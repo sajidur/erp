@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var roleList = ViewData["roles"];
+}
+
+<style type="text/css">
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+    }
+</style>
+
+<fieldset class="scheduler-border">
+    <legend class="scheduler-border">Role Wise Screen List</legend>
+    <div class="row">
+
+        <div class="col-sm-8">
+            @*<h4 style="padding-left:170px">Role Wise Screen List</h4>*@
+            <div class="row">
+                <div class="row well-sm">
+                    <div class="col-sm-3">
+                        @Html.Label("Role")
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DropDownList("roleId", (IEnumerable<SelectListItem>)roleList, "--Select--", new { id = "roleId", @class = "form-control input-sm" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row " id="showGrid">
+
+    </div>
+
+</fieldset>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+
+        //for grid Checkbox
+
+
+        $(function () {
+            $('#gridContent table tr th:first').html(
+                $('<input/>', {
+                    type: 'checkbox',
+                    click: function () {
+                        var checkboxes = $(this).closest('table').find('tbody tr td input[type="checkbox"]');
+                        checkboxes.prop('checked', $(this).is(':checked'));
+                    }
+                })
+            );
+        });
+
+
+
+
+    });
+
+    //For bill  generte
+
+
+
+    $(function () {
+
+        $("#roleId").change(function () {
+            var roleId = $('#roleId').val();
+            $("#showGrid").load('@Url.Action("GetRoleWiseScreen", "ScreenPermission")', { roleId: roleId });
+        });
+
+
+    })
+
+</script>
+

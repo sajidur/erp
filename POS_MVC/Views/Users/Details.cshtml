@@ -1,0 +1,75 @@
+﻿@model RexERP_MVC.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SetDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SetDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifyUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BranchId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRole.RoleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRole.RoleName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

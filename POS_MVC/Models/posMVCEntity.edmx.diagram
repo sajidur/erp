@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="09b6b1c7b3b249dc84caf2cd4d4a3018" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AccountGroup" Width="1.5" PointX="21.5" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AccountLedger" Width="1.5" PointX="23.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ACGroup" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ACTimeZone" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ACUnlockComb" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AdditionalCost" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AdvancePayment" Width="1.5" PointX="26" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AlarmLog" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AttParam" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AuditedExc" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.AUTHDEVICE" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.BankReconciliation" Width="1.5" PointX="34.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Brand" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Category" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.CHECKEXACT" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.CHECKINOUT" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Company" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ContraDetail" Width="1.5" PointX="34.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ContraMaster" Width="1.5" PointX="29" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.CreditNoteMaster" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Customer" Width="1.5" PointX="11.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.DEPARTMENT" Width="1.5" PointX="13.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.DeptUsedSch" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Design" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Employee" Width="1.5" PointX="23.75" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.FaceTemp" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.FinancialYear" Width="1.5" PointX="23.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.HOLIDAY" Width="1.5" PointX="15.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Inventory" Width="1.5" PointX="5.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.JournalDetail" Width="1.5" PointX="26" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.JournalMaster" Width="1.5" PointX="26" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.LeaveClass" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.LeaveClass1" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.LedgerPosting" Width="1.5" PointX="32" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Location" Width="1.5" PointX="13.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Machine" Width="1.5" PointX="17.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.NUM_RUN" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.NUM_RUN_DEIL" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.PartyBalance" Width="1.5" PointX="26" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.PartyPaymentHistory" Width="1.5" PointX="19.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Picture" Width="1.5" PointX="19.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Product" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ReceiveDetail" Width="1.5" PointX="8.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ReceiveMaster" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ReportItem" Width="1.5" PointX="25.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.RoleWiseScreenPermission" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalaryPayment" Width="1.5" PointX="7.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDelivery" Width="1.5" PointX="18.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDetail" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesMaster" Width="1.5" PointX="13.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesOrder" Width="1.5" PointX="11.25" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesReturn" Width="1.5" PointX="25.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SchClass" Width="1.5" PointX="18.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Screen" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SECURITYDETAIL" Width="1.5" PointX="27.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Setting" Width="1.5" PointX="18.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SHIFT" Width="1.5" PointX="9.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.StockIn" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.StockOut" Width="1.5" PointX="5.25" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Supplier" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.sysdiagram" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SystemLog" Width="1.5" PointX="20.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Tax" Width="1.5" PointX="27.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.TBSMSALLOT" Width="1.5" PointX="11.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.TBSMSINFO" Width="1.5" PointX="13.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.TEMPLATE" Width="1.5" PointX="15.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.TempSalesDetail" Width="1.5" PointX="21.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.TempSalesMaster" Width="1.5" PointX="16.5" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Unit" Width="1.5" PointX="28.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.User" Width="1.5" PointX="23.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.USER_OF_RUN" Width="1.5" PointX="28.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.USER_SPEDAY" Width="1.5" PointX="28.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.USER_TEMP_SCH" Width="1.5" PointX="28.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.UserACMachine" Width="1.5" PointX="21.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.UserACPrivilege" Width="1.5" PointX="29.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.USERINFO" Width="1.5" PointX="0.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.UserRole" Width="1.5" PointX="21.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.UserUpdate" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.UserUsedSClass" Width="1.5" PointX="28.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.VoucherType" Width="1.5" PointX="23.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.WareHouse" Width="1.5" PointX="3" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.EmOpLog" Width="1.5" PointX="29.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ServerLog" Width="1.5" PointX="30.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.UsersMachine" Width="1.5" PointX="30.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ProductInfo" Width="1.5" PointX="30.75" PointY="23.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_AccountLedger_AccountGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_AdvancePayment_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraDetails_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_JournalDetails_Ladger" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_LedgerPosting_AccountLedger" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_PartyBalance_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_AdvancePayment_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_AdvancePayment_VoucherType" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_AdvancePayment_Year" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_BankReconciliation_LadgerPosting" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraDetails_ContraMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraMaster_Ledger" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraMaster_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraMaster_VoucherType" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraMaster_Year" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesMaster_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_JournalMaster_Year" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_LedgerPosting_Year" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_WareHouse" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_JournalDetails_JournalMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_JournalMaster_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_JournalMaster_VoucherType" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_LedgerPosting_Voucher" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_PartyBalance_Voucher" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_RecieveMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveMaster_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_RoleWiseScreenPermission_Screens" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_SalesMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_TempSalesMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_TempSalesDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_UserInfo_UserInfo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

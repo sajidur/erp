@@ -20,6 +20,10 @@ namespace RexERP_MVC.Controllers
             var users = db.Users.Include(u => u.UserRole);
             return View(users.ToList());
         }
+        public ActionResult MenuPermission()
+        {
+            return View();
+        }
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
@@ -120,6 +124,38 @@ namespace RexERP_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Users/Delete/5
+        [HttpGet, ActionName("Screen")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Screen(string roleId)
+        {
+            var screen = db.Screens.ToList();
+            return Json(screen);
+        }
+
+        // POST: Users/Delete/5
+        [HttpGet, ActionName("Roles")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Roles()
+        {
+            var permission = db.UserRoles.ToList();
+            return Json(permission);
+        }
+
+
+        // POST: Users/Delete/5
+        [HttpPost, ActionName("MenuPermission")]
+        [ValidateAntiForgeryToken]
+        public ActionResult MenuPermission([Bind(Include = "RoleId,ScreenId")] RoleWiseScreenPermission roleWiseScreen)
+        {
+            var permission = db.RoleWiseScreenPermissions.Where(a => a.RoleId == roleWiseScreen.RoleId && a.ScreenId == roleWiseScreen.ScreenId).FirstOrDefault();
+            if (permission==null)
+            {
+                db.RoleWiseScreenPermissions.Add(roleWiseScreen);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

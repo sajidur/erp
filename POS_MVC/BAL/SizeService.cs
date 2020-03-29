@@ -8,23 +8,23 @@ namespace RexERP_MVC.BAL
 {
     public class SizeService
     {
-        DBService<Design> service = new DBService<Design>();
-        public List<Design> GetAll()
+        DBService<Size> service = new DBService<Size>();
+        public List<Size> GetAll()
         {
             return service.GetAll();
         }
-        public Design GetById(int? id = 0)
+        public Size GetById(int? id = 0)
         {
             return service.GetById(id);
         }
 
-        public Design Save(Design cus)
+        public Size Save(Size cus)
         {
             service.Save(cus);
             return cus;
 
         }
-        public Design Update(Design t, int id)
+        public Size Update(Size t, int id)
         {
             service.Update(t, id);
             return t;

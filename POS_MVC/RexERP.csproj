@@ -339,9 +339,6 @@
     <Compile Include="Models\DeptUsedSch.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Design.cs">
-      <DependentUpon>posMVCEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DueSummary_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -499,6 +496,9 @@
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SHIFT.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Size.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">

@@ -375,22 +375,8 @@
     <Property Name="DeptId" Type="int" Nullable="false" />
     <Property Name="SchId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Design">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DesignName" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="DesignCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Descriptions" Type="nvarchar" MaxLength="500" />
-    <Property Name="CreatedBy" Type="char" MaxLength="24" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="UpdatedBy" Type="nchar" MaxLength="24" />
-    <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
-  </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EmOpLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -433,7 +419,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
     <Property Name="LedgerId" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="EXCNOTES">
           <Property Name="USERID" Type="int" />
           <Property Name="ATTDATE" Type="datetime" />
@@ -671,7 +657,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primar
     <Property Name="OverTime" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Ones">
           <Property Name="Id" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
@@ -1008,7 +994,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary ke
     <Property Name="FullControl" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ServerLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -1058,8 +1044,21 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a prima
     <Property Name="CYCLE" Type="smallint" />
     <Property Name="UNITS" Type="smallint" />
   </EntityType>
+  <EntityType Name="Size">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Descriptions" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="char" MaxLength="24" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nchar" MaxLength="24" />
+    <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="SMSHistory">
           <Property Name="CustomerId" Type="int" />
           <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
@@ -1168,7 +1167,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a prim
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="TBKEY">
           <Property Name="PreName" Type="varchar" MaxLength="12" />
           <Property Name="ONEKEY" Type="int" />
@@ -1416,7 +1415,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.TBKEY' does not have a primary k
     <Property Name="SetDate" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UsersMachines">
     <Key>
       <PropertyRef Name="ID" />
@@ -1477,7 +1476,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.UsersMachines' does not have a p
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ProductInfo">
     <Key>
       <PropertyRef Name="DesignName" />
@@ -2254,7 +2253,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DEPARTMENTS" EntityType="Self.DEPARTMENTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSchs" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Design" EntityType="Self.Design" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FaceTemp" EntityType="Self.FaceTemp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
@@ -2288,6 +2286,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <EntitySet Name="SECURITYDETAILS" EntityType="Self.SECURITYDETAILS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SHIFT" EntityType="Self.SHIFT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />

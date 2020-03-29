@@ -400,20 +400,6 @@
     <Property Name="DeptId" Type="Int32" Nullable="false" />
     <Property Name="SchId" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Design">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DesignName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DesignCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-    <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-  </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="Id" />
@@ -2207,7 +2193,6 @@
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="DEPARTMENTS" EntityType="Self.DEPARTMENT" />
     <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSch" />
-    <EntitySet Name="Designs" EntityType="Self.Design" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
     <EntitySet Name="FaceTemps" EntityType="Self.FaceTemp" />
     <EntitySet Name="FinancialYears" EntityType="Self.FinancialYear" />
@@ -2582,6 +2567,7 @@
     <FunctionImport Name="YearClosed">
       <Parameter Name="CustomerId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="Sizes" EntityType="DB_9B34E1_erpModel.Size" />
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2847,4 +2833,17 @@
     <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
     <Property Type="Decimal" Name="WeightInMon" Nullable="true" Precision="18" Scale="2" />
   </ComplexType>
+  <EntityType Name="Size">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+    <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

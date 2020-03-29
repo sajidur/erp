@@ -36,12 +36,12 @@ namespace RexERP_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Design category = service.GetById(id);
+            Size category = service.GetById(id);
             if (category == null)
             {
                 return HttpNotFound();
             }
-            var result = AutoMapper.Mapper.Map<Design, BrandResponse>(category);
+            var result = AutoMapper.Mapper.Map<Size, BrandResponse>(category);
 
             return View(category);
         }

@@ -396,21 +396,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Designs">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Design">
-        <MappingFragment StoreEntitySet="Design">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DesignName" ColumnName="DesignName" />
-          <ScalarProperty Name="DesignCode" ColumnName="DesignCode" />
-          <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
@@ -1876,5 +1861,19 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="YearClosed" FunctionName="DB_9B34E1_erpModel.Store.YearClosed" />
+    <EntitySetMapping Name="Sizes">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Size">
+        <MappingFragment StoreEntitySet="Size">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

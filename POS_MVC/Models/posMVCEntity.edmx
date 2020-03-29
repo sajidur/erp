@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_9B34E1_erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DB_9B34E1_erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountGroup">
           <Key>
             <PropertyRef Name="Id" />
@@ -380,22 +380,8 @@
           <Property Name="DeptId" Type="int" Nullable="false" />
           <Property Name="SchId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Design">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DesignName" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="DesignCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descriptions" Type="nvarchar" MaxLength="500" />
-          <Property Name="CreatedBy" Type="char" MaxLength="24" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="UpdatedBy" Type="nchar" MaxLength="24" />
-          <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmOpLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -438,7 +424,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
           <Property Name="LedgerId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="EXCNOTES">
           <Property Name="USERID" Type="int" />
           <Property Name="ATTDATE" Type="datetime" />
@@ -676,7 +662,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primar
           <Property Name="OverTime" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Ones">
           <Property Name="Id" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
@@ -1013,7 +999,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary ke
           <Property Name="FullControl" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ServerLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -1063,8 +1049,21 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a prima
           <Property Name="CYCLE" Type="smallint" />
           <Property Name="UNITS" Type="smallint" />
         </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Descriptions" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="char" MaxLength="24" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nchar" MaxLength="24" />
+          <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="SMSHistory">
           <Property Name="CustomerId" Type="int" />
           <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
@@ -1173,7 +1172,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a prim
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="TBKEY">
           <Property Name="PreName" Type="varchar" MaxLength="12" />
           <Property Name="ONEKEY" Type="int" />
@@ -1421,7 +1420,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.TBKEY' does not have a primary k
           <Property Name="SetDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UsersMachines">
           <Key>
             <PropertyRef Name="ID" />
@@ -1482,7 +1481,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.UsersMachines' does not have a p
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ProductInfo">
           <Key>
             <PropertyRef Name="DesignName" />
@@ -2259,7 +2258,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEPARTMENTS" EntityType="Self.DEPARTMENTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSchs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Design" EntityType="Self.Design" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FaceTemp" EntityType="Self.FaceTemp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
@@ -2293,6 +2291,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <EntitySet Name="SECURITYDETAILS" EntityType="Self.SECURITYDETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SHIFT" EntityType="Self.SHIFT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
@@ -2573,8 +2572,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_9B34E1_erpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2977,20 +2975,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           </Key>
           <Property Name="DeptId" Type="Int32" Nullable="false" />
           <Property Name="SchId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Design">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DesignName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DesignCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-          <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -4785,7 +4769,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="DEPARTMENTS" EntityType="Self.DEPARTMENT" />
           <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSch" />
-          <EntitySet Name="Designs" EntityType="Self.Design" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="FaceTemps" EntityType="Self.FaceTemp" />
           <EntitySet Name="FinancialYears" EntityType="Self.FinancialYear" />
@@ -5081,7 +5064,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             <Parameter Name="yearId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCustomerBalance" ReturnType="Collection(DB_9B34E1_erpModel.GetCustomerBalance_Result)">
-            <Parameter Name="ledgerId" Mode="In" Type="Int32" />
+          <Parameter Name="ledgerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPartyPayment" ReturnType="Collection(DB_9B34E1_erpModel.GetPartyPayment_Result)">
             <Parameter Name="LedgerId" Mode="In" Type="Int32" />
@@ -5109,7 +5092,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             <Parameter Name="invoiceId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="rptCustomerTransaction" ReturnType="Collection(DB_9B34E1_erpModel.rptCustomerTransaction_Result)">
-            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="rptIndividualLedger" ReturnType="Collection(DB_9B34E1_erpModel.rptIndividualLedger_Result)">
             <Parameter Name="CustomerId" Mode="In" Type="Int32" />
@@ -5118,7 +5101,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             <Parameter Name="invoiceId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="rptSalesInvoice" ReturnType="Collection(DB_9B34E1_erpModel.rptSalesInvoice_Result)">
-            <Parameter Name="SalesInvoice" Mode="In" Type="String" />
+          <Parameter Name="SalesInvoice" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -5155,11 +5138,12 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             <Parameter Name="toDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="StockOutInvoice" ReturnType="Collection(DB_9B34E1_erpModel.StockOutInvoice_Result)">
-            <Parameter Name="InvoiceNo" Mode="In" Type="String" />
+          <Parameter Name="InvoiceNo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="YearClosed">
-            <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Sizes" EntityType="DB_9B34E1_erpModel.Size" />
         </EntityContainer>
         <ComplexType Name="CashBook_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5425,6 +5409,19 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
           <Property Type="Decimal" Name="WeightInMon" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+          <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5823,21 +5820,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
               <MappingFragment StoreEntitySet="DeptUsedSchs">
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
                 <ScalarProperty Name="SchId" ColumnName="SchId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Designs">
-            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Design">
-              <MappingFragment StoreEntitySet="Design">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DesignName" ColumnName="DesignName" />
-                <ScalarProperty Name="DesignCode" ColumnName="DesignCode" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7306,6 +7288,20 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="YearClosed" FunctionName="DB_9B34E1_erpModel.Store.YearClosed" />
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

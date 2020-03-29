@@ -227,6 +227,7 @@
     </Compile>
     <Compile Include="BAL\SalaryPaymentService.cs" />
     <Compile Include="BAL\SalesService.cs" />
+    <Compile Include="BAL\SizeService.cs" />
     <Compile Include="BAL\SMSEmailService.cs" />
     <Compile Include="BAL\SQLDAL.cs" />
     <Compile Include="BAL\SQLDALService.cs" />
@@ -256,6 +257,7 @@
     <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\SalaryPaymentController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
+    <Compile Include="Controllers\SizeSetupController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DB_9B34E1_erpDataSet.Designer.cs">
@@ -342,9 +344,6 @@
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DeptUsedSch.cs">
-      <DependentUpon>posMVCEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Design.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DueSummary_Result.cs">
@@ -506,6 +505,9 @@
     <Compile Include="Models\SHIFT.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Size.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -647,7 +649,6 @@
     <Compile Include="ViewModel\ColorResponse.cs" />
     <Compile Include="ViewModel\CompanyResponse.cs" />
     <Compile Include="ViewModel\CustomerResponse.cs" />
-    <Compile Include="ViewModel\DesignResponse.cs" />
     <Compile Include="ViewModel\EmployeeResponse.cs" />
     <Compile Include="ViewModel\GoodsReceiveResponse.cs" />
     <Compile Include="ViewModel\ImageViewModel.cs" />
@@ -1228,6 +1229,8 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Holidays\HolidaysSetup.cshtml" />
+    <Content Include="Views\Users\MenuPermission.cshtml" />
+    <Content Include="Views\SizeSetup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,7 +50,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DEPARTMENT> DEPARTMENTS { get; set; }
         public virtual DbSet<DeptUsedSch> DeptUsedSchs { get; set; }
-        public virtual DbSet<Design> Designs { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<FaceTemp> FaceTemps { get; set; }
         public virtual DbSet<FinancialYear> FinancialYears { get; set; }
@@ -112,6 +111,7 @@ namespace RexERP_MVC.Models
         public virtual DbSet<ServerLog> ServerLogs { get; set; }
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

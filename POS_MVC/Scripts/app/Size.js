@@ -4,21 +4,8 @@ $(document).ready(function () {
 
 });
 
-function GenerateProductGroupId() {
-    $.ajax({
-        url: '@Url.Action("GenerateProductGroupId", "ProductGroup")',
-        type: 'Get',
-        async: false,
-        success: function (responseData) {
-            $("#txtGroupCode").val(responseData);
-
-        },
-        error: function () { }
-    });
-}
-
 function LoadSizeGrid() {
-    var url = '/Size/GetAll';
+    var url = '/SizeSetup/GetAll';
 
     $.ajax({
         url: url,
@@ -53,50 +40,6 @@ function ResetForm() {
     $('#txtBrandNameBang').val('');
 }
 
-function EnableDisableControls(status) {
-    //status = 1 for Save, 2 for Delete
-    if (status == "1") {
-        $('#btnSave').prop('disabled', false);
-        $('#btnUpdate').prop('disabled', true);
-        $('#btnDelete').prop('disabled', true);
-    }
-    else if (status == "2") {
-        $('#btnSave').prop('disabled', true);
-        $('#btnUpdate').prop('disabled', false);
-        $('#btnDelete').prop('disabled', false);
-    }
-
-    else {
-        $('#btnSave').prop('disabled', false);
-        $('#btnUpdate').prop('disabled', false);
-        $('#btnDelete').prop('disabled', false);
-    }
-}
-
-function OnSelectProductGroup(GroupId) {
-
-    $.ajax({
-        url: '@Url.Action("GetAProductGroup", "ProductGroup")',
-        type: 'get',
-        dataType: 'json',
-        async: false,
-        data: {
-            productGroupId: GroupId
-        },
-        success: function (data) {
-            ResetForm();
-            $('#txtGroupCode').val(data.GroupId);
-            $('#txtGroupName').val(data.GroupName);
-            $('#txtGroupDes').val(data.GroupDescription);
-            $('#ddllineNumber').val(data.ProductLine.LineId);
-            LoadProductGroupGrid();
-
-        },
-        error: function () {
-
-        }
-    });
-}
 
 function FormDataAsObject() {
     var object = new Object();
@@ -105,16 +48,14 @@ function FormDataAsObject() {
 }
 
 function Save() {
-    debugger;
     if ($("#txtSizeName").val() == "") {
         alert('SizeName Is Empty.');
         return false;
     }
-
     var formObject = FormDataAsObject();
 
     $.ajax({
-        url: '/Size/Create',
+        url: '/SizeSetup/Create',
         method: 'post',
         dataType: 'json',
         async: false,
@@ -135,18 +76,6 @@ function Save() {
 
 }
 
-function productGroupInfoValidation(formObject) {
-
-    if (!formObject.GroupName) {
-        $('#txtGroupName').focus();
-        ShowNotification('2', 'Group Name Can not be empty.');
-        return false;
-    }
-
-
-    return true;
-
-}
 
 function Update() {
     var formObject = FormDataAsObject();

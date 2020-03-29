@@ -41,11 +41,7 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<CompanyResponse, Company>().ReverseMap();
                 cfg.CreateMap<HoliDayResponse, HOLIDAY>().ReverseMap();
 
-                cfg.CreateMap<Design, DesignResponse>()
-                 .ForMember(x => x.Id,
-                              m => m.MapFrom(a => a.Id))
-                   .ForMember(x => x.DesignName,
-                              m => m.MapFrom(a => a.DesignName)).ReverseMap();
+                cfg.CreateMap<Size, SizeResponse>().ReverseMap();
                 });
         }
     }

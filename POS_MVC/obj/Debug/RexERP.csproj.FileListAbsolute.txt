@@ -123,4 +123,3 @@ E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csproj.CopyComplete
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
-E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csprojAssemblyReference.cache

@@ -640,7 +640,6 @@
     <Compile Include="ViewModel\ColorResponse.cs" />
     <Compile Include="ViewModel\CompanyResponse.cs" />
     <Compile Include="ViewModel\CustomerResponse.cs" />
-    <Compile Include="ViewModel\DesignResponse.cs" />
     <Compile Include="ViewModel\EmployeeResponse.cs" />
     <Compile Include="ViewModel\GoodsReceiveResponse.cs" />
     <Compile Include="ViewModel\ImageViewModel.cs" />

@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 
 function LoadSizeGrid() {
-    var url = '/Size/GetAll';
+    var url = '/SizeSetup/GetAll';
 
     $.ajax({
         url: url,
@@ -55,7 +55,7 @@ function Save() {
     var formObject = FormDataAsObject();
 
     $.ajax({
-        url: '/Size/Create',
+        url: '/SizeSetup/Create',
         method: 'post',
         dataType: 'json',
         async: false,

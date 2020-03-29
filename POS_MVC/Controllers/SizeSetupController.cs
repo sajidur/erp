@@ -16,17 +16,17 @@ namespace RexERP_MVC.Controllers
 
         public ActionResult Index()
         {
-            return View(new Design());
+            return View(new Size());
         }
         // GET: /Category/Details/5
         public ActionResult GetAll()
         {
-            List<Design> category = service.GetAll();
+            List<Size> category = service.GetAll();
             if (category == null)
             {
                 return HttpNotFound();
             }
-            var result = AutoMapper.Mapper.Map<List<Design>, List<SizeResponse>>(category);
+            var result = AutoMapper.Mapper.Map<List<Size>, List<SizeResponse>>(category);
             return Json(category, JsonRequestBehavior.AllowGet);
         }
         // GET: /Category/Details/5
@@ -56,7 +56,7 @@ namespace RexERP_MVC.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(Design category, int create)
+        public ActionResult Create(Size category, int create)
         {
             var result = 0;
             if (ModelState.IsValid)

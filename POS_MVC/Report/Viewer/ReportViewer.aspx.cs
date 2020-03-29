@@ -66,12 +66,35 @@ namespace RexERP_MVC.Report.Viewer
                     {
                         LedgerReport();
                     }
+
+                    if (reportType == "AllGoodReceiveReport")
+                    {
+                        LoadShowAllGoodReceiveReport();
+                    }
                 }
                 catch (Exception ex)
                 {
                     lblMsg.Text = ex.Message;
                 }
             }
+        }
+
+        private void LoadShowAllGoodReceiveReport()
+        {
+            string fromDate = Request.QueryString["fromDate"].ToString();
+            string toDate = Request.QueryString["toDate"].ToString();
+            string supplierId = Request.QueryString["supplierId"].ToString();
+
+            string query = @"exec SP_GetAllReceiveReport";
+            oResult = oDAL.Select(query);
+            DataSet dt = null;
+            dt = oResult.ds as DataSet;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptAllReceiveReport.rdlc");
+            ReportDataSource datasourceIncome = new ReportDataSource("AllReceiveReport", dt.Tables[0]);
+            
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasourceIncome);
         }    
 
         private void LoadInvoiceReport()

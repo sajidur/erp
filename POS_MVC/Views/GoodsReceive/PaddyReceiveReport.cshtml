@@ -1,7 +1,7 @@
 ﻿
 
 <div class="row">
-    <label>Paddy Receive Report/ ধান ক্রয় রিপোর্ট</label>
+    <label>Paddy Receive Report</label>
     <div class="col-md-12">
         <div class="card">
             <div class="row">
@@ -30,6 +30,10 @@
                                     </div>
                                     <div class="col-md-1">
                                         <button onclick="LoadPurchase()" type="button" class="primary">Filter</button>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <button onclick="LoadAllPurchaseReport()" type="button" class="primary">Preview</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -101,7 +105,7 @@
         $('#txtToDate').val(today);
         $('#txtFromDate').val(today);
         LoadPurchase();
-        LoadSupplierCombo("ddlSupplier");
+        LoadSupplierComboForReport("ddlSupplier");
     });
     function LoadPurchase() {
         var supplierId = 0;
@@ -130,6 +134,23 @@
                 console.log(err);
             }
         });
+    }
+
+    function LoadAllPurchaseReport() {
+        var supplierId = 0;
+        var fromDate = new Date($('#txtFromDate').val()).toISOString();
+        var toDate = new Date($('#txtToDate').val()).toISOString();
+        var customerDropdown = document.getElementById("ddlSupplier");
+        console.log(customerDropdown.selectedIndex)
+        if (customerDropdown.selectedIndex == -1 || customerDropdown.selectedIndex == 0) {
+            supplierId = 0;
+        }
+        else {
+            supplierId = customerDropdown.options[customerDropdown.selectedIndex].value;
+        }
+
+        var param = "ReportName=AllGoodReceiveReport&fromDate=" + fromDate + "&toDate=" + toDate + "&supplierId=" + supplierId;
+        window.open("../Report/Viewer/ReportViewer.aspx?" + param, "_blank");
     }
 
 </script>

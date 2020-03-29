@@ -19,7 +19,7 @@ namespace RexERP_MVC.ViewModel
         public string InvoiceNo { get; set; }
         public string VoucherNo { get; set; }
         public DateTime? PostingDate { get; set; }
-        public string Date { get { return PostingDate?.ToShortDateString(); } set { PostingDate?.ToShortDateString(); } }
+        public string Date { get { return PostingDate.Value.ToString(); } set { PostingDate.Value.ToString(); } }
         public string extra1 { get; set; }
     }
 }

@@ -39,6 +39,7 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<TempSalesMaster, TempSalesMasterResponse>().ReverseMap();
                 cfg.CreateMap<TempSalesDetail, TempSalesDetailsResponse>().ReverseMap();
                 cfg.CreateMap<CompanyResponse, Company>().ReverseMap();
+                cfg.CreateMap<HoliDayResponse, HOLIDAY>().ReverseMap();
 
                 cfg.CreateMap<Design, DesignResponse>()
                  .ForMember(x => x.Id,

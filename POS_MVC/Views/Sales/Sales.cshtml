@@ -67,7 +67,6 @@
 
                                 </div>
                                 <div class="col-md-4">
-
                                     Total Amount:<label id="lblTotalAmountA">0.0</label>
                                 </div>
                             </div>
@@ -79,13 +78,13 @@
                         </div>
                     </div>                                   
                     <div class="col-lg-4 col-lg-offset-1">
-                        <form class="bs-component">
-                            
+                        <form class="bs-component">                            
                                 <script id="templateInventoryGroupModal" type="text/html">
                                     <table class="table table-bordered table-striped table-hover" id="inventoryGroupTableModal">
                                         <thead>
                                         <th>Id</th>
                                         <th>Item/Product</th>
+                                        <th>Size</th>
                                         <th>Unit</th>
                                         <th>Godown</th>
                                         <th>Available Qty</th>
@@ -96,22 +95,25 @@
                                         </thead>
                                         <tbody>
                                         {{#InventoryGroupSearch}}
-                                        <tr>
-                                            <td>{{Product.Id}}</td>
-                                            <td> {{Product.ProductName}}</td>
-                                            <td> {{QtyInBale}}</td>
-                                            <td>{{WareHouse.WareHouseName}}</td>
-                                            <td> {{BalanceQty}}</td>
-                                            <td width="10px">
-                                                <input type="text" name="txtSalesQty" id="txtSalesQty" class="datatable-textbox-style" />
-                                            </td>
-                                            <td width="10px">
-                                                <input type="text" name="txtRate" id="txtRate" class="datatable-textbox-style"  />
-                                            </td>
+                                            <tr>
+                                                <td>{{Product.Id}}</td>
+                                                <td> {{Product.ProductName}}</td>
+                                                <td>
+                                                    <select class="form-control" id="ddlWareHouse" name="ddlSize"></select>
+                                                </td>
+                                                <td> {{QtyInBale}}</td>
+                                                <td>{{WareHouse.WareHouseName}}</td>
+                                                <td> {{BalanceQty}}</td>
+                                                <td width="10px">
+                                                    <input type="text" name="txtSalesQty" id="txtSalesQty" class="datatable-textbox-style" />
+                                                </td>
+                                                <td width="10px">
+                                                    <input type="text" name="txtRate" id="txtRate" class="datatable-textbox-style" />
+                                                </td>
                                                 <td class="action-sm">
                                                     <a class="datatable-submit-button" id="btnAdd" onclick="LoadForAdd('{{Product.Id}}')"><i class="fa fa-edit"></i>Add</a>
                                                 </td>
-                                            <td style="display:none;">{{WarehouseId}}</td>
+                                                <td style="display:none;">{{WarehouseId}}</td>
                                             </tr>
                                             {{/InventoryGroupSearch}}
                                         </tbody>
@@ -298,5 +300,6 @@
         LoadInventoryList();
         LoadCustomerCombo("ddlCustomer");
         Expression();
+        LoadAllSize("ddlSize");
     });
 </script>

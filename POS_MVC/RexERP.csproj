@@ -226,6 +226,7 @@
     </Compile>
     <Compile Include="BAL\SalaryPaymentService.cs" />
     <Compile Include="BAL\SalesService.cs" />
+    <Compile Include="BAL\SizeService.cs" />
     <Compile Include="BAL\SMSEmailService.cs" />
     <Compile Include="BAL\SQLDAL.cs" />
     <Compile Include="BAL\SQLDALService.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\SalaryPaymentController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
+    <Compile Include="Controllers\SizeSetupController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Models\AccountGroup.cs">
@@ -1204,6 +1206,7 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\MenuPermission.cshtml" />
+    <Content Include="Views\SizeSetup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

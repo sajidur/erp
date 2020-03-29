@@ -118,7 +118,6 @@ E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Web.Razor.xml
 E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Web.WebPages.xml
 E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Web.WebPages.Deployment.xml
 E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Web.WebPages.Razor.xml
-E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csprojAssemblyReference.cache
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RdlCompile.cache
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csproj.CopyComplete

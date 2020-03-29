@@ -146,6 +146,32 @@ function LoadAllUnit(type, controlId) {
     });
 
 }
+function LoadAllSize(controlId) {
+    var url = "/Unit/GetAll";
+    $.ajax({
+        url: url,
+        method: "POST",
+        success: function (res) {
+            var data = res;
+            $("#" + controlId).empty();
+            $("#" + controlId).get(0).options.length = 0;
+            if (true) {
+                $("#" + controlId).get(0).options[0] = new Option("-Select-", "-1");
+            }
+            if (data != null) {
+                $.each(data, function (index, item) {
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Name, item.Id);
+                });
+            }
+            $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!" });
+
+        },
+        error: function () {
+        }
+    });
+
+}
+
 
 function dateConvert(dateObject) {
     var d = new Date(dateObject);

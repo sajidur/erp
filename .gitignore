@@ -1,3 +1,15 @@
 
 *.dll
 *.dll
+*.ide
+*.ide
+*.ide-shm
+POS_MVC/obj/Debug/RexERP.csprojAssemblyReference.cache
+POS_MVC/obj/Debug/RexERP.csproj.FileListAbsolute.txt
+.vs/RexERP/v16/Server/sqlite3/storage.ide-wal
+POS_MVC/obj/Debug/RexERP.csproj.FileListAbsolute.txt
+.vs/RexERP/v16/Server/sqlite3/storage.ide-wal
+.vs/RexERP/v16/Server/sqlite3/storage.ide
+.vs/RexERP/v16/Server/sqlite3/storage.ide-shm
+.vs/RexERP/v16/Server/sqlite3/storage.ide-wal
+POS_MVC/obj/Debug/RexERP.csproj.FileListAbsolute.txt

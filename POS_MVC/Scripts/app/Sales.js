@@ -92,10 +92,10 @@ function LoadForAdd(InvId) {
             Id = $(this).find('td').eq(0).html();
             ProductName = $(this).find('td').eq(1).html();
             ProductId = Id;
-            BaleQty = $(this).find('td').eq(5).find('input').val();
+            BaleQty = $(this).find('td').eq(6).find('input').val();
             BaleWeight = $(this).find('td').eq(2).text();
-            Rate = $(this).find('td').eq(6).find('input').val();
-            WarehouseId = $(this).find('td').eq(8).text();
+            Rate = $(this).find('td').eq(7).find('input').val();
+            WarehouseId = $(this).find('td').eq(9).text();
         }
     });
     var Amount = Rate * BaleQty;

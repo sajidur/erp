@@ -6,6 +6,7 @@
         <Source>Embedded</Source>
         <Value>ID1563777778</Value>
         <Sizing>FitProportional</Sizing>
+        <Top>0.125in</Top>
         <Left>1.47791in</Left>
         <Height>0.73958in</Height>
         <Width>4.0625in</Width>
@@ -29,14 +30,16 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.01958in</Top>
-        <Left>2.30083in</Left>
+        <Top>0.14458in</Top>
+        <Left>2.25916in</Left>
         <Height>0.25in</Height>
-        <Width>2.29167in</Width>
+        <Width>2.33334in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -59,14 +62,16 @@
                 <Style />
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>0.31125in</Top>
-        <Left>2.45708in</Left>
+        <Top>0.43625in</Top>
+        <Left>2.25916in</Left>
         <Height>0.25in</Height>
-        <Width>1.92708in</Width>
+        <Width>2in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>

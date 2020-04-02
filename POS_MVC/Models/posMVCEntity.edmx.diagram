@@ -141,6 +141,10 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_TempSalesDetails" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_UserInfo_UserInfo" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Size" Width="1.5" PointX="28.375" PointY="30.75" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Brand" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Size" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Size" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

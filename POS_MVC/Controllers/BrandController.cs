@@ -28,7 +28,7 @@ namespace RexERP_MVC.Controllers
                 return HttpNotFound();
             }
             var result = AutoMapper.Mapper.Map<List<Brand>, List<BrandResponse>>(category);
-            return Json(category, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: /Category/Details/5
         public ActionResult Details(int? id)

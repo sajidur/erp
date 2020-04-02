@@ -14,6 +14,13 @@ namespace RexERP_MVC.Models
     
     public partial class Size
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Size()
+        {
+            this.Inventories = new HashSet<Inventory>();
+            this.ReceiveDetails = new HashSet<ReceiveDetail>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Descriptions { get; set; }
@@ -22,5 +29,10 @@ namespace RexERP_MVC.Models
         public string UpdatedBy { get; set; }
         public string UpdatedDate { get; set; }
         public bool IsActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventory> Inventories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReceiveDetail> ReceiveDetails { get; set; }
     }
 }

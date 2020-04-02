@@ -14,6 +14,13 @@ namespace RexERP_MVC.Models
     
     public partial class Brand
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Brand()
+        {
+            this.Inventories = new HashSet<Inventory>();
+            this.ReceiveDetails = new HashSet<ReceiveDetail>();
+        }
+    
         public int Id { get; set; }
         public string BrandName { get; set; }
         public string BrandNameInBangla { get; set; }
@@ -22,5 +29,10 @@ namespace RexERP_MVC.Models
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool Active { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventory> Inventories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReceiveDetail> ReceiveDetails { get; set; }
     }
 }

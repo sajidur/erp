@@ -1252,10 +1252,10 @@
       </Textbox>
       <Subreport Name="Subreport1">
         <ReportName>rdlcHeader</ReportName>
-        <Top>0cm</Top>
-        <Left>0cm</Left>
-        <Height>2.71568cm</Height>
-        <Width>19.52306cm</Width>
+        <Top>0.3175cm</Top>
+        <Left>1.69333cm</Left>
+        <Height>2.39818cm</Height>
+        <Width>16.23053cm</Width>
         <ZIndex>20</ZIndex>
         <Style>
           <Border>

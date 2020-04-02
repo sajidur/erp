@@ -28,9 +28,12 @@ namespace RexERP_MVC.ViewModel
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
-
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
         public ProductResponse Product { get; set; }
         public SupplierResponse Supplier { get; set; }
         public WareHouseResponse WareHouse { get; set; }
+        public virtual BrandResponse Brand { get; set; }
+        public virtual SizeResponse Size { get; set; }
     }
 }

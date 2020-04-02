@@ -207,6 +207,8 @@
     <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Brand" ToRole="Inventory" />
+    <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand" FromRole="Brand" ToRole="ReceiveDetail" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -501,6 +503,10 @@
     <NavigationProperty Name="Product" Relationship="Self.FK_Inventory_Product" FromRole="Inventory" ToRole="Product" />
     <NavigationProperty Name="Supplier" Relationship="Self.FK_Inventory_Supplier" FromRole="Inventory" ToRole="Supplier" />
     <NavigationProperty Name="WareHouse" Relationship="Self.FK_Inventory_WareHouse" FromRole="Inventory" ToRole="WareHouse" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="BrandId" Type="Int32" />
+    <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Inventory" ToRole="Brand" />
+    <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Inventory" ToRole="Size" />
   </EntityType>
   <EntityType Name="JournalDetail">
     <Key>
@@ -780,6 +786,10 @@
     <NavigationProperty Name="Product" Relationship="Self.FK_ReceiveDetails_product" FromRole="ReceiveDetails" ToRole="Product" />
     <NavigationProperty Name="ReceiveMaster" Relationship="Self.FK_ReceiveDetails_RecieveMaster" FromRole="ReceiveDetails" ToRole="ReceiveMaster" />
     <NavigationProperty Name="WareHouse" Relationship="Self.FK_ReceiveDetails_Warehouse" FromRole="ReceiveDetails" ToRole="WareHouse" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="BrandId" Type="Int32" />
+    <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand" FromRole="ReceiveDetail" ToRole="Brand" />
+    <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Size" FromRole="ReceiveDetail" ToRole="Size" />
   </EntityType>
   <EntityType Name="ReceiveMaster">
     <Key>
@@ -2568,6 +2578,22 @@
       <Parameter Name="CustomerId" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="Sizes" EntityType="DB_9B34E1_erpModel.Size" />
+    <AssociationSet Name="FK_Inventory_Brand" Association="DB_9B34E1_erpModel.FK_Inventory_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="Inventory" EntitySet="Inventories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReceiveDetails_Brand" Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inventory_Size" Association="DB_9B34E1_erpModel.FK_Inventory_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="Inventory" EntitySet="Inventories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReceiveDetails_Size" Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2845,5 +2871,55 @@
     <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
     <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Size" ToRole="Inventory" />
+    <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Size" FromRole="Size" ToRole="ReceiveDetail" />
   </EntityType>
+  <Association Name="FK_Inventory_Brand">
+    <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReceiveDetails_Brand">
+    <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.ReceiveDetail" Role="ReceiveDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReceiveDetail">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inventory_Size">
+    <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReceiveDetails_Size">
+    <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.ReceiveDetail" Role="ReceiveDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReceiveDetail">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

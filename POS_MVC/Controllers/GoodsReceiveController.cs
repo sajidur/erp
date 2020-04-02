@@ -58,6 +58,8 @@ namespace RexERP_MVC.Controllers
                 ReceiveDetail details = new ReceiveDetail();
                 //details.Id = item.Id;
                 details.ReceiveMasterId = master.Id;
+                details.BrandId = item.BrandId;
+                details.SizeId = item.SizeId;
                 details.ProductId = item.ProductId;
                 details.WarehouseId = item.WarehouseId;
                 details.Qty = item.QTY;

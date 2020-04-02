@@ -37,7 +37,7 @@ namespace RexERP_MVC.BAL
             {
                 foreach (var item in cus.ReceiveDetails)
                 {
-                    var existingItem = inventory.GetAll(a=>a.ProductId==item.ProductId && a.IsActive==true && a.WarehouseId==wareHouseId).ToList();
+                    var existingItem = inventory.GetAll(a=>a.ProductId==item.ProductId && a.IsActive==true && a.WarehouseId==wareHouseId && a.SizeId==item.SizeId&&a.BrandId==item.BrandId).ToList();
                     if (existingItem.Count>0)
                     {
                         foreach (var inv in existingItem)
@@ -60,6 +60,8 @@ namespace RexERP_MVC.BAL
                         inv.ReceiveQty = item.Qty;
                         inv.SupplierId = cus.SupplierID;
                         inv.WarehouseId = wareHouseId;
+                        inv.BrandId = item.BrandId;
+                        inv.SizeId = item.SizeId;
                         inv.Faulty = 0;
                         inv.OpeningQty = 0;
                         inv.BalanceQty = item.Qty;
@@ -78,6 +80,7 @@ namespace RexERP_MVC.BAL
                 ledgerObj.InvoiceNo = cus.InvoiceNo;
                 ledgerObj.Credit = 0;
                 ledgerObj.Debit = cus.GrandTotal;
+                ledgerObj.MasterId = result.Id;
                 var save = ledgerService.Save(ledgerObj);
 
                 //Ledger posting to customer ledger credit
@@ -89,6 +92,7 @@ namespace RexERP_MVC.BAL
                 detailsLedger.InvoiceNo = cus.InvoiceNo;
                 detailsLedger.Credit = cus.GrandTotal;
                 detailsLedger.Debit = 0;
+                detailsLedger.MasterId = result.Id;
                 var detailsLedgerResult = ledgerService.Save(detailsLedger);
 
                 var party = new PartyBalance();
@@ -97,6 +101,7 @@ namespace RexERP_MVC.BAL
                 party.Credit = cus.GrandTotal;
                 party.CreditPeriod = 60;
                 party.Debit = 0;
+                party.MasterId = result.Id;
                 party.FinancialYearId = CurrentSession.GetCurrentSession().FinancialYear;
                 party.PostingDate = cus.InvoiceDate;
                 party.VoucherTypeId = (int)VoucherType.PurchaseInvoice;

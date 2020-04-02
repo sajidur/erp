@@ -1,15 +1,4 @@
 ﻿
-$(document).ready(function () {
-    _serverDate = null;
-    // LoadAllCombo();
-    LoadBrandGrid
-    //GenerateProductGroupId();
-    //LoadProductGroupGrid();
-    EnableDisableControls("1");
-
-});
-
-
 function GenerateProductGroupId() {
     $.ajax({
         url: '@Url.Action("GenerateProductGroupId", "ProductGroup")',
@@ -39,13 +28,29 @@ function LoadBrandGrid() {
 
         }
     });
-
-
 }
 
+function LoadAllBrand(controlId) {
+    var url = '/Brand/GetAll';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        success: function (data) {
+            $("#" + controlId).empty();
+            $("#" + controlId).get(0).options.length = 0;
+            $("#" + controlId).get(0).options[0] = new Option("---- Select -----", "");
+            if (data != null) {
+                $.each(data, function (index, item) {
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.BrandName, item.Id);
+                });
+            }
+            $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!" });
 
-function LoadAllCombo() {
-    GetAllActiveLine("ddllineNumber", true);
+        },
+        error: function () {
+
+        }
+    });
 }
 
 function FormDataAsObject() {
@@ -59,57 +64,6 @@ function ResetForm() {
     $('#txtBrandName').val('');
     $('#txtBrandNameBang').val('');
 }
-
-function EnableDisableControls(status) {
-    //status = 1 for Save, 2 for Delete
-    if (status == "1") {
-        $('#btnSave').prop('disabled', false);
-        $('#btnUpdate').prop('disabled', true);
-        $('#btnDelete').prop('disabled', true);
-    }
-    else if (status == "2") {
-        $('#btnSave').prop('disabled', true);
-        $('#btnUpdate').prop('disabled', false);
-        $('#btnDelete').prop('disabled', false);
-    }
-
-    else {
-        $('#btnSave').prop('disabled', false);
-        $('#btnUpdate').prop('disabled', false);
-        $('#btnDelete').prop('disabled', false);
-    }
-}
-
-
-
-function OnSelectProductGroup(GroupId) {
-
-    $.ajax({
-        url: '@Url.Action("GetAProductGroup", "ProductGroup")',
-        type: 'get',
-        dataType: 'json',
-        async: false,
-        data: {
-            productGroupId: GroupId
-        },
-        success: function (data) {
-            ResetForm();
-            $('#txtGroupCode').val(data.GroupId);
-            $('#txtGroupName').val(data.GroupName);
-            $('#txtGroupDes').val(data.GroupDescription);
-            $('#ddllineNumber').val(data.ProductLine.LineId);
-
-            EnableDisableControls("2");
-            LoadProductGroupGrid();
-
-        },
-        error: function () {
-
-        }
-    });
-}
-
-
 function Save() {
     //debugger;
     if ($("#txtCode").val() == "") {
@@ -143,92 +97,6 @@ function Save() {
         error: function () {
 
 
-        }
-    });
-
-}
-
-function productGroupInfoValidation(formObject) {
-
-    if (!formObject.GroupName) {
-        $('#txtGroupName').focus();
-        ShowNotification('2', 'Group Name Can not be empty.');
-        return false;
-    }
-
-
-    return true;
-
-}
-
-function Update() {
-    var formObject = FormDataAsObject();
-
-    if (productGroupInfoValidation(formObject)) {
-
-
-        $.ajax({
-            url: '@Url.Action("CreateOrUpdate", "ProductGroup")',
-            method: 'post',
-            dataType: 'json',
-            async: false,
-            data: {
-                GroupId: formObject.GroupId,
-                GroupName: formObject.GroupName,
-                GroupDescription: formObject.GroupDescription,
-                LineNumber: formObject.LineNumber,
-                create: 2,
-            },
-            success: function (data) {
-                var vmMsg = data;
-                if (vmMsg.MessageType == 1) {
-                    ShowNotification(1, vmMsg.ReturnMessage);
-                    ResetForm();
-                    LoadProductGroupGrid();
-                    GenerateProductGroupId();
-
-                } else {
-                    ShowNotification(3, vmMsg.ReturnMessage);
-                    // HideLoader();
-                }
-            },
-            error: function () {
-                //HideLoader();
-            }
-        });
-    }
-}
-
-function Delete() {
-    var formObject = FormDataAsObject();
-
-    $.ajax({
-        url: '@Url.Action("Delete", "ProductGroup")',
-        method: 'post',
-        dataType: 'json',
-        async: false,
-        data: {
-            GroupId: formObject.GroupId,
-            GroupName: formObject.GroupName,
-            GroupDescription: formObject.GroupDescription,
-            LineNumber: formObject.LineNumber,
-        },
-        success: function (data) {
-            var vmMsg = data;
-            if (vmMsg.MessageType == 1) {
-                ShowNotification(1, vmMsg.ReturnMessage);
-                ResetForm();
-                LoadProductGroupGrid();
-                GenerateProductGroupId();
-                //$('#BtnSave').prop('disabled', true);
-                //HideLoader();
-            } else {
-                ShowNotification(3, vmMsg.ReturnMessage);
-                // HideLoader();
-            }
-        },
-        error: function () {
-            //HideLoader();
         }
     });
 

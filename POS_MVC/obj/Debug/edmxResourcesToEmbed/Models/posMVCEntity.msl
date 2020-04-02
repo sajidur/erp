@@ -472,6 +472,8 @@
     <EntitySetMapping Name="Inventories">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Inventory">
         <MappingFragment StoreEntitySet="Inventory">
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="InventoryGuid" ColumnName="InventoryGuid" />
@@ -748,6 +750,8 @@
     <EntitySetMapping Name="ReceiveDetails">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.ReceiveDetail">
         <MappingFragment StoreEntitySet="ReceiveDetails">
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ReceiveMasterId" ColumnName="ReceiveMasterId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />

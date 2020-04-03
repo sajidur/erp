@@ -68,16 +68,13 @@ function BrandSave() {
         alert('Brand Name Empty');
         return false;
     }
-
     var formObject = FormDataAsObject();
-
     $.ajax({
         url: '/Brand/Create',
         method: 'post',
         dataType: 'json',
         async: false,
         data: {
-            Id: formObject.Id,
             BrandName: formObject.BrandName,
             create: 1
         },

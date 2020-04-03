@@ -47,40 +47,35 @@ function LoadAllSize(controlId) {
 
 function FormDataAsObject() {
     var object = new Object();
-    object.BrandName = $('#txtBrandName').val();
-    object.BrandNameInBangla = $('#txtBrandNameBang').val();
+    object.SizeName = $('#txtSizeName').val();
     return object;
 }
 
 function ResetForm() {
-    $('#txtBrandName').val('');
-    $('#txtBrandNameBang').val('');
+    $('#txtSizeName').val('');
 }
 
 
-function Save() {
+function SizeSave() {
     if ($("#txtSizeName").val() == "") {
         alert('SizeName Is Empty.');
         return false;
     }
-    var formObject = FormDataAsObject();
-
     $.ajax({
         url: '/SizeSetup/Create',
         method: 'post',
         dataType: 'json',
         async: false,
         data: {
-            Id: formObject.Id,
             Name: $('#txtSizeName').val(),
             create: 1
         },
         success: function (data) {
-            ShowNotification("1", "Size Saved!!")
-            ClearAddBox();
-            LoadDesignList();
+            ShowNotification("1", "Size Saved!!");
+            ResetForm();
         },
         error: function () {
+            ShowNotification("3", "Saved Failed!!");
 
         }
     });

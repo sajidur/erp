@@ -67,15 +67,29 @@
                                             <option value="0">Select</option>
                                         </select>
                                     </td>
-                                    <td class="col-sm-2">
-                                        <select id="ddlSize" class="form-control">
-                                            <option value="0">Select</option>
-                                        </select>
+                                    <td class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <select id="ddlSize" class="form-control">
+                                                    <option value="0">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button id="btnSizeAdd">+</button>
+                                            </div>
+                                        </div>
                                     </td>
-                                    <td class="col-sm-2">
-                                        <select id="ddlBrand" class="form-control">
-                                            <option value="0">Select</option>
-                                        </select>
+                                    <td class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <select id="ddlBrand" class="form-control">
+                                                    <option value="0">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button id="btnBrandAdd">+</button>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td class="col-sm-1">
                                         <input type="number" name="txtQty" id="txtQty" value="0" class="form-control" style="height:35px" />
@@ -283,6 +297,50 @@
 
         Calculation();
         CalculationExpense();
+        $(function (){
+        $('#btnBrandAdd').click(function() {
+            var url = '/Brand/Add';
+            var dialog = $('<div style="display:none"></div>').appendTo('body');
+            dialog.load(url, {}, 
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                    maxWidth:600,
+                    maxHeight: 500,
+                    width: 600,
+                    height: 500,
+                    modal: true,
+                    title:"Add Brand",
+                        close: function (event, ui) {
+                         LoadAllBrand("ddlBrand");
+                        dialog.remove();
+                    }
+                });
+            });
+            return false;
+        });
+        });
+                $(function (){
+        $('#btnSizeAdd').click(function() {
+            var url = '/SizeSetup/Add';
+            var dialog = $('<div style="display:none"></div>').appendTo('body');
+            dialog.load(url, {}, 
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                    maxWidth:600,
+                    maxHeight: 500,
+                    width: 600,
+                    height: 500,
+                    modal: true,
+                    title:"Add Size",
+                        close: function (event, ui) {
+                                                LoadAllSize("ddlSize");
+                        dialog.remove();
+                    }
+                });
+            });
+            return false;
+        });
+    });
     });
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>

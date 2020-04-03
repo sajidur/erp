@@ -480,5 +480,7 @@ namespace RexERP_MVC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("YearClosed", customerIdParameter);
         }
+
+        public System.Data.Entity.DbSet<RexERP_MVC.ViewModel.BrandResponse> BrandResponses { get; set; }
     }
 }

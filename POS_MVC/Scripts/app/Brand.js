@@ -56,23 +56,16 @@ function LoadAllBrand(controlId) {
 function FormDataAsObject() {
     var object = new Object();
     object.BrandName = $('#txtBrandName').val();
-    object.BrandNameInBangla = $('#txtBrandNameBang').val();
     return object;
 }
 
 function ResetForm() {
     $('#txtBrandName').val('');
-    $('#txtBrandNameBang').val('');
 }
-function Save() {
+function BrandSave() {
     //debugger;
-    if ($("#txtCode").val() == "") {
-        alert('Code Name Empty');
-        return false;
-    }
-
-    if ($("#txtCategoryName").val() == "") {
-        alert(' Name Empty');
+    if ($("#txtBrandName").val() == "") {
+        alert('Brand Name Empty');
         return false;
     }
 
@@ -86,7 +79,6 @@ function Save() {
         data: {
             Id: formObject.Id,
             BrandName: formObject.BrandName,
-            BrandNameInBangla: formObject.BrandNameInBangla,
             create: 1
         },
         success: function (data) {
@@ -95,7 +87,6 @@ function Save() {
             LoadBrandGrid();
         },
         error: function () {
-
 
         }
     });

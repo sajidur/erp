@@ -48,7 +48,7 @@ namespace RexERP_MVC.Controllers
         }
 
         // GET: /Category/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
             return View();
         }
@@ -63,7 +63,6 @@ namespace RexERP_MVC.Controllers
             if (ModelState.IsValid)
             {
                 service.Save(category);
-                return RedirectToAction("Index");
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

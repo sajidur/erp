@@ -31,7 +31,7 @@ namespace RexERP_MVC.Models
         public string UpdatedDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual TempSalesMaster TempSalesMaster { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

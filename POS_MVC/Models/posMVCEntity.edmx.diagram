@@ -44,7 +44,6 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.PartyBalance" Width="1.5" PointX="26" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.PartyPaymentHistory" Width="1.5" PointX="19.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Picture" Width="1.5" PointX="19.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Product" Width="1.5" PointX="3" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.ReceiveDetail" Width="1.5" PointX="8.25" PointY="21.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.ReceiveMaster" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.ReportItem" Width="1.5" PointX="25.75" PointY="0.75" IsExpanded="true" />
@@ -97,7 +96,6 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_AdvancePayment_VoucherType" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_AdvancePayment_Year" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_BankReconciliation_LadgerPosting" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraDetails_ContraMaster" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraMaster_Ledger" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraMaster_User" ManuallyRouted="false" />
@@ -114,11 +112,6 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_JournalMaster_VoucherType" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_LedgerPosting_Voucher" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_PartyBalance_Voucher" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_product" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_product" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_RecieveMaster" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Warehouse" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveMaster_Supplier" ManuallyRouted="false" />
@@ -137,16 +130,23 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Size" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Inventory" Width="1.5" PointX="34.625" PointY="19.125" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Brand" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Size" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Supplier" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_WareHouse" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.StockIn" Width="1.5" PointX="36.625" PointY="12.75" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Brand" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Size" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Supplier" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Warehouse" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Product" Width="1.5" PointX="3" PointY="19.25" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Product_Category" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

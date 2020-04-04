@@ -66,7 +66,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<PartyBalance> PartyBalances { get; set; }
         public virtual DbSet<PartyPaymentHistory> PartyPaymentHistories { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ReceiveDetail> ReceiveDetails { get; set; }
         public virtual DbSet<ReceiveMaster> ReceiveMasters { get; set; }
         public virtual DbSet<ReportItem> ReportItems { get; set; }
@@ -112,6 +111,7 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<StockIn> StockIns { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

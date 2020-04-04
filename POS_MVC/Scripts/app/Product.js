@@ -1,16 +1,4 @@
-﻿$(function () {
-    LoadProductList();   
-});
-
-
-$(document).ready(function () {
-    LoadAllCategory();
-    LoadListData();
-});
-
-
-
-function LoadProductList() {
+﻿function LoadProductList() {
     var url = '/Product/GetAll';
     $.ajax({
         url: url,
@@ -130,8 +118,18 @@ function LoadSingleData(parameters) {
             $("#hdId").val(data.Id);
             $("#txtCode").val(data.Code);
             $("#txtProductName").val(data.ProductName);
+            var ddlUnit = document.getElementById('ddlUnit');
+            setSelectedValue(ddlUnit, data.Unit);
+
+          //  $("#ddlUnit").find(data.Unit).attr("selected", "selected");
+
+
+            $("#txtReorderLevel").val(data.ReorderLevel);
+            $("#txtMinStock").val(data.MinStock);
+            $("#txtMaxStock").val(data.MaxStock);
+
             var ddlProductType = document.getElementById('ddlProductCategory');
-            ddlProductType.selectedIndex = data.ProductType;
+            setSelectedValue(ddlProductType, data.ProductType);
 
             var ddlCategoryName = document.getElementById('ddlCategory');
             //ddlCategoryName.selectedIndex = data.Category.CategoryName;
@@ -161,6 +159,10 @@ function FormDataAsObject() {
     object.ProductName = $('#txtProductName').val();
     object.ProductType = $("#ddlProductCategory option:selected").text();
     object.ProductTypeId = $("#ddlProductCategory option:selected").val();
+    object.Unit = $("#ddlUnit option:selected").text();
+    object.MinStock = $('#txtMinStock').val();
+    object.MaxStock = $('#txtMaxStock').val();
+    object.ReorderLevel = $('#txtReorderLevel').val();
     console.log(object);
     return object;
 }
@@ -190,6 +192,10 @@ function Save() {
             ProductName: formObject.ProductName,
             ProductType: formObject.ProductType,
             ProductTypeId: formObject.ProductTypeId,
+            MinStock:formObject.MinStock,
+            MaxStock:formObject.MaxStock,
+            ReorderLevel:formObject.ReorderLevel,
+            Unit:formObject.Unit,
             create: 1
         },
         success: function (data) {
@@ -239,6 +245,10 @@ $("#btnUpdate").click(function () {
                 ProductName: formObject.ProductName,
                 ProductType: formObject.ProductType,
                 ProductTypeId: formObject.ProductTypeId,
+                MinStock: formObject.MinStock,
+                MaxStock: formObject.MaxStock,
+                ReorderLevel: formObject.ReorderLevel,
+                Unit: formObject.Unit,
                 create: 1
             },
         async: false,
@@ -322,6 +332,30 @@ function LoadAllCategory() {
             if (data != null) {
                 $.each(data, function (index, item) {
                     $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.CategoryName, item.Id);
+                });
+            }
+        },
+        error: function () {
+        }
+    });
+}
+function LoadUnits() {
+    var url = '/Setup/Units';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        success: function (res) {
+            var controlId = "ddlUnit";
+            var data = res;
+            //alert('Success');
+            $("#" + controlId).empty();
+            $("#" + controlId).get(0).options.length = 0;
+            if (true) {
+                $("#" + controlId).get(0).options[0] = new Option("---- Select -----", "");
+            }
+            if (data != null) {
+                $.each(data, function (index, item) {
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Name, item.Id);
                 });
             }
         },

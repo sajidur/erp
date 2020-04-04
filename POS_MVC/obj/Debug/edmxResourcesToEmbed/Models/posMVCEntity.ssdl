@@ -735,6 +735,11 @@ warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined 
     <Property Name="CategoryId" Type="int" />
     <Property Name="ProductType" Type="nvarchar" MaxLength="50" />
     <Property Name="ProductTypeId" Type="int" />
+    <Property Name="MinStock" Type="int" />
+    <Property Name="TaxId" Type="int" />
+    <Property Name="MaxStock" Type="int" />
+    <Property Name="Unit" Type="varchar" MaxLength="50" />
+    <Property Name="ReorderLevel" Type="int" />
     <Property Name="CreatedBy" Type="char" MaxLength="24" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="UpdateBy" Type="nchar" MaxLength="24" />

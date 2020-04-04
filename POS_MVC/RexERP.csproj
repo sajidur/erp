@@ -235,6 +235,7 @@
     <Compile Include="BAL\SupplierService.cs" />
     <Compile Include="BAL\T.cs" />
     <Compile Include="BAL\TaxService.cs" />
+    <Compile Include="BAL\UnitService.cs" />
     <Compile Include="BAL\WareHouseService.cs" />
     <Compile Include="Controllers\AccountGroupController.cs" />
     <Compile Include="Controllers\AccountLedgerController.cs" />

@@ -157,9 +157,9 @@ namespace RexERP_MVC.Controllers
             return View();
         }
 
-        public ActionResult GetAllFinishGoods()
+        public ActionResult GetAllInventory()
         {
-            List<Inventory> inventories = service.GetAllFinishGoods();
+            List<Inventory> inventories = service.GetAllInventory();
             if (inventories == null)
             {
                 return HttpNotFound();

@@ -66,11 +66,11 @@
                                 <table class="table table-bordered table-striped table-hover" id="inventoryGroupTableModal">
                                     <thead>
                                     <th>Id</th>
-                                    <th>ProductId</th>
                                     <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Brand</th>
                                     <th>Supplier</th>
                                     <th>WarehouseId</th>
-                                    <th>QtyInBale</th>
                                     <th>BalanceQty</th>
                                     <th>ProductionQty</th>
                                     <th>Action</th>
@@ -79,11 +79,11 @@
                                         {{#InventoryGroupSearch}}
                                         <tr>
                                             <td>{{Id}}</td>
-                                            <td>{{Product.Id}}</td>
-                                            <td> {{Product.ProductName}}</td>
+                                            <td>{{Product.ProductName}}</td>
+                                            <td>{{Size.Name}}</td>
+                                            <td>{{Brand.BrandName}}</td>
                                             <td> {{Supplier.Name}}</td>
                                             <td> {{WareHouse.WareHouseName}}</td>
-                                            <td> {{QtyInBale}}</td>
                                             <td> {{BalanceQty}}</td>
                                             <td>
                                                 <input type="text" name="txtProductionQty" id="txtProductionQty" class="form-control" />
@@ -116,19 +116,21 @@
         <thead>
         <th></th>
         <th>Item</th>
+        <th>Size</th>
+        <th>Brand</th>
         <th>Godown</th>
         <th>Qty</th>
-        <th>কেজি/বস্তা</th>
         <th>Action </th>
         </thead>
         <tbody>
-        {{#StockTableAdd}}
-        <tr>
-            <td>{{inventoryCountCount}}</td>
-                <td> {{Product.ProductName}}</td>
-                <td> {{WareHouse.WareHouseName}}</td>
-                <td> {{BaleQty}}</td>
-                <td> {{BaleWeight}}</td>
+            {{#StockTableAdd}}
+            <tr>
+                <td>{{Count}}</td>
+                <td> {{ProductName}}</td>
+                <td>{{SizeName}}</td>
+                <td>{{BrandName}}</td>
+                <td> {{WareHouse}}</td>
+                <td> {{Qty}}</td>
                 <td>
                     <a class="btn btn-danger" onclick="OnDeleteStockOut('{{inventoryCountCount}}')"><i class="fa fa-trash-o"></i></a>
                 </td>

@@ -19,10 +19,12 @@ namespace RexERP_MVC.Models
         public string InventoryGuid { get; set; }
         public int SupplierId { get; set; }
         public int WarehouseId { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
         public Nullable<decimal> OpeningQty { get; set; }
         public Nullable<decimal> ReceiveQty { get; set; }
-        public Nullable<decimal> AddFromOtherSource { get; set; }
-        public Nullable<decimal> ProductionQty { get; set; }
+        public Nullable<decimal> ProductionIn { get; set; }
+        public Nullable<decimal> ProductionOut { get; set; }
         public Nullable<decimal> ReturnQty { get; set; }
         public Nullable<decimal> Faulty { get; set; }
         public Nullable<decimal> SalesQty { get; set; }
@@ -34,13 +36,11 @@ namespace RexERP_MVC.Models
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
-        public Nullable<int> SizeId { get; set; }
-        public Nullable<int> BrandId { get; set; }
     
+        public virtual Brand Brand { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Size Size { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual WareHouse WareHouse { get; set; }
-        public virtual Brand Brand { get; set; }
-        public virtual Size Size { get; set; }
     }
 }

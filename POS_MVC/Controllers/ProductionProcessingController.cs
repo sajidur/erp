@@ -63,63 +63,26 @@ namespace RexERP_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(string InvoiceNo, string Notes, List<StockOut> stockOuts)
+        public ActionResult Save(string InvoiceNo, string Notes, List<StockOutRequest> stockOuts)
         {
-            StockOut result = new StockOut();
-            StockOut FinalResult = new StockOut();
-            //if (ModelState.IsValid)
-            {                
-                foreach (var item in stockOuts)
-                {
-                    result.InvoiceNo = InvoiceNo;
-                    result.Notes = Notes;
-                    result.IsActive = true;
-                    result.CreatedDate = DateTime.Now;
-                    result.ProductionDate = DateTime.Now;
-                    result.CreatedBy = CurrentSession.GetCurrentSession().UserName;
-
-                    result.ProductId = item.ProductId;
-                    result.BaleWeight = item.BaleWeight;
-                    result.WarehouseId = item.WarehouseId;
-                    result.SupplierId = item.SupplierId;
-                    result.BaleQty = item.BaleQty;
-                    result.WeightInMon = item.WeightInMon;
-
-                    FinalResult = service.Save(result);
-                }
-            }
-
-            return Json(FinalResult, JsonRequestBehavior.AllowGet);
+            var saved=service.Save(stockOuts, InvoiceNo, Notes);
+            return Json(saved, JsonRequestBehavior.AllowGet);
         }
-
-
         [HttpPost]
         public ActionResult SaveStockIn(string InvoiceNo, string Notes, List<StockIn> stockIns)
         {
             StockIn result = new StockIn();
-            StockIn FinalResult = new StockIn();
             //if (ModelState.IsValid)
             {
                 foreach (var item in stockIns)
                 {
-                    result.InvoiceNo = InvoiceNo;
-                    result.Notes = Notes;
-                    result.IsActive = true;
-                    result.CreatedDate = DateTime.Now;
-                    result.ProductionDate = DateTime.Now;
-                    result.CreatedBy = CurrentSession.GetCurrentSession().UserName;
-                    result.SupplierId = 0;
-                    result.ProductId = item.ProductId;
-                    result.BaleWeight = item.BaleWeight;
-                    result.WarehouseId = item.WarehouseId;
-                    result.SupplierId = item.SupplierId;
-                    result.BaleQty = item.BaleQty;
-                    result.WeightInMon = item.WeightInMon;
-                    FinalResult = serviceStockIn.Save(result,Notes);
+                    item.Notes = Notes;
+                    item.InvoiceNo = InvoiceNo;
+                    serviceStockIn.Save(item);
                 }
             }
 
-            return Json(FinalResult, JsonRequestBehavior.AllowGet);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult InventoryDetails(int? id)

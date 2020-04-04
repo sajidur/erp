@@ -207,8 +207,9 @@
     <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="Active" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Brand" ToRole="Inventory" />
     <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand" FromRole="Brand" ToRole="ReceiveDetail" />
+    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Brand" ToRole="Inventory" />
+    <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Brand" FromRole="Brand" ToRole="StockIn" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -476,38 +477,6 @@
     <Property Name="DeptID" Type="Int16" />
     <Property Name="timezone" Type="Int32" />
   </EntityType>
-  <EntityType Name="Inventory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProductId" Type="Int32" Nullable="false" />
-    <Property Name="InventoryGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SupplierId" Type="Int32" Nullable="false" />
-    <Property Name="WarehouseId" Type="Int32" Nullable="false" />
-    <Property Name="OpeningQty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ReceiveQty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="AddFromOtherSource" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ProductionQty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ReturnQty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Faulty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="SalesQty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="BalanceQty" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Inventory_Product" FromRole="Inventory" ToRole="Product" />
-    <NavigationProperty Name="Supplier" Relationship="Self.FK_Inventory_Supplier" FromRole="Inventory" ToRole="Supplier" />
-    <NavigationProperty Name="WareHouse" Relationship="Self.FK_Inventory_WareHouse" FromRole="Inventory" ToRole="WareHouse" />
-    <Property Name="SizeId" Type="Int32" />
-    <Property Name="BrandId" Type="Int32" />
-    <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Inventory" ToRole="Brand" />
-    <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Inventory" ToRole="Size" />
-  </EntityType>
   <EntityType Name="JournalDetail">
     <Key>
       <PropertyRef Name="Id" />
@@ -759,13 +728,13 @@
     <Property Name="UpdateDate" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
-    <NavigationProperty Name="Inventories" Relationship="Self.FK_Inventory_Product" FromRole="Product" ToRole="Inventory" />
     <NavigationProperty Name="ReceiveDetails" Relationship="Self.FK_ReceiveDetails_product" FromRole="Product" ToRole="ReceiveDetails" />
     <NavigationProperty Name="SalesDetails" Relationship="Self.FK_SalesDetails_Product" FromRole="Product" ToRole="SalesDetails" />
     <NavigationProperty Name="SalesOrders" Relationship="Self.FK_SalesOrder_product" FromRole="Product" ToRole="SalesOrder" />
-    <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_Product" FromRole="Product" ToRole="StockIn" />
     <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_Product" FromRole="Product" ToRole="StockOut" />
     <NavigationProperty Name="TempSalesDetails" Relationship="Self.FK_TempSalesDetails_Product" FromRole="Product" ToRole="TempSalesDetails" />
+    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Product" FromRole="Product" ToRole="Inventory" />
+    <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Product" FromRole="Product" ToRole="StockIn" />
   </EntityType>
   <EntityType Name="ReceiveDetail">
     <Key>
@@ -1077,30 +1046,6 @@
     <Property Name="CYCLE" Type="Int16" />
     <Property Name="UNITS" Type="Int16" />
   </EntityType>
-  <EntityType Name="StockIn">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="StockOutInvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ProductId" Type="Int32" />
-    <Property Name="BaleWeight" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="WarehouseId" Type="Int32" />
-    <Property Name="SupplierId" Type="Int32" />
-    <Property Name="ProductionDate" Type="DateTime" Precision="0" />
-    <Property Name="BaleQty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="WeightInMon" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_StockIn_Product" FromRole="StockIn" ToRole="Product" />
-    <NavigationProperty Name="Supplier" Relationship="Self.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
-    <NavigationProperty Name="WareHouse" Relationship="Self.FK_StockIn_Warehouse" FromRole="StockIn" ToRole="WareHouse" />
-  </EntityType>
   <EntityType Name="StockOut">
     <Key>
       <PropertyRef Name="Id" />
@@ -1147,10 +1092,10 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="LedgerId" Type="Int32" />
-    <NavigationProperty Name="Inventories" Relationship="Self.FK_Inventory_Supplier" FromRole="Supplier" ToRole="Inventory" />
     <NavigationProperty Name="ReceiveMasters" Relationship="Self.FK_ReceiveMaster_Supplier" FromRole="Supplier" ToRole="ReceiveMaster" />
-    <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_Supplier" FromRole="Supplier" ToRole="StockIn" />
     <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_Supplier" FromRole="Supplier" ToRole="StockOut" />
+    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Supplier" FromRole="Supplier" ToRole="Inventory" />
+    <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Supplier" FromRole="Supplier" ToRole="StockIn" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -1493,10 +1438,10 @@
     <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Inventories" Relationship="Self.FK_Inventory_WareHouse" FromRole="WareHouse" ToRole="Inventory" />
     <NavigationProperty Name="ReceiveDetails" Relationship="Self.FK_ReceiveDetails_Warehouse" FromRole="WareHouse" ToRole="ReceiveDetails" />
-    <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_Warehouse" FromRole="WareHouse" ToRole="StockIn" />
     <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_Warehouse" FromRole="WareHouse" ToRole="StockOut" />
+    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_WareHouse" FromRole="WareHouse" ToRole="Inventory" />
+    <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Warehouse" FromRole="WareHouse" ToRole="StockIn" />
   </EntityType>
   <EntityType Name="EmOpLog">
     <Key>
@@ -1831,42 +1776,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Inventory_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inventory">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Inventory_Supplier">
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inventory">
-        <PropertyRef Name="SupplierId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Inventory_WareHouse">
-    <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
-    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="WareHouse">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inventory">
-        <PropertyRef Name="WarehouseId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_JournalDetails_JournalMaster">
     <End Role="JournalDetails" Type="Self.JournalDetail" Multiplicity="1" />
     <End Role="JournalDetails1" Type="Self.JournalDetail" Multiplicity="0..1" />
@@ -1959,18 +1868,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SalesOrder">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StockIn_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StockIn">
         <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
@@ -2095,30 +1992,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StockIn_Supplier">
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
-    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StockIn">
-        <PropertyRef Name="SupplierId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StockIn_Warehouse">
-    <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="0..1" />
-    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="WareHouse">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StockIn">
-        <PropertyRef Name="WarehouseId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_StockOut_Supplier">
     <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
     <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
@@ -2207,7 +2080,6 @@
     <EntitySet Name="FaceTemps" EntityType="Self.FaceTemp" />
     <EntitySet Name="FinancialYears" EntityType="Self.FinancialYear" />
     <EntitySet Name="HOLIDAYS" EntityType="Self.HOLIDAY" />
-    <EntitySet Name="Inventories" EntityType="Self.Inventory" />
     <EntitySet Name="JournalDetails" EntityType="Self.JournalDetail" />
     <EntitySet Name="JournalMasters" EntityType="Self.JournalMaster" />
     <EntitySet Name="LeaveClasses" EntityType="Self.LeaveClass" />
@@ -2236,7 +2108,6 @@
     <EntitySet Name="SECURITYDETAILS" EntityType="Self.SECURITYDETAIL" />
     <EntitySet Name="Settings" EntityType="Self.Setting" />
     <EntitySet Name="SHIFTs" EntityType="Self.SHIFT" />
-    <EntitySet Name="StockIns" EntityType="Self.StockIn" />
     <EntitySet Name="StockOuts" EntityType="Self.StockOut" />
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
@@ -2352,18 +2223,6 @@
       <End Role="FinancialYear" EntitySet="FinancialYears" />
       <End Role="LedgerPosting" EntitySet="LedgerPostings" />
     </AssociationSet>
-    <AssociationSet Name="FK_Inventory_Product" Association="Self.FK_Inventory_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="Inventory" EntitySet="Inventories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Inventory_Supplier" Association="Self.FK_Inventory_Supplier">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="Inventory" EntitySet="Inventories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Inventory_WareHouse" Association="Self.FK_Inventory_WareHouse">
-      <End Role="WareHouse" EntitySet="WareHouses" />
-      <End Role="Inventory" EntitySet="Inventories" />
-    </AssociationSet>
     <AssociationSet Name="FK_JournalDetails_JournalMaster" Association="Self.FK_JournalDetails_JournalMaster">
       <End Role="JournalDetails" EntitySet="JournalDetails" />
       <End Role="JournalDetails1" EntitySet="JournalDetails" />
@@ -2395,10 +2254,6 @@
     <AssociationSet Name="FK_SalesOrder_product" Association="Self.FK_SalesOrder_product">
       <End Role="Product" EntitySet="Products" />
       <End Role="SalesOrder" EntitySet="SalesOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StockIn_Product" Association="Self.FK_StockIn_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="StockIn" EntitySet="StockIns" />
     </AssociationSet>
     <AssociationSet Name="FK_StockOut_Product" Association="Self.FK_StockOut_Product">
       <End Role="Product" EntitySet="Products" />
@@ -2439,14 +2294,6 @@
     <AssociationSet Name="FK_TempSalesMaster_SalesOrder" Association="Self.FK_TempSalesMaster_SalesOrder">
       <End Role="SalesOrder" EntitySet="SalesOrders" />
       <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StockIn_Supplier" Association="Self.FK_StockIn_Supplier">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="StockIn" EntitySet="StockIns" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StockIn_Warehouse" Association="Self.FK_StockIn_Warehouse">
-      <End Role="WareHouse" EntitySet="WareHouses" />
-      <End Role="StockIn" EntitySet="StockIns" />
     </AssociationSet>
     <AssociationSet Name="FK_StockOut_Supplier" Association="Self.FK_StockOut_Supplier">
       <End Role="Supplier" EntitySet="Suppliers" />
@@ -2578,21 +2425,55 @@
       <Parameter Name="CustomerId" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="Sizes" EntityType="DB_9B34E1_erpModel.Size" />
+    <AssociationSet Name="FK_ReceiveDetails_Brand" Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReceiveDetails_Size" Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
+    </AssociationSet>
+    <EntitySet Name="Inventories" EntityType="DB_9B34E1_erpModel.Inventory" />
     <AssociationSet Name="FK_Inventory_Brand" Association="DB_9B34E1_erpModel.FK_Inventory_Brand">
       <End Role="Brand" EntitySet="Brands" />
       <End Role="Inventory" EntitySet="Inventories" />
     </AssociationSet>
-    <AssociationSet Name="FK_ReceiveDetails_Brand" Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand">
-      <End Role="Brand" EntitySet="Brands" />
-      <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
+    <AssociationSet Name="FK_Inventory_Product" Association="DB_9B34E1_erpModel.FK_Inventory_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Inventory" EntitySet="Inventories" />
     </AssociationSet>
     <AssociationSet Name="FK_Inventory_Size" Association="DB_9B34E1_erpModel.FK_Inventory_Size">
       <End Role="Size" EntitySet="Sizes" />
       <End Role="Inventory" EntitySet="Inventories" />
     </AssociationSet>
-    <AssociationSet Name="FK_ReceiveDetails_Size" Association="DB_9B34E1_erpModel.FK_ReceiveDetails_Size">
+    <AssociationSet Name="FK_Inventory_Supplier" Association="DB_9B34E1_erpModel.FK_Inventory_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Inventory" EntitySet="Inventories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inventory_WareHouse" Association="DB_9B34E1_erpModel.FK_Inventory_WareHouse">
+      <End Role="WareHouse" EntitySet="WareHouses" />
+      <End Role="Inventory" EntitySet="Inventories" />
+    </AssociationSet>
+    <EntitySet Name="StockIns" EntityType="DB_9B34E1_erpModel.StockIn" />
+    <AssociationSet Name="FK_StockIn_Brand" Association="DB_9B34E1_erpModel.FK_StockIn_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Product" Association="DB_9B34E1_erpModel.FK_StockIn_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Size" Association="DB_9B34E1_erpModel.FK_StockIn_Size">
       <End Role="Size" EntitySet="Sizes" />
-      <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Supplier" Association="DB_9B34E1_erpModel.FK_StockIn_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="StockIn" EntitySet="StockIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Warehouse" Association="DB_9B34E1_erpModel.FK_StockIn_Warehouse">
+      <End Role="WareHouse" EntitySet="WareHouses" />
+      <End Role="StockIn" EntitySet="StockIns" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
@@ -2871,8 +2752,65 @@
     <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
     <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Size" ToRole="Inventory" />
     <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Size" FromRole="Size" ToRole="ReceiveDetail" />
+    <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Size" ToRole="Inventory" />
+    <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Size" FromRole="Size" ToRole="StockIn" />
+  </EntityType>
+  <Association Name="FK_ReceiveDetails_Brand">
+    <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.ReceiveDetail" Role="ReceiveDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReceiveDetail">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReceiveDetails_Size">
+    <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.ReceiveDetail" Role="ReceiveDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReceiveDetail">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="InventoryGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SupplierId" Type="Int32" Nullable="false" />
+    <Property Name="WarehouseId" Type="Int32" Nullable="false" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="BrandId" Type="Int32" />
+    <Property Name="OpeningQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ReceiveQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionIn" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionOut" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ReturnQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Faulty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SalesQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Inventory" ToRole="Brand" />
+    <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_Inventory_Product" FromRole="Inventory" ToRole="Product" />
+    <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Inventory" ToRole="Size" />
+    <NavigationProperty Name="Supplier" Relationship="DB_9B34E1_erpModel.FK_Inventory_Supplier" FromRole="Inventory" ToRole="Supplier" />
+    <NavigationProperty Name="WareHouse" Relationship="DB_9B34E1_erpModel.FK_Inventory_WareHouse" FromRole="Inventory" ToRole="WareHouse" />
   </EntityType>
   <Association Name="FK_Inventory_Brand">
     <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -2886,15 +2824,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ReceiveDetails_Brand">
-    <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
-    <End Type="DB_9B34E1_erpModel.ReceiveDetail" Role="ReceiveDetail" Multiplicity="*" />
+  <Association Name="FK_Inventory_Product">
+    <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Brand">
+      <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ReceiveDetail">
-        <PropertyRef Name="BrandId" />
+      <Dependent Role="Inventory">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2910,15 +2848,113 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ReceiveDetails_Size">
+  <Association Name="FK_Inventory_Supplier">
+    <End Type="DB_9B34E1_erpModel.Supplier" Role="Supplier" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inventory_WareHouse">
+    <End Type="DB_9B34E1_erpModel.WareHouse" Role="WareHouse" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WareHouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="WarehouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="StockIn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StockOutInvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="WarehouseId" Type="Int32" />
+    <Property Name="SupplierId" Type="Int32" />
+    <Property Name="ProductionDate" Type="DateTime" Precision="0" />
+    <Property Name="BaleQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BrandId" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_StockIn_Brand" FromRole="StockIn" ToRole="Brand" />
+    <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_StockIn_Product" FromRole="StockIn" ToRole="Product" />
+    <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_StockIn_Size" FromRole="StockIn" ToRole="Size" />
+    <NavigationProperty Name="Supplier" Relationship="DB_9B34E1_erpModel.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
+    <NavigationProperty Name="WareHouse" Relationship="DB_9B34E1_erpModel.FK_StockIn_Warehouse" FromRole="StockIn" ToRole="WareHouse" />
+  </EntityType>
+  <Association Name="FK_StockIn_Brand">
+    <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.StockIn" Role="StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_Product">
+    <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.StockIn" Role="StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_Size">
     <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
-    <End Type="DB_9B34E1_erpModel.ReceiveDetail" Role="ReceiveDetail" Multiplicity="*" />
+    <End Type="DB_9B34E1_erpModel.StockIn" Role="StockIn" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Size">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ReceiveDetail">
+      <Dependent Role="StockIn">
         <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_Supplier">
+    <End Type="DB_9B34E1_erpModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.StockIn" Role="StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_Warehouse">
+    <End Type="DB_9B34E1_erpModel.WareHouse" Role="WareHouse" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.StockIn" Role="StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WareHouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="WarehouseId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,16 +1,9 @@
-﻿
-
-var detailsStockOut = [];
+﻿var detailsStockOut = [];
 var datatableRowCount = 0;
 
 $(document).ready(function () {
-    LoadInvoiceNo("txtPoNo");
-    LoadAllProduct();
-    LoadAllWareHouse("ddlWareHouse");
-    //LoadSupplierCombo("ddlSupplier");
-
+    LoadInvoiceNo("txtPoNo");  
     LoadInventoryList();
-
     var templateWithData = Mustache.to_html($("#templateStockOutModal").html(), { StockTableAdd: detailsStockOut });
     $("#div-stockOut-add").empty().html(templateWithData);
 });
@@ -32,33 +25,6 @@ function OnDeleteStockOut(Id) {
     }
     var templateWithData = Mustache.to_html($("#templateStockOutModal").html(), { StockTableAdd: detailsStockOut });
     $("#div-stockOut-add").empty().html(templateWithData);
-}
-
-
-function LoadAllProduct() {
-    var url = "/Product/GetAll";
-    $.ajax({
-        url: url,
-        method: "POST",
-        success: function (res) {
-            var data = res;
-            //alert('Success');
-            var controlId = "ddlItem";
-            $("#" + controlId).empty();
-            $("#" + controlId).get(0).options.length = 0;
-            if (true) {
-                $("#" + controlId).get(0).options[0] = new Option("-পছন্দ করুন-", "-1");
-            }
-            if (data != null) {
-                $.each(data, function (index, item) {
-                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.ProductName, item.Id);
-                });
-            }
-        },
-        error: function () {
-        }
-    });
-
 }
 
 function GetStockOutReport() {
@@ -149,7 +115,7 @@ function Save() {
 
 
 function LoadInventoryList() {
-    var url = '/ProductionProcessing/GetAllInventory';
+    var url = '/Sales/GetAllInventoryforSales';
     $.ajax({
         url: url,
         method: 'POST',
@@ -166,47 +132,37 @@ function LoadInventoryList() {
     });
 }
 
-var inventoryCount = 1;
+var count = 0;
 function LoadForAdd(parameters) {
-    $.ajax({
-        url: '/ProductionProcessing/InventoryDetails',
-        data: { 'id': parameters },
-        success: function (data) {
-            var inventoryCountCount = inventoryCount++;
-            var Id = data.Id;
-            var ProductId = data.ProductId;
-            var WarehouseId = data.WarehouseId;
-            var table = $('#inventoryGroupTableModal').DataTable();            
-
-            var BaleQty = '';
-            $('#inventoryGroupTableModal tr').each(function (i) {
-                if ($(this).find('td').eq(0).text() == Id) {
-                    BaleQty = $(this).find('td').eq(7).find('input').val();
-                }
-            });
-
-
-            var BaleWeight = data.QtyInBale;
-            var WeightInMon = data.QtyInBale;
-            var SupplierId = data.SupplierId;
-
-            var Product = data.Product;
-            var Supplier = data.Supplier;
-            var WareHouse = data.WareHouse;
-            
+    count++;
+    var Id = "0";
+    var ProductName = "";
+    var SizeName = "";
+    var BrandName = "";
+    var WareHouse = "";
+    var Qty = '0';
+    var ProductId = '0';
+    $('#inventoryGroupTableModal tr').each(function (i) {
+        if ($(this).find('td').eq(0).text() == parameters) {
+            Id = $(this).find('td').eq(0).html();
+            ProductName = $(this).find('td').eq(1).html();
+            SizeName = $(this).find('td').eq(2).html();
+            BrandName = $(this).find('td').eq(3).html();
+            WareHouse = $(this).find('td').eq(5).html();
+            ProductId = Id;
+            Qty = $(this).find('td').eq(7).find('input').val();
+          }
+        });         
             var object = {
-                inventoryCountCount : inventoryCountCount,
-                Id: Id, ProductId: ProductId, WarehouseId: WarehouseId,
-                BaleQty: BaleQty, BaleWeight: BaleWeight,
-                WeightInMon: WeightInMon, SupplierId: SupplierId, Product: Product,
-                Supplier: Supplier, WareHouse: WareHouse
+                Count: count,
+                ProductName: ProductName,
+                InventoryId: Id,
+                Qty: Qty,
+                SizeName: SizeName,
+                BrandName: BrandName,
+                WareHouse: WareHouse
             };
             detailsStockOut.push(object);
             var templateWithData = Mustache.to_html($("#templateStockOutModal").html(), { StockTableAdd: detailsStockOut });
             $("#div-stockOut-add").empty().html(templateWithData);
-        },
-        error: function () {
-            alert('An error occured try again later');
-        }
-    });
 }

@@ -54,7 +54,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<FaceTemp> FaceTemps { get; set; }
         public virtual DbSet<FinancialYear> FinancialYears { get; set; }
         public virtual DbSet<HOLIDAY> HOLIDAYS { get; set; }
-        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<JournalDetail> JournalDetails { get; set; }
         public virtual DbSet<JournalMaster> JournalMasters { get; set; }
         public virtual DbSet<LeaveClass> LeaveClasses { get; set; }
@@ -83,7 +82,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<SECURITYDETAIL> SECURITYDETAILS { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<SHIFT> SHIFTs { get; set; }
-        public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -112,6 +110,8 @@ namespace RexERP_MVC.Models
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {
@@ -480,7 +480,5 @@ namespace RexERP_MVC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("YearClosed", customerIdParameter);
         }
-
-        public System.Data.Entity.DbSet<RexERP_MVC.ViewModel.BrandResponse> BrandResponses { get; set; }
     }
 }

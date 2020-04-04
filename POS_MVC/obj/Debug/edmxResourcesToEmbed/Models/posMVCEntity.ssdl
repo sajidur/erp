@@ -482,8 +482,8 @@ warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defi
     <Property Name="BrandId" Type="int" />
     <Property Name="OpeningQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ReceiveQty" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="AddFromOtherSource" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="ProductionQty" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionIn" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionOut" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ReturnQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Faulty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="SalesQty" Type="decimal" Precision="18" Scale="2" />
@@ -1078,12 +1078,12 @@ warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key de
     <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" />
     <Property Name="StockOutInvoiceNo" Type="nvarchar" MaxLength="50" />
     <Property Name="ProductId" Type="int" />
-    <Property Name="BaleWeight" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SizeId" Type="int" />
     <Property Name="WarehouseId" Type="int" />
     <Property Name="SupplierId" Type="int" />
     <Property Name="ProductionDate" Type="date" />
     <Property Name="BaleQty" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="WeightInMon" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BrandId" Type="int" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="CreatedBy" Type="char" MaxLength="24" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -2024,6 +2024,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StockIn_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StockIn_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
@@ -2033,6 +2045,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Principal>
       <Dependent Role="StockIn">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockIn_Size">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="SizeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2586,8 +2610,16 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       <End Role="Product" EntitySet="Product" />
       <End Role="SalesOrder" EntitySet="SalesOrder" />
     </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Brand" Association="Self.FK_StockIn_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="StockIn" EntitySet="StockIn" />
+    </AssociationSet>
     <AssociationSet Name="FK_StockIn_Product" Association="Self.FK_StockIn_Product">
       <End Role="Product" EntitySet="Product" />
+      <End Role="StockIn" EntitySet="StockIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockIn_Size" Association="Self.FK_StockIn_Size">
+      <End Role="Size" EntitySet="Size" />
       <End Role="StockIn" EntitySet="StockIn" />
     </AssociationSet>
     <AssociationSet Name="FK_StockIn_Supplier" Association="Self.FK_StockIn_Supplier">

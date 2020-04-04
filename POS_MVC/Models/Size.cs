@@ -17,8 +17,9 @@ namespace RexERP_MVC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Size()
         {
-            this.Inventories = new HashSet<Inventory>();
             this.ReceiveDetails = new HashSet<ReceiveDetail>();
+            this.Inventories = new HashSet<Inventory>();
+            this.StockIns = new HashSet<StockIn>();
         }
     
         public int Id { get; set; }
@@ -31,8 +32,10 @@ namespace RexERP_MVC.Models
         public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReceiveDetail> ReceiveDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory> Inventories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReceiveDetail> ReceiveDetails { get; set; }
+        public virtual ICollection<StockIn> StockIns { get; set; }
     }
 }

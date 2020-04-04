@@ -662,6 +662,7 @@
     <Compile Include="ViewModel\ShopTransferResponse.cs" />
     <Compile Include="ViewModel\SizeResponse.cs" />
     <Compile Include="ViewModel\StockInResponse.cs" />
+    <Compile Include="ViewModel\StockOutRequest.cs" />
     <Compile Include="ViewModel\StockOutResponse.cs" />
     <Compile Include="ViewModel\SupplierResponse.cs" />
     <Compile Include="ViewModel\TempSalesDetailsResponse.cs" />

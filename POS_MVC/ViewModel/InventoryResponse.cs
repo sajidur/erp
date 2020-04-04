@@ -14,6 +14,7 @@ namespace RexERP_MVC.ViewModel
         public int SupplierId { get; set; }
         public int WarehouseId { get; set; }
         public Nullable<decimal> OpeningQty { get; set; }
+        public Nullable<decimal> SalesQty { get; set; }
         public Nullable<decimal> ReceiveQty { get; set; }
         public Nullable<decimal> AddFromOtherSource { get; set; }
         public Nullable<decimal> ProductionQty { get; set; }

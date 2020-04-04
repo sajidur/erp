@@ -68,20 +68,18 @@ function BrandSave() {
         alert('Brand Name Empty');
         return false;
     }
-    var formObject = FormDataAsObject();
     $.ajax({
         url: '/Brand/Create',
         method: 'post',
         dataType: 'json',
         async: false,
         data: {
-            BrandName: formObject.BrandName,
+            BrandName: $('#txtBrandName').val(),
             create: 1
         },
         success: function (data) {
             ShowNotification("0", "Brand Saved!!")
             ResetForm();
-            LoadBrandGrid();
         },
         error: function () {
 

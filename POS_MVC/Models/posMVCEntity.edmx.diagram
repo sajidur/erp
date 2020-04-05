@@ -52,7 +52,6 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDelivery" Width="1.5" PointX="18.75" PointY="20.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDetail" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesMaster" Width="1.5" PointX="13.5" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesOrder" Width="1.5" PointX="11.25" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesReturn" Width="1.5" PointX="25.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SchClass" Width="1.5" PointX="18.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Screen" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
@@ -103,7 +102,6 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraMaster_Year" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesMaster_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_JournalMaster_Year" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_LedgerPosting_Year" ManuallyRouted="false" />
@@ -118,8 +116,6 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_RoleWiseScreenPermission_Screens" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_SalesMaster" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Warehouse" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_TempSalesMaster" ManuallyRouted="false" />
@@ -143,10 +139,17 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Product" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesOrder" Width="1.5" PointX="38.875" PointY="14" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Brand" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Customer" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Inventory" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Size" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

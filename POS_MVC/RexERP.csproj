@@ -593,6 +593,7 @@
       <DependentUpon>mvcReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
+    <Compile Include="RequestModel\SalesOrderRequest.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

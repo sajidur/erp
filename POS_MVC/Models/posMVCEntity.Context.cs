@@ -74,7 +74,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
         public virtual DbSet<SalesDetail> SalesDetails { get; set; }
         public virtual DbSet<SalesMaster> SalesMasters { get; set; }
-        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
         public virtual DbSet<SalesReturn> SalesReturns { get; set; }
         public virtual DbSet<SchClass> SchClasses { get; set; }
         public virtual DbSet<Screen> Screens { get; set; }
@@ -112,6 +111,7 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

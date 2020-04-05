@@ -2,6 +2,7 @@
 using RexERP_MVC.BAL;
 using RexERP_MVC.BLL;
 using RexERP_MVC.Models;
+using RexERP_MVC.RequestModel;
 using RexERP_MVC.Util;
 using RexERP_MVC.ViewModel;
 using System;
@@ -396,13 +397,13 @@ namespace RexERP_MVC.Controllers
                         };
                         response.Customer.Name = salesOrder.Customer.Name;
                         response.Amount = salesOrder.Amount;
-                        response.Notes = string.Concat(new object[] { salesOrder.Product.ProductName, "->", salesOrder.BaleQty, "*", salesOrder.BaleWeight, "*", salesOrder.Rate });
+                        response.Notes = string.Concat(new object[] { salesOrder.Product.ProductName, "->", salesOrder.BaleQty, "*", "*", salesOrder.Rate });
                         responses.Add(response);
                     }
                     else
                     {
                         SalesOrderResponse salesOrderResponse = isexists.FirstOrDefault<SalesOrderResponse>();
-                        salesOrderResponse.Notes = string.Concat(new object[] { salesOrderResponse.Notes, " ,", salesOrder.Product.ProductName, "->", salesOrder.BaleQty, "*", salesOrder.BaleWeight, "*", salesOrder.Rate });
+                        salesOrderResponse.Notes = string.Concat(new object[] { salesOrderResponse.Notes, " ,", salesOrder.Product.ProductName, "->", salesOrder.BaleQty, "*", "*", salesOrder.Rate });
                         SalesOrderResponse amount = salesOrderResponse;
                         amount.Amount = amount.Amount + salesOrder.Amount;
                     }
@@ -467,41 +468,40 @@ namespace RexERP_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveSalesOrder(List<SalesOrder> salesOrders,bool isSendSMS)
+        public ActionResult SaveSalesOrder(List<SalesOrderRequest> salesOrders, int CustomerID, string SalesOrderId, string Notes, bool isSendSMS)
         {
             SalesOrder result = new SalesOrder();
             SalesOrder FinalResult = new SalesOrder();
             decimal totalAmount = new decimal();
-            int customerId = 0;
             int count = 1;
-            foreach (SalesOrder item in salesOrders)
+            foreach (SalesOrderRequest item in salesOrders)
             {
-                result.SalesOrderId = item.SalesOrderId;
-                result.CustomerID = item.CustomerID;
-                result.Notes = item.Notes;
+                result.SalesOrderId = SalesOrderId;
+                result.CustomerID = CustomerID;
+                result.Notes = Notes;
                 result.OrderDate = DateTime.Now.Date;
                 result.OrderRecieveBy = CurrentSession.GetCurrentSession().UserName;
-                result.ProductId = item.ProductId;
-                result.BaleQty = item.BaleQty;
-                result.BaleWeight = item.BaleWeight;
-                result.TotalQtyInKG = item.TotalQtyInKG;
-                result.Rate = item.Rate;
-                result.Amount = item.Amount;
-                result.DeliveryDate = item.DeliveryDate;
+                result.ProductId = item.Inventory.ProductId;
+                result.BaleQty = item.Qty;
+                result.Rate = item.Qty;
+                result.SizeId = item.Inventory.SizeId;
+                result.BrandId = item.Inventory.BrandId;
+                //  result.Amount = item.Amount;
+                result.InventoryId = item.Inventory.Id;
+                result.DeliveryDate =DateTime.Now;
                 result.DeliveryQty = new decimal?(new decimal());
                 result.CreatedBy = CurrentSession.GetCurrentSession().UserName;
                 result.CreatedDate = new DateTime?(DateTime.Now);
                 result.IsActive = true;
                 FinalResult = this.salesService.SaveSalesOrder(result);
                 totalAmount += result.Amount;
-                customerId = item.CustomerID;
                 count++;
             }
             if (FinalResult.Id > 0)
             {
                 if (isSendSMS)
                 {
-                    Customer customer = (new CustomerService()).GetById(new int?(customerId));
+                    Customer customer = (new CustomerService()).GetById(new int?(CustomerID));
                     SMSEmailService sMSEmailService = new SMSEmailService();
                     string phone = customer.Phone;
                     string[] name = new string[] { "Dear ", customer.Name, ",DO Has Been Created.DO No-", FinalResult.SalesOrderId, ", Dated- ", null, null, null, null };

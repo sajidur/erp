@@ -46,10 +46,10 @@ namespace RexERP_MVC.Models
         public Nullable<int> YearId { get; set; }
     
         public virtual Customer Customer { get; set; }
-        public virtual SalesOrder SalesOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TempSalesDetail> TempSalesDetails { get; set; }
         public virtual TempSalesMaster TempSalesMaster1 { get; set; }
         public virtual TempSalesMaster TempSalesMaster2 { get; set; }
+        public virtual SalesOrder SalesOrder { get; set; }
     }
 }

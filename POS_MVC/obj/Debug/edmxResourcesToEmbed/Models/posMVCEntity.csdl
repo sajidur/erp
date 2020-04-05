@@ -210,6 +210,7 @@
     <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Brand" FromRole="Brand" ToRole="ReceiveDetail" />
     <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Brand" ToRole="Inventory" />
     <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Brand" FromRole="Brand" ToRole="StockIn" />
+    <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Brand" FromRole="Brand" ToRole="SalesOrder" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -371,8 +372,8 @@
     <Property Name="LedgerId" Type="Int32" />
     <NavigationProperty Name="SalesDeliveries" Relationship="Self.FK_SalesDelivery_Customer" FromRole="Customer" ToRole="SalesDelivery" />
     <NavigationProperty Name="SalesMasters" Relationship="Self.FK_SalesMaster_Customer" FromRole="Customer" ToRole="SalesMaster" />
-    <NavigationProperty Name="SalesOrders" Relationship="Self.FK_SalesOrder_Customer" FromRole="Customer" ToRole="SalesOrder" />
     <NavigationProperty Name="TempSalesMasters" Relationship="Self.FK_TempSalesMaster_Customer" FromRole="Customer" ToRole="TempSalesMaster" />
+    <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Customer" FromRole="Customer" ToRole="SalesOrder" />
   </EntityType>
   <EntityType Name="DEPARTMENT">
     <Key>
@@ -889,38 +890,7 @@
     <NavigationProperty Name="Customer" Relationship="Self.FK_SalesMaster_Customer" FromRole="SalesMaster" ToRole="Customer" />
     <NavigationProperty Name="SalesDeliveries" Relationship="Self.FK_SalesDelivery_SalesMaster" FromRole="SalesMaster" ToRole="SalesDelivery" />
     <NavigationProperty Name="SalesDetails" Relationship="Self.FK_SalesDetails_SalesMaster" FromRole="SalesMaster" ToRole="SalesDetails" />
-    <NavigationProperty Name="SalesOrder" Relationship="Self.FK_SalesMaster_Salesorder" FromRole="SalesMaster" ToRole="SalesOrder" />
-  </EntityType>
-  <EntityType Name="SalesOrder">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SalesOrderId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="OrderRecieveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CustomerID" Type="Int32" Nullable="false" />
-    <Property Name="ProductId" Type="Int32" Nullable="false" />
-    <Property Name="BaleQty" Type="Int32" Nullable="false" />
-    <Property Name="BaleWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="TotalQtyInKG" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
-    <Property Name="DeliveryQty" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="TransportType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="TransportNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PricingDate" Type="DateTime" Precision="3" />
-    <Property Name="Notes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-    <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_SalesOrder_Customer" FromRole="SalesOrder" ToRole="Customer" />
-    <NavigationProperty Name="SalesMasters" Relationship="Self.FK_SalesMaster_Salesorder" FromRole="SalesOrder" ToRole="SalesMaster" />
-    <NavigationProperty Name="TempSalesMasters" Relationship="Self.FK_TempSalesMaster_SalesOrder" FromRole="SalesOrder" ToRole="TempSalesMaster" />
-    <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_product" FromRole="SalesOrder" ToRole="Product" />
+    <NavigationProperty Name="SalesOrder" Relationship="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder" FromRole="SalesMaster" ToRole="SalesOrder" />
   </EntityType>
   <EntityType Name="SalesReturn">
     <Key>
@@ -1202,10 +1172,10 @@
     <Property Name="RentAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="YearId" Type="Int32" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_TempSalesMaster_Customer" FromRole="TempSalesMaster" ToRole="Customer" />
-    <NavigationProperty Name="SalesOrder" Relationship="Self.FK_TempSalesMaster_SalesOrder" FromRole="TempSalesMaster" ToRole="SalesOrder" />
     <NavigationProperty Name="TempSalesDetails" Relationship="Self.FK_TempSalesDetails_TempSalesMaster" FromRole="TempSalesMaster" ToRole="TempSalesDetails" />
     <NavigationProperty Name="TempSalesMaster1" Relationship="Self.FK_TempSalesMaster_TempSalesDetails" FromRole="TempSalesMaster" ToRole="TempSalesMaster1" />
     <NavigationProperty Name="TempSalesMaster2" Relationship="Self.FK_TempSalesMaster_TempSalesDetails" FromRole="TempSalesMaster1" ToRole="TempSalesMaster" />
+    <NavigationProperty Name="SalesOrder" Relationship="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder" FromRole="TempSalesMaster" ToRole="SalesOrder" />
   </EntityType>
   <EntityType Name="Unit">
     <Key>
@@ -1691,18 +1661,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SalesOrder_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalesOrder">
-        <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TempSalesMaster_Customer">
     <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
     <End Role="TempSalesMaster" Type="Self.TempSalesMaster" Multiplicity="*" />
@@ -1871,30 +1829,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SalesMaster_Salesorder">
-    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="0..1" />
-    <End Role="SalesMaster" Type="Self.SalesMaster" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalesOrder">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalesMaster">
-        <PropertyRef Name="SalesOrderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TempSalesMaster_SalesOrder">
-    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="0..1" />
-    <End Role="TempSalesMaster" Type="Self.TempSalesMaster" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalesOrder">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TempSalesMaster">
-        <PropertyRef Name="SalesOrderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_StockOut_Supplier">
     <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
     <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
@@ -2003,7 +1937,6 @@
     <EntitySet Name="SalesDeliveries" EntityType="Self.SalesDelivery" />
     <EntitySet Name="SalesDetails" EntityType="Self.SalesDetail" />
     <EntitySet Name="SalesMasters" EntityType="Self.SalesMaster" />
-    <EntitySet Name="SalesOrders" EntityType="Self.SalesOrder" />
     <EntitySet Name="SalesReturns" EntityType="Self.SalesReturn" />
     <EntitySet Name="SchClasses" EntityType="Self.SchClass" />
     <EntitySet Name="Screens" EntityType="Self.Screen" />
@@ -2105,10 +2038,6 @@
       <End Role="Customer" EntitySet="Customers" />
       <End Role="SalesMaster" EntitySet="SalesMasters" />
     </AssociationSet>
-    <AssociationSet Name="FK_SalesOrder_Customer" Association="Self.FK_SalesOrder_Customer">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="SalesOrder" EntitySet="SalesOrders" />
-    </AssociationSet>
     <AssociationSet Name="FK_TempSalesMaster_Customer" Association="Self.FK_TempSalesMaster_Customer">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
@@ -2164,14 +2093,6 @@
     <AssociationSet Name="FK_SalesDetails_SalesMaster" Association="Self.FK_SalesDetails_SalesMaster">
       <End Role="SalesMaster" EntitySet="SalesMasters" />
       <End Role="SalesDetails" EntitySet="SalesDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SalesMaster_Salesorder" Association="Self.FK_SalesMaster_Salesorder">
-      <End Role="SalesOrder" EntitySet="SalesOrders" />
-      <End Role="SalesMaster" EntitySet="SalesMasters" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TempSalesMaster_SalesOrder" Association="Self.FK_TempSalesMaster_SalesOrder">
-      <End Role="SalesOrder" EntitySet="SalesOrders" />
-      <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
     </AssociationSet>
     <AssociationSet Name="FK_StockOut_Supplier" Association="Self.FK_StockOut_Supplier">
       <End Role="Supplier" EntitySet="Suppliers" />
@@ -2362,10 +2283,6 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="SalesDetail" EntitySet="SalesDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK_SalesOrder_product" Association="DB_9B34E1_erpModel.FK_SalesOrder_product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="SalesOrder" EntitySet="SalesOrders" />
-    </AssociationSet>
     <AssociationSet Name="FK_StockIn_Product" Association="DB_9B34E1_erpModel.FK_StockIn_Product">
       <End Role="Product" EntitySet="Products" />
       <End Role="StockIn" EntitySet="StockIns" />
@@ -2377,6 +2294,35 @@
     <AssociationSet Name="FK_TempSalesDetails_Product" Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product">
       <End Role="Product" EntitySet="Products" />
       <End Role="TempSalesDetail" EntitySet="TempSalesDetails" />
+    </AssociationSet>
+    <EntitySet Name="SalesOrders" EntityType="DB_9B34E1_erpModel.SalesOrder" />
+    <AssociationSet Name="FK_SalesOrder_Brand" Association="DB_9B34E1_erpModel.FK_SalesOrder_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrder_Customer" Association="DB_9B34E1_erpModel.FK_SalesOrder_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrder_Inventory" Association="DB_9B34E1_erpModel.FK_SalesOrder_Inventory">
+      <End Role="Inventory" EntitySet="Inventories" />
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrder_product" Association="DB_9B34E1_erpModel.FK_SalesOrder_product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesMaster_Salesorder" Association="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder">
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+      <End Role="SalesMaster" EntitySet="SalesMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrder_Size" Association="DB_9B34E1_erpModel.FK_SalesOrder_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TempSalesMaster_SalesOrder" Association="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+      <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
@@ -2658,6 +2604,7 @@
     <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_Size" FromRole="Size" ToRole="ReceiveDetail" />
     <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Size" ToRole="Inventory" />
     <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Size" FromRole="Size" ToRole="StockIn" />
+    <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Size" FromRole="Size" ToRole="SalesOrder" />
   </EntityType>
   <Association Name="FK_ReceiveDetails_Brand">
     <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -2714,6 +2661,7 @@
     <NavigationProperty Name="Supplier" Relationship="DB_9B34E1_erpModel.FK_Inventory_Supplier" FromRole="Inventory" ToRole="Supplier" />
     <NavigationProperty Name="WareHouse" Relationship="DB_9B34E1_erpModel.FK_Inventory_WareHouse" FromRole="Inventory" ToRole="WareHouse" />
     <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_Inventory_Product" FromRole="Inventory" ToRole="Product" />
+    <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Inventory" FromRole="Inventory" ToRole="SalesOrder" />
   </EntityType>
   <Association Name="FK_Inventory_Brand">
     <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -2862,10 +2810,10 @@
     <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Product" FromRole="Product" ToRole="Inventory" />
     <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_product" FromRole="Product" ToRole="ReceiveDetail" />
     <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Product" FromRole="Product" ToRole="SalesDetail" />
-    <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_product" FromRole="Product" ToRole="SalesOrder" />
     <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Product" FromRole="Product" ToRole="StockIn" />
     <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Product" FromRole="Product" ToRole="StockOut" />
     <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" FromRole="Product" ToRole="TempSalesDetail" />
+    <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_product" FromRole="Product" ToRole="SalesOrder" />
   </EntityType>
   <Association Name="FK_Product_Category">
     <End Type="DB_9B34E1_erpModel.Category" Role="Category" Multiplicity="0..1" />
@@ -2915,18 +2863,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SalesOrder_product">
-    <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="1" />
-    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalesOrder">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_StockIn_Product">
     <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="0..1" />
     <End Type="DB_9B34E1_erpModel.StockIn" Role="StockIn" Multiplicity="*" />
@@ -2960,6 +2896,125 @@
       </Principal>
       <Dependent Role="TempSalesDetail">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SalesOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InventoryId" Type="Int32" />
+    <Property Name="SalesOrderId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrandId" Type="Int32" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrderRecieveBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="BaleQty" Type="Int32" Nullable="false" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+    <Property Name="DeliveryQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TransportType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TransportNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PricingDate" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+    <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Brand" FromRole="SalesOrder" ToRole="Brand" />
+    <NavigationProperty Name="Customer" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Customer" FromRole="SalesOrder" ToRole="Customer" />
+    <NavigationProperty Name="Inventory" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Inventory" FromRole="SalesOrder" ToRole="Inventory" />
+    <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_product" FromRole="SalesOrder" ToRole="Product" />
+    <NavigationProperty Name="SalesMasters" Relationship="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder" FromRole="SalesOrder" ToRole="SalesMaster" />
+    <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Size" FromRole="SalesOrder" ToRole="Size" />
+    <NavigationProperty Name="TempSalesMasters" Relationship="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder" FromRole="SalesOrder" ToRole="TempSalesMaster" />
+  </EntityType>
+  <Association Name="FK_SalesOrder_Brand">
+    <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrder">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrder_Customer">
+    <End Type="DB_9B34E1_erpModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrder">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrder_Inventory">
+    <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrder">
+        <PropertyRef Name="InventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrder_product">
+    <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrder">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesMaster_Salesorder">
+    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.SalesMaster" Role="SalesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesMaster">
+        <PropertyRef Name="SalesOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrder_Size">
+    <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrder">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TempSalesMaster_SalesOrder">
+    <End Type="DB_9B34E1_erpModel.SalesOrder" Role="SalesOrder" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.TempSalesMaster" Role="TempSalesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TempSalesMaster">
+        <PropertyRef Name="SalesOrderId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

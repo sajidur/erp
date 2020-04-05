@@ -871,34 +871,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SalesOrders">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesOrder">
-        <MappingFragment StoreEntitySet="SalesOrder">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SalesOrderId" ColumnName="SalesOrderId" />
-          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-          <ScalarProperty Name="OrderRecieveBy" ColumnName="OrderRecieveBy" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
-          <ScalarProperty Name="BaleWeight" ColumnName="BaleWeight" />
-          <ScalarProperty Name="TotalQtyInKG" ColumnName="TotalQtyInKG" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-          <ScalarProperty Name="DeliveryQty" ColumnName="DeliveryQty" />
-          <ScalarProperty Name="TransportType" ColumnName="TransportType" />
-          <ScalarProperty Name="TransportNo" ColumnName="TransportNo" />
-          <ScalarProperty Name="PricingDate" ColumnName="PricingDate" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SalesReturns">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesReturn">
         <MappingFragment StoreEntitySet="SalesReturn">
@@ -1880,6 +1852,35 @@
           <ScalarProperty Name="ProductNameBangla" ColumnName="ProductNameBangla" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrders">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesOrder">
+        <MappingFragment StoreEntitySet="SalesOrder">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="PricingDate" ColumnName="PricingDate" />
+          <ScalarProperty Name="TransportNo" ColumnName="TransportNo" />
+          <ScalarProperty Name="TransportType" ColumnName="TransportType" />
+          <ScalarProperty Name="DeliveryQty" ColumnName="DeliveryQty" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="OrderRecieveBy" ColumnName="OrderRecieveBy" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SalesOrderId" ColumnName="SalesOrderId" />
+          <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

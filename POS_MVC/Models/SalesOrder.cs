@@ -22,14 +22,15 @@ namespace RexERP_MVC.Models
         }
     
         public int Id { get; set; }
+        public Nullable<int> InventoryId { get; set; }
         public string SalesOrderId { get; set; }
+        public Nullable<int> BrandId { get; set; }
+        public Nullable<int> SizeId { get; set; }
         public System.DateTime OrderDate { get; set; }
         public string OrderRecieveBy { get; set; }
         public int CustomerID { get; set; }
         public int ProductId { get; set; }
         public int BaleQty { get; set; }
-        public decimal BaleWeight { get; set; }
-        public decimal TotalQtyInKG { get; set; }
         public decimal Rate { get; set; }
         public decimal Amount { get; set; }
         public Nullable<System.DateTime> DeliveryDate { get; set; }
@@ -44,11 +45,14 @@ namespace RexERP_MVC.Models
         public string UpdatedDate { get; set; }
         public bool IsActive { get; set; }
     
+        public virtual Brand Brand { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual Inventory Inventory { get; set; }
+        public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesMaster> SalesMasters { get; set; }
+        public virtual Size Size { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TempSalesMaster> TempSalesMasters { get; set; }
-        public virtual Product Product { get; set; }
     }
 }

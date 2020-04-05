@@ -14,6 +14,12 @@ namespace RexERP_MVC.Models
     
     public partial class Inventory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Inventory()
+        {
+            this.SalesOrders = new HashSet<SalesOrder>();
+        }
+    
         public int Id { get; set; }
         public int ProductId { get; set; }
         public string InventoryGuid { get; set; }
@@ -42,5 +48,7 @@ namespace RexERP_MVC.Models
         public virtual Supplier Supplier { get; set; }
         public virtual WareHouse WareHouse { get; set; }
         public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesOrder> SalesOrders { get; set; }
     }
 }

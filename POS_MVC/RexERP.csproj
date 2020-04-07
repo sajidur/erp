@@ -236,6 +236,7 @@
     <Compile Include="BAL\SupplierService.cs" />
     <Compile Include="BAL\T.cs" />
     <Compile Include="BAL\TaxService.cs" />
+    <Compile Include="BAL\UnitService.cs" />
     <Compile Include="BAL\WareHouseService.cs" />
     <Compile Include="Controllers\AccountGroupController.cs" />
     <Compile Include="Controllers\AccountLedgerController.cs" />
@@ -600,6 +601,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
+    <Compile Include="RequestModel\SalesOrderRequest.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -671,6 +673,7 @@
     <Compile Include="ViewModel\ShopTransferResponse.cs" />
     <Compile Include="ViewModel\SizeResponse.cs" />
     <Compile Include="ViewModel\StockInResponse.cs" />
+    <Compile Include="ViewModel\StockOutRequest.cs" />
     <Compile Include="ViewModel\StockOutResponse.cs" />
     <Compile Include="ViewModel\SupplierResponse.cs" />
     <Compile Include="ViewModel\TempSalesDetailsResponse.cs" />
@@ -685,6 +688,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\chosen.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\main.css" />
@@ -845,6 +850,14 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.min.js" />
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\jquery.timepicker.css" />
     <Content Include="Content\toastr.css" />
@@ -1231,6 +1244,8 @@
     <Content Include="Views\Holidays\HolidaysSetup.cshtml" />
     <Content Include="Views\Users\MenuPermission.cshtml" />
     <Content Include="Views\SizeSetup\Index.cshtml" />
+    <Content Include="Views\Brand\Add.cshtml" />
+    <Content Include="Views\SizeSetup\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

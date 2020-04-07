@@ -16,6 +16,11 @@ namespace RexERP_MVC.ViewModel
         public Nullable<int> CategoryId { get; set; }
         public string ProductType { get; set; }
         public int ProductTypeId { get; set; }
+        public Nullable<int> MinStock { get; set; }
+        public Nullable<int> TaxId { get; set; }
+        public Nullable<int> MaxStock { get; set; }
+        public string Unit { get; set; }
+        public Nullable<int> ReorderLevel { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string UpdateBy { get; set; }

@@ -1,20 +1,27 @@
 ﻿var detailsStockIn = [];
-var datatableRowCount = 0;
+var Count = 0;
 
 $("#btnAdd").click(function () {
     try {
-        datatableRowCount++;
+        Count++;
     var item = $("#ddlItem option:selected").text();
     var ProductId = $("#ddlItem option:selected").val();
     var WarehouseId = $("#ddlWareHouse option:selected").val();
-    var WarehouseName = $("#ddlWareHouse option:selected").text();
+        var WarehouseName = $("#ddlWareHouse option:selected").text();
+        var SizeId = $("#ddlSize option:selected").val();
+        var Size = $("#ddlSize option:selected").text();
+        var BrandId = $("#ddlBrand option:selected").val();
+        var Brand = $("#ddlBrand option:selected").text();
+
     var BaleQty = $("#txtBaleQty").val();
-    var BaleWeight = $("#txtBaleWeight").val();
-    var WeightInMon = $("#txtWeightInMon").val();
-    var object = {
+        var object = {
+        Count: Count,
         Item: item, ProductId: ProductId, WarehouseId: WarehouseId,
-        WarehouseName: WarehouseName, BaleQty: BaleQty, BaleWeight: BaleWeight,
-        WeightInMon: WeightInMon
+        WarehouseName: WarehouseName,
+        BaleQty: BaleQty, SizeId: SizeId,
+        Size: Size,
+        BrandId: BrandId,
+        Brand:Brand
     };
     detailsStockIn.push(object);
     var templateWithData = Mustache.to_html($("#templateProductModalAdded").html(), { ProductSearchAdded: detailsStockIn });

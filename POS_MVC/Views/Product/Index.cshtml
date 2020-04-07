@@ -1,6 +1,6 @@
 ﻿@model RexERP_MVC.Models.Product
 @{
-    ViewBag.Title = "পন্য";
+    ViewBag.Title = "Product";
 }
 <div class="page-title">
     <div>
@@ -24,6 +24,19 @@
                         <form class="form-horizontal">
                             <fieldset>
                                 <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        Product Type:
+                                    </label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="ddlProductCategory" name="ddlProductCategory">
+                                            <option value="-1">Select</option>
+                                            <option value="1">Raw Material</option>
+                                            <option value="2">Finished Goods </option>
+                                            <option value="3">Re-Selling</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <input type="hidden" id="hdId" />
                                     <label class="col-md-2 control-label">
                                         Category Name:
@@ -41,7 +54,6 @@
                                         <input type="text" id="txtCode" name="txtCode" class="form-control" />
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         ProductName:
@@ -50,20 +62,42 @@
                                         <textarea id="txtProductName" name="txtProductName" class="form-control"></textarea>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">                                    
+                                <div class="form-group">
                                     <label class="col-md-2 control-label">
-                                        Product Category:
+                                        Unit:
                                     </label>
                                     <div class="col-md-4">
-                                        <select class="form-control" id="ddlProductCategory" name="ddlProductCategory">
-                                            <option value="-1">Select</option>
-                                            <option value="1">Raw Material</option>
-                                            <option value="2">Finished Goods </option>
-                                            <option value="3">Re-Selling</option>
-                                        </select>
+                                        <select class="form-control" id="ddlUnit" name="ddlUnit"></select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button id="btnUnitAdd">+</button>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        MinStock:
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="number" id="txtMinStock" name="txtMinStock" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        MaxStock:
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="number" id="txtMaxStock" name="txtMaxStock" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        ReorderLevel:
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="number" id="txtReorderLevel" name="txtReorderLevel" class="form-control" />
+                                    </div>
+                                </div>
+
 
                                 <fieldset>
                                     <div class="form-actions">
@@ -99,27 +133,35 @@
                             <script id="templateProductGroupModal" type="text/html">
                                 <table class="table table-bordered table-striped table-hover" id="productGroupTableModal">
                                     <thead>
-                                        <th>ID</th>
-                                        <th>Category</th>
-                                        <th>Product Code</th>
-                                        <th>Product Name</th>
-                                        <th>Product Type</th>
-                                        <th>Action</th>
+                                    <th>ID</th>
+                                    <th>Category</th>
+                                    <th>Product Code</th>
+                                    <th>Product Name</th>
+                                    <th>Product Type</th>
+                                    <th>Unit</th>
+                                    <th>MinStock</th>
+                                    <th>MaxStock</th>
+                                    <th>ReorderLevel</th>
+                                    <th>Action</th>
                                     </thead>
                                     <tbody>
-                                    {{#ProductGroupSearch}}
-                                    <tr>
-                                        <td> {{Id}}</td>
-                                        <td> {{Category.CategoryName}}</td>
-                                        <td> {{Code}}</td>
-                                        <td> {{ProductName}}</td>
-                                        <td> {{ProductType}}</td>
-                                        <td class="action-sm">
-                                            <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
-                                        </td>
-                                    </tr>
+                                        {{#ProductGroupSearch}}
+                                        <tr>
+                                            <td> {{Id}}</td>
+                                            <td> {{Category.CategoryName}}</td>
+                                            <td> {{Code}}</td>
+                                            <td> {{ProductName}}</td>
+                                            <td> {{ProductType}}</td>
+                                            <td> {{Unit}}</td>
+                                            <td> {{MinStock}}</td>
+                                            <td> {{MaxStock}}</td>
+                                            <td> {{ReorderLevel}}</td>
+                                            <td class="action-sm">
+                                                <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
+                                            </td>
+                                        </tr>
 
-                                    {{/ProductGroupSearch}}
+                                        {{/ProductGroupSearch}}
                                     </tbody>
                                 </table>
                             </script>
@@ -131,3 +173,31 @@
 </div>
 
 <script src="~/Scripts/app/Product.js"></script>
+<script>
+$(document).ready(function () {
+    LoadAllCategory();
+    LoadListData();
+    LoadUnits();
+    LoadProductList();   
+});
+        $('#btnUnitAdd').click(function() {
+            var url = '/SizeSetup/Add';
+            var dialog = $('<div style="display:none"></div>').appendTo('body');
+            dialog.load(url, {}, 
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                    maxWidth:600,
+                    maxHeight: 500,
+                    width: 600,
+                    height: 500,
+                    modal: true,
+                    title:"Add Unit",
+                        close: function (event, ui) {
+                        LoadAllSize("ddlSize");
+                        dialog.remove();
+                    }
+                });
+            });
+            return false;
+        });
+</script>

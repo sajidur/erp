@@ -4,47 +4,47 @@
         <div class="card">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="well bs-component" >
-                                <div class="form-group">
-                                    <label class="col-md-2">
-                                        Invoice No:
-                                    </label>
-                                    <div class="col-md-3">
-                                        <input type="text" value="" readonly id="txtPoNo" name="txtPoNo" class="form-control" style="height:35px" />
-                                    </div>
-                                    <label class="col-md-2">
-                                        Supplier/Party:
-                                    </label>
-                                    <div class="col-md-3">
-                                        <select class="form-control" id="ddlSupplier" name="ddlSupplier" style="height:35px"></select>
-                                    </div>
-                                    <label class="col-md-1 control-label">
-                                        Challan No:
-                                    </label>
-                                    <div class="col-md-1">
-                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" />
-                                    </div>
+                    <div class="well bs-component">
+                        <div class="form-group">
+                            <label class="col-md-2">
+                                Invoice No:
+                            </label>
+                            <div class="col-md-3">
+                                <input type="text" value="" readonly id="txtPoNo" name="txtPoNo" class="form-control" style="height:35px" />
+                            </div>
+                            <label class="col-md-2">
+                                Supplier/Party:
+                            </label>
+                            <div class="col-md-3">
+                                <select class="form-control" id="ddlSupplier" name="ddlSupplier" style="height:35px"></select>
+                            </div>
+                            <label class="col-md-1 control-label">
+                                Challan No:
+                            </label>
+                            <div class="col-md-1">
+                                <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Dates:
+                            </label>
+                            <div class="col-md-3">
+                                <input type="date" id="txtDates" name="txtDates" required class="form-control" style="height:35px" />
+                            </div>
+                            <label class="col-md-2 control-label">
+                                Notes:
+                            </label>
+                            <div class="col-md-3">
+                                <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" style="height:35px" />
+                            </div>
+                        </div>
+                        <div class="ibox-content" id="divInfo">
+                            <div class="form-group">
+                                <div class="col-md-12 table-responsive" id="div-productGroup">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">
-                                        Dates:
-                                    </label>
-                                    <div class="col-md-3">
-                                        <input type="date" id="txtDates" name="txtDates" required class="form-control" style="height:35px"/>
-                                    </div>
-                                    <label class="col-md-2 control-label">
-                                        Notes:
-                                    </label>
-                                    <div class="col-md-3">
-                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" style="height:35px" />
-                                    </div>
-                                </div>
-                                <div class="ibox-content" id="divInfo">
-                                    <div class="form-group">
-                                        <div class="col-md-12 table-responsive" id="div-productGroup">
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <hr />
@@ -52,6 +52,8 @@
                             <thead>
                                 <tr>
                                     <td>Item</td>
+                                    <td>Size</td>
+                                    <td>Brand</td>
                                     <td>Qty</td>
                                     <td>Rate</td>
                                     <td>Total Amount </td>
@@ -65,16 +67,39 @@
                                             <option value="0">Select</option>
                                         </select>
                                     </td>
-                                 
+                                    <td class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <select id="ddlSize" class="form-control">
+                                                    <option value="0">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button id="btnSizeAdd">+</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <select id="ddlBrand" class="form-control">
+                                                    <option value="0">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <button id="btnBrandAdd">+</button>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="col-sm-1">
-                                        <input type="number" name="txtQty" id="txtQty" value="0" class="form-control" style="height:35px"/>
+                                        <input type="number" name="txtQty" id="txtQty" value="0" class="form-control" style="height:35px" />
                                     </td>
 
                                     <td class="col-sm-1">
                                         <input type="number" name="txtAmount" id="txtAmount" value="0" class="form-control" style="height:35px" />
                                     </td>
                                     <td class="col-sm-2">
-                                        <input type="number" readonly name="txtTotalAmount" id="txtTotalAmount" class="form-control" style="height:35px"/>
+                                        <input type="number" readonly name="txtTotalAmount" id="txtTotalAmount" class="form-control" style="height:35px" />
                                     </td>
                                     <td class="col-md-2">
                                         <select class="form-control" id="ddlWareHouse" name="ddlWareHouse"></select>
@@ -84,16 +109,16 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>  
+                        </table>
                         <div class="ibox-content" id="divInfo">
                             <div class="form-group">
                                 <h4>Added Product</h4>
                                 <div class="col-md-12 table-responsive" id="div-product-add">
                                 </div>
                             </div>
-                        </div>          
+                        </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <div class="col-md-8">
 
@@ -103,8 +128,8 @@
                             <p>Total Amount:<label id="lblTotalAmount">0</label></p>
                         </div>
                     </div>
-                    <div class="form-group" >
-                        <div class="form-group" >
+                    <div class="form-group">
+                        <div class="form-group">
                             <h4>Other Expense</h4>
                             <table id="myTable" class="table order-list">
                                 <thead>
@@ -126,10 +151,10 @@
                                             <input type="number" name="txtExpenseAmount" id="txtExpenseAmount" class="form-control" style="height:35px" />
                                         </td>
                                         <td class="col-sm-1">
-                                            <input type="number" name="txtExpenseRate" id="txtExpenseRate" class="form-control" style="height:35px"/>
+                                            <input type="number" name="txtExpenseRate" id="txtExpenseRate" class="form-control" style="height:35px" />
                                         </td>
                                         <td class="col-sm-1">
-                                            <input type="number" readonly name="txtExpenseTotalAmount" id="txtExpenseTotalAmount" class="form-control" style="height:35px"/>
+                                            <input type="number" readonly name="txtExpenseTotalAmount" id="txtExpenseTotalAmount" class="form-control" style="height:35px" />
                                         </td>
                                         <td class="col-sm-1">
                                             <input type="button" class="btn btn-primary" id="btnAddExpense" value="ADD" />
@@ -149,10 +174,10 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-8">
-                        </div>
+                            </div>
                             <div class="col-md-4">
-                                
-                                  <p>Total Expense Amount:<label id="lblTotalExpenseAmount">0</label></p>
+
+                                <p>Total Expense Amount:<label id="lblTotalExpenseAmount">0</label></p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -171,15 +196,15 @@
                                 <h5><b>Grand Total:</b><label id="lblGrandTotal">0</label></h5>
                             </div>
                         </div>
-                        
-                    </div>  
+
+                    </div>
                     <div class="form-actions">
-                            <div class="col-md-12">
-                                <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="Save()"><i class="fa fa-save"></i>&nbsp; Save</button>
-                                <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
-                            </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="GoodReceiveSave()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -189,18 +214,22 @@
         <thead>
         <th> </th>
         <th>Item</th>
+        <th>Size</th>
+        <th>Brand</th>
         <th>Qty</th>
         <th>Rate</th>
         <th>Total Amount </th>
         <th>Action </th>
         </thead>
         <tbody>
-        {{#ProductSearchAdd}}
-        <tr>
-            <td>{{countAddedProductCount}}</td>
+            {{#ProductSearchAdd}}
+            <tr>
+                <td>{{countAddedProductCount}}</td>
                 <td>{{Item}}</td>
-                <td> {{QTY}}</td>               
-                <td> {{Amount}}</td>              
+                <td>{{Size}}</td>
+                <td>{{Brand}}</td>
+                <td> {{QTY}}</td>
+                <td> {{Amount}}</td>
                 <td> {{TotalAmount}}</td>
                 <td>
                     <a class="btn btn-danger" onclick="OnDeleteProduct('{{countAddedProductCount}}')"><i class="fa fa-trash-o"></i></a>
@@ -221,9 +250,9 @@
         <th>Action </th>
         </thead>
         <tbody>
-        {{#ExpenseSearchAdd}}
-        <tr>
-            <td>{{countAddedExpenseCount}}</td>
+            {{#ExpenseSearchAdd}}
+            <tr>
+                <td>{{countAddedExpenseCount}}</td>
                 <td>{{Item}}</td>
                 <td> {{ExpenseRate}}</td>
                 <td> {{ExpenseAmount}}</td>
@@ -248,14 +277,74 @@
         $("#grandtotal").text(grandTotal.toFixed(2));
     }
     $(document).ready(function () {
-       // LoadAccountLedgerList(13, "ddlExpenseHead");
+        // LoadAccountLedgerList(13, "ddlExpenseHead");
         var now = new Date();
         var day = ("0" + now.getDate()).slice(-2);
         var month = ("0" + (now.getMonth() + 1)).slice(-2);
         var today = now.getFullYear() + "-" + (month) + "-" + (day);
         $('#txtDates').val(today);
+        LoadAllSize("ddlSize");
+        LoadAllBrand("ddlBrand");
+        LoadInvoiceNo("txtPoNo");
+        LoadAllProduct('ddlItem');
+        LoadAllWareHouse("ddlWareHouse");
+        LoadSupplier("ddlSupplier");
+        var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
+        $("#div-product-add").empty().html(templateWithData);
+
+        var templateWithExpense = Mustache.to_html($("#templateExpenseModalAdd").html(), { ExpenseSearchAdd: detailsExpense });
+        $("#div-expense-add").empty().html(templateWithExpense);
+
+        Calculation();
+        CalculationExpense();
+        $(function (){
+        $('#btnBrandAdd').click(function() {
+            var url = '/Brand/Add';
+            var dialog = $('<div style="display:none"></div>').appendTo('body');
+            dialog.load(url, {}, 
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                    maxWidth:600,
+                    maxHeight: 500,
+                    width: 600,
+                    height: 500,
+                    modal: true,
+                    title:"Add Brand",
+                        close: function (event, ui) {
+                         LoadAllBrand("ddlBrand");
+                        dialog.remove();
+                    }
+                });
+            });
+            return false;
+        });
+        });
+                $(function (){
+        $('#btnSizeAdd').click(function() {
+            var url = '/SizeSetup/Add';
+            var dialog = $('<div style="display:none"></div>').appendTo('body');
+            dialog.load(url, {}, 
+                function (responseText, textStatus, XMLHttpRequest) {
+                    dialog.dialog({
+                    maxWidth:600,
+                    maxHeight: 500,
+                    width: 600,
+                    height: 500,
+                    modal: true,
+                    title:"Add Size",
+                        close: function (event, ui) {
+                        LoadAllSize("ddlSize");
+                        dialog.remove();
+                    }
+                });
+            });
+            return false;
+        });
+    });
     });
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/GoodReceive.js"></script>
 <script src="~/Scripts/app/Accounts.js"></script>
+<script src="~/Scripts/app/Brand.js"></script>
+<script src="~/Scripts/app/Size.js"></script>

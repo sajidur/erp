@@ -29,9 +29,6 @@ function InsertSuccess(response) {
         }
     }
 }
-$(document).ready(function () {
-    LoadColorList();
-});
 function LoadColorList() {
     var url = '/Color/GetAll';
     $.ajax({
@@ -43,6 +40,24 @@ function LoadColorList() {
             MakePagination('productGroupTableModal');
         },
         error: function () {
+        }
+    });
+}
+function LoadAllBrand(controlId) {
+    var url = '/Color/GetAll';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        success: function (data) {
+            $("#" + controlId).get(0).options[0] = new Option("---- Select -----", "");
+            if (data != null) {
+                $.each(data, function (index, item) {
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Name, item.Id);
+                });
+            }
+        },
+        error: function () {
+
         }
     });
 }

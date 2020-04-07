@@ -17,18 +17,26 @@ function GetDataTable() {
             "dataType": 'json',
             "contentType": "application/json; charset=utf-8",
             "type": "POST",
-            "url": "/Inventory/GetAllFinishGoods",
+            "url": "/Inventory/GetAllInventory",
             "dataSrc": function (json) {
                 return json;
             }
         },
         "columns": [
+            { "data": "Product.ProductType" },
+            { "data": "Product.Category.CategoryName" },
             { "data": "Product.ProductName" },
+            { "data": "Size.Name" },
+            { "data": "Brand.BrandName" },
             { "data": "WareHouse.WareHouseName" },
-            { "data": "QtyInBale" },
-            { "data": "BalanceQty" },
-            { "data": "BalanceQtyInKG" }
-
+            { "data": "OpeningQty" },
+            { "data": "ReceiveQty" },
+            { "data": "AddFromOtherSource" },
+            { "data": "ProductionQty" },
+            { "data": "ReturnQty" },
+            { "data":"SalesQty"},
+            { "data": "Faulty" },
+            { "data": "BalanceQty" }
         ],
 
         "bDestroy": true,

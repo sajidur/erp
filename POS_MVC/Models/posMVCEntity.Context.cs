@@ -54,7 +54,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<FaceTemp> FaceTemps { get; set; }
         public virtual DbSet<FinancialYear> FinancialYears { get; set; }
         public virtual DbSet<HOLIDAY> HOLIDAYS { get; set; }
-        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<JournalDetail> JournalDetails { get; set; }
         public virtual DbSet<JournalMaster> JournalMasters { get; set; }
         public virtual DbSet<LeaveClass> LeaveClasses { get; set; }
@@ -67,7 +66,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<PartyBalance> PartyBalances { get; set; }
         public virtual DbSet<PartyPaymentHistory> PartyPaymentHistories { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ReceiveDetail> ReceiveDetails { get; set; }
         public virtual DbSet<ReceiveMaster> ReceiveMasters { get; set; }
         public virtual DbSet<ReportItem> ReportItems { get; set; }
@@ -76,14 +74,12 @@ namespace RexERP_MVC.Models
         public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
         public virtual DbSet<SalesDetail> SalesDetails { get; set; }
         public virtual DbSet<SalesMaster> SalesMasters { get; set; }
-        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
         public virtual DbSet<SalesReturn> SalesReturns { get; set; }
         public virtual DbSet<SchClass> SchClasses { get; set; }
         public virtual DbSet<Screen> Screens { get; set; }
         public virtual DbSet<SECURITYDETAIL> SECURITYDETAILS { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<SHIFT> SHIFTs { get; set; }
-        public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -112,6 +108,10 @@ namespace RexERP_MVC.Models
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

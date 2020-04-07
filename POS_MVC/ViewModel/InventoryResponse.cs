@@ -14,6 +14,7 @@ namespace RexERP_MVC.ViewModel
         public int SupplierId { get; set; }
         public int WarehouseId { get; set; }
         public Nullable<decimal> OpeningQty { get; set; }
+        public Nullable<decimal> SalesQty { get; set; }
         public Nullable<decimal> ReceiveQty { get; set; }
         public Nullable<decimal> AddFromOtherSource { get; set; }
         public Nullable<decimal> ProductionQty { get; set; }
@@ -28,9 +29,12 @@ namespace RexERP_MVC.ViewModel
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
-
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
         public ProductResponse Product { get; set; }
         public SupplierResponse Supplier { get; set; }
         public WareHouseResponse WareHouse { get; set; }
+        public virtual BrandResponse Brand { get; set; }
+        public virtual SizeResponse Size { get; set; }
     }
 }

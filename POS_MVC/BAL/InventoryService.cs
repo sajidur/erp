@@ -52,9 +52,9 @@ namespace RexERP_MVC.BAL
             return service.GetAll(a => a.GoodsType == "3" && a.WarehouseId == warehouseId).ToList();
         }
 
-        public List<Inventory> GetAllFinishGoods()
+        public List<Inventory> GetAllInventory()
         {
-            return service.GetAll(a => a.GoodsType == "2").ToList();
+            return service.GetAll().ToList();
         }
 
         public List<Inventory> GetAllFinishGoodsFilteredBySupplier(int supplierId)

@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="well bs-component">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        Size Name:
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="txtSizeName" name="txtSizeName" class="form-control" />
+                                    </div>
+                                </div>
+                                <fieldset>
+                                    <div class="form-actions">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SizeSave()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                            <button class="btn btn-w-m btn-primary" data-style="expand-left" id="btnUpdate" type="button" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>
+                                            <button class="btn btn-danger" data-style="expand-left" id="btnDelete" type="button" onclick="Delete()"><i class="fa fa-minus"></i>&nbsp; Delete</button>
+                                            <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="ibox-title">
+                                </div>
+                                <br />
+                                <div class="ibox-content" id="divInfo">
+                                    <div class="form-group">
+                                        <div class="col-md-12 table-responsive" id="div-productGroup">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-lg-offset-1">
+                    <form class="bs-component">
+
+                        <fieldset>
+
+                            <script id="templateProductGroupModal" type="text/html">
+                                <table class="table table-bordered table-striped table-hover" id="productGroupTableModal">
+                                    <thead>
+                                    <th>ID</th>
+                                    <th>BrandName</th>
+                                    <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        {{#ProductGroupSearch}}
+
+                                        <tr>
+                                            <td> {{Id}}</td>
+                                            <td> {{SizeName}}</td>
+                                            <td class="action-sm">
+                                                <a class="btn btn-primary btn-xs" onclick="OnSelectProductGroup('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
+                                            </td>
+                                        </tr>
+
+                                        {{/ProductGroupSearch}}
+                                    </tbody>
+                                </table>
+                            </script>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

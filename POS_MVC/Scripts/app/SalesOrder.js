@@ -1,6 +1,5 @@
 ﻿var detailsSalesOrder = [];
-var detailSalesOrderForPost = [];
-
+var inventoryList = [];
 $(document).ready(function () {
     LoadInvoiceNo("txtPoNo");
     LoadCustomerCombo("ddlCustomer");
@@ -51,11 +50,12 @@ function LoadInvoiceNo(controlId) {
 }
 
 function LoadProductList() {
-    var url = '/ProductionProcessing/GetProductForStockIn';
+    var url = '/Sales/GetAllInventoryforSales';
     $.ajax({
         url: url,
         method: 'POST',
         success: function (res) {
+            inventoryList = res;
             var templateWithData = Mustache.to_html($("#templateSalesOrderGroupModal").html(), { SalesOrderGroupSearch: res });
             $("#div-salesOrderGroup").empty().html(templateWithData);
             MakePagination('salesOrderGroupTableModal');
@@ -66,62 +66,57 @@ function LoadProductList() {
     });
 }
 
-var count = 1;
+var count = 0;
 function LoadForAdd(parameters) {
-    $.ajax({
-        url: '/Product/Details',
-        data: { 'id': parameters },
-        success: function (data) {
-            var countCount = count++;
-            var Id = data.Id;
-            var ProductName = data.ProductName;
-            var BaleQty = 0;
-            var BaleWeight = 0;
-            var Rate = 0;
-            var Notes='';
-            $('#salesOrderGroupTableModal tr').each(function (i) {
-                if ($(this).find('td').eq(0).text() == Id) {
-                    BaleQty = $(this).find('td').eq(2).find('input').val();
-                    BaleWeight = $(this).find('td').eq(3).find('input').val();
-                    Rate = $(this).find('td').eq(5).find('input').val();
-                    Notes = $(this).find('td').eq(1).text();
-                }
-            });  
-            var TotalQtyInKG = BaleQty * BaleWeight;            
-            var Amount = Rate * BaleQty;
-            var object = {
-                countCount: countCount,
-                Id: Id,
-                ProductName: ProductName,
-                BaleQty: BaleQty, 
-                BaleWeight: BaleWeight,
-                TotalQtyInKG: TotalQtyInKG, 
-                Rate: Rate,
-                Amount: Amount,
-                Notes: ProductName
-            };
-            detailsSalesOrder.push(object);
-            var templateWithData = Mustache.to_html($("#templateSalesOrderGroupModalGrid").html(), { SalesOrderGroupSearchGrid: detailsSalesOrder });
-            $("#div-salesOrderGroupGrid").empty().html(templateWithData);
-            Calculation();
-        },
-        error: function () {
-            alert('An error occured try again later');
+    count++;
+    var WareHouse = "";
+    var Qty = '0';
+    var ProductId = '0';
+    $('#salesOrderGroupTableModal tr').each(function (i) {
+        if ($(this).find('td').eq(0).text() == parameters) {
+            Qty = $(this).find('td').eq(7).find('input').val();
         }
     });
+    var newArray = inventoryList.filter(function (el) {
+        if (el.Id == parameters) {
+            return el;
+        }
+    });
+    var salesOrder = {
+        Inventory:newArray[0],
+        Qty: Qty,
+        Count: count,
+        
+    }
+    //var object = {
+    //    Count: count,
+    //    ProductName: newArray.Product.ProductName,
+    //    InventoryId: newArray.Id,
+    //    SizeId: newArray.SizeId,
+    //    BrandId: newArray.BrandId,
+    //    Qty: Qty,
+    //    SizeName: newArray.Size.Name,
+    //    BrandName: newArray.Brand.BrandName,
+    //    WareHouse: WareHouse
+    //};
+    detailsSalesOrder.push(salesOrder);
+    var templateWithData = Mustache.to_html($("#templateSalesOrderGroupModalGrid").html(), { SalesOrderGroupSearchGrid: detailsSalesOrder });
+    $("#div-salesOrderGroupGrid").empty().html(templateWithData);
+    Calculation();
 }
 
 
 function Save() {
-    GetDataFromDatatable();
     var url = '/Sales/SaveSalesOrder';
-    console.log(detailSalesOrderForPost);
     $("#btnSave").prop("disabled", true);
     $.ajax({
         url: url,
         method: 'POST',
         data: {
-            salesOrders: detailSalesOrderForPost,
+            salesOrders: detailsSalesOrder,
+            Notes: $("#txtDescriptions").val(),
+            CustomerID: $("#ddlCustomer option:selected").val(),
+            SalesOrderId:$("#txtPoNo").val(),
             isSendSMS: $('#chkSendSMS').is(':checked')
         },
         success: function (data) {
@@ -136,45 +131,6 @@ function Save() {
     });
 
 }
-
-function GetDataFromDatatable() {
-    $('#salesOrderGroupTableModalGrid tr').each(function (i) {
-        if (i > 0) {
-            var ProductId = $(this).find('td').eq(1).text();
-            var ProductName = $(this).find('td').eq(2).text();
-            var BaleQty = $(this).find('td').eq(3).text();
-            var BaleWeight = $(this).find('td').eq(4).text();
-            var TotalQtyInKG = $(this).find('td').eq(5).text();
-            var Rate = $(this).find('td').eq(6).text();
-            var Amount = $(this).find('td').eq(7).text();
-            var DeliveryDate = $("#txtDate").val();
-            var Notes = $("#txtDescriptions").val();
-            var CustomerID = $("#ddlCustomer option:selected").val();
-            var SalesOrderId = $("#txtPoNo").val();
-            var product = {
-                ProductId: ProductId,
-                ProductName: ProductName
-            }
-            var object = {
-                ProductId: ProductId,
-                BaleQty: BaleQty,
-                BaleWeight: BaleWeight,
-                TotalQtyInKG: TotalQtyInKG,
-                Rate: Rate,
-                Amount: Amount,
-                DeliveryDate: DeliveryDate,
-                Notes: Notes,
-                CustomerID: CustomerID,
-                SalesOrderId: SalesOrderId,
-                Product: product
-            };
-            detailSalesOrderForPost.push(object);
-
-        }
-    });
-}
-
-
 function OnDeleteSalesOrder(Id) {
     for (var i = 0; i < detailsSalesOrder.length; i++) {
         if (detailsSalesOrder[i].countCount == Id) {

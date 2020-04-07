@@ -23,6 +23,9 @@ namespace RexERP_MVC.ViewModel
         public int ReceiveMasterId { get; set; }
         public int ProductId { get; set; }
         public Nullable<int> WarehouseId { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
+
         public decimal QTY { get; set; }
         public int QtyInBale { get; set; }
         public decimal WeightInKG { get; set; }

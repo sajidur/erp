@@ -29,7 +29,7 @@ namespace RexERP_MVC.Models
         public string UpdatedDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual SalesMaster SalesMaster { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

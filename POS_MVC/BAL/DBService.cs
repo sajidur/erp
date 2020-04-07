@@ -54,6 +54,16 @@ namespace RexERP_MVC.BAL
             return cat;
 
         }
+        public List<T> Save(List<T> cat)
+        {
+            foreach (var item in cat)
+            {
+                entity.Add(item);
+            }
+            this.entity.SaveChanges();
+            return cat;
+
+        }
         public T Update(T t, int id)
         {
             entity.Update(t, id);

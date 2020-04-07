@@ -1,4 +1,5 @@
 ﻿using RexERP_MVC.Models;
+using RexERP_MVC.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace RexERP_MVC.BAL
 
         public Brand Save(Brand cus)
         {
-             service.Save(cus);
+            cus.Active = true;
+            cus.CreatedDate = DateTime.Now;
+            cus.CreatedBy= CurrentSession.GetCurrentSession().UserName;
+            service.Save(cus);
             return cus;
 
         }

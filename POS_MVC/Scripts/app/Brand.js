@@ -1,15 +1,4 @@
 ﻿
-$(document).ready(function () {
-    _serverDate = null;
-    // LoadAllCombo();
-    LoadBrandGrid
-    //GenerateProductGroupId();
-    //LoadProductGroupGrid();
-    EnableDisableControls("1");
-
-});
-
-
 function GenerateProductGroupId() {
     $.ajax({
         url: '@Url.Action("GenerateProductGroupId", "ProductGroup")',
@@ -39,68 +28,23 @@ function LoadBrandGrid() {
 
         }
     });
-
-
 }
 
-
-function LoadAllCombo() {
-    GetAllActiveLine("ddllineNumber", true);
-}
-
-function FormDataAsObject() {
-    var object = new Object();
-    object.BrandName = $('#txtBrandName').val();
-    object.BrandNameInBangla = $('#txtBrandNameBang').val();
-    return object;
-}
-
-function ResetForm() {
-    $('#txtBrandName').val('');
-    $('#txtBrandNameBang').val('');
-}
-
-function EnableDisableControls(status) {
-    //status = 1 for Save, 2 for Delete
-    if (status == "1") {
-        $('#btnSave').prop('disabled', false);
-        $('#btnUpdate').prop('disabled', true);
-        $('#btnDelete').prop('disabled', true);
-    }
-    else if (status == "2") {
-        $('#btnSave').prop('disabled', true);
-        $('#btnUpdate').prop('disabled', false);
-        $('#btnDelete').prop('disabled', false);
-    }
-
-    else {
-        $('#btnSave').prop('disabled', false);
-        $('#btnUpdate').prop('disabled', false);
-        $('#btnDelete').prop('disabled', false);
-    }
-}
-
-
-
-function OnSelectProductGroup(GroupId) {
-
+function LoadAllBrand(controlId) {
+    var url = '/Brand/GetAll';
     $.ajax({
-        url: '@Url.Action("GetAProductGroup", "ProductGroup")',
-        type: 'get',
-        dataType: 'json',
-        async: false,
-        data: {
-            productGroupId: GroupId
-        },
+        url: url,
+        method: 'POST',
         success: function (data) {
-            ResetForm();
-            $('#txtGroupCode').val(data.GroupId);
-            $('#txtGroupName').val(data.GroupName);
-            $('#txtGroupDes').val(data.GroupDescription);
-            $('#ddllineNumber').val(data.ProductLine.LineId);
-
-            EnableDisableControls("2");
-            LoadProductGroupGrid();
+            $("#" + controlId).empty();
+            $("#" + controlId).get(0).options.length = 0;
+            $("#" + controlId).get(0).options[0] = new Option("---- Select -----", "");
+            if (data != null) {
+                $.each(data, function (index, item) {
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.BrandName, item.Id);
+                });
+            }
+            $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!" });
 
         },
         error: function () {
@@ -109,126 +53,36 @@ function OnSelectProductGroup(GroupId) {
     });
 }
 
+function FormDataAsObject() {
+    var object = new Object();
+    object.BrandName = $('#txtBrandName').val();
+    return object;
+}
 
-function Save() {
+function ResetForm() {
+    $('#txtBrandName').val('');
+}
+function BrandSave() {
     //debugger;
-    if ($("#txtCode").val() == "") {
-        alert('Code Name Empty');
+    if ($("#txtBrandName").val() == "") {
+        alert('Brand Name Empty');
         return false;
     }
-
-    if ($("#txtCategoryName").val() == "") {
-        alert(' Name Empty');
-        return false;
-    }
-
-    var formObject = FormDataAsObject();
-
     $.ajax({
         url: '/Brand/Create',
         method: 'post',
         dataType: 'json',
         async: false,
         data: {
-            Id: formObject.Id,
-            BrandName: formObject.BrandName,
-            BrandNameInBangla: formObject.BrandNameInBangla,
+            BrandName: $('#txtBrandName').val(),
             create: 1
         },
         success: function (data) {
             ShowNotification("0", "Brand Saved!!")
             ResetForm();
-            LoadBrandGrid();
         },
         error: function () {
 
-
-        }
-    });
-
-}
-
-function productGroupInfoValidation(formObject) {
-
-    if (!formObject.GroupName) {
-        $('#txtGroupName').focus();
-        ShowNotification('2', 'Group Name Can not be empty.');
-        return false;
-    }
-
-
-    return true;
-
-}
-
-function Update() {
-    var formObject = FormDataAsObject();
-
-    if (productGroupInfoValidation(formObject)) {
-
-
-        $.ajax({
-            url: '@Url.Action("CreateOrUpdate", "ProductGroup")',
-            method: 'post',
-            dataType: 'json',
-            async: false,
-            data: {
-                GroupId: formObject.GroupId,
-                GroupName: formObject.GroupName,
-                GroupDescription: formObject.GroupDescription,
-                LineNumber: formObject.LineNumber,
-                create: 2,
-            },
-            success: function (data) {
-                var vmMsg = data;
-                if (vmMsg.MessageType == 1) {
-                    ShowNotification(1, vmMsg.ReturnMessage);
-                    ResetForm();
-                    LoadProductGroupGrid();
-                    GenerateProductGroupId();
-
-                } else {
-                    ShowNotification(3, vmMsg.ReturnMessage);
-                    // HideLoader();
-                }
-            },
-            error: function () {
-                //HideLoader();
-            }
-        });
-    }
-}
-
-function Delete() {
-    var formObject = FormDataAsObject();
-
-    $.ajax({
-        url: '@Url.Action("Delete", "ProductGroup")',
-        method: 'post',
-        dataType: 'json',
-        async: false,
-        data: {
-            GroupId: formObject.GroupId,
-            GroupName: formObject.GroupName,
-            GroupDescription: formObject.GroupDescription,
-            LineNumber: formObject.LineNumber,
-        },
-        success: function (data) {
-            var vmMsg = data;
-            if (vmMsg.MessageType == 1) {
-                ShowNotification(1, vmMsg.ReturnMessage);
-                ResetForm();
-                LoadProductGroupGrid();
-                GenerateProductGroupId();
-                //$('#BtnSave').prop('disabled', true);
-                //HideLoader();
-            } else {
-                ShowNotification(3, vmMsg.ReturnMessage);
-                // HideLoader();
-            }
-        },
-        error: function () {
-            //HideLoader();
         }
     });
 

@@ -1,19 +1,5 @@
 ﻿var details = [];
 var detailsExpense = [];
-$(document).ready(function () {
-    LoadInvoiceNo("txtPoNo");
-    LoadAllProduct('ddlItem');
-    LoadAllWareHouse("ddlWareHouse");
-    LoadSupplier("ddlSupplier");
-    var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
-    $("#div-product-add").empty().html(templateWithData);
-
-    var templateWithExpense = Mustache.to_html($("#templateExpenseModalAdd").html(), { ExpenseSearchAdd: detailsExpense });
-    $("#div-expense-add").empty().html(templateWithExpense);
-
-    Calculation();
-    CalculationExpense();
-});
 function Calculation()
 {
     var qty = $("#txtQty").val();
@@ -62,12 +48,17 @@ $("#txtDiscount").on("propertychange change keyup paste input", function () {
 var countAddedProduct = 1;
 $("#btnAdd").click(function () {
     var countAddedProductCount = countAddedProduct++;
-    var Id = $("#ddlItem option:selected").val();
     var item = $("#ddlItem option:selected").text();
     var ProductId = $("#ddlItem option:selected").val();
     //var ProductId = 6;
     var WarehouseId = $("#ddlWareHouse option:selected").val();
     //var WarehouseId = 1;
+    var sizeId = $("#ddlSize option:selected").val();
+    var size = $("#ddlItem option:selected").text();
+
+    var brandId = $("#ddlBrand option:selected").val();
+    var brand = $("#ddlBrand option:selected").text();
+
     var qty = $("#txtQty").val();
     var Amount = $("#txtAmount").val();
     var TotalAmount = $("#txtTotalAmount").val();
@@ -85,7 +76,7 @@ $("#btnAdd").click(function () {
         return;
     }
     //var object = {Id:Id, Item: item, BaleQty: BaleQty, QtyPerBale: QtyPerBale, UnitStyle: UnitStyle, Amount: Amount, TotalKg: TotalKg, TotalQty: TotalQty, TotalAmount: TotalAmount };
-    var object = { countAddedProductCount: countAddedProductCount, Id: Id, Item: item, ProductId: ProductId, WarehouseId: WarehouseId, QTY: qty, Amount: Amount, TotalAmount: TotalAmount };
+    var object = { countAddedProductCount: countAddedProductCount, Id: ProductId, Item: item, ProductId: ProductId, WarehouseId: WarehouseId, SizeId: sizeId, Size: size, BrandId: brandId,Brand:brand, QTY: qty, Amount: Amount, TotalAmount: TotalAmount };
     details.push(object);
     var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
     $("#div-product-add").empty().html(templateWithData);
@@ -199,7 +190,7 @@ function GrandTotal(){
     }
 }
 
-function Save()
+function GoodReceiveSave()
 {
     console.log($("#ddlWareHouse").val());
     var supplierId = $("#ddlSupplier").val();

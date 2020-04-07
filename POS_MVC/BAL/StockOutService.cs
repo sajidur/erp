@@ -5,6 +5,7 @@ using System.Web;
 using RexERP_MVC.Models;
 using RexERP_MVC.Util;
 using System.Data.SqlClient;
+using RexERP_MVC.ViewModel;
 
 namespace RexERP_MVC.BAL
 {
@@ -36,22 +37,31 @@ namespace RexERP_MVC.BAL
             return service.GetById(id);
         }
 
-        public StockOut Save(StockOut stockOut)
+        public bool Save(List<StockOutRequest> stockOuts,string invoiceNo,string Notes)
         {
-            var existingItem = inventory.GetAll(a => a.ProductId == stockOut.ProductId && a.IsActive == true && a.WarehouseId == stockOut.WarehouseId && a.SupplierId == stockOut.SupplierId).ToList();
+            var inventoryLists = stockOuts.Select(a => a.InventoryId).ToList();
+            var existingItem = inventory.GetAll(a => inventoryLists.Contains(a.Id) && a.IsActive == true).ToList();
             if (existingItem.Count > 0)
             {
+                var stocks = new List<StockOut>();
                 foreach (var inv in existingItem)
                 {
+                    var qty = stockOuts.Where(a => a.InventoryId == inv.Id).Sum(a => a.Qty);
+                    var stock = new StockOut() {AlreadyProcessed=false,BaleQty=qty,ProductId=inv.ProductId,IsActive=true,InvoiceNo= invoiceNo,Notes=Notes,SupplierId=inv.SupplierId,WarehouseId=inv.WarehouseId,CreatedBy=CurrentSession.GetCurrentSession().UserName,CreatedDate=DateTime.Now};
                     inv.UpdatedDate = DateTime.Now;
                     inv.UpdatedBy = CurrentSession.GetCurrentSession().UserName;
-                    inv.ProductionQty = stockOut.BaleQty;
-                    inv.BalanceQty = inv.BalanceQty - stockOut.BaleQty??0;
+                    inv.ProductionOut+= qty;
+                    inv.BalanceQty = inv.BalanceQty - qty;
                     inventory.Update(inv, inv.Id);
+                    stocks.Add(stock);
                 }
-
+                service.Save(stocks);
+                return true;
             }
-            return service.Save(stockOut);
+            else
+            {
+                return false;
+            }
         }
 
         public StockOut Update(StockOut t, int id)

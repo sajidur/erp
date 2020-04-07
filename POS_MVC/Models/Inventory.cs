@@ -14,15 +14,23 @@ namespace RexERP_MVC.Models
     
     public partial class Inventory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Inventory()
+        {
+            this.SalesOrders = new HashSet<SalesOrder>();
+        }
+    
         public int Id { get; set; }
         public int ProductId { get; set; }
         public string InventoryGuid { get; set; }
         public int SupplierId { get; set; }
         public int WarehouseId { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
         public Nullable<decimal> OpeningQty { get; set; }
         public Nullable<decimal> ReceiveQty { get; set; }
-        public Nullable<decimal> AddFromOtherSource { get; set; }
-        public Nullable<decimal> ProductionQty { get; set; }
+        public Nullable<decimal> ProductionIn { get; set; }
+        public Nullable<decimal> ProductionOut { get; set; }
         public Nullable<decimal> ReturnQty { get; set; }
         public Nullable<decimal> Faulty { get; set; }
         public Nullable<decimal> SalesQty { get; set; }
@@ -35,8 +43,12 @@ namespace RexERP_MVC.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual Size Size { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual WareHouse WareHouse { get; set; }
+        public virtual Product Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesOrder> SalesOrders { get; set; }
     }
 }

@@ -22,9 +22,9 @@ namespace RexERP_MVC.BAL
             return service.GetById(id);
         }
 
-        public StockIn Save(StockIn stockIn, string Notes)
+        public StockIn Save(StockIn stockIn)
         {
-            var existingItem = inventory.GetAll(a => a.ProductId == stockIn.ProductId && a.IsActive == true && a.WarehouseId == stockIn.WarehouseId).ToList();
+            var existingItem = inventory.GetAll(a => a.ProductId == stockIn.ProductId && a.BrandId==stockIn.BrandId && a.SizeId==stockIn.SizeId && a.IsActive == true && a.WarehouseId == stockIn.WarehouseId).ToList();
             if (existingItem.Count > 0)
             {
                 foreach (var inv in existingItem)
@@ -32,7 +32,7 @@ namespace RexERP_MVC.BAL
                     inv.UpdatedDate = DateTime.Now;
                     inv.UpdatedBy = "";
                     inv.BalanceQty = inv.BalanceQty + stockIn.BaleQty??0;
-                    inv.ReceiveQty = inv.ReceiveQty ?? 0 + stockIn.BaleQty ?? 0;
+                    inv.ProductionIn = inv.ProductionIn ?? 0 + stockIn.BaleQty ?? 0;
                     inventory.Update(inv, inv.Id);
                 }
 
@@ -45,9 +45,11 @@ namespace RexERP_MVC.BAL
                 result.ProductId = (int)stockIn.ProductId;
                 result.SupplierId = stockIn.SupplierId??0;
                 result.WarehouseId = (int)stockIn.WarehouseId;
-                result.ReceiveQty = stockIn.BaleQty;
+                result.ProductionIn = stockIn.BaleQty;
+                result.BrandId = stockIn.BrandId;
+                result.SizeId = stockIn.SizeId;
                 result.BalanceQty = stockIn.BaleQty??0;
-                result.Notes = Notes;
+                result.Notes = stockIn.Notes;
                 result.GoodsType = "2";
                 result.CreatedBy = CurrentSession.GetCurrentSession().UserName;
                 result.CreatedDate = DateTime.Now;

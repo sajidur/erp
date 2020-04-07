@@ -16,7 +16,7 @@ namespace RexERP_MVC.Controllers
 
         public ActionResult Index()
         {
-            return View(new Size());
+            return View();
         }
         // GET: /Category/Details/5
         public ActionResult GetAll()
@@ -27,7 +27,7 @@ namespace RexERP_MVC.Controllers
                 return HttpNotFound();
             }
             var result = AutoMapper.Mapper.Map<List<Size>, List<SizeResponse>>(category);
-            return Json(category, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: /Category/Details/5
         public ActionResult Details(int? id)
@@ -47,7 +47,7 @@ namespace RexERP_MVC.Controllers
         }
 
         // GET: /Category/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
             return View();
         }
@@ -62,7 +62,6 @@ namespace RexERP_MVC.Controllers
             if (ModelState.IsValid)
             {
                 service.Save(category);
-                return RedirectToAction("Index");
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

@@ -161,30 +161,3 @@ function dateConvert(dateObject) {
 
     return date;
 }
-
-
-function LoadSupplierComboForReport(controlId) {
-    var url = '/Suppliers/GetAll';
-
-    $.ajax({
-        url: url,
-        method: 'POST',
-        success: function (res) {
-            var data = res;
-            //alert('Success');
-            $("#" + controlId).empty();
-            $("#" + controlId).get(0).options.length = 0;
-            if (true) {
-                $("#" + controlId).get(0).options[0] = new Option("All", "All");
-            }
-            if (data != null) {
-                $.each(data, function (index, item) {
-                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option('' + item.Code + '-' + item.Name, item.Id);
-                });
-            }
-            $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!", search_contains: true });
-        },
-        error: function () {
-        }
-    });
-}

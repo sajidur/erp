@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    LoadSupplierComboForReport("ddlSupplier");
+    LoadSupplierCombo("ddlSupplier");
     GetDataTable();
 
 });

@@ -1,5 +1,4 @@
 ﻿var ledgerPostingList = [];
-
 function LoadForEdit(parameters) {
     $("#ui-id-1").html("Modify Account");
     $("#btnSave").hide();
@@ -78,7 +77,6 @@ function LoadAccountGroupListByNature(a) {
         }
     });
 }
-
 function LoadAccountLedgerList() {
     var url = '/AccountLedger/GetAllLedger';
     $.ajax({
@@ -103,7 +101,6 @@ function LoadAccountLedgerList() {
         }
     });
 }
-
 function LoadAccountLedger(controlId) {
     var url = '/AccountLedger/GetAllLedger';
     $.ajax({
@@ -152,7 +149,6 @@ function GetBankCashLedgerList(controlId, groupId) {
         }
     });
 }
-
 function GetDrCrLedgerList(a, value) {
     var url = '/AccountLedger/DrCrLedgerList';
     console.log(value);
@@ -177,7 +173,6 @@ function GetDrCrLedgerList(a, value) {
         }
     });
 }
-
 function LoadSingleData(parameters) {
     $.ajax({
         url: '/AccountLedger/GetById',
@@ -231,6 +226,7 @@ function SaveAccounts() {
     });
 
 }
+
 
 function SaveLedger() {
     $.ajax({
@@ -352,7 +348,6 @@ function ChangeGroup()
     });
 
 }
-
 function ChangeLedgerGroup() {
     var id = $("#ddlUnder").val();
     if (id == 28) {
@@ -402,7 +397,6 @@ function JournalPosting() {
 }
 
 var count = 0;
-
 function AddJournalToGrid() {
     var Ledger = "";
     var DrOrCr = '';

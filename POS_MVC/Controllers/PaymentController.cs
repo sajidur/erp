@@ -98,7 +98,7 @@ namespace RexERP_MVC.Controllers
                     payment.InvoiceNo = item.InvoiceNo;
                     payment.PaidAmount = item.Credit;
                     payment.Party = item.LedgerName;
-                    payment.PostingDate = item.PostingDate.Value.ToString("dd-MM-yyyy");
+                    payment.PostingDate = item.PostingDate?.ToString("dd-MM-yyyy");
                     payment.TotalAmount = item.Debit;
                     payment.RestAmount = payment.TotalAmount - payment.PaidAmount;
                     paymentList.Add(payment);

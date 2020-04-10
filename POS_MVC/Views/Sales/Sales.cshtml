@@ -96,7 +96,7 @@
                                     <tbody>
                                         {{#InventoryGroupSearch}}
                                         <tr>
-                                            <td>{{Product.Id}}</td>
+                                            <td>{{Id}}</td>
                                             <td> {{Product.ProductName}}</td>
                                             <td>{{Size.Name}}</td>
                                             <td>{{Brand.BrandName}}</td>
@@ -109,7 +109,7 @@
                                                 <input type="text" name="txtRate" id="txtRate" class="datatable-textbox-style" />
                                             </td>
                                             <td class="action-sm">
-                                                <a class="datatable-submit-button" id="btnAdd" onclick="LoadForAdd('{{Product.Id}}')"><i class="fa fa-edit"></i>Add</a>
+                                                <a class="datatable-submit-button" id="btnAdd" onclick="LoadForAdd('{{Id}}')"><i class="fa fa-edit"></i>Add</a>
                                             </td>
                                             <td style="display:none;">{{WarehouseId}}</td>
                                         </tr>

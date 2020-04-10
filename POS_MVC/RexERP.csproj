@@ -213,7 +213,6 @@
     <Compile Include="BAL\GenericRepository.cs" />
     <Compile Include="BAL\GlobalClass.cs" />
     <Compile Include="BAL\GoodsReceiveService.cs" />
-    <Compile Include="BAL\HolidayService.cs" />
     <Compile Include="BAL\InventoryService.cs" />
     <Compile Include="BAL\JournalPostingService.cs" />
     <Compile Include="BAL\LedgerPostingService.cs" />
@@ -248,7 +247,6 @@
     <Compile Include="Controllers\FinancialYearController.cs" />
     <Compile Include="Controllers\GodownTransferController.cs" />
     <Compile Include="Controllers\GoodsReceiveController.cs" />
-    <Compile Include="Controllers\HolidaysController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\JournalController.cs" />
     <Compile Include="Controllers\LedgerPostingController.cs" />
@@ -261,11 +259,6 @@
     <Compile Include="Controllers\SizeSetupController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="DB_9B34E1_erpDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB_9B34E1_erpDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountGroup.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -598,7 +591,6 @@
     </Compile>
     <Compile Include="Report\mvcReport.cs">
       <DependentUpon>mvcReport.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
@@ -614,7 +606,6 @@
     <Compile Include="ViewModel\CustomerLedgerResultResponse.cs" />
     <Compile Include="ViewModel\DueSummaryResponse.cs" />
     <Compile Include="ViewModel\FinancialYearView.cs" />
-    <Compile Include="ViewModel\HoliDayResponse.cs" />
     <Compile Include="ViewModel\HomePageStatistices.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -859,7 +850,6 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.min.js" />
     <Content Include="Content\jquery.dataTables.css" />
-    <Content Include="Content\jquery.timepicker.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
@@ -896,7 +886,6 @@
     <Content Include="Scripts\app\FinishGoodsReport.js" />
     <Content Include="Scripts\app\GoodReceive.js" />
     <Content Include="Scripts\app\HeadOfficeInventoryReport.js" />
-    <Content Include="Scripts\app\Holiday.js" />
     <Content Include="Scripts\app\HomePage.js" />
     <Content Include="Scripts\app\Inventory.js" />
     <Content Include="Scripts\app\InventoryReport.js" />
@@ -922,17 +911,6 @@
     </EntityDeploy>
     <Content Include="Models\posMVCEntity.edmx.diagram">
       <DependentUpon>posMVCEntity.edmx</DependentUpon>
-    </Content>
-    <Content Include="DB_9B34E1_erpDataSet.xsc">
-      <DependentUpon>DB_9B34E1_erpDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="DB_9B34E1_erpDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DB_9B34E1_erpDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="DB_9B34E1_erpDataSet.xss">
-      <DependentUpon>DB_9B34E1_erpDataSet.xsd</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Default Settings %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
@@ -1070,8 +1048,6 @@
     <Content Include="Scripts\jquery.msgBox.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
-    <Content Include="Scripts\jquery.timepicker.js" />
-    <Content Include="Scripts\jquery.timepicker.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1241,7 +1217,6 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Holidays\HolidaysSetup.cshtml" />
     <Content Include="Views\Users\MenuPermission.cshtml" />
     <Content Include="Views\SizeSetup\Index.cshtml" />
     <Content Include="Views\Brand\Add.cshtml" />
@@ -1250,7 +1225,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadEmployeeImage\" />
-    <Folder Include="Views\Payroll\" />
     <Folder Include="Views\PictureUpload\" />
   </ItemGroup>
   <ItemGroup>
@@ -1264,7 +1238,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Report\RPT\ChallanMainReport.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptAllReceiveReport.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptDueSummary.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptIncomeStatement.rdlc" />
     <EmbeddedResource Include="Report\RPT\rdlcHeader.rdlc">

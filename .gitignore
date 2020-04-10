@@ -14,3 +14,6 @@ POS_MVC/obj/Debug/RexERP.csproj.FileListAbsolute.txt
 .vs/RexERP/v16/Server/sqlite3/storage.ide-wal
 POS_MVC/obj/Debug/RexERP.csproj.FileListAbsolute.txt
 .vs/RexERP/v16/.suo
+*.dll
+POS_MVC/obj/Debug/RiceMill_MVC.pdb
+POS_MVC/obj/Debug/RiceMill_MVC.dll

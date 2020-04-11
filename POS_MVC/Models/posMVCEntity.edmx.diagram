@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="09b6b1c7b3b249dc84caf2cd4d4a3018" Name="Diagram1">
+      <Diagram DiagramId="09b6b1c7b3b249dc84caf2cd4d4a3018" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.AccountGroup" Width="1.5" PointX="21.5" PointY="28.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.AccountLedger" Width="1.5" PointX="23.75" PointY="26.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.ACGroup" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
@@ -50,7 +50,6 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.RoleWiseScreenPermission" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalaryPayment" Width="1.5" PointX="7.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDelivery" Width="1.5" PointX="18.75" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDetail" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesMaster" Width="1.5" PointX="13.5" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesReturn" Width="1.5" PointX="25.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SchClass" Width="1.5" PointX="18.75" PointY="26.75" IsExpanded="true" />
@@ -66,7 +65,6 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.TBSMSALLOT" Width="1.5" PointX="11.75" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.TBSMSINFO" Width="1.5" PointX="13.75" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.TEMPLATE" Width="1.5" PointX="15.75" PointY="27.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9B34E1_erpModel.TempSalesDetail" Width="1.5" PointX="21.75" PointY="21" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.TempSalesMaster" Width="1.5" PointX="16.5" PointY="19.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Unit" Width="1.5" PointX="28.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.User" Width="1.5" PointX="23.75" PointY="3.25" IsExpanded="true" />
@@ -115,10 +113,8 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveMaster_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_RoleWiseScreenPermission_Screens" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_SalesMaster" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Supplier" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Warehouse" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_TempSalesMaster" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_TempSalesDetails" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_UserInfo_UserInfo" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Size" Width="1.5" PointX="28.375" PointY="30.75" />
@@ -138,10 +134,8 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_Product_Category" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_Inventory_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ReceiveDetails_product" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockIn_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Product" />
-        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesOrder" Width="1.5" PointX="38.875" PointY="14" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Brand" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Customer" />
@@ -150,6 +144,16 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesOrder_Size" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.TempSalesDetail" Width="1.5" PointX="37.625" PointY="22.125" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Brand" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Size" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_TempSalesDetails_TempSalesMaster" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDetail" Width="1.5" PointX="36.625" PointY="6" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Brand" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Product" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Size" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

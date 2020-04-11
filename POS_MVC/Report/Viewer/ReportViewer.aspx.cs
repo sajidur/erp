@@ -85,47 +85,21 @@ namespace RexERP_MVC.Report.Viewer
 
            
             ReportViewer1.ProcessingMode = ProcessingMode.Local;
-            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/ChallanMainReport.rdlc");
-            ReportViewer1.LocalReport.SubreportProcessing += new
-                              SubreportProcessingEventHandler(SetSubDataSource);
-            ReportViewer1.ZoomMode = Microsoft.Reporting.WebForms.ZoomMode.PageWidth;
-            this.ReportViewer1.LocalReport.Refresh();
-
-
-        }
-
-        private void SetSubDataSource(object sender, SubreportProcessingEventArgs e)
-        {
-            btnTruckChallan.Visible = true;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptSalesInvoice.rdlc");
             string invoiceId = Request.QueryString["invoiceId"].ToString();
             string query = @"exec rptSalesInvoice '" + invoiceId + "'";
             oResult = oDAL.Select(query);
             DataTable dt = null;
             dt = oResult.Data as DataTable;
             ReportDataSource datasource = new ReportDataSource("dsSalesInvoice", dt);
-            //ReportViewer1.LocalReport.DataSources.Clear();
-            //ReportViewer1.LocalReport.DataSources.Add(datasource);
-            e.DataSources.Add(new ReportDataSource("dsSalesInvoice", dt));
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
+            ReportViewer1.ZoomMode = Microsoft.Reporting.WebForms.ZoomMode.PageWidth;
+
+            this.ReportViewer1.LocalReport.Refresh();
 
 
-            string customerId = Request.QueryString["customerid"].ToString();
-            query = @"exec rptIndividualLedger " + customerId + ",0,0,'"+invoiceId+"'";
-            oResult = oDAL.Select(query);
-            dt = oResult.Data as DataTable;
-             ReportDataSource customerDatasource = new ReportDataSource("individualLedger", dt);
-            //ReportViewer1.LocalReport.DataSources.Add(customerDatasource);
-            e.DataSources.Add(new ReportDataSource("individualLedger", dt));
-
-            query = @"exec rptCustomerRecive " + customerId + ","+ invoiceId + "";
-            oResult = oDAL.Select(query);
-            dt = oResult.Data as DataTable;
-            ReportDataSource transactionDatasource = new ReportDataSource("rptCustomerTransaction", dt);
-            //ReportViewer1.LocalReport.DataSources.Add(transactionDatasource);
-            e.DataSources.Add(new ReportDataSource("rptCustomerTransaction", dt));
-
-           // ReportViewer1.ZoomMode = Microsoft.Reporting.WebForms.ZoomMode.PageWidth;
         }
-
         private void IncomeStatment()
         {
             string fromDate = Request.QueryString["fromDate"].ToString();
@@ -261,77 +235,5 @@ namespace RexERP_MVC.Report.Viewer
             ReportViewer1.ZoomMode = Microsoft.Reporting.WebForms.ZoomMode.PageWidth;
         }
 
-        protected void btnTruckChallan_Click(object sender, EventArgs e)
-        {
-            //btnTruckChallan.Visible = true;
-            //string invoiceId = Request.QueryString["invoiceId"].ToString();
-            //string query = @"exec rptSalesInvoice '" + invoiceId + "'";
-            //oResult = oDAL.Select(query);
-            //DataTable dt = null;
-            //dt = oResult.Data as DataTable;
-
-            //ReportViewer1.ProcessingMode = ProcessingMode.Local;
-            //ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptTruckChallanInvoice.rdlc");
-            //ReportDataSource datasource = new ReportDataSource("dsSalesInvoice", dt);
-            //ReportViewer1.LocalReport.DataSources.Clear();
-            //ReportViewer1.LocalReport.DataSources.Add(datasource);
-
-            //string customerId = Request.QueryString["customerid"].ToString();
-            //query = @"exec rptIndividualLedger " + customerId + "";
-            //oResult = oDAL.Select(query);
-            //dt = oResult.Data as DataTable;
-            //ReportDataSource customerDatasource = new ReportDataSource("individualLedger", dt);
-            //ReportViewer1.LocalReport.DataSources.Add(customerDatasource);
-
-            //query = @"exec rptCustomerRecive " + customerId + "";
-            //oResult = oDAL.Select(query);
-            //dt = oResult.Data as DataTable;
-            //ReportDataSource transactionDatasource = new ReportDataSource("rptCustomerTransaction", dt);
-            //ReportViewer1.LocalReport.DataSources.Add(transactionDatasource);
-
-
-            ReportViewer1.ProcessingMode = ProcessingMode.Local;
-            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/TrackChallanMain.rdlc");
-            ReportViewer1.LocalReport.SubreportProcessing += new
-                              SubreportProcessingEventHandler(TrackDataSource);
-            ReportViewer1.ZoomMode = Microsoft.Reporting.WebForms.ZoomMode.PageWidth;
-
-            this.ReportViewer1.LocalReport.Refresh();
-
-        }
-
-        private void TrackDataSource(object sender, SubreportProcessingEventArgs e)
-        {
-            btnTruckChallan.Visible = true;
-            string invoiceId = Request.QueryString["invoiceId"].ToString();
-            string query = @"exec rptSalesInvoice '" + invoiceId + "'";
-            oResult = oDAL.Select(query);
-            DataTable dt = null;
-            dt = oResult.Data as DataTable;
-            ReportDataSource datasource = new ReportDataSource("dsSalesInvoice", dt);
-            //ReportViewer1.LocalReport.DataSources.Clear();
-            //ReportViewer1.LocalReport.DataSources.Add(datasource);
-            e.DataSources.Add(new ReportDataSource("dsSalesInvoice", dt));
-
-
-            string customerId = Request.QueryString["customerid"].ToString();
-            //query = @"exec rptBalanceByInvoice " + customerId + ",0,0,'" + invoiceId + "'";
-            query = @"exec rptIndividualLedger " + customerId + ",0,0,'" + invoiceId + "'";
-
-            oResult = oDAL.Select(query);
-            dt = oResult.Data as DataTable;
-            ReportDataSource customerDatasource = new ReportDataSource("individualLedger", dt);
-            //ReportViewer1.LocalReport.DataSources.Add(customerDatasource);
-            e.DataSources.Add(new ReportDataSource("individualLedger", dt));
-
-            // query = @"exec rptCustomerRecive " + customerId + "";
-            query = @"exec rptCustomerRecive " + customerId + "," + invoiceId + "";
-
-            oResult = oDAL.Select(query);
-            dt = oResult.Data as DataTable;
-            ReportDataSource transactionDatasource = new ReportDataSource("rptCustomerTransaction", dt);
-            //ReportViewer1.LocalReport.DataSources.Add(transactionDatasource);
-            e.DataSources.Add(new ReportDataSource("rptCustomerTransaction", dt));
-        }
     }
 }

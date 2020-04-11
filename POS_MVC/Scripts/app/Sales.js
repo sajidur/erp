@@ -104,21 +104,12 @@ function LoadForAdd(InvId) {
         ShowNotification("3", "Amount empty!!");
         return;
     }
-    if (ProductId <= 0) {
-        ShowNotification("3", "Select a product!!");
-        return;
-    }
-    if (WarehouseId <= 0) {
-        ShowNotification("3", "Select godown!!");
-        return;
-    }
     var object = {
         countCount: countCount,
         Id: Id,
         ProductId:Id,
         ProductName: ProductName,
-        BaleQty: BaleQty,
-        BaleWeight: BaleWeight,
+        Qty: BaleQty,
         Rate: Rate,
         Amount: Amount,
         SalesOrderId: SalesOrderId,
@@ -210,12 +201,11 @@ function LoadForAddOrder(parameters) {
     }
 
     function Calculation() {
-        debugger;
         var totalAmount = 0;
         var TotalQty = 0;
         for (var i = 0; i < detailsSales.length; i++) {
             totalAmount += detailsSales[i].Amount;
-            TotalQty += detailsSales[i].BaleQty;
+            TotalQty += detailsSales[i].Qty;
         }
         
         $("#txtTotalQty").val(TotalQty);
@@ -248,7 +238,7 @@ function LoadForAddOrder(parameters) {
     function Save(e) {
         GetDataFromDatatable();
         var IsActive;
-        if (detailSalesInMaster.length <= 0) {
+        if (detailsSales.length <= 0) {
             ShowNotification("3", "No Item added!!");
             return;
         }
@@ -270,7 +260,7 @@ function LoadForAddOrder(parameters) {
                 method: 'POST',
                 data: {
                     salesMasters: detailsSalesForPost,
-                    salesDetail: detailSalesInMaster,
+                    salesDetail: detailsSales,
                     salesOrders: orderElements,
                     lstDeliveryQunatities: orderDeliveryQty,
                     Discount: $("#txtDiscount").val(),
@@ -296,7 +286,6 @@ function LoadForAddOrder(parameters) {
 
 
     function GetDataFromDatatable() {
-        detailSalesInMaster = [];
         detailsSalesForPost = [];
         $('#salesGroupTableModalGrid tr').each(function (i) {
             if (i > 0) {
@@ -311,11 +300,6 @@ function LoadForAddOrder(parameters) {
                 var SalesOrderId = $(this).find('td').eq(6).text();
                 var WarehouseId = $(this).find('td').eq(8).text();
                 var SalesDate = $("#txtDate").val();
-
-                if (WarehouseId <= 0) {
-                    ShowNotification("3", "select godown!!");
-                    return;
-                }
                 var object = {
                     SalesInvoice: SalesInvoice,
                     CustomerID: CustomerID,
@@ -328,15 +312,6 @@ function LoadForAddOrder(parameters) {
                     TransportType: $("#txtDelivery").val(),
                     TransportNo: $("#txtDriverMob").val()
                 };
-
-                var object2 = {
-                    ProductId: ProductId,
-                    BaleQty: Qty,
-                    Rate: Rate,
-                    Amount: Amount,
-                    WarehouseId: WarehouseId
-                };
-                detailSalesInMaster.push(object2);
                 detailsSalesForPost.push(object);
             }
         });

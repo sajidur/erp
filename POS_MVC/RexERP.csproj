@@ -1239,7 +1239,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Report\RPT\ChallanMainReport.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptDueSummary.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptIncomeStatement.rdlc" />
     <EmbeddedResource Include="Report\RPT\rdlcHeader.rdlc">
@@ -1248,8 +1247,6 @@
     <Content Include="Report\RPT\rptStockOutForProcessing.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Report\RPT\rptSalesInvoiceRepresentive.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptSalesInvoiceCustomer.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptSalesInvoice.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoiceDriver.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoiceOffice.rdlc" />

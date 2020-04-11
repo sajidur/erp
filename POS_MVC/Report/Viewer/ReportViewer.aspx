@@ -22,7 +22,6 @@
          <div style="height: 252px">
         <asp:Label ID="lblMsg" runat="server" Text=""  Font-Size="20px" ForeColor="Red"></asp:Label>
       <button id="printreport">Print</button>
-          <asp:Button ID="btnTruckChallan" runat="server" OnClick="btnTruckChallan_Click" Text="Print Truck Challan" Visible="False" />
           <br />
          <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"
         InteractiveDeviceInfos="(Collection)" ProcessingMode="Remote" WaitMessageFont-Names="Verdana"

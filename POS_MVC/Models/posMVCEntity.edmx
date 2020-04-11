@@ -860,6 +860,10 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
           <Property Name="SalesMasterId" Type="int" Nullable="false" />
           <Property Name="SalesInvoice" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="SizeId" Type="int" />
+          <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandId" Type="int" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
           <Property Name="Qty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1210,10 +1214,10 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
           <Property Name="SalesMasterId" Type="int" Nullable="false" />
           <Property Name="SalesInvoice" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="BaleQty" Type="int" Nullable="false" />
-          <Property Name="BaleWeight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SizeId" Type="int" />
+          <Property Name="BrandId" Type="int" />
+          <Property Name="Qty" Type="int" Nullable="false" />
           <Property Name="WarehouseId" Type="int" Nullable="false" />
-          <Property Name="TotalQtyInKG" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Notes" Type="nvarchar" MaxLength="500" />
@@ -1935,6 +1939,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SalesDetails_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetails">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SalesDetails_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="*" />
@@ -1956,6 +1972,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Principal>
             <Dependent Role="SalesDetails">
               <PropertyRef Name="SalesMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetails">
+              <PropertyRef Name="SizeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2139,6 +2167,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TempSalesDetails_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="TempSalesDetails" Type="Self.TempSalesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TempSalesDetails">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TempSalesDetails_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="TempSalesDetails" Type="Self.TempSalesDetails" Multiplicity="*" />
@@ -2148,6 +2188,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Principal>
             <Dependent Role="TempSalesDetails">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempSalesDetails_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="TempSalesDetails" Type="Self.TempSalesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TempSalesDetails">
+              <PropertyRef Name="SizeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2605,12 +2657,20 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             <End Role="SalesMaster" EntitySet="SalesMaster" />
             <End Role="SalesDelivery" EntitySet="SalesDelivery" />
           </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_Brand" Association="Self.FK_SalesDetails_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="SalesDetails" EntitySet="SalesDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_SalesDetails_Product" Association="Self.FK_SalesDetails_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="SalesDetails" EntitySet="SalesDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesDetails_SalesMaster" Association="Self.FK_SalesDetails_SalesMaster">
             <End Role="SalesMaster" EntitySet="SalesMaster" />
+            <End Role="SalesDetails" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_Size" Association="Self.FK_SalesDetails_Size">
+            <End Role="Size" EntitySet="Size" />
             <End Role="SalesDetails" EntitySet="SalesDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesMaster_Customer" Association="Self.FK_SalesMaster_Customer">
@@ -2673,8 +2733,16 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             <End Role="WareHouse" EntitySet="WareHouse" />
             <End Role="StockOut" EntitySet="StockOut" />
           </AssociationSet>
+          <AssociationSet Name="FK_TempSalesDetails_Brand" Association="Self.FK_TempSalesDetails_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="TempSalesDetails" EntitySet="TempSalesDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_TempSalesDetails_Product" Association="Self.FK_TempSalesDetails_Product">
             <End Role="Product" EntitySet="Product" />
+            <End Role="TempSalesDetails" EntitySet="TempSalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempSalesDetails_Size" Association="Self.FK_TempSalesDetails_Size">
+            <End Role="Size" EntitySet="Size" />
             <End Role="TempSalesDetails" EntitySet="TempSalesDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_TempSalesDetails_TempSalesMaster" Association="Self.FK_TempSalesDetails_TempSalesMaster">
@@ -2913,6 +2981,8 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Brand" FromRole="Brand" ToRole="Inventory" />
           <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Brand" FromRole="Brand" ToRole="StockIn" />
           <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Brand" FromRole="Brand" ToRole="SalesOrder" />
+          <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Brand" FromRole="Brand" ToRole="TempSalesDetail" />
+          <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Brand" FromRole="Brand" ToRole="SalesDetail" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -3538,27 +3608,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="Customer" Relationship="Self.FK_SalesDelivery_Customer" FromRole="SalesDelivery" ToRole="Customer" />
           <NavigationProperty Name="SalesMaster" Relationship="Self.FK_SalesDelivery_SalesMaster" FromRole="SalesDelivery" ToRole="SalesMaster" />
         </EntityType>
-        <EntityType Name="SalesDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SalesMasterId" Type="Int32" Nullable="false" />
-          <Property Name="SalesInvoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="WarehouseId" Type="Int32" Nullable="false" />
-          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-          <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="SalesMaster" Relationship="Self.FK_SalesDetails_SalesMaster" FromRole="SalesDetails" ToRole="SalesMaster" />
-          <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Product" FromRole="SalesDetail" ToRole="Product" />
-        </EntityType>
         <EntityType Name="SalesMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -3591,8 +3640,8 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <Property Name="MasterId" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_SalesMaster_Customer" FromRole="SalesMaster" ToRole="Customer" />
           <NavigationProperty Name="SalesDeliveries" Relationship="Self.FK_SalesDelivery_SalesMaster" FromRole="SalesMaster" ToRole="SalesDelivery" />
-          <NavigationProperty Name="SalesDetails" Relationship="Self.FK_SalesDetails_SalesMaster" FromRole="SalesMaster" ToRole="SalesDetails" />
           <NavigationProperty Name="SalesOrder" Relationship="DB_9B34E1_erpModel.FK_SalesMaster_Salesorder" FromRole="SalesMaster" ToRole="SalesOrder" />
+          <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster" FromRole="SalesMaster" ToRole="SalesDetail" />
         </EntityType>
         <EntityType Name="SalesReturn">
           <Key>
@@ -3822,29 +3871,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <Property Name="DivisionFP" Type="Int16" />
           <Property Name="TEMPLATE4" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="TempSalesDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SalesMasterId" Type="Int32" Nullable="false" />
-          <Property Name="SalesInvoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="BaleQty" Type="Int32" Nullable="false" />
-          <Property Name="BaleWeight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="WarehouseId" Type="Int32" Nullable="false" />
-          <Property Name="TotalQtyInKG" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-          <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <NavigationProperty Name="TempSalesMaster" Relationship="Self.FK_TempSalesDetails_TempSalesMaster" FromRole="TempSalesDetails" ToRole="TempSalesMaster" />
-          <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" FromRole="TempSalesDetail" ToRole="Product" />
-        </EntityType>
         <EntityType Name="TempSalesMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -3874,10 +3900,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <Property Name="RentAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="YearId" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_TempSalesMaster_Customer" FromRole="TempSalesMaster" ToRole="Customer" />
-          <NavigationProperty Name="TempSalesDetails" Relationship="Self.FK_TempSalesDetails_TempSalesMaster" FromRole="TempSalesMaster" ToRole="TempSalesDetails" />
           <NavigationProperty Name="TempSalesMaster1" Relationship="Self.FK_TempSalesMaster_TempSalesDetails" FromRole="TempSalesMaster" ToRole="TempSalesMaster1" />
           <NavigationProperty Name="TempSalesMaster2" Relationship="Self.FK_TempSalesMaster_TempSalesDetails" FromRole="TempSalesMaster1" ToRole="TempSalesMaster" />
           <NavigationProperty Name="SalesOrder" Relationship="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder" FromRole="TempSalesMaster" ToRole="SalesOrder" />
+          <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_TempSalesMaster" FromRole="TempSalesMaster" ToRole="TempSalesDetail" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -4519,18 +4545,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SalesDetails_SalesMaster">
-          <End Role="SalesMaster" Type="Self.SalesMaster" Multiplicity="1" />
-          <End Role="SalesDetails" Type="Self.SalesDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalesMaster">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SalesDetails">
-              <PropertyRef Name="SalesMasterId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StockOut_Supplier">
           <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
           <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
@@ -4552,18 +4566,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Principal>
             <Dependent Role="StockOut">
               <PropertyRef Name="WarehouseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TempSalesDetails_TempSalesMaster">
-          <End Role="TempSalesMaster" Type="Self.TempSalesMaster" Multiplicity="1" />
-          <End Role="TempSalesDetails" Type="Self.TempSalesDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TempSalesMaster">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TempSalesDetails">
-              <PropertyRef Name="SalesMasterId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4637,7 +4639,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <EntitySet Name="RoleWiseScreenPermissions" EntityType="Self.RoleWiseScreenPermission" />
           <EntitySet Name="SalaryPayments" EntityType="Self.SalaryPayment" />
           <EntitySet Name="SalesDeliveries" EntityType="Self.SalesDelivery" />
-          <EntitySet Name="SalesDetails" EntityType="Self.SalesDetail" />
           <EntitySet Name="SalesMasters" EntityType="Self.SalesMaster" />
           <EntitySet Name="SalesReturns" EntityType="Self.SalesReturn" />
           <EntitySet Name="SchClasses" EntityType="Self.SchClass" />
@@ -4653,7 +4654,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <EntitySet Name="TBSMSALLOTs" EntityType="Self.TBSMSALLOT" />
           <EntitySet Name="TBSMSINFOes" EntityType="Self.TBSMSINFO" />
           <EntitySet Name="TEMPLATEs" EntityType="Self.TEMPLATE" />
-          <EntitySet Name="TempSalesDetails" EntityType="Self.TempSalesDetail" />
           <EntitySet Name="TempSalesMasters" EntityType="Self.TempSalesMaster" />
           <EntitySet Name="Units" EntityType="Self.Unit" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -4792,10 +4792,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             <End Role="SalesMaster" EntitySet="SalesMasters" />
             <End Role="SalesDelivery" EntitySet="SalesDeliveries" />
           </AssociationSet>
-          <AssociationSet Name="FK_SalesDetails_SalesMaster" Association="Self.FK_SalesDetails_SalesMaster">
-            <End Role="SalesMaster" EntitySet="SalesMasters" />
-            <End Role="SalesDetails" EntitySet="SalesDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_StockOut_Supplier" Association="Self.FK_StockOut_Supplier">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="StockOut" EntitySet="StockOuts" />
@@ -4803,10 +4799,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <AssociationSet Name="FK_StockOut_Warehouse" Association="Self.FK_StockOut_Warehouse">
             <End Role="WareHouse" EntitySet="WareHouses" />
             <End Role="StockOut" EntitySet="StockOuts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TempSalesDetails_TempSalesMaster" Association="Self.FK_TempSalesDetails_TempSalesMaster">
-            <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
-            <End Role="TempSalesDetails" EntitySet="TempSalesDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_TempSalesMaster_TempSalesDetails" Association="Self.FK_TempSalesMaster_TempSalesDetails">
             <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
@@ -4981,10 +4973,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             <End Role="Product" EntitySet="Products" />
             <End Role="ReceiveDetail" EntitySet="ReceiveDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_SalesDetails_Product" Association="DB_9B34E1_erpModel.FK_SalesDetails_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="SalesDetail" EntitySet="SalesDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_StockIn_Product" Association="DB_9B34E1_erpModel.FK_StockIn_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="StockIn" EntitySet="StockIns" />
@@ -4992,10 +4980,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <AssociationSet Name="FK_StockOut_Product" Association="DB_9B34E1_erpModel.FK_StockOut_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="StockOut" EntitySet="StockOuts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TempSalesDetails_Product" Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="TempSalesDetail" EntitySet="TempSalesDetails" />
           </AssociationSet>
           <EntitySet Name="SalesOrders" EntityType="DB_9B34E1_erpModel.SalesOrder" />
           <AssociationSet Name="FK_SalesOrder_Brand" Association="DB_9B34E1_erpModel.FK_SalesOrder_Brand">
@@ -5025,6 +5009,40 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <AssociationSet Name="FK_TempSalesMaster_SalesOrder" Association="DB_9B34E1_erpModel.FK_TempSalesMaster_SalesOrder">
             <End Role="SalesOrder" EntitySet="SalesOrders" />
             <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
+          </AssociationSet>
+          <EntitySet Name="TempSalesDetails" EntityType="DB_9B34E1_erpModel.TempSalesDetail" />
+          <AssociationSet Name="FK_TempSalesDetails_Brand" Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Brand">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="TempSalesDetail" EntitySet="TempSalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempSalesDetails_Product" Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="TempSalesDetail" EntitySet="TempSalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempSalesDetails_Size" Association="DB_9B34E1_erpModel.FK_TempSalesDetails_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="TempSalesDetail" EntitySet="TempSalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TempSalesDetails_TempSalesMaster" Association="DB_9B34E1_erpModel.FK_TempSalesDetails_TempSalesMaster">
+            <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
+            <End Role="TempSalesDetail" EntitySet="TempSalesDetails" />
+          </AssociationSet>
+          <EntitySet Name="SalesDetails" EntityType="DB_9B34E1_erpModel.SalesDetail" />
+          <AssociationSet Name="FK_SalesDetails_Brand" Association="DB_9B34E1_erpModel.FK_SalesDetails_Brand">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="SalesDetail" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_Product" Association="DB_9B34E1_erpModel.FK_SalesDetails_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SalesDetail" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_SalesMaster" Association="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster">
+            <End Role="SalesMaster" EntitySet="SalesMasters" />
+            <End Role="SalesDetail" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_Size" Association="DB_9B34E1_erpModel.FK_SalesDetails_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="SalesDetail" EntitySet="SalesDetails" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="CashBook_Result">
@@ -5307,6 +5325,8 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Size" FromRole="Size" ToRole="Inventory" />
           <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Size" FromRole="Size" ToRole="StockIn" />
           <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Size" FromRole="Size" ToRole="SalesOrder" />
+          <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Size" FromRole="Size" ToRole="TempSalesDetail" />
+          <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Size" FromRole="Size" ToRole="SalesDetail" />
         </EntityType>
         <Association Name="FK_ReceiveDetails_Brand">
           <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -5511,11 +5531,11 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="Category" Relationship="DB_9B34E1_erpModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="Inventories" Relationship="DB_9B34E1_erpModel.FK_Inventory_Product" FromRole="Product" ToRole="Inventory" />
           <NavigationProperty Name="ReceiveDetails" Relationship="DB_9B34E1_erpModel.FK_ReceiveDetails_product" FromRole="Product" ToRole="ReceiveDetail" />
-          <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Product" FromRole="Product" ToRole="SalesDetail" />
           <NavigationProperty Name="StockIns" Relationship="DB_9B34E1_erpModel.FK_StockIn_Product" FromRole="Product" ToRole="StockIn" />
           <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Product" FromRole="Product" ToRole="StockOut" />
-          <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" FromRole="Product" ToRole="TempSalesDetail" />
           <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_product" FromRole="Product" ToRole="SalesOrder" />
+          <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" FromRole="Product" ToRole="TempSalesDetail" />
+          <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Product" FromRole="Product" ToRole="SalesDetail" />
         </EntityType>
         <Association Name="FK_Product_Category">
           <End Type="DB_9B34E1_erpModel.Category" Role="Category" Multiplicity="0..1" />
@@ -5553,18 +5573,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SalesDetails_Product">
-          <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="DB_9B34E1_erpModel.SalesDetail" Role="SalesDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SalesDetail">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StockIn_Product">
           <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="DB_9B34E1_erpModel.StockIn" Role="StockIn" Multiplicity="*" />
@@ -5585,18 +5593,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StockOut">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TempSalesDetails_Product">
-          <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="DB_9B34E1_erpModel.TempSalesDetail" Role="TempSalesDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TempSalesDetail">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
@@ -5717,6 +5713,154 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Principal>
             <Dependent Role="TempSalesMaster">
               <PropertyRef Name="SalesOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TempSalesDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesMasterId" Type="Int32" Nullable="false" />
+          <Property Name="SalesInvoice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SizeId" Type="Int32" />
+          <Property Name="BrandId" Type="Int32" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+          <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Brand" FromRole="TempSalesDetail" ToRole="Brand" />
+          <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Product" FromRole="TempSalesDetail" ToRole="Product" />
+          <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Size" FromRole="TempSalesDetail" ToRole="Size" />
+          <NavigationProperty Name="TempSalesMaster" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_TempSalesMaster" FromRole="TempSalesDetail" ToRole="TempSalesMaster" />
+        </EntityType>
+        <Association Name="FK_TempSalesDetails_Brand">
+          <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+          <End Type="DB_9B34E1_erpModel.TempSalesDetail" Role="TempSalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TempSalesDetail">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempSalesDetails_Product">
+          <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DB_9B34E1_erpModel.TempSalesDetail" Role="TempSalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TempSalesDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempSalesDetails_Size">
+          <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+          <End Type="DB_9B34E1_erpModel.TempSalesDetail" Role="TempSalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TempSalesDetail">
+              <PropertyRef Name="SizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TempSalesDetails_TempSalesMaster">
+          <End Type="DB_9B34E1_erpModel.TempSalesMaster" Role="TempSalesMaster" Multiplicity="1" />
+          <End Type="DB_9B34E1_erpModel.TempSalesDetail" Role="TempSalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TempSalesMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TempSalesDetail">
+              <PropertyRef Name="SalesMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SalesDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesMasterId" Type="Int32" Nullable="false" />
+          <Property Name="SalesInvoice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SizeId" Type="Int32" />
+          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandId" Type="Int32" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+          <Property Name="UpdatedDate" Type="String" MaxLength="24" FixedLength="true" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Brand" FromRole="SalesDetail" ToRole="Brand" />
+          <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Product" FromRole="SalesDetail" ToRole="Product" />
+          <NavigationProperty Name="SalesMaster" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster" FromRole="SalesDetail" ToRole="SalesMaster" />
+          <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Size" FromRole="SalesDetail" ToRole="Size" />
+        </EntityType>
+        <Association Name="FK_SalesDetails_Brand">
+          <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+          <End Type="DB_9B34E1_erpModel.SalesDetail" Role="SalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetail">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_Product">
+          <End Type="DB_9B34E1_erpModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DB_9B34E1_erpModel.SalesDetail" Role="SalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_SalesMaster">
+          <End Type="DB_9B34E1_erpModel.SalesMaster" Role="SalesMaster" Multiplicity="1" />
+          <End Type="DB_9B34E1_erpModel.SalesDetail" Role="SalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetail">
+              <PropertyRef Name="SalesMasterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_Size">
+          <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+          <End Type="DB_9B34E1_erpModel.SalesDetail" Role="SalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetail">
+              <PropertyRef Name="SizeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6544,26 +6688,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SalesDetails">
-            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesDetail">
-              <MappingFragment StoreEntitySet="SalesDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
-                <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SalesMasters">
             <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesMaster">
               <MappingFragment StoreEntitySet="SalesMaster">
@@ -6827,28 +6951,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
                 <ScalarProperty Name="Flag" ColumnName="Flag" />
                 <ScalarProperty Name="DivisionFP" ColumnName="DivisionFP" />
                 <ScalarProperty Name="TEMPLATE4" ColumnName="TEMPLATE4" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TempSalesDetails">
-            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.TempSalesDetail">
-              <MappingFragment StoreEntitySet="TempSalesDetails">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
-                <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
-                <ScalarProperty Name="BaleWeight" ColumnName="BaleWeight" />
-                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
-                <ScalarProperty Name="TotalQtyInKG" ColumnName="TotalQtyInKG" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7606,6 +7708,52 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
                 <ScalarProperty Name="BrandId" ColumnName="BrandId" />
                 <ScalarProperty Name="SalesOrderId" ColumnName="SalesOrderId" />
                 <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempSalesDetails">
+            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.TempSalesDetail">
+              <MappingFragment StoreEntitySet="TempSalesDetails">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
+                <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesDetails">
+            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesDetail">
+              <MappingFragment StoreEntitySet="SalesDetails">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
+                <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

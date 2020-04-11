@@ -138,6 +138,7 @@ namespace RexERP_MVC.Controllers
                 balance.extra1 = string.Concat("Recipt Invoice: ", voucherNo, " Notes:", notes);
                 balance.extra2 = posting.Id.ToString();
                 this.partyBalanceService.Save(balance);
+                isSendSMS = false;
                 if (isSendSMS)
                 {
                     Customer customer = (new CustomerService()).GetById(new int?(supplierId));

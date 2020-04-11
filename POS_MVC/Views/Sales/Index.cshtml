@@ -137,8 +137,8 @@
     });
     function LoadSales() {
         var CustomerID = 0;
-        var fromDate = new Date($('#txtFromDate').val()).toISOString();
-        var toDate = new Date($('#txtToDate').val()).toISOString();
+        var fromDate =$('#txtFromDate').val();
+        var toDate =$('#txtToDate').val();
         var customerDropdown = document.getElementById("ddlCustomer");
         console.log(customerDropdown.selectedIndex)
         if (customerDropdown.selectedIndex == -1 || customerDropdown.selectedIndex == 0) {

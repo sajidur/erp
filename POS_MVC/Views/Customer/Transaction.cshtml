@@ -97,19 +97,7 @@
 
     });
     $("#btnFilter").click(function () {
-        var fromDate = new Date($('#txtFromDate').val());
-        var now = new Date(fromDate);
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        var from = now.getFullYear() + "-" + (month) + "-" + (day);
-
-        var toDate = new Date($('#txtToDate').val());
-        var now = new Date(toDate);
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        var to = now.getFullYear() + "-" + (month) + "-" + (day);
-        // var toDate = new Date($('#txtToDate').val()).toISOString();
-        GetReceipt(from, to);
+        GetReceipt( $('#txtFromDate').val(), $('#txtToDate').val());
     });
     function GetLedger() {
         var ledgerId = $("#ddlCustomer option:selected").val();

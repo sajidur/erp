@@ -583,13 +583,16 @@ namespace RexERP_MVC.Controllers
                     from a in salesMasters
                     select a.TotalAmount).Sum() + result.AdditionalCost) - result.Discount;
                 int count = 0;
+                var ids = salesDetail.Select(a => a.ProductId).ToList();
+                var inventories = inventoryService.GetAll(ids);
                 foreach (TempSalesDetail item in salesDetail)
                 {
+                    var inventory = inventories.Where(a => a.Id == item.ProductId).FirstOrDefault();
                     TempSalesDetail resultDetail = new TempSalesDetail()
                     {
                         SalesMasterId = result.Id,
                         SalesInvoice = result.SalesInvoice,
-                        ProductId = item.ProductId,
+                        ProductId = inventory.ProductId,
                         BaleQty = item.BaleQty,
                         BaleWeight = item.BaleWeight,
                         TotalQtyInKG = item.TotalQtyInKG,

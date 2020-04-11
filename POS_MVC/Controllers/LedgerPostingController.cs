@@ -136,16 +136,20 @@ namespace RexERP_MVC.Controllers
                     balance = due.Balance;
                     balanceText = string.Concat("Balance with Dada Rice Tk=", string.Format("{0:#,#.}", minusOne * decimal.Round((balance.HasValue ? balance.GetValueOrDefault() : decimal.Zero)), ""), "=");
                 }
-                SMSEmailService sMSEmailService = new SMSEmailService();
-                string[] ledgerName = new string[] { "Dear ", customer.LedgerName, ",Tk=", null, null, null, null, null, null };
-                balance = postingObj.Debit;
-                ledgerName[3] = string.Format("{0:#,#.}", decimal.Round((balance.HasValue ? balance.GetValueOrDefault() : decimal.Zero)), "");
-                ledgerName[4] = "/- Received was wrong posted. Your Ref:No:";
-                ledgerName[5] = postingObj.VoucherNo;
-                ledgerName[6] = " has been deleted,";
-                ledgerName[7] = balanceText;
-                ledgerName[8] = " Dada Rice.";
-                sMSEmailService.SendOneToOneSingleSms("01739110321", string.Concat(ledgerName));
+                var isSendSMS = false;
+                if (isSendSMS)
+                {
+                    SMSEmailService sMSEmailService = new SMSEmailService();
+                    string[] ledgerName = new string[] { "Dear ", customer.LedgerName, ",Tk=", null, null, null, null, null, null };
+                    balance = postingObj.Debit;
+                    ledgerName[3] = string.Format("{0:#,#.}", decimal.Round((balance.HasValue ? balance.GetValueOrDefault() : decimal.Zero)), "");
+                    ledgerName[4] = "/- Received was wrong posted. Your Ref:No:";
+                    ledgerName[5] = postingObj.VoucherNo;
+                    ledgerName[6] = " has been deleted,";
+                    ledgerName[7] = balanceText;
+                    ledgerName[8] = " Dada Rice.";
+                    sMSEmailService.SendOneToOneSingleSms("01739110321", string.Concat(ledgerName));
+                }
                 actionResult = base.Json("Sucess", 0);
             }
             catch (Exception exception)
@@ -187,16 +191,20 @@ namespace RexERP_MVC.Controllers
                     balance = due.Balance;
                     balanceText = string.Concat("Balance with Dada Rice Tk=", string.Format("{0:#,#.}", minusOne * decimal.Round((balance.HasValue ? balance.GetValueOrDefault() : decimal.Zero)), ""), "=");
                 }
-                SMSEmailService sMSEmailService = new SMSEmailService();
-                string[] ledgerName = new string[] { "Dear ", customer.LedgerName, ",Tk=", null, null, null, null, null, null };
-                balance = postingObj.Credit;
-                ledgerName[3] = string.Format("{0:#,#.}", decimal.Round((balance.HasValue ? balance.GetValueOrDefault() : decimal.Zero)), "");
-                ledgerName[4] = " payment was wrong posted. Your Ref No:";
-                ledgerName[5] = postingObj.VoucherNo;
-                ledgerName[6] = " has been deleted,";
-                ledgerName[7] = balanceText;
-                ledgerName[8] = " Dada Rice.";
-                sMSEmailService.SendOneToOneSingleSms("01739110321", string.Concat(ledgerName));
+                var isSendSMS = false;
+                if (isSendSMS)
+                {
+                    SMSEmailService sMSEmailService = new SMSEmailService();
+                    string[] ledgerName = new string[] { "Dear ", customer.LedgerName, ",Tk=", null, null, null, null, null, null };
+                    balance = postingObj.Credit;
+                    ledgerName[3] = string.Format("{0:#,#.}", decimal.Round((balance.HasValue ? balance.GetValueOrDefault() : decimal.Zero)), "");
+                    ledgerName[4] = " payment was wrong posted. Your Ref No:";
+                    ledgerName[5] = postingObj.VoucherNo;
+                    ledgerName[6] = " has been deleted,";
+                    ledgerName[7] = balanceText;
+                    ledgerName[8] = " Dada Rice.";
+                    sMSEmailService.SendOneToOneSingleSms("01739110321", string.Concat(ledgerName));
+                }
                 actionResult = base.Json("Sucess", 0);
             }
             catch (Exception exception)

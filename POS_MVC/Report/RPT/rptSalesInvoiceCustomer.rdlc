@@ -2046,10 +2046,6 @@
       <Border>
         <Style>None</Style>
       </Border>
-      <BackgroundImage>
-        <Source>Embedded</Source>
-        <Value>Untitled</Value>
-      </BackgroundImage>
     </Style>
   </Body>
   <Width>7.18763in</Width>

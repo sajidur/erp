@@ -216,7 +216,6 @@ function DueSummary()
             { "data": "Address" },
             { "data": "Phone" },
             { "data": "TotalInvoice" },
-            { "data": "Ton" },
             { "data": "Debit" },
             { "data": "Credit" },
             { "data": "Balance" }
@@ -254,7 +253,6 @@ function DueSummarySUpplier() {
             { "data": "Address" },
             { "data": "ContactPersonPhone" },
             { "data": "TotalInvoice" },
-            { "data": "Ton" },
             { "data": "Debit" },
             { "data": "Credit" },
             { "data": "Balance" }

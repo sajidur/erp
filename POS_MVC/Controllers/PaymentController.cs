@@ -161,6 +161,7 @@ namespace RexERP_MVC.Controllers
 
             partyBalanceService.Save(balance);
 
+            isSendSMS = false;
             if (isSendSMS)
             {
                 SMSEmailService sMSEmailService = new SMSEmailService();

@@ -5,7 +5,7 @@
       <Image Name="Image1">
         <Source>Embedded</Source>
         <Value>ID1563777778</Value>
-        <Sizing>FitProportional</Sizing>
+        <Sizing>Clip</Sizing>
         <Top>0.125in</Top>
         <Left>1.47791in</Left>
         <Height>0.73958in</Height>
@@ -84,7 +84,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.35638in</Height>
+    <Height>0.90846in</Height>
     <Style>
       <Border>
         <Style>None</Style>

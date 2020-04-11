@@ -170,3 +170,28 @@ Date :06/09/2019 2:21:59 PM
 
 -----------------------------------------------------------------------------
 
+Message :An error occurred while updating the entries. See the inner exception for details.<br/>
+StackTrace :   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RexERP_MVC.BAL.DbContextRepository`1.SaveChanges(Boolean validateEntities) in E:\My Work\Rex ERP\erp\POS_MVC\BAL\DbContextRepository.cs:line 76
+   at RexERP_MVC.BAL.GenericRepository`1.SaveChanges() in E:\My Work\Rex ERP\erp\POS_MVC\BAL\GenericRepository.cs:line 32
+   at RexERP_MVC.BAL.DBService`1.Save(T cat) in E:\My Work\Rex ERP\erp\POS_MVC\BAL\DBService.cs:line 53
+   at RexERP_MVC.BAL.SalesService.SaveTempSalesMaster(TempSalesMaster salesMaster) in E:\My Work\Rex ERP\erp\POS_MVC\BAL\SalesService.cs:line 226
+   at RexERP_MVC.Controllers.SalesController.SaveSales(List`1 salesMasters, Decimal Discount, List`1 salesDetail, List`1 salesOrders, List`1 lstDeliveryQunatities, Boolean isSendSMS, String DriverName, Decimal RentAmount) in E:\My Work\Rex ERP\erp\POS_MVC\Controllers\SalesController.cs:line 609
+Date :04/11/2020 10:52:00 AM
+
+-----------------------------------------------------------------------------
+
+Message :Object reference not set to an instance of an object.<br/>
+StackTrace :   at RexERP_MVC.Controllers.SalesController.SaveSales(List`1 salesMasters, Decimal Discount, List`1 salesDetail, List`1 salesOrders, List`1 lstDeliveryQunatities, Boolean isSendSMS, String DriverName, Decimal RentAmount) in E:\My Work\Rex ERP\erp\POS_MVC\Controllers\SalesController.cs:line 591
+Date :04/11/2020 11:19:53 AM
+
+-----------------------------------------------------------------------------
+
+Message :Object reference not set to an instance of an object.<br/>
+StackTrace :   at RexERP_MVC.Controllers.SalesController.SaveSales(List`1 salesMasters, Decimal Discount, List`1 salesDetail, List`1 salesOrders, List`1 lstDeliveryQunatities, Boolean isSendSMS, String DriverName, Decimal RentAmount) in E:\My Work\Rex ERP\erp\POS_MVC\Controllers\SalesController.cs:line 591
+Date :04/11/2020 11:22:54 AM
+
+-----------------------------------------------------------------------------
+

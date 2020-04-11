@@ -11,34 +11,29 @@
                         <form class="form-horizontal" style="height:75px">
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label">
-                                        Invoice No:
-                                    </label>
+                                    <label class="col-md-1 control-label"> Invoice No:</label>
                                     <div class="col-md-2">
                                         <input type="text" value="001" readonly id="txtPoNo" name="txtPoNo" class="form-control" style="width:200px; height:35px" />
                                     </div>
-                                    <div class="col-md-2">
-                                        <label class="col-md-2 col-md-offset-4 control-label">
-                                            Customer:
-                                        </label>
+                                    <div class="col-md-1">
+                                        <label class="col-md-1 col-md-offset-4 control-label">Customer:</label>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <select class="form-control" id="ddlCustomer" name="ddlCustomer" onchange="LoadSalesOrderList()" style="width:200px; height:35px"></select>
+                                    </div>
+                                    <label class="col-md-1 control-label">
+                                        Notes:
+                                    </label>
+                                    <div class="col-md-2">
+                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" style="width:200px; height:35px" placeholder="Notes" />
                                     </div>
                                     <div class="col-md-3" style="text-align:left;">
                                         <label class="control-label" style="color:red;" id="lblBalance">
 
                                         </label>
                                     </div>
-
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">
-                                        Notes:
-                                    </label>
-                                    <div class="col-md-2">
-                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" style="width:200px; height:35px" placeholder="Notes" />
-                                    </div>
+                                <div class="form-group" style="display:none;">
                                     <div class="col-md-2">
                                         <input type="text" id="txtCoutha" name="txtCoutha" readonly class="form-control" style="width:200px; height:35px" placeholder="Challan No" />
                                     </div>
@@ -59,24 +54,99 @@
                         <div class="ibox-content" id="divInfo">
                             <div class="form-group">
                                 <h4>Added Sales Items</h4>
-                                <div class="col-md-12 table-responsive" id="div-sales-add">
+                                <div class="col-md-12 table-responsive" id="div-sales-add" style="width:70%;float:left;">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-8" id="div-salesOrderGridGroup">
-
-                                </div>
+                               
+                                @*<div class="col-md-4">
+                                   
+                                </div>*@
+                                @*<label class="col-md-2 control-label">
+                                    Discount:
+                                </label>
                                 <div class="col-md-4">
-                                    Total Amount:<label id="lblTotalAmountA">0.0</label>
+                                    <input type="number" id="txtDiscount" name="txtDiscount" value="0" class="form-control" style="width:200px; height:35px" />
                                 </div>
+                                <label class="col-md-2 control-label">
+                                    Discount Notes:
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" id="txtDiscountNotes" name="txtDiscountNotes" class="form-control" style="width:200px; height:35px" />
+                                </div>*@
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-12 table-responsive" id="div-inventoryGroup">
-                                </div>
-                            </div>
+                          
+                            <div style="width: 26%; float: right;">
+                                <div class="form-group  form-horizontal">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-6 control-label">
+                                                Total Qty:
+                                            </label>
+                                            <div class="col-md-8 col-sm-6">
+                                                <input type="text" id="txtTotalQty" value="0" readonly="readonly" class="form-control" style="height:32px;" />
+                                            </div>
+                                        </div>
 
-                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-6 control-label">
+                                                Total Amt:
+                                            </label>
+                                                <div class="col-md-8 col-sm-6">
+                                                    <input type="text" id="txtTotalAmt" value="0" readonly="readonly" class="form-control" style="height:32px;" />
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-6 control-label">
+                                                Discount:
+                                            </label>
+                                            <div class="col-md-8 col-sm-6">
+                                                <input type="text" id="txtDiscount" value="0" class="form-control" style="height:32px;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-6 control-label">
+                                                Net Total:
+                                            </label>
+                                                <div class="col-md-8 col-sm-6">
+                                                    <input type="text" id="txtNetTotalAmt" value="0" readonly="readonly" class="form-control" style="height:32px;" />
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-6 control-label">
+                                                Discount Note:
+                                            </label>
+                                            <div class="col-md-8 col-sm-6">
+                                                <input type="text" id="txtDiscountNote" value="" class="form-control" style="height:32px;" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                                @*<div style=" width:20%; float:right;">
+
+                        Total Amount: <label id="lblTotalAmountA">0.0</label><br />
+                        Grand Total: <label id="lblGTotal">0.0</label><br />
+                        Discount:<input type="number" id="txtDiscount" name="txtDiscount" value="0" class="form-control" style="width:50px;height:25px;"/>
+
+            </div>*@
+
+
+                                <div class="form-group">
+                                    <div class="col-md-8" id="div-salesOrderGridGroup">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12 table-responsive" id="div-inventoryGroup">
+                                    </div>
+                                </div>
+
+                            </div>
                     </div>
+
                     <div class="col-lg-4 col-lg-offset-1">
                         <form class="bs-component">
                             <script id="templateInventoryGroupModal" type="text/html">
@@ -119,8 +189,9 @@
                             </script>
                         </form>
                     </div>
+
                     <div class="form-actions">
-                        <div class="col-md-10">
+                        @*<div class="col-md-10">
                             <div class="form-group">
                                 <label class="col-md-2 control-label">
                                     Discount:
@@ -135,7 +206,7 @@
                                     <input type="text" id="txtDiscountNotes" name="txtDiscountNotes" class="form-control" style="width:200px; height:35px" />
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                         <div class="ibox-content" id="divInfo">
                             <div class="form-group">
                                 <div class="col-md-8" id="div-salesOrderGridGroup">
@@ -182,120 +253,127 @@
     </div>
 </div>
 
-<div class="col-lg-8 col-lg-offset-1">
-    <form class="bs-component">
-        <script id="templateSalesOrderGroupModal" type="text/html">
-            <table class="table table-bordered table-striped table-hover" id="salesOrderGroupTableModal">
-                <thead>
-                <th>Id</th>
-                <th>OrderNo</th>
-                <th>Item</th>
-                <th>Available Qty</th>
-                <th>Rate</th>
-                <th>Sales Qty</th>
-                <th>Sales Rate</th>
-                <th></th>
-                <th>Godown</th>
-                <th>Add</th>
-                <th style="display:none">ProductId</th>
-                </thead>
-                <tbody>
-                    {{#SalesOrderGroupSearch}}
-                    <tr>
-                        <td>{{Id}}</td>
-                        <td> {{SalesOrderId}}</td>
-                        <td> {{Product.ProductName}}</td>
-                        <td> {{BaleQty}}</td>
-                        <td> {{Rate}}</td>
-                        <td>
-                            <input type="text" name="txtRateOrder" value="{{BaleQty}}" id="txtRateOrder" class="datatable-textbox-style" />
-                        </td>
-                        <td>
-                            <input type="text" name="txtDeliveryQty" value="{{Rate}}" id="txtDeliveryQty" class="datatable-textbox-style" />
-                        </td>
-                        <td>
-                            <input type="checkbox" class="checkbox" id="chkOrderComplete" value="true" />
-                        </td>
-                        <td>
-                            <select class="form-control" id="ddlWareHouse" name="ddlWareHouse">
-                                <option value="0">Select</option>
-                                <option value="1">Godown-1</option>
-                                <option value="3">Godown-2</option>
-                            </select>
-                        </td>
-                        <td>
-                            <a class="datatable-submit-button" id="btnAddOrder" onclick="LoadForAddOrder('{{Id}}')">Add</a>
-                        </td>
+    <div class="col-lg-8 col-lg-offset-1">
+        <form class="bs-component">
+            <script id="templateSalesOrderGroupModal" type="text/html">
+                <table class="table table-bordered table-striped table-hover" id="salesOrderGroupTableModal">
+                    <thead>
+                    <th>Id</th>
+                    <th>OrderNo</th>
+                    <th>Item</th>
+                    <th>Available Qty</th>
+                    <th>Rate</th>
+                    <th>Sales Qty</th>
+                    <th>Sales Rate</th>
+                    <th></th>
+                    <th>Godown</th>
+                    <th>Add</th>
+                    <th style="display:none">ProductId</th>
+                    </thead>
+                    <tbody>
+                        {{#SalesOrderGroupSearch}}
+                        <tr>
+                            <td>{{Id}}</td>
+                            <td> {{SalesOrderId}}</td>
+                            <td> {{Product.ProductName}}</td>
+                            <td> {{BaleQty}}</td>
+                            <td> {{Rate}}</td>
+                            <td>
+                                <input type="text" name="txtRateOrder" value="{{BaleQty}}" id="txtRateOrder" class="datatable-textbox-style" />
+                            </td>
+                            <td>
+                                <input type="text" name="txtDeliveryQty" value="{{Rate}}" id="txtDeliveryQty" class="datatable-textbox-style" />
+                            </td>
+                            <td>
+                                <input type="checkbox" class="checkbox" id="chkOrderComplete" value="true" />
+                            </td>
+                            <td>
+                                <select class="form-control" id="ddlWareHouse" name="ddlWareHouse">
+                                    <option value="0">Select</option>
+                                    <option value="1">Godown-1</option>
+                                    <option value="3">Godown-2</option>
+                                </select>
+                            </td>
+                            <td>
+                                <a class="datatable-submit-button" id="btnAddOrder" onclick="LoadForAddOrder('{{Id}}')">Add</a>
+                            </td>
 
-                        <td style="display:none;"> {{ProductId}}</td>
-                    </tr>
+                            <td style="display:none;"> {{ProductId}}</td>
+                        </tr>
 
-                    {{/SalesOrderGroupSearch}}
-                </tbody>
-            </table>
-        </script>
-    </form>
-</div>
+                        {{/SalesOrderGroupSearch}}
+                    </tbody>
+                </table>
+            </script>
+        </form>
+    </div>
 
-<script id="templateSalesGroupModalGrid" type="text/html">
-    <table class="table table-bordered table-striped table-hover" id="salesGroupTableModalGrid">
-        <thead>
-        <th>SI.NO </th>
-        <th>Id</th>
-        <th>Item</th>
-        <th>Qty</th>
-        <th>Rate</th>
-        <th>Total Amount</th>
-        <th>Order Id</th>
-        <th>Action</th>
-        <th></th>
-        </thead>
-        <tbody>
-            {{#SalesGroupSearchGrid}}
-            <tr>
-                <td>{{countCount}}</td>
-                <td>{{ProductId}}</td>
-                <td>{{ProductName}}</td>
-                <td>{{BaleQty}}</td>
-                <td>{{Rate}}</td>
-                <td>{{Amount}}</td>
-                <td>{{SalesOrderId}}</td>
-                <td class="action-sm">
-                    <a class="btn btn-danger" onclick="OnDeleteSalesOrder('{{countCount}}')"><i class="fa fa-trash-o"></i></a>
-                </td>
-                <td style="display:none;">{{WarehouseId}}</td>
-            </tr>
-            {{/SalesGroupSearchGrid}}
-        </tbody>
-    </table>
-</script>
 
-<script>
-    function calculateRow(row) {
-        var price = +row.find('input[name^="price"]').val();
-    }
 
-    function calculateGrandTotal() {
-        var grandTotal = 0;
-        $("table.order-list").find('input[name^="price"]').each(function () {
-            grandTotal += +$(this).val();
+    <script id="templateSalesGroupModalGrid" type="text/html">
+        <table class="table table-bordered table-striped table-hover" id="salesGroupTableModalGrid">
+            <thead>
+            <th>SI.NO </th>
+            <th>Id</th>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Rate</th>
+            <th>Total Amount</th>
+            <th>Order Id</th>
+            <th>Action</th>
+            <th></th>
+            </thead>
+            <tbody>
+                {{#SalesGroupSearchGrid}}
+                <tr>
+                    <td>{{countCount}}</td>
+                    <td>{{ProductId}}</td>
+                    <td>{{ProductName}}</td>
+                    <td>{{BaleQty}}</td>
+                    <td>{{Rate}}</td>
+                    <td>{{Amount}}</td>
+                    <td>{{SalesOrderId}}</td>
+                    <td class="action-sm">
+                        <a class="btn btn-danger" onclick="OnDeleteSalesOrder('{{countCount}}')"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                    <td style="display:none;">{{WarehouseId}}</td>
+                </tr>
+                {{/SalesGroupSearchGrid}}
+            </tbody>
+        </table>
+    </script>
+
+    <script>
+        function calculateRow(row) {
+            var price = +row.find('input[name^="price"]').val();
+        }
+
+        function calculateGrandTotal() {
+            var grandTotal = 0;
+            $("table.order-list").find('input[name^="price"]').each(function () {
+                grandTotal += +$(this).val();
+            });
+            $("#grandtotal").text(grandTotal.toFixed(2));
+        }
+    </script>
+    <script src="~/Scripts/app/CommonLoader.js"></script>
+    <script src="~/Scripts/app/Sales.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#txtTotalAmt').val('0');
+            $('#txtDiscount').val('0');
+            $('#txtNetTotalAmt').val('0');
+            $('#txtDiscountNote').val('');
+            $('#txtTotalQty').val('0')
+            var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            $('#txtDate').val(today);
+
+            LoadInvoiceNo("txtPoNo");
+            LoadInventoryList();
+            LoadCustomerCombo("ddlCustomer");
+            Expression();
         });
-        $("#grandtotal").text(grandTotal.toFixed(2));
-    }
-</script>
-<script src="~/Scripts/app/CommonLoader.js"></script>
-<script src="~/Scripts/app/Sales.js"></script>
-<script>
-    $(document).ready(function () {
-        var now = new Date();
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2);
-        var today = now.getFullYear() + "-" + (month) + "-" + (day);
-        $('#txtDate').val(today);
-
-        LoadInvoiceNo("txtPoNo");
-        LoadInventoryList();
-        LoadCustomerCombo("ddlCustomer");
-        Expression();
-    });
-</script>
+    </script>

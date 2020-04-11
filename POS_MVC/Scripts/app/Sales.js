@@ -210,23 +210,27 @@ function LoadForAddOrder(parameters) {
     }
 
     function Calculation() {
-
+        debugger;
         var totalAmount = 0;
+        var TotalQty = 0;
         for (var i = 0; i < detailsSales.length; i++) {
             totalAmount += detailsSales[i].Amount;
+            TotalQty += detailsSales[i].BaleQty;
         }
-
-        $("#lblTotalAmountA").html(totalAmount);
+        
+        $("#txtTotalQty").val(TotalQty);
+        $("#txtTotalAmt").val(totalAmount);
         GrandTotal();
     }
 
     function GrandTotal() {
+       
         var discount = $("#txtDiscount").val();
-        var totalAmount = parseFloat($("#lblTotalAmountA").text());
+        var totalAmount = parseFloat($("#txtTotalAmt").val());
         if (discount != 0) {
             var GTotal = totalAmount - discount;
-            $("#lblGTotal").html(GTotal.toFixed(2));
-        } else { $("#lblGTotal").html(totalAmount); }
+            $("#txtNetTotalAmt").val(GTotal.toFixed(2));
+        } else { $("#txtNetTotalAmt").val(totalAmount); }
     }
 
     function Expression() { 

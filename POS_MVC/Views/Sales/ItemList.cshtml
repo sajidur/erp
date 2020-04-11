@@ -1,0 +1,54 @@
+﻿
+<div class="row">
+    <label>ItemList</label>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-4 col-lg-offset-1">
+                        <form class="bs-component">
+                            <script id="templateInventoryGroupModal" type="text/html">
+                                <table class="table table-bordered table-striped table-hover" id="inventoryGroupTableModal">
+                                    <thead>
+                                    <th>Id</th>
+                                    <th>Item/Product</th>
+                                    <th>Size</th>
+                                    <th>Brand</th>
+                                    <th>Godown</th>
+                                    <th>Available Qty</th>
+                                    <th>Sale Qty</th>
+                                    <th>Rate</th>
+                                    <th>Action</th>
+                                    <th></th>
+                                    </thead>
+                                    <tbody>
+                                        {{#InventoryGroupSearch}}
+                                        <tr>
+                                            <td>{{Id}}</td>
+                                            <td> {{Product.ProductName}}</td>
+                                            <td>{{Size.Name}}</td>
+                                            <td>{{Brand.BrandName}}</td>
+                                            <td>{{WareHouse.WareHouseName}}</td>
+                                            <td> {{BalanceQty}}</td>
+                                            <td width="10px">
+                                                <input type="text" name="txtSalesQty" id="txtSalesQty" class="datatable-textbox-style" />
+                                            </td>
+                                            <td width="10px">
+                                                <input type="text" name="txtRate" id="txtRate" class="datatable-textbox-style" />
+                                            </td>
+                                            <td class="action-sm">
+                                                <a class="datatable-submit-button" id="btnAdd" onclick="LoadForAdd('{{Id}}')"><i class="fa fa-edit"></i>Add</a>
+                                            </td>
+                                            <td style="display:none;">{{WarehouseId}}</td>
+                                        </tr>
+                                        {{/InventoryGroupSearch}}
+                                    </tbody>
+                                </table>
+                            </script>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

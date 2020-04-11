@@ -591,6 +591,7 @@
     </Compile>
     <Compile Include="Report\mvcReport.cs">
       <DependentUpon>mvcReport.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
@@ -1221,6 +1222,7 @@
     <Content Include="Views\SizeSetup\Index.cshtml" />
     <Content Include="Views\Brand\Add.cshtml" />
     <Content Include="Views\SizeSetup\Add.cshtml" />
+    <Content Include="Views\Sales\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

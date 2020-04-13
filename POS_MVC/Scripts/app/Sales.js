@@ -235,7 +235,12 @@ function LoadForAddOrder(parameters) {
         return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
     }
 
-    function Save(e) {
+function Save(e) {
+        var CustomerID = $("#ddlCustomer option:selected").val();
+        if (CustomerID == "") {
+            ShowNotification("3", "Please select Customer!!");
+            return;
+        }
         GetDataFromDatatable();
         var IsActive;
         if (detailsSales.length <= 0) {
@@ -246,7 +251,6 @@ function LoadForAddOrder(parameters) {
         {
             $("#btnSave").prop("disabled", true);
         }
-
         var totalCredit =Math.abs(balance - parseFloat($("#lblGTotal").text()));
         var r = true;
         if (creditLimit != 0 && totalCredit > creditLimit) {
@@ -287,10 +291,6 @@ function LoadForAddOrder(parameters) {
 
 function GetDataFromDatatable() {
     var CustomerID = $("#ddlCustomer option:selected").val();
-    if (CustomerID<0) {
-        ShowNotification("3", "Please select Customer!!");
-        return;
-    }
         detailsSalesForPost = [];
         $('#salesGroupTableModalGrid tr').each(function (i) {
             if (i > 0) {

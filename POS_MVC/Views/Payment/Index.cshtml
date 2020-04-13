@@ -51,8 +51,8 @@
                                 <tr>
                                     <td>Cash/Bank</td>
                                     <td>Bank</td>
-                                    <td style="display:none;">Cheque/TT No</td>
-                                    <td style="display:none;">Cheque Date</td>
+                                    <td>Cheque/TT No</td>
+                                    <td>Cheque Date</td>
                                     <td>Amount</td>
                                 </tr>
                             </thead>
@@ -70,9 +70,9 @@
                                             <option value="0">Select</option>
                                         </select>
                                     </td>
-                                    <td class="col-sm-1" style="display:none;">
+                                    <td class="col-sm-1">
                                         <input type="text" id="chkNo" class="form-control" />
-                                    <td class="col-sm-2" style="display:none;">
+                                    <td class="col-sm-2">
                                         <input type="date" id="chkDate" name="chkDate" class="form-control" style="height:40px"/>
                                     </td>
                                     <td class="col-sm-1">
@@ -167,6 +167,7 @@
         var ldgerName = $("#ddlItem option:selected").text();
         var LedgerId = $("#ddlItem option:selected").val();
         var chkNo = $("#chkNo").val();
+        var chkDate = $("#chkDate").val();
         var PostingDate = $("#chkDate").val();
         var amount = $("#txtAmount").val();
         if (amount == "0") {
@@ -178,7 +179,7 @@
             return;
         }
         //var object = {Id:Id, Item: item, BaleQty: BaleQty, QtyPerBale: QtyPerBale, UnitStyle: UnitStyle, Amount: Amount, TotalKg: TotalKg, TotalQty: TotalQty, TotalAmount: TotalAmount };
-        var object = {count:count, LedgerId: LedgerId, ldgerName: ldgerName, chkNo: chkNo, PostingDate: PostingDate, Debit: amount };
+        var object = { count: count, LedgerId: LedgerId, ldgerName: ldgerName, chkNo: chkNo, ChequeDate: chkDate, PostingDate: PostingDate, Debit: amount };
         details.push(object);
         var templateWithData = Mustache.to_html($("#templateProductModal").html(), { ProductSearch: details });
         $("#div-product").empty().html(templateWithData);

@@ -18,6 +18,7 @@ namespace RexERP_MVC.Models
         public Inventory()
         {
             this.SalesOrders = new HashSet<SalesOrder>();
+            this.StockOuts = new HashSet<StockOut>();
         }
     
         public int Id { get; set; }
@@ -50,5 +51,7 @@ namespace RexERP_MVC.Models
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesOrder> SalesOrders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockOut> StockOuts { get; set; }
     }
 }

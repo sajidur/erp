@@ -213,6 +213,7 @@
     <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Brand" FromRole="Brand" ToRole="SalesOrder" />
     <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Brand" FromRole="Brand" ToRole="TempSalesDetail" />
     <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Brand" FromRole="Brand" ToRole="SalesDetail" />
+    <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Brand" FromRole="Brand" ToRole="StockOut" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -995,6 +996,14 @@
     <NavigationProperty Name="Supplier" Relationship="Self.FK_StockOut_Supplier" FromRole="StockOut" ToRole="Supplier" />
     <NavigationProperty Name="WareHouse" Relationship="Self.FK_StockOut_Warehouse" FromRole="StockOut" ToRole="WareHouse" />
     <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_StockOut_Product" FromRole="StockOut" ToRole="Product" />
+    <Property Name="InventoryId" Type="Int32" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="BrandId" Type="Int32" />
+    <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_StockOut_Brand" FromRole="StockOut" ToRole="Brand" />
+    <NavigationProperty Name="Inventory" Relationship="DB_9B34E1_erpModel.FK_StockOut_Inventory" FromRole="StockOut" ToRole="Inventory" />
+    <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_StockOut_Size" FromRole="StockOut" ToRole="Size" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -2274,6 +2283,18 @@
       <End Role="Size" EntitySet="Sizes" />
       <End Role="SalesDetail" EntitySet="SalesDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_StockOut_Brand" Association="DB_9B34E1_erpModel.FK_StockOut_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="StockOut" EntitySet="StockOuts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockOut_Inventory" Association="DB_9B34E1_erpModel.FK_StockOut_Inventory">
+      <End Role="Inventory" EntitySet="Inventories" />
+      <End Role="StockOut" EntitySet="StockOuts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockOut_Size" Association="DB_9B34E1_erpModel.FK_StockOut_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="StockOut" EntitySet="StockOuts" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2557,6 +2578,7 @@
     <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Size" FromRole="Size" ToRole="SalesOrder" />
     <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Size" FromRole="Size" ToRole="TempSalesDetail" />
     <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Size" FromRole="Size" ToRole="SalesDetail" />
+    <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Size" FromRole="Size" ToRole="StockOut" />
   </EntityType>
   <Association Name="FK_ReceiveDetails_Brand">
     <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -2614,6 +2636,7 @@
     <NavigationProperty Name="WareHouse" Relationship="DB_9B34E1_erpModel.FK_Inventory_WareHouse" FromRole="Inventory" ToRole="WareHouse" />
     <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_Inventory_Product" FromRole="Inventory" ToRole="Product" />
     <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Inventory" FromRole="Inventory" ToRole="SalesOrder" />
+    <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Inventory" FromRole="Inventory" ToRole="StockOut" />
   </EntityType>
   <Association Name="FK_Inventory_Brand">
     <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -2688,6 +2711,8 @@
     <NavigationProperty Name="Supplier" Relationship="DB_9B34E1_erpModel.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
     <NavigationProperty Name="WareHouse" Relationship="DB_9B34E1_erpModel.FK_StockIn_Warehouse" FromRole="StockIn" ToRole="WareHouse" />
     <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_StockIn_Product" FromRole="StockIn" ToRole="Product" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_StockIn_Brand">
     <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -3090,6 +3115,42 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SalesDetail">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockOut_Brand">
+    <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.StockOut" Role="StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockOut_Inventory">
+    <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.StockOut" Role="StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
+        <PropertyRef Name="InventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockOut_Size">
+    <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.StockOut" Role="StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
         <PropertyRef Name="SizeId" />
       </Dependent>
     </ReferentialConstraint>

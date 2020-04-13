@@ -335,6 +335,14 @@
     <script src="~/Scripts/app/CommonLoader.js"></script>
     <script src="~/Scripts/app/Sales.js"></script>
     <script>
+//        extend: all the CSS files and inline styles
+//style: only inline styles
+//link: only CSS links
+//        $('.card').click(function(){
+//  $('.card').printElement({
+//  css: 'extend'
+//});
+//})
         $(document).ready(function () {
             $('#txtTotalAmt').val('0');
             $('#txtDiscount').val('0');
@@ -352,4 +360,8 @@
             LoadCustomerCombo("ddlCustomer");
             Expression();
         });
+        $('.element').printElement({
+  css: 'extend'
+});
+
     </script>

@@ -30,9 +30,17 @@ namespace RexERP_MVC.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
         public Nullable<bool> AlreadyProcessed { get; set; }
+        public Nullable<int> InventoryId { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
+        public string SizeName { get; set; }
+        public string BrandName { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         public virtual WareHouse WareHouse { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual Inventory Inventory { get; set; }
+        public virtual Size Size { get; set; }
     }
 }

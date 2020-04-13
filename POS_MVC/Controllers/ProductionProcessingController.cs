@@ -15,12 +15,14 @@ namespace RexERP_MVC.Controllers
     public class ProductionProcessingController : Controller
     {
         // GET: ProductionProcessing
-        StockOutService service = new StockOutService();
+        private StockOutService service = new StockOutService();
         private InventoryService inventoryService = new InventoryService();
         private ProductService productService = new ProductService();
-        StockOutService stockOutService = new StockOutService();
-        StockInService serviceStockIn = new StockInService();
-        WareHouseService serviceWareHouseService = new WareHouseService();
+        private StockOutService stockOutService = new StockOutService();
+        private StockInService serviceStockIn = new StockInService();
+        private WareHouseService serviceWareHouseService = new WareHouseService();
+        private BrandService _brandService = new BrandService();
+        private SizeService _sizeService = new SizeService();
 
         public ActionResult Index()
         {
@@ -72,13 +74,34 @@ namespace RexERP_MVC.Controllers
         public ActionResult SaveStockIn(string InvoiceNo, string Notes, List<StockIn> stockIns)
         {
             StockIn result = new StockIn();
+            var brands =_brandService.GetAll();
+            var sizes =_sizeService.GetAll();
             //if (ModelState.IsValid)
             {
                 foreach (var item in stockIns)
                 {
+                    var brand = brands.Where(a => a.Id == item.BrandId).FirstOrDefault();
+                    var size = sizes.Where(a => a.Id == item.SizeId).FirstOrDefault();
                     item.Notes = Notes;
                     item.InvoiceNo = InvoiceNo;
+                    item.BrandName = brand.BrandName;
+                    item.SizeName = size.Name;
+                    item.CreatedDate = DateTime.Now;
+                    item.CreatedBy = CurrentSession.GetCurrentSession().UserName;
+                    if (!item.ProductionDate.HasValue)
+                    {
+                        item.ProductionDate = DateTime.Now;
+                    }
                     serviceStockIn.Save(item);
+                }
+                //stocOut Invoice Update
+                var stockOuts = stockOutService.GetStockChallan(InvoiceNo);
+                foreach (var item in stockOuts)
+                {
+                    item.AlreadyProcessed = true;
+                    item.UpdatedDate = DateTime.Now;
+                    item.UpdatedBy = CurrentSession.GetCurrentSession().UserName;
+                    stockOutService.Update(item, item.Id);
                 }
             }
 

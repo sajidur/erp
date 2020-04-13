@@ -270,7 +270,7 @@ function LoadForAddOrder(parameters) {
 
                 },
                 success: function (data) {
-                    ShowNotification("1", "Sales Saved!!");
+                    ShowNotification("1", data);
                     var templateWithData = Mustache.to_html($("#templateSalesGroupModalGrid").html(), { SalesGroupSearchGrid: detailsSales });
                     $("#div-sales-add").empty().html(templateWithData);
                     // window.location.href = ;
@@ -285,12 +285,16 @@ function LoadForAddOrder(parameters) {
     }
 
 
-    function GetDataFromDatatable() {
+function GetDataFromDatatable() {
+    var CustomerID = $("#ddlCustomer option:selected").val();
+    if (CustomerID<0) {
+        ShowNotification("3", "Please select Customer!!");
+        return;
+    }
         detailsSalesForPost = [];
         $('#salesGroupTableModalGrid tr').each(function (i) {
             if (i > 0) {
                 var SalesInvoice = $("#txtPoNo").val();
-                var CustomerID = $("#ddlCustomer option:selected").val();
                 var Notes = $("#txtDescriptions").val();
                 var Coutha = $("#txtCoutha").val();
                 var ProductId = $(this).find('td').eq(1).text();

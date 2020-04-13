@@ -37,6 +37,10 @@ namespace RexERP_MVC.Report.Viewer
                     {
                         LoadInvoiceReport();
                     }
+                    if (reportType == "StockInForProcessing")
+                    {
+                        StockInForProcessing();
+                    }
                     if (reportType == "StockOutForProcessing")
                     {
                         StockOutForProcessing();
@@ -66,13 +70,63 @@ namespace RexERP_MVC.Report.Viewer
                     {
                         LedgerReport();
                     }
+                    if (reportType == "ReceiveVoucher")
+                    {
+                        ReceiveVoucher();
+                    }
+                    if (reportType == "PaymentVoucher")
+                    {
+                        PaymentVoucher();
+                    }
                 }
                 catch (Exception ex)
                 {
                     lblMsg.Text = ex.Message;
                 }
             }
-        }    
+        }
+
+        private void ReceiveVoucher()
+        {
+            string invoiceId = Request.QueryString["invoiceId"].ToString();
+            string query = @"exec ReceiveVoucher '" + invoiceId + "'";
+            oResult = oDAL.Select(query);
+            DataTable dt = null;
+            dt = oResult.Data as DataTable;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptReceiveVoucher.rdlc");
+            ReportDataSource datasource = new ReportDataSource("dsReceiveVoucher", dt);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
+        }
+
+        private void PaymentVoucher()
+        {
+            string invoiceId = Request.QueryString["invoiceId"].ToString();
+            string query = @"exec PaymentVoucher '" + invoiceId + "'";
+            oResult = oDAL.Select(query);
+            DataTable dt = null;
+            dt = oResult.Data as DataTable;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptPaymentVoucher.rdlc");
+            ReportDataSource datasource = new ReportDataSource("dsPaymentVoucher", dt);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
+        }
+
+        private void StockInForProcessing()
+        {
+            string invoiceId = Request.QueryString["invoiceId"].ToString();
+            string query = @"exec StockInInvoice '" + invoiceId + "'";
+            oResult = oDAL.Select(query);
+            DataTable dt = null;
+            dt = oResult.Data as DataTable;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptStockInProcessing.rdlc");
+            ReportDataSource datasource = new ReportDataSource("dsProductProcessingInInvoice", dt);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
+        }
 
         private void LoadInvoiceReport()
         {

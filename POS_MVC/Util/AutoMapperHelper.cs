@@ -39,6 +39,9 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<TempSalesMaster, TempSalesMasterResponse>().ReverseMap();
                 cfg.CreateMap<TempSalesDetail, TempSalesDetailsResponse>().ReverseMap();
                 cfg.CreateMap<CompanyResponse, Company>().ReverseMap();
+                cfg.CreateMap<UserRoleResponse, UserRole>().ReverseMap();
+                cfg.CreateMap<Screen, MenuResponse>().ReverseMap();
+
 
                 cfg.CreateMap<Size, SizeResponse>().ReverseMap();
                 });

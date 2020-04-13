@@ -228,8 +228,8 @@
                 details = [];
                 var templateWithData = Mustache.to_html($("#templateProductModal").html(), { ProductSearch: details });
                 $("#div-product").empty().html(templateWithData);
-                LoadInvoiceNo("txtPoNo");
-                location.reload();
+                window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=PaymentVoucher&invoiceId=" + $("#txtPoNo").val();
+
             },
             error: function () {
             }

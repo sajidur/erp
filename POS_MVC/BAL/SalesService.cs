@@ -237,7 +237,7 @@ namespace RexERP_MVC.BAL
             {
                 foreach (SalesDetail salesDetail in salesMaster.SalesDetails)
                 {
-                    List<Inventory> existingItem = this.inventory.GetAll((Inventory a) => a.ProductId == salesDetail.ProductId && a.IsActive && a.WarehouseId == salesDetail.WarehouseId).ToList<Inventory>();
+                    List<Inventory> existingItem = this.inventory.GetAll((Inventory a) => a.ProductId == salesDetail.ProductId && a.IsActive && a.WarehouseId == salesDetail.WarehouseId && a.SizeId==salesDetail.SizeId&&a.BrandId==salesDetail.BrandId).ToList<Inventory>();
                     if (existingItem.Count > 0)
                     {
                         foreach (Inventory inv in existingItem)
@@ -292,7 +292,7 @@ namespace RexERP_MVC.BAL
                 balance.Debit = new decimal?(salesMaster.GrandTotal);
                 num = new decimal();
                 balance.Credit = new decimal?(num);
-                balance.VoucherTypeId = 19;
+                balance.VoucherTypeId =(int) VoucherType.SalesInvoice;
                 balance.extra1 = string.Concat("Sales Invoice: ", salesMaster.SalesInvoice, " Challan:", salesMaster.Coutha);
                 balance.extra2 = result.Id.ToString();
                 this.partyBalanceService.Save(balance);

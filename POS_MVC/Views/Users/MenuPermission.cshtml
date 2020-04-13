@@ -1,1 +1,207 @@
 ﻿
+@{
+    ViewBag.Title = "Menu Permission";
+}
+
+<style type="text/css">
+
+    fieldset {
+        margin: 4px;
+        border: 1px solid silver;
+        padding: 4px;
+        border-radius: 2px;
+        border-color: lightgray;
+    }
+
+    legend {
+        padding: 2px;
+        font-size: 14px;
+        font-weight: bolder;
+        color: grey;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="well bs-component">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="hidden" id="hdId" />
+                                    <label class="col-md-2 control-label">
+                                        Role
+                                    </label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="ddlRole" name="ddlRole"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        Menu:
+                                    </label>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="ddlMenu" name="ddlMenu"></select>
+                                    </div>
+                                </div>
+                                <fieldset>
+                                    <div class="form-actions">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="Save()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="ibox-title">
+                                </div>
+                                <br />
+                                <div class="ibox-content" id="divInfo">
+                                    <div class="form-group">
+                                        <div class="col-md-12 table-responsive" id="div-productGroup">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-lg-offset-1">
+                    <form class="bs-component">
+                        <script id="templateProductGroupModal" type="text/html">
+                            <table class="table table-bordered table-striped table-hover" id="productGroupTableModal">
+                                <thead>
+                                <th>ID</th>
+                                <th>Code</th>
+                                <td> CategoryName (পণ্যের ধরণ)</td>
+                                <th>Action</th>
+                                </thead>
+                                <tbody>
+                                    {{#ProductGroupSearch}}
+                                    <tr>
+                                        <td> {{Id}}</td>
+                                        <td> {{Code}}</td>
+                                        <td> {{CategoryName}}</td>
+                                        <td class="action-sm">
+                                            <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
+                                        </td>
+                                    </tr>
+
+                                    {{/ProductGroupSearch}}
+                                </tbody>
+                            </table>
+                        </script>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+     function Save() {
+        var r = true;
+        if (r == true) {
+            var rolewiseScreen = {RoleId:$('#ddlRole').val(),ScreenId:$('#ddlMenu').val()};
+            var url = '/Users/MenuPermission';
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: {
+                    roleWiseScreen: rolewiseScreen
+                },
+                success: function (data) {
+                    ShowNotification("1", data);
+                    setTimeout(location.reload.bind(location), 10000);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+    }
+    $(document).ready(function () {
+    LoadRole();
+    LoadMenu();
+    });
+    function LoadRole() {
+        var r = true;
+        if (r == true) {
+
+            var url = '/Users/Roles';
+           var controlId = "ddlRole";
+
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                         $("#" + controlId).get(0).options[0] = new Option("---- Select -----", "");
+                        if (data != null) {
+                            $.each(data, function (index, item) {
+                                $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.RoleName, item.Id);
+                            });
+                        }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+    }
+    function LoadMenu() {
+        var r = true;
+        if (r == true) {
+
+            var url = '/Users/Screen';
+            var controlId = "ddlMenu";
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                          $("#" + controlId).get(0).options[0] = new Option("---- Select -----", "");
+                            if (data != null) {
+                                $.each(data, function (index, item) {
+                                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.ScreenName, item.ScreenId);
+                                });
+                            }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+    }
+        function LoadExistingData() {
+        var r = true;
+        if (r == true) {
+            var url = '/Users/MenuUsers';
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                      var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { SalesOrderGroupSearch: data });
+                     $("#div-productGroup").empty().html(templateWithData);
+                       MakePagination('productGroupTableModal');
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+    }
+</script>
+
+
+
+
+
+
+
+
+

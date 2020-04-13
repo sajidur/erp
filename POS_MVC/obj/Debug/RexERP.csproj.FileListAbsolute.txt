@@ -185,3 +185,6 @@ D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.cache
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptStockInProcessing.rdlc
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptReceiveVoucher.rdlc
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptPaymentVoucher.rdlc

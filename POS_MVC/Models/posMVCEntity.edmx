@@ -1077,6 +1077,8 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
           <Property Name="ProductionDate" Type="date" />
           <Property Name="BaleQty" Type="decimal" Precision="18" Scale="2" />
           <Property Name="BrandId" Type="int" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
           <Property Name="Notes" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedBy" Type="char" MaxLength="24" />
           <Property Name="CreatedDate" Type="datetime" />
@@ -1104,6 +1106,11 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="AlreadyProcessed" Type="bit" />
+          <Property Name="InventoryId" Type="int" />
+          <Property Name="SizeId" Type="int" />
+          <Property Name="BrandId" Type="int" />
+          <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -2131,6 +2138,30 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StockOut_Brand">
+          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Inventory">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
+          <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="InventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StockOut_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
@@ -2140,6 +2171,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             </Principal>
             <Dependent Role="StockOut">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="SizeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2721,8 +2764,20 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             <End Role="WareHouse" EntitySet="WareHouse" />
             <End Role="StockIn" EntitySet="StockIn" />
           </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Brand" Association="Self.FK_StockOut_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="StockOut" EntitySet="StockOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Inventory" Association="Self.FK_StockOut_Inventory">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="StockOut" EntitySet="StockOut" />
+          </AssociationSet>
           <AssociationSet Name="FK_StockOut_Product" Association="Self.FK_StockOut_Product">
             <End Role="Product" EntitySet="Product" />
+            <End Role="StockOut" EntitySet="StockOut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Size" Association="Self.FK_StockOut_Size">
+            <End Role="Size" EntitySet="Size" />
             <End Role="StockOut" EntitySet="StockOut" />
           </AssociationSet>
           <AssociationSet Name="FK_StockOut_Supplier" Association="Self.FK_StockOut_Supplier">
@@ -2983,6 +3038,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Brand" FromRole="Brand" ToRole="SalesOrder" />
           <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Brand" FromRole="Brand" ToRole="TempSalesDetail" />
           <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Brand" FromRole="Brand" ToRole="SalesDetail" />
+          <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Brand" FromRole="Brand" ToRole="StockOut" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -3765,6 +3821,14 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="Supplier" Relationship="Self.FK_StockOut_Supplier" FromRole="StockOut" ToRole="Supplier" />
           <NavigationProperty Name="WareHouse" Relationship="Self.FK_StockOut_Warehouse" FromRole="StockOut" ToRole="WareHouse" />
           <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_StockOut_Product" FromRole="StockOut" ToRole="Product" />
+          <Property Name="InventoryId" Type="Int32" />
+          <Property Name="SizeId" Type="Int32" />
+          <Property Name="BrandId" Type="Int32" />
+          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Brand" Relationship="DB_9B34E1_erpModel.FK_StockOut_Brand" FromRole="StockOut" ToRole="Brand" />
+          <NavigationProperty Name="Inventory" Relationship="DB_9B34E1_erpModel.FK_StockOut_Inventory" FromRole="StockOut" ToRole="Inventory" />
+          <NavigationProperty Name="Size" Relationship="DB_9B34E1_erpModel.FK_StockOut_Size" FromRole="StockOut" ToRole="Size" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -5044,6 +5108,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
             <End Role="Size" EntitySet="Sizes" />
             <End Role="SalesDetail" EntitySet="SalesDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Brand" Association="DB_9B34E1_erpModel.FK_StockOut_Brand">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="StockOut" EntitySet="StockOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Inventory" Association="DB_9B34E1_erpModel.FK_StockOut_Inventory">
+            <End Role="Inventory" EntitySet="Inventories" />
+            <End Role="StockOut" EntitySet="StockOuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockOut_Size" Association="DB_9B34E1_erpModel.FK_StockOut_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="StockOut" EntitySet="StockOuts" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="CashBook_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5327,6 +5403,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Size" FromRole="Size" ToRole="SalesOrder" />
           <NavigationProperty Name="TempSalesDetails" Relationship="DB_9B34E1_erpModel.FK_TempSalesDetails_Size" FromRole="Size" ToRole="TempSalesDetail" />
           <NavigationProperty Name="SalesDetails" Relationship="DB_9B34E1_erpModel.FK_SalesDetails_Size" FromRole="Size" ToRole="SalesDetail" />
+          <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Size" FromRole="Size" ToRole="StockOut" />
         </EntityType>
         <Association Name="FK_ReceiveDetails_Brand">
           <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -5384,6 +5461,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="WareHouse" Relationship="DB_9B34E1_erpModel.FK_Inventory_WareHouse" FromRole="Inventory" ToRole="WareHouse" />
           <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_Inventory_Product" FromRole="Inventory" ToRole="Product" />
           <NavigationProperty Name="SalesOrders" Relationship="DB_9B34E1_erpModel.FK_SalesOrder_Inventory" FromRole="Inventory" ToRole="SalesOrder" />
+          <NavigationProperty Name="StockOuts" Relationship="DB_9B34E1_erpModel.FK_StockOut_Inventory" FromRole="Inventory" ToRole="StockOut" />
         </EntityType>
         <Association Name="FK_Inventory_Brand">
           <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -5458,6 +5536,8 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <NavigationProperty Name="Supplier" Relationship="DB_9B34E1_erpModel.FK_StockIn_Supplier" FromRole="StockIn" ToRole="Supplier" />
           <NavigationProperty Name="WareHouse" Relationship="DB_9B34E1_erpModel.FK_StockIn_Warehouse" FromRole="StockIn" ToRole="WareHouse" />
           <NavigationProperty Name="Product" Relationship="DB_9B34E1_erpModel.FK_StockIn_Product" FromRole="StockIn" ToRole="Product" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_StockIn_Brand">
           <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
@@ -5860,6 +5940,42 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="SalesDetail">
+              <PropertyRef Name="SizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Brand">
+          <End Type="DB_9B34E1_erpModel.Brand" Role="Brand" Multiplicity="0..1" />
+          <End Type="DB_9B34E1_erpModel.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Inventory">
+          <End Type="DB_9B34E1_erpModel.Inventory" Role="Inventory" Multiplicity="0..1" />
+          <End Type="DB_9B34E1_erpModel.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOut">
+              <PropertyRef Name="InventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockOut_Size">
+          <End Type="DB_9B34E1_erpModel.Size" Role="Size" Multiplicity="0..1" />
+          <End Type="DB_9B34E1_erpModel.StockOut" Role="StockOut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockOut">
               <PropertyRef Name="SizeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -6827,6 +6943,11 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <EntitySetMapping Name="StockOuts">
             <EntityTypeMapping TypeName="DB_9B34E1_erpModel.StockOut">
               <MappingFragment StoreEntitySet="StockOut">
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -7641,6 +7762,8 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
           <EntitySetMapping Name="StockIns">
             <EntityTypeMapping TypeName="DB_9B34E1_erpModel.StockIn">
               <MappingFragment StoreEntitySet="StockIn">
+                <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />

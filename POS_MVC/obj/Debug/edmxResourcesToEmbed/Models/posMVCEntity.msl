@@ -958,6 +958,11 @@
     <EntitySetMapping Name="StockOuts">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.StockOut">
         <MappingFragment StoreEntitySet="StockOut">
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -1772,6 +1777,8 @@
     <EntitySetMapping Name="StockIns">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.StockIn">
         <MappingFragment StoreEntitySet="StockIn">
+          <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />

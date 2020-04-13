@@ -154,6 +154,9 @@
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Product" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_SalesMaster" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDetails_Size" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Brand" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Inventory" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_StockOut_Size" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1072,6 +1072,8 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
     <Property Name="ProductionDate" Type="date" />
     <Property Name="BaleQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BrandId" Type="int" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="CreatedBy" Type="char" MaxLength="24" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -1099,6 +1101,11 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="AlreadyProcessed" Type="bit" />
+    <Property Name="InventoryId" Type="int" />
+    <Property Name="SizeId" Type="int" />
+    <Property Name="BrandId" Type="int" />
+    <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -2126,6 +2133,30 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StockOut_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+    <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockOut_Inventory">
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
+    <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Inventory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
+        <PropertyRef Name="InventoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StockOut_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
@@ -2135,6 +2166,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Principal>
       <Dependent Role="StockOut">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockOut_Size">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
+        <PropertyRef Name="SizeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2716,8 +2759,20 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       <End Role="WareHouse" EntitySet="WareHouse" />
       <End Role="StockIn" EntitySet="StockIn" />
     </AssociationSet>
+    <AssociationSet Name="FK_StockOut_Brand" Association="Self.FK_StockOut_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="StockOut" EntitySet="StockOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockOut_Inventory" Association="Self.FK_StockOut_Inventory">
+      <End Role="Inventory" EntitySet="Inventory" />
+      <End Role="StockOut" EntitySet="StockOut" />
+    </AssociationSet>
     <AssociationSet Name="FK_StockOut_Product" Association="Self.FK_StockOut_Product">
       <End Role="Product" EntitySet="Product" />
+      <End Role="StockOut" EntitySet="StockOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockOut_Size" Association="Self.FK_StockOut_Size">
+      <End Role="Size" EntitySet="Size" />
       <End Role="StockOut" EntitySet="StockOut" />
     </AssociationSet>
     <AssociationSet Name="FK_StockOut_Supplier" Association="Self.FK_StockOut_Supplier">

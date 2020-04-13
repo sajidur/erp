@@ -64,7 +64,6 @@
         <thead>
         <th>Invoice Id</th>
         <th>Sales Date</th>
-
         <th>Customer</th>
         <th>Total Amount</th>
         <th>Additional Cost</th>
@@ -90,34 +89,6 @@
                 </td>
             </tr>
             {{/ProductSearch}}
-        </tbody>
-    </table>
-</script>
-<script id="templateProductModalAdd" type="text/html">
-    <table class="table table-bordered table-striped table-hover" id="productTableModalAdd">
-        <thead>
-        <th>ItemInfo</th>
-        <th>Barcode</th>
-        <th>Sales price</th>
-        <th>WholeSalesPrice</th>
-        <th>Qty</th>
-        <th>Action</th>
-        </thead>
-        <tbody>
-            {{#ProductSearchAdd}}
-            <tr>
-                <td> {{ItemInfo}}</td>
-                <td> {{Barcode1}}</td>
-                <td> {{RetailPrice}}</td>
-                <td> {{WholeSalesPrice}}</td>
-                <td>
-                    {{Quantity}}
-                </td>
-                <td class="action-sm">
-                    <a class="btn btn-primary btn-xs" onclick="OnSelectProduct('{{Id}}')"><i class="fa fa-Add"></i> Delete</a>
-                </td>
-            </tr>
-            {{/ProductSearchAdd}}
         </tbody>
     </table>
 </script>

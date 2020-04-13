@@ -90,10 +90,6 @@ namespace RexERP_MVC.Controllers
             result.SalesInvoice = item.SalesInvoice;
             SalesMaster FinalResult = new SalesMaster();
             FinalResult.SalesInvoice = item.SalesInvoice;
-            SalesDetail FinalResultDetail = new SalesDetail();
-            SalesOrder resultOrder = new SalesOrder();
-            SalesOrder FinalResultOrder = new SalesOrder();
-            List<int> lstSalesMasterId = new List<int>();
             try
             {
                 result.SalesInvoice = item.SalesInvoice;
@@ -174,7 +170,7 @@ namespace RexERP_MVC.Controllers
                     order.BaleQty = order.BaleQty - order.BaleQty;
                     order.DeliveryDate = new DateTime?(DateTime.Now);
                     order.IsActive = false;
-                    FinalResultOrder = this.salesService.Update(order, order.Id);
+                  //  FinalResultOrder = this.salesService.Update(order, order.Id);
                 }
                 if (saved.Id > 0)
                 {
@@ -561,6 +557,11 @@ namespace RexERP_MVC.Controllers
             {
                 foreach (TempSalesMaster item in salesMasters)
                 {
+                    if (item.CustomerID<0)
+                    {
+                        actionResult = base.Json("Select Customer Properly!!", 0);
+                        return actionResult;
+                    }
                     customerId = item.CustomerID;
                     result.SalesInvoice = salesinvoiceid;
                     result.SalesOrderId = item.SalesOrderId;
@@ -617,6 +618,7 @@ namespace RexERP_MVC.Controllers
                     item.Notes = FinalResult.Notes;
                     item.CreatedBy = CurrentSession.GetCurrentSession().UserName;
                     item.CreatedDate = DateTime.Now;
+                    item.WarehouseId = inventory.WarehouseId;
                     item.IsActive = true;
                     result.TempSalesDetails.Add(item);
                     count += item.Qty;
@@ -624,7 +626,7 @@ namespace RexERP_MVC.Controllers
                 result.DriverName = DriverName;
                 result.RentAmount = RentAmount;
                 TempSalesMaster saved = this.salesService.SaveTempSalesMaster(result);
-                actionResult = base.Json(FinalResult, 0);
+                actionResult = base.Json("Sales Saved", 0);
             }
             catch (Exception exception)
             {

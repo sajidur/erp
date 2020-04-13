@@ -591,7 +591,6 @@
     </Compile>
     <Compile Include="Report\mvcReport.cs">
       <DependentUpon>mvcReport.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
@@ -601,6 +600,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Util\RexEnum.cs" />
     <Compile Include="ViewModel\AccountGroupResponse.cs" />
     <Compile Include="ViewModel\AccountLedgerResponse.cs" />
     <Compile Include="ViewModel\CashBookResponse.cs" />
@@ -662,6 +662,7 @@
     <Compile Include="ViewModel\SalesDetailResponse.cs" />
     <Compile Include="ViewModel\SalesMasterResponse.cs" />
     <Compile Include="ViewModel\SalesOrderResponse.cs" />
+    <Compile Include="ViewModel\MenuResponse.cs" />
     <Compile Include="ViewModel\ShopTransferResponse.cs" />
     <Compile Include="ViewModel\SizeResponse.cs" />
     <Compile Include="ViewModel\StockInResponse.cs" />
@@ -941,13 +942,10 @@
     <Content Include="Scripts\app\Sales.js" />
     <Content Include="Scripts\app\SalesOrder.js" />
     <Content Include="Scripts\app\SalesReport.js" />
-    <Content Include="Scripts\app\Shop.js" />
-    <Content Include="Scripts\app\ShopTransfer.js" />
     <Content Include="Scripts\app\Size.js" />
     <Content Include="Scripts\app\StockIn.js" />
     <Content Include="Scripts\app\StockOut.js" />
     <Content Include="Scripts\app\Supplier.js" />
-    <Content Include="Scripts\app\ToShopTransfer.js" />
     <Content Include="Scripts\app\Transaction.js" />
     <Content Include="Scripts\app\Transfer.js" />
     <Content Include="Scripts\app\UOM.js" />
@@ -1039,6 +1037,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <Content Include="Scripts\DataTables\vfs_fonts.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\divjs.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -1223,6 +1222,7 @@
     <Content Include="Views\Brand\Add.cshtml" />
     <Content Include="Views\SizeSetup\Add.cshtml" />
     <Content Include="Views\Sales\ItemList.cshtml" />
+    <Content Include="Views\Users\CreateRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1248,12 +1248,17 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Report\RPT\rptSalesInvoice.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoiceDriver.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoiceOffice.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoice.rdlc" />
+    <Content Include="Report\RPT\rptStockInProcessing.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\RPT\rptReceiveVoucher.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\RPT\rptPaymentVoucher.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Report\RPT\SalesDescription.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptCustomerLedger.rdlc" />
-    <EmbeddedResource Include="Report\RPT\TrackChallanMain.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

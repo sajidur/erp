@@ -30,6 +30,8 @@ namespace RexERP_MVC.Models
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
+        public string BrandName { get; set; }
+        public string SizeName { get; set; }
     
         public virtual Brand Brand { get; set; }
         public virtual Size Size { get; set; }

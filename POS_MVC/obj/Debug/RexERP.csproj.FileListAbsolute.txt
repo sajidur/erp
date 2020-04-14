@@ -123,7 +123,6 @@ E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csproj.CopyComplete
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
-E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csprojAssemblyReference.cache
 D:\Project\RexProject\erp\POS_MVC\bin\SqlServerTypes\x64\msvcr120.dll
 D:\Project\RexProject\erp\POS_MVC\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
 D:\Project\RexProject\erp\POS_MVC\bin\SqlServerTypes\x86\msvcr120.dll
@@ -186,3 +185,6 @@ D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.cache
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptStockInProcessing.rdlc
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptReceiveVoucher.rdlc
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptPaymentVoucher.rdlc

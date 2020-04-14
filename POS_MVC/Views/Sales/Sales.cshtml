@@ -1,7 +1,6 @@
 ﻿<title>
     :Sales Page
 </title>
-<div class="row">
     <label>Sales</label>
     <div class="col-md-12">
         <div class="card">
@@ -52,9 +51,9 @@
                     </div>
                     <div>
                         <div class="ibox-content" id="divInfo">
-                            <div class="form-group">
+                            <div class="col-md-8">
                                 <h4>Added Sales Items</h4>
-                                <div class="col-md-12 table-responsive" id="div-sales-add" style="width:70%;float:left;">
+                                <div id="div-sales-add" float:left;">
                                 </div>
                                
                                 @*<div class="col-md-4">
@@ -74,7 +73,7 @@
                                 </div>*@
                             </div>
                           
-                            <div style="width: 26%; float: right;">
+                            <div class="col-md-4">
                                 <div class="form-group  form-horizontal">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <div class="form-group">
@@ -161,7 +160,6 @@
                                     <th>Sale Qty</th>
                                     <th>Rate</th>
                                     <th>Action</th>
-                                    <th></th>
                                     </thead>
                                     <tbody>
                                         {{#InventoryGroupSearch}}
@@ -181,7 +179,6 @@
                                             <td class="action-sm">
                                                 <a class="datatable-submit-button" id="btnAdd" onclick="LoadForAdd('{{Id}}')"><i class="fa fa-edit"></i>Add</a>
                                             </td>
-                                            <td style="display:none;">{{WarehouseId}}</td>
                                         </tr>
                                         {{/InventoryGroupSearch}}
                                     </tbody>
@@ -210,11 +207,6 @@
                         <div class="ibox-content" id="divInfo">
                             <div class="form-group">
                                 <div class="col-md-8" id="div-salesOrderGridGroup">
-
-                                </div>
-                                <div class="col-md-4">
-                                    Grand Total:<label id="lblGTotal">0.0</label>
-                                </div>
                             </div>
 
                         </div>
@@ -311,7 +303,7 @@
 
 
     <script id="templateSalesGroupModalGrid" type="text/html">
-        <table class="table table-bordered table-striped table-hover" id="salesGroupTableModalGrid">
+        <table class="table table-bordered table-hover" id="salesGroupTableModalGrid">
             <thead>
             <th>SI.NO </th>
             <th>Id</th>
@@ -321,7 +313,6 @@
             <th>Total Amount</th>
             <th>Order Id</th>
             <th>Action</th>
-            <th></th>
             </thead>
             <tbody>
                 {{#SalesGroupSearchGrid}}
@@ -329,36 +320,29 @@
                     <td>{{countCount}}</td>
                     <td>{{ProductId}}</td>
                     <td>{{ProductName}}</td>
-                    <td>{{BaleQty}}</td>
+                    <td>{{Qty}}</td>
                     <td>{{Rate}}</td>
                     <td>{{Amount}}</td>
                     <td>{{SalesOrderId}}</td>
                     <td class="action-sm">
                         <a class="btn btn-danger" onclick="OnDeleteSalesOrder('{{countCount}}')"><i class="fa fa-trash-o"></i></a>
                     </td>
-                    <td style="display:none;">{{WarehouseId}}</td>
                 </tr>
                 {{/SalesGroupSearchGrid}}
             </tbody>
         </table>
     </script>
-
-    <script>
-        function calculateRow(row) {
-            var price = +row.find('input[name^="price"]').val();
-        }
-
-        function calculateGrandTotal() {
-            var grandTotal = 0;
-            $("table.order-list").find('input[name^="price"]').each(function () {
-                grandTotal += +$(this).val();
-            });
-            $("#grandtotal").text(grandTotal.toFixed(2));
-        }
-    </script>
     <script src="~/Scripts/app/CommonLoader.js"></script>
     <script src="~/Scripts/app/Sales.js"></script>
     <script>
+//        extend: all the CSS files and inline styles
+//style: only inline styles
+//link: only CSS links
+//        $('.card').click(function(){
+//  $('.card').printElement({
+//  css: 'extend'
+//});
+//})
         $(document).ready(function () {
             $('#txtTotalAmt').val('0');
             $('#txtDiscount').val('0');
@@ -376,4 +360,8 @@
             LoadCustomerCombo("ddlCustomer");
             Expression();
         });
+        $('.element').printElement({
+  css: 'extend'
+});
+
     </script>

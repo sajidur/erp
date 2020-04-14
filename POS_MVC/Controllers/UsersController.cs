@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RexERP_MVC.Models;
+using RexERP_MVC.ViewModel;
 
 namespace RexERP_MVC.Controllers
 {
@@ -20,9 +21,28 @@ namespace RexERP_MVC.Controllers
             var users = db.Users.Include(u => u.UserRole);
             return View(users.ToList());
         }
+        public ActionResult Users()
+        {
+            var users = db.Users.ToList();
+            var usersRes = AutoMapper.Mapper.Map<List<UserInfoResponse>>(users);
+            return Json(usersRes,JsonRequestBehavior.AllowGet);
+        }
         public ActionResult MenuPermission()
         {
             return View();
+        }
+        public ActionResult CreateRoles()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateRoles([Bind(Include = "RoleName")] UserRole role)
+        {
+            role.TenancyId = 1;
+            role.SetDate = DateTime.Now;
+            db.UserRoles.Add(role);
+            db.SaveChanges();
+            return RedirectToAction("MenuPermission");
         }
 
         // GET: Users/Details/5
@@ -126,26 +146,31 @@ namespace RexERP_MVC.Controllers
 
         // POST: Users/Delete/5
         [HttpGet, ActionName("Screen")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Screen(string roleId)
+        public ActionResult Screen()
         {
             var screen = db.Screens.ToList();
-            return Json(screen);
+            var response = AutoMapper.Mapper.Map<List<MenuResponse>>(screen);
+            return Json(response,JsonRequestBehavior.AllowGet);
         }
 
         // POST: Users/Delete/5
         [HttpGet, ActionName("Roles")]
-        [ValidateAntiForgeryToken]
         public ActionResult Roles()
         {
             var permission = db.UserRoles.ToList();
-            return Json(permission);
+            var response = AutoMapper.Mapper.Map<List<UserRoleResponse>>(permission);
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MenuUsers()
+        {
+            var permission = db.RoleWiseScreenPermissions.ToList();
+            return Json(permission,JsonRequestBehavior.AllowGet);
         }
 
 
         // POST: Users/Delete/5
         [HttpPost, ActionName("MenuPermission")]
-        [ValidateAntiForgeryToken]
         public ActionResult MenuPermission([Bind(Include = "RoleId,ScreenId")] RoleWiseScreenPermission roleWiseScreen)
         {
             var permission = db.RoleWiseScreenPermissions.Where(a => a.RoleId == roleWiseScreen.RoleId && a.ScreenId == roleWiseScreen.ScreenId).FirstOrDefault();
@@ -153,8 +178,13 @@ namespace RexERP_MVC.Controllers
             {
                 db.RoleWiseScreenPermissions.Add(roleWiseScreen);
                 db.SaveChanges();
+                return Json("Sucess", JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return Json("Already Exists", JsonRequestBehavior.AllowGet);
+
+            }
         }
         protected override void Dispose(bool disposing)
         {

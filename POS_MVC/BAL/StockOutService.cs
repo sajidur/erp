@@ -30,6 +30,17 @@ namespace RexERP_MVC.BAL
             //var get = service.ExecuteProcedure("Exec StockOutChallanList @fromDate,@toDate", parameters);
             //return get;
         }
+        public List<StockOut> GetStockChallan(string invoiceNo )
+        {
+            return service.GetAll(a => a.InvoiceNo==invoiceNo).ToList();
+            //List<SqlParameter> parameters = new List<SqlParameter>();
+            //SqlParameter param1 = new SqlParameter("@fromDate", DateTime.Now.AddMonths(-1));
+            //parameters.Add(param1);
+            //SqlParameter param2 = new SqlParameter("@toDate", DateTime.Now);
+            //parameters.Add(param2);
+            //var get = service.ExecuteProcedure("Exec StockOutChallanList @fromDate,@toDate", parameters);
+            //return get;
+        }
 
 
         public StockOut GetById(int? id = 0)
@@ -47,7 +58,25 @@ namespace RexERP_MVC.BAL
                 foreach (var inv in existingItem)
                 {
                     var qty = stockOuts.Where(a => a.InventoryId == inv.Id).Sum(a => a.Qty);
-                    var stock = new StockOut() {AlreadyProcessed=false,BaleQty=qty,ProductId=inv.ProductId,IsActive=true,InvoiceNo= invoiceNo,Notes=Notes,SupplierId=inv.SupplierId,WarehouseId=inv.WarehouseId,CreatedBy=CurrentSession.GetCurrentSession().UserName,CreatedDate=DateTime.Now};
+                    var stock = new StockOut()
+                    {
+                        AlreadyProcessed = false,
+                        BaleQty = qty,
+                        ProductId = inv.ProductId,
+                        IsActive = true,
+                        InvoiceNo = invoiceNo,
+                        Notes = Notes,
+                        SupplierId = inv.SupplierId,
+                        WarehouseId = inv.WarehouseId,
+                        CreatedBy = CurrentSession.GetCurrentSession().UserName,
+                        CreatedDate = DateTime.Now,
+                        SizeId=inv.SizeId,
+                        SizeName=inv.Size.Name,
+                        BrandId=inv.BrandId,
+                        BrandName=inv.Brand.BrandName,
+                        InventoryId=inv.Id,
+                        ProductionDate=DateTime.Now
+                    };
                     inv.UpdatedDate = DateTime.Now;
                     inv.UpdatedBy = CurrentSession.GetCurrentSession().UserName;
                     inv.ProductionOut+= qty;

@@ -117,7 +117,8 @@ function Save() {
         success: function (data) {
             ShowNotification("1", "Stock In Saved!!");
             $('#StockTableAdd').val("");
-            setTimeout(location.reload.bind(location), 10000);
+            window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=StockInForProcessing&invoiceId=" + $("#txtPoNo").val();
+
         },
         error: function (err) {
             ShowNotification("4", "ERROR!!"+err);
@@ -144,7 +145,9 @@ function GetDataFromDatatable() {
                 BaleQty: BaleQty,
                 BaleWeight: BaleWeight,
                 WeightInMon: WeightInMon,
-                SupplierId: SupplierId
+                SupplierId: SupplierId,
+                StockOutInvoiceNo: $("#ddlStockOutInvoice option:selected").val(),
+                ProductionDate: $("#txtDate").val()
             };
 
             detailsStockIn.push(object);

@@ -796,49 +796,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SalesDeliveries">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesDelivery">
-        <MappingFragment StoreEntitySet="SalesDelivery">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
-          <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
-          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
-          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
-          <ScalarProperty Name="DriverMobileNo" ColumnName="DriverMobileNo" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-          <ScalarProperty Name="AdditionalCost" ColumnName="AdditionalCost" />
-          <ScalarProperty Name="TransportType" ColumnName="TransportType" />
-          <ScalarProperty Name="TransportNo" ColumnName="TransportNo" />
-          <ScalarProperty Name="ExpenseBy" ColumnName="ExpenseBy" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SalesDetails">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesDetail">
-        <MappingFragment StoreEntitySet="SalesDetails">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
-          <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="Qty" ColumnName="Qty" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SalesMasters">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesMaster">
         <MappingFragment StoreEntitySet="SalesMaster">
@@ -978,6 +935,11 @@
     <EntitySetMapping Name="StockOuts">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.StockOut">
         <MappingFragment StoreEntitySet="StockOut">
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -1102,28 +1064,6 @@
           <ScalarProperty Name="Flag" ColumnName="Flag" />
           <ScalarProperty Name="DivisionFP" ColumnName="DivisionFP" />
           <ScalarProperty Name="TEMPLATE4" ColumnName="TEMPLATE4" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TempSalesDetails">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.TempSalesDetail">
-        <MappingFragment StoreEntitySet="TempSalesDetails">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
-          <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
-          <ScalarProperty Name="BaleWeight" ColumnName="BaleWeight" />
-          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
-          <ScalarProperty Name="TotalQtyInKG" ColumnName="TotalQtyInKG" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1342,19 +1282,6 @@
           <ScalarProperty Name="Heading2" ColumnName="Heading2" />
           <ScalarProperty Name="Heading3" ColumnName="Heading3" />
           <ScalarProperty Name="Heading4" ColumnName="Heading4" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="WareHouses">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.WareHouse">
-        <MappingFragment StoreEntitySet="WareHouse">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1620,16 +1547,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="rptCustomerRecive" FunctionName="DB_9B34E1_erpModel.Store.rptCustomerRecive">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_9B34E1_erpModel.rptCustomerRecive_Result">
-          <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
-          <ScalarProperty Name="Debit" ColumnName="Debit" />
-          <ScalarProperty Name="Credit" ColumnName="Credit" />
-          <ScalarProperty Name="Balance" ColumnName="Balance" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="rptCustomerTransaction" FunctionName="DB_9B34E1_erpModel.Store.rptCustomerTransaction">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB_9B34E1_erpModel.rptCustomerTransaction_Result">
@@ -1814,6 +1731,8 @@
     <EntitySetMapping Name="StockIns">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.StockIn">
         <MappingFragment StoreEntitySet="StockIn">
+          <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
@@ -1881,6 +1800,124 @@
           <ScalarProperty Name="BrandId" ColumnName="BrandId" />
           <ScalarProperty Name="SalesOrderId" ColumnName="SalesOrderId" />
           <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TempSalesDetails">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.TempSalesDetail">
+        <MappingFragment StoreEntitySet="TempSalesDetails">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
+          <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InventoryTransactions">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.InventoryTransaction">
+        <MappingFragment StoreEntitySet="InventoryTransaction">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+          <ScalarProperty Name="BalanceQty" ColumnName="BalanceQty" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="InventoryGuid" ColumnName="InventoryGuid" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypes">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.TransactionType">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="TransactionType1" ColumnName="TransactionType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WareHouses">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.WareHouse">
+        <MappingFragment StoreEntitySet="WareHouse">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="WareHouseAddress" ColumnName="WareHouseAddress" />
+          <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesDetails">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesDetail">
+        <MappingFragment StoreEntitySet="SalesDetails">
+          <ScalarProperty Name="DeliveryStatus" ColumnName="DeliveryStatus" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
+          <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesDeliveries">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesDelivery">
+        <MappingFragment StoreEntitySet="SalesDelivery">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="ExpenseBy" ColumnName="ExpenseBy" />
+          <ScalarProperty Name="TransportNo" ColumnName="TransportNo" />
+          <ScalarProperty Name="TransportType" ColumnName="TransportType" />
+          <ScalarProperty Name="AdditionalCost" ColumnName="AdditionalCost" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DriverMobileNo" ColumnName="DriverMobileNo" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="SalesDetailsId" ColumnName="SalesDetailsId" />
+          <ScalarProperty Name="SalesMasterId" ColumnName="SalesMasterId" />
+          <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

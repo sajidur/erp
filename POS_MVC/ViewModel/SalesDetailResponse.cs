@@ -10,18 +10,6 @@ namespace RexERP_MVC.ViewModel
             set;
         }
 
-        public int BaleQty
-        {
-            get;
-            set;
-        }
-
-        public decimal BaleWeight
-        {
-            get;
-            set;
-        }
-
         public string CreatedBy
         {
             get;
@@ -64,12 +52,6 @@ namespace RexERP_MVC.ViewModel
             set;
         }
 
-        public decimal Rate
-        {
-            get;
-            set;
-        }
-
         public string SalesInvoice
         {
             get;
@@ -105,9 +87,11 @@ namespace RexERP_MVC.ViewModel
             get;
             set;
         }
-
-        public SalesDetailResponse()
-        {
-        }
+        public decimal Qty { get; set; }
+        public decimal Rate { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public string SizeName { get; set; }
+        public Nullable<int> BrandId { get; set; }
+        public string BrandName { get; set; }
     }
 }

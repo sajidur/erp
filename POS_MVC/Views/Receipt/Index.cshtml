@@ -52,8 +52,8 @@
                                     <td>Cash/Bank</td>
                                     <td>Bank</td>
                                     <td>Amount</td>
-                                    <td style="display:none;">Cheque/TT No</td>
-                                    <td style="display:none;">Cheque Date</td>
+                                    <td>Cheque/TT No</td>
+                                    <td >Cheque Date</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,14 +74,13 @@
                                         <input type="number" id="txtAmount" value="0" style="float:left;" class="form-control" />
                                     </td>
                                     <td class="col-sm-1">
-                                        <input type="button" class="btn btn-primary " id="btnAdd" value="Add" />
+                                        <input type="text" id="chkNo" class="form-control" />
+                                    <td class="col-sm-2">
+                                        <input type="date" id="chkDate" name="chkDate" class="form-control" style="height:40px" />
                                     </td>
                                     <td class="col-sm-1">
-                                        <input type="text" style="display:none;" id="chkNo" class="form-control" />
-                                    <td class="col-sm-2">
-                                        <input type="date" style="display:none;" id="chkDate" name="chkDate" class="form-control" style="height:40px"/>
+                                        <input type="button" class="btn btn-primary " id="btnAdd" value="Add" />
                                     </td>
-                         
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -168,6 +167,7 @@
         var ldgerName = $("#ddlItem option:selected").text();
         var LedgerId = $("#ddlItem option:selected").val();
         var chkno = $("#chkNo").val();
+        var chkDate = $("#chkDate").val();
         var PostingDate = $("#chkDate").val();
         var amount = parseFloat($("#txtAmount").val());
         if (amount=="0") {
@@ -179,7 +179,7 @@
             return;
         }
         //var object = {Id:Id, Item: item, BaleQty: BaleQty, QtyPerBale: QtyPerBale, UnitStyle: UnitStyle, Amount: Amount, TotalKg: TotalKg, TotalQty: TotalQty, TotalAmount: TotalAmount };
-        var object = { count: count, LedgerId: LedgerId, ldgerName: ldgerName, ChequeNo: chkno, PostingDate: PostingDate, Credit: amount };
+        var object = { count: count, LedgerId: LedgerId, ldgerName: ldgerName, ChequeNo: chkno,ChequeDate: chkDate, PostingDate: PostingDate, Credit: amount };
         details.push(object);
         var templateWithData = Mustache.to_html($("#templateProductModal").html(), { ProductSearch: details });
         $("#div-product").empty().html(templateWithData);
@@ -228,8 +228,8 @@
                 details = [];
                 var templateWithData = Mustache.to_html($("#templateProductModal").html(), { ProductSearch: details });
                 $("#div-product").empty().html(templateWithData);
-                LoadInvoiceNo("txtPoNo");
-                location.reload();
+                window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=PaymentVoucher&invoiceId=" + $("#txtPoNo").val();
+
             },
             error: function () {
             }

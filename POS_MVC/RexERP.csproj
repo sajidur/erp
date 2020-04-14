@@ -225,6 +225,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="BAL\SalaryPaymentService.cs" />
+    <Compile Include="BAL\SalesDeliveryService.cs" />
     <Compile Include="BAL\SalesService.cs" />
     <Compile Include="BAL\SizeService.cs" />
     <Compile Include="BAL\SMSEmailService.cs" />
@@ -371,6 +372,9 @@
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Inventory.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InventoryTransaction.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\JournalDetail.cs">
@@ -547,6 +551,9 @@
     <Compile Include="Models\TempSalesMaster.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TransactionType.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Unit.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -591,7 +598,6 @@
     </Compile>
     <Compile Include="Report\mvcReport.cs">
       <DependentUpon>mvcReport.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
@@ -601,6 +607,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Util\RexEnum.cs" />
     <Compile Include="ViewModel\AccountGroupResponse.cs" />
     <Compile Include="ViewModel\AccountLedgerResponse.cs" />
     <Compile Include="ViewModel\CashBookResponse.cs" />
@@ -662,6 +669,7 @@
     <Compile Include="ViewModel\SalesDetailResponse.cs" />
     <Compile Include="ViewModel\SalesMasterResponse.cs" />
     <Compile Include="ViewModel\SalesOrderResponse.cs" />
+    <Compile Include="ViewModel\MenuResponse.cs" />
     <Compile Include="ViewModel\ShopTransferResponse.cs" />
     <Compile Include="ViewModel\SizeResponse.cs" />
     <Compile Include="ViewModel\StockInResponse.cs" />
@@ -941,16 +949,14 @@
     <Content Include="Scripts\app\Sales.js" />
     <Content Include="Scripts\app\SalesOrder.js" />
     <Content Include="Scripts\app\SalesReport.js" />
-    <Content Include="Scripts\app\Shop.js" />
-    <Content Include="Scripts\app\ShopTransfer.js" />
     <Content Include="Scripts\app\Size.js" />
     <Content Include="Scripts\app\StockIn.js" />
     <Content Include="Scripts\app\StockOut.js" />
     <Content Include="Scripts\app\Supplier.js" />
-    <Content Include="Scripts\app\ToShopTransfer.js" />
     <Content Include="Scripts\app\Transaction.js" />
     <Content Include="Scripts\app\Transfer.js" />
     <Content Include="Scripts\app\UOM.js" />
+    <Content Include="Scripts\app\Users.js" />
     <Content Include="Scripts\app\WareHouse.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1039,6 +1045,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <Content Include="Scripts\DataTables\vfs_fonts.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\divjs.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -1223,6 +1230,8 @@
     <Content Include="Views\Brand\Add.cshtml" />
     <Content Include="Views\SizeSetup\Add.cshtml" />
     <Content Include="Views\Sales\ItemList.cshtml" />
+    <Content Include="Views\Users\CreateRoles.cshtml" />
+    <Content Include="Views\Sales\DeliveredList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1239,7 +1248,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Report\RPT\ChallanMainReport.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptDueSummary.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptIncomeStatement.rdlc" />
     <EmbeddedResource Include="Report\RPT\rdlcHeader.rdlc">
@@ -1248,15 +1256,18 @@
     <Content Include="Report\RPT\rptStockOutForProcessing.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Report\RPT\rptSalesInvoiceRepresentive.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptSalesInvoiceCustomer.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptSalesInvoice.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoiceDriver.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoiceOffice.rdlc" />
-    <EmbeddedResource Include="Report\RPT\rptTruckChallanInvoice.rdlc" />
+    <Content Include="Report\RPT\rptStockInProcessing.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\RPT\rptReceiveVoucher.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\RPT\rptPaymentVoucher.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Report\RPT\SalesDescription.rdlc" />
     <EmbeddedResource Include="Report\RPT\rptCustomerLedger.rdlc" />
-    <EmbeddedResource Include="Report\RPT\TrackChallanMain.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

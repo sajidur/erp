@@ -20,10 +20,13 @@ namespace RexERP_MVC.Controllers
     {
         // GET: Sales
         private InventoryService inventoryService = new InventoryService();
-        SalesService salesService = new SalesService();
-        LedgerPostingService service = new LedgerPostingService();
-        CustomerService customerService = new CustomerService();
-        Entities context = new Entities();             
+        private SalesService salesService = new SalesService();
+        private LedgerPostingService service = new LedgerPostingService();
+        private CustomerService customerService = new CustomerService();
+        private SalesDeliveryService salesDeliveryService = new SalesDeliveryService();
+        private WareHouseService _wareHouseService = new WareHouseService();
+
+        private Entities context = new Entities();             
         public ActionResult Index()
         {
             ViewBag.Title = "Sales Report";
@@ -76,7 +79,55 @@ namespace RexERP_MVC.Controllers
             var result = Mapper.Map<TempSalesMaster, TempSalesMasterResponse>(tempList);
             return Json(result,JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult DeliveredList()
+        {
+            return View();
+        }
+        public ActionResult DeliveryPendingList()
+        {
+            ActionResult actionResult;
+            List<SalesDetail> category = null;
+            var wareHouse = _wareHouseService.GetByUserId(CurrentSession.GetCurrentSession().UserId);
+            if (wareHouse!=null)
+            {
+                category = this.salesService.GetAll(0, (int)DeliveryStatus.Pending, wareHouse.Id);
+            }
+            if (category != null)
+            {
+                actionResult = base.Json(Mapper.Map<List<SalesDetailResponse>>(category), 0);
+            }
+            else
+            {
+                actionResult = base.HttpNotFound();
+            }
+            return actionResult;
+        }
+        public ActionResult Delivery(int Id,string Notes)
+        {
+          var salesDetails= this.salesService.GetBySalesDetailesId(Id);
+            var salesDelivery = new SalesDelivery()
+            {
+                AdditionalCost=0,
+                CustomerID=salesDetails.SalesMaster.CustomerID,
+                IsActive=true,
+                DeliveryDate=DateTime.Now,
+                DriverMobileNo="",
+                DriverName="",
+                ExpenseBy="",
+                Notes=Notes,
+                SalesDetailsId=salesDetails.Id,
+                SalesInvoice=salesDetails.SalesInvoice,
+                SalesMasterId=salesDetails.SalesMasterId,
+                TransportNo="",
+                TransportType="",
+                CreatedDate=DateTime.Now,
+                CreatedBy=CurrentSession.GetCurrentSession().UserName
+            };
+            salesDeliveryService.Save(salesDelivery);
+            salesDetails.DeliveryStatus =(int) DeliveryStatus.Delivered;
+            salesService.Update(salesDetails, Id);
+            return Json("Delivered Sucess", JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Authorize(int id,bool isSendSMS)
         {
@@ -90,10 +141,6 @@ namespace RexERP_MVC.Controllers
             result.SalesInvoice = item.SalesInvoice;
             SalesMaster FinalResult = new SalesMaster();
             FinalResult.SalesInvoice = item.SalesInvoice;
-            SalesDetail FinalResultDetail = new SalesDetail();
-            SalesOrder resultOrder = new SalesOrder();
-            SalesOrder FinalResultOrder = new SalesOrder();
-            List<int> lstSalesMasterId = new List<int>();
             try
             {
                 result.SalesInvoice = item.SalesInvoice;
@@ -124,7 +171,11 @@ namespace RexERP_MVC.Controllers
                         SalesMasterId = result.Id,
                         SalesInvoice = result.SalesInvoice,
                         ProductId = itemDetails.ProductId,
-                        Qty = itemDetails.BaleQty,                      
+                        Qty = itemDetails.Qty,    
+                        SizeId=itemDetails.SizeId,
+                        SizeName=itemDetails.Size.Name,
+                        BrandName=itemDetails.Brand.BrandName,
+                        BrandId=itemDetails.BrandId,
                         Rate = itemDetails.Rate,
                         Amount = itemDetails.Amount,
                         Notes = FinalResult.Notes,
@@ -133,7 +184,7 @@ namespace RexERP_MVC.Controllers
                         IsActive = new bool?(true),
                         WarehouseId = itemDetails.WarehouseId
                     };
-                    count += itemDetails.BaleQty;
+                    count += itemDetails.Qty;
                     result.SalesDetails.Add(resultDetail);
                 }
                 message = string.Concat(message, "Tk=", string.Format("{0:#,#.}", decimal.Round(result.GrandTotal), ""), "=");
@@ -170,7 +221,7 @@ namespace RexERP_MVC.Controllers
                     order.BaleQty = order.BaleQty - order.BaleQty;
                     order.DeliveryDate = new DateTime?(DateTime.Now);
                     order.IsActive = false;
-                    FinalResultOrder = this.salesService.Update(order, order.Id);
+                  //  FinalResultOrder = this.salesService.Update(order, order.Id);
                 }
                 if (saved.Id > 0)
                 {
@@ -199,6 +250,7 @@ namespace RexERP_MVC.Controllers
                         str[5] = DateTime.Now.ToString("dd-MM-yyyy");
                         str[6] = ".";
                         str[7] = balanceText;
+                        isSendSMS = false;
                         if (isSendSMS)
                         {
                             sMSEmailService.SendOneToOneSingleSms(phone, string.Concat(str));
@@ -509,7 +561,11 @@ namespace RexERP_MVC.Controllers
                     name[6] = ". Total DO Amount =";
                     name[7] = string.Format("{0:#,##0}", decimal.Round(totalAmount), "");
                     name[8] = "/= Dada Rice.";
-                    sMSEmailService.SendOneToOneSingleSms(phone, string.Concat(name));
+                    var sendSMS = false;
+                    if (sendSMS)
+                    {
+                        sMSEmailService.SendOneToOneSingleSms(phone, string.Concat(name));
+                    }
                 }
             }
             return Json(FinalResult,JsonRequestBehavior.AllowGet);
@@ -541,10 +597,6 @@ namespace RexERP_MVC.Controllers
             int customerId = 0;
             TempSalesMaster result = new TempSalesMaster();
             result.SalesInvoice = salesinvoiceid;
-            foreach (var item in salesMasters)
-            {
-                item.SalesInvoice = salesinvoiceid;
-            }
             TempSalesMaster FinalResult = new TempSalesMaster();
             FinalResult.SalesInvoice = salesinvoiceid;
             TempSalesDetail FinalResultDetail = new TempSalesDetail();
@@ -556,8 +608,13 @@ namespace RexERP_MVC.Controllers
             {
                 foreach (TempSalesMaster item in salesMasters)
                 {
+                    if (item.CustomerID<0)
+                    {
+                        actionResult = base.Json("Select Customer Properly!!", 0);
+                        return actionResult;
+                    }
                     customerId = item.CustomerID;
-                    result.SalesInvoice = item.SalesInvoice;
+                    result.SalesInvoice = salesinvoiceid;
                     result.SalesOrderId = item.SalesOrderId;
                     result.SalesDate = item.SalesDate;
                     if (!result.SalesDate.HasValue)
@@ -588,29 +645,39 @@ namespace RexERP_MVC.Controllers
                 foreach (TempSalesDetail item in salesDetail)
                 {
                     var inventory = inventories.Where(a => a.Id == item.ProductId).FirstOrDefault();
-                    TempSalesDetail resultDetail = new TempSalesDetail()
-                    {
-                        SalesMasterId = result.Id,
-                        SalesInvoice = result.SalesInvoice,
-                        ProductId = inventory.ProductId,
-                        BaleQty = item.BaleQty,
-                        BaleWeight = item.BaleWeight,
-                        TotalQtyInKG = item.TotalQtyInKG,
-                        Rate = item.Rate,
-                        Amount = item.Amount,
-                        Notes = FinalResult.Notes,
-                        CreatedBy = CurrentSession.GetCurrentSession().UserName,
-                        CreatedDate = new DateTime?(DateTime.Now),
-                        IsActive = new bool?(true),
-                        WarehouseId = item.WarehouseId
-                    };
-                    result.TempSalesDetails.Add(resultDetail);
-                    count += item.BaleQty;
+                    //TempSalesDetail resultDetail = new TempSalesDetail()
+                    //{
+                    //    SalesMasterId = result.Id,
+                    //    SalesInvoice = result.SalesInvoice,
+                    //    ProductId = inventory.ProductId,
+                    //    Qty = item.Qty,
+                    //    BrandId = item.BrandId,
+                    //    SizeId=item.SizeId,
+                    //    Rate = item.Rate,
+                    //    Amount = item.Amount,
+                    //    Notes = FinalResult.Notes,
+                    //    CreatedBy = CurrentSession.GetCurrentSession().UserName,
+                    //    CreatedDate = new DateTime?(DateTime.Now),
+                    //    IsActive = new bool?(true),
+                    //    WarehouseId = item.WarehouseId
+                    //};
+                    item.BrandId = inventory.BrandId;
+                    item.ProductId = inventory.ProductId;
+                    item.SizeId = inventory.SizeId;
+                    item.SalesMasterId = result.Id;
+                    item.SalesInvoice = result.SalesInvoice;
+                    item.Notes = FinalResult.Notes;
+                    item.CreatedBy = CurrentSession.GetCurrentSession().UserName;
+                    item.CreatedDate = DateTime.Now;
+                    item.WarehouseId = inventory.WarehouseId;
+                    item.IsActive = true;
+                    result.TempSalesDetails.Add(item);
+                    count += item.Qty;
                 }
                 result.DriverName = DriverName;
                 result.RentAmount = RentAmount;
                 TempSalesMaster saved = this.salesService.SaveTempSalesMaster(result);
-                actionResult = base.Json(FinalResult, 0);
+                actionResult = base.Json("Sales Saved", 0);
             }
             catch (Exception exception)
             {

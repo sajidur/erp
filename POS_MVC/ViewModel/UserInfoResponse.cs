@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RexERP_MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,8 @@ namespace RexERP_MVC.ViewModel
         public string ModifyUser { get; set; }
         public Nullable<int> BranchId { get; set; }
 
+        public virtual ICollection<ContraMaster> ContraMasters { get; set; }
+        public virtual ICollection<JournalMasterResponse> JournalMasters { get; set; }
         public virtual UserRoleResponse UserRole { get; set; }
     }
 }

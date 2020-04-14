@@ -20,10 +20,13 @@ namespace RexERP_MVC.Controllers
     {
         // GET: Sales
         private InventoryService inventoryService = new InventoryService();
-        SalesService salesService = new SalesService();
-        LedgerPostingService service = new LedgerPostingService();
-        CustomerService customerService = new CustomerService();
-        Entities context = new Entities();             
+        private SalesService salesService = new SalesService();
+        private LedgerPostingService service = new LedgerPostingService();
+        private CustomerService customerService = new CustomerService();
+        private SalesDeliveryService salesDeliveryService = new SalesDeliveryService();
+        private WareHouseService _wareHouseService = new WareHouseService();
+
+        private Entities context = new Entities();             
         public ActionResult Index()
         {
             ViewBag.Title = "Sales Report";
@@ -76,7 +79,55 @@ namespace RexERP_MVC.Controllers
             var result = Mapper.Map<TempSalesMaster, TempSalesMasterResponse>(tempList);
             return Json(result,JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult DeliveredList()
+        {
+            return View();
+        }
+        public ActionResult DeliveryPendingList()
+        {
+            ActionResult actionResult;
+            List<SalesDetail> category = null;
+            var wareHouse = _wareHouseService.GetByUserId(CurrentSession.GetCurrentSession().UserId);
+            if (wareHouse!=null)
+            {
+                category = this.salesService.GetAll(0, (int)DeliveryStatus.Pending, wareHouse.Id);
+            }
+            if (category != null)
+            {
+                actionResult = base.Json(Mapper.Map<List<SalesDetailResponse>>(category), 0);
+            }
+            else
+            {
+                actionResult = base.HttpNotFound();
+            }
+            return actionResult;
+        }
+        public ActionResult Delivery(int Id,string Notes)
+        {
+          var salesDetails= this.salesService.GetBySalesDetailesId(Id);
+            var salesDelivery = new SalesDelivery()
+            {
+                AdditionalCost=0,
+                CustomerID=salesDetails.SalesMaster.CustomerID,
+                IsActive=true,
+                DeliveryDate=DateTime.Now,
+                DriverMobileNo="",
+                DriverName="",
+                ExpenseBy="",
+                Notes=Notes,
+                SalesDetailsId=salesDetails.Id,
+                SalesInvoice=salesDetails.SalesInvoice,
+                SalesMasterId=salesDetails.SalesMasterId,
+                TransportNo="",
+                TransportType="",
+                CreatedDate=DateTime.Now,
+                CreatedBy=CurrentSession.GetCurrentSession().UserName
+            };
+            salesDeliveryService.Save(salesDelivery);
+            salesDetails.DeliveryStatus =(int) DeliveryStatus.Delivered;
+            salesService.Update(salesDetails, Id);
+            return Json("Delivered Sucess", JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Authorize(int id,bool isSendSMS)
         {

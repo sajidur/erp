@@ -418,6 +418,13 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Property Name="Remarks" Type="nvarchar(max)" />
     <Property Name="LedgerId" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EXCNOTES">
+          <Property Name="USERID" Type="int" />
+          <Property Name="ATTDATE" Type="datetime" />
+          <Property Name="NOTES" Type="varchar" MaxLength="200" />
+        </EntityType>-->
   <EntityType Name="FaceTemp">
     <Key>
       <PropertyRef Name="TEMPLATEID" />
@@ -482,6 +489,28 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Property Name="SalesQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BalanceQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InventoryTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="InventoryGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="SupplierId" Type="int" Nullable="false" />
+    <Property Name="WarehouseId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" />
+    <Property Name="BrandId" Type="int" />
+    <Property Name="Qty" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TransactionType" Type="int" />
     <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -651,6 +680,12 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Property Name="SCHCLASSID" Type="int" />
     <Property Name="OverTime" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Ones">
+          <Property Name="Id" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
   <EntityType Name="PartyBalance">
     <Key>
       <PropertyRef Name="PartyBalanceId" />
@@ -829,9 +864,10 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SalesInvoice" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="SalesMasterId" Type="int" />
+    <Property Name="SalesDetailsId" Type="int" />
     <Property Name="DeliveryDate" Type="datetime" />
     <Property Name="DriverName" Type="nvarchar" MaxLength="50" />
     <Property Name="DriverMobileNo" Type="nvarchar" MaxLength="50" />
@@ -869,6 +905,7 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Property Name="UpdatedBy" Type="nchar" MaxLength="24" />
     <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" />
+    <Property Name="DeliveryStatus" Type="int" />
   </EntityType>
   <EntityType Name="SalesMaster">
     <Key>
@@ -1058,6 +1095,15 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
     <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SMSHistory">
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMSText" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CustomerType" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
   <EntityType Name="StockIn">
     <Key>
       <PropertyRef Name="Id" />
@@ -1165,6 +1211,12 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
     <Property Name="UpdateDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TBKEY">
+          <Property Name="PreName" Type="varchar" MaxLength="12" />
+          <Property Name="ONEKEY" Type="int" />
+        </EntityType>-->
   <EntityType Name="TBSMSALLOT">
     <Key>
       <PropertyRef Name="REFERENCE" />
@@ -1257,6 +1309,14 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
     <Property Name="DriverName" Type="nvarchar" MaxLength="500" />
     <Property Name="RentAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="YearId" Type="int" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TransactionType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Action" Type="bit" />
   </EntityType>
   <EntityType Name="Unit">
     <Key>
@@ -1462,6 +1522,8 @@ warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="WareHouseName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="WareHouseAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="UserId" Type="int" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
@@ -1697,6 +1759,78 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Inventory">
+        <PropertyRef Name="WarehouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTransaction_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+    <End Role="InventoryTransaction" Type="Self.InventoryTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryTransaction">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTransaction_InventoryTransaction">
+    <End Role="InventoryTransaction" Type="Self.InventoryTransaction" Multiplicity="1" />
+    <End Role="InventoryTransaction1" Type="Self.InventoryTransaction" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="InventoryTransaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryTransaction1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTransaction_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="InventoryTransaction" Type="Self.InventoryTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryTransaction">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTransaction_Size">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="InventoryTransaction" Type="Self.InventoryTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryTransaction">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTransaction_TransactionType">
+    <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
+    <End Role="InventoryTransaction" Type="Self.InventoryTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryTransaction">
+        <PropertyRef Name="TransactionType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTransaction_WareHouse">
+    <End Role="WareHouse" Type="Self.WareHouse" Multiplicity="1" />
+    <End Role="InventoryTransaction" Type="Self.InventoryTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WareHouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryTransaction">
         <PropertyRef Name="WarehouseId" />
       </Dependent>
     </ReferentialConstraint>
@@ -2358,10 +2492,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <Parameter Name="fromDate" Type="datetime" Mode="In" />
     <Parameter Name="toDate" Type="datetime" Mode="In" />
   </Function>
-  <Function Name="rptCustomerRecive" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="CustomerId" Type="int" Mode="In" />
-    <Parameter Name="invoiceId" Type="nvarchar" Mode="In" />
-  </Function>
   <Function Name="rptCustomerTransaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CustomerId" Type="int" Mode="In" />
   </Function>
@@ -2443,6 +2573,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HOLIDAYS" EntityType="Self.HOLIDAYS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InventoryTransaction" EntityType="Self.InventoryTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JournalDetails" EntityType="Self.JournalDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JournalMaster" EntityType="Self.JournalMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeaveClass" EntityType="Self.LeaveClass" Schema="dbo" store:Type="Tables" />
@@ -2483,6 +2614,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TempSalesDetails" EntityType="Self.TempSalesDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TempSalesMaster" EntityType="Self.TempSalesMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USER_OF_RUN" EntityType="Self.USER_OF_RUN" Schema="dbo" store:Type="Tables" />
@@ -2614,6 +2746,30 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <AssociationSet Name="FK_Inventory_WareHouse" Association="Self.FK_Inventory_WareHouse">
       <End Role="WareHouse" EntitySet="WareHouse" />
       <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTransaction_Brand" Association="Self.FK_InventoryTransaction_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="InventoryTransaction" EntitySet="InventoryTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTransaction_InventoryTransaction" Association="Self.FK_InventoryTransaction_InventoryTransaction">
+      <End Role="InventoryTransaction" EntitySet="InventoryTransaction" />
+      <End Role="InventoryTransaction1" EntitySet="InventoryTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTransaction_Product" Association="Self.FK_InventoryTransaction_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="InventoryTransaction" EntitySet="InventoryTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTransaction_Size" Association="Self.FK_InventoryTransaction_Size">
+      <End Role="Size" EntitySet="Size" />
+      <End Role="InventoryTransaction" EntitySet="InventoryTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTransaction_TransactionType" Association="Self.FK_InventoryTransaction_TransactionType">
+      <End Role="TransactionType" EntitySet="TransactionType" />
+      <End Role="InventoryTransaction" EntitySet="InventoryTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTransaction_WareHouse" Association="Self.FK_InventoryTransaction_WareHouse">
+      <End Role="WareHouse" EntitySet="WareHouse" />
+      <End Role="InventoryTransaction" EntitySet="InventoryTransaction" />
     </AssociationSet>
     <AssociationSet Name="FK_JournalDetails_JournalMaster" Association="Self.FK_JournalDetails_JournalMaster">
       <End Role="JournalDetails" EntitySet="JournalDetails" />

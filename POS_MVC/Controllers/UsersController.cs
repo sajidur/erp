@@ -21,6 +21,12 @@ namespace RexERP_MVC.Controllers
             var users = db.Users.Include(u => u.UserRole);
             return View(users.ToList());
         }
+        public ActionResult Users()
+        {
+            var users = db.Users.ToList();
+            var usersRes = AutoMapper.Mapper.Map<List<UserInfoResponse>>(users);
+            return Json(usersRes,JsonRequestBehavior.AllowGet);
+        }
         public ActionResult MenuPermission()
         {
             return View();

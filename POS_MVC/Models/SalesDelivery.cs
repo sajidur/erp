@@ -17,6 +17,7 @@ namespace RexERP_MVC.Models
         public int Id { get; set; }
         public string SalesInvoice { get; set; }
         public Nullable<int> SalesMasterId { get; set; }
+        public Nullable<int> SalesDetailsId { get; set; }
         public Nullable<System.DateTime> DeliveryDate { get; set; }
         public string DriverName { get; set; }
         public string DriverMobileNo { get; set; }

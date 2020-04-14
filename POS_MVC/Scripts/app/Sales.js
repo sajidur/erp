@@ -332,4 +332,19 @@ function GetDataFromDatatable() {
         $("#div-sales-add").empty().html(templateWithData);
         Calculation();
         GrandTotal();
-    }
+}
+function LoadDeliveryList() {
+    var url = '/Sales/DeliveryPendingList';
+    $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (res) {
+            console.log(res);
+            var templateWithData = Mustache.to_html($("#templateProductModal").html(), { ProductSearch: res });
+            $("#div-product").empty().html(templateWithData);
+         //   MakePagination('productTableModal');
+        },
+        error: function () {
+        }
+    });
+}

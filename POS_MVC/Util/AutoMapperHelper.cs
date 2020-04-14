@@ -41,6 +41,7 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<CompanyResponse, Company>().ReverseMap();
                 cfg.CreateMap<UserRoleResponse, UserRole>().ReverseMap();
                 cfg.CreateMap<Screen, MenuResponse>().ReverseMap();
+                cfg.CreateMap<User, UserInfoResponse>().ForMember(x => x.ContraMasters, opt => opt.Ignore()).ForMember(x => x.JournalMasters, opt => opt.Ignore()).ReverseMap();
 
 
                 cfg.CreateMap<Size, SizeResponse>().ReverseMap();

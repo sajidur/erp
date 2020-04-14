@@ -18,7 +18,10 @@ namespace RexERP_MVC.BAL
         {
             return service.GetById(id);
         }
-
+        public WareHouse GetByUserId(int UserId)
+        {
+            return service.GetAll(a => a.UserId == UserId).FirstOrDefault();
+        }
         public WareHouse Save(WareHouse cus)
         {
             return service.Save(cus);

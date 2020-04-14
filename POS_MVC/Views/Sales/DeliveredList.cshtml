@@ -1,0 +1,115 @@
+﻿
+
+@{
+    ViewBag.Title = "Delivery Details";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox-title">
+            <h3>Product List</h3>
+        </div>
+        <div class="ibox-content" id="divInfo">
+            <div class="form-group">
+                <div class="col-md-12 table-responsive" id="div-product">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="templateProductModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="productTableModal">
+        <th>Id</th>
+        <th>Invoice No</th>
+        <th>Product Name</th>
+        <th>Size</th>
+        <th>Brand</th>
+        <th>Qty</th>
+        <th>Rate</th>
+        <th>Amount</th>
+        <th>Notes</th>
+        <th>
+        </th>
+        <tbody>
+            {{#ProductSearch}}
+            <tr>
+                <td>
+                    {{Id}}
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="/Report/Viewer/ReportViewer.aspx?ReportName=SalesInvoice&invoiceId={{SalesInvoice}}&customerid={{CustomerID}}">{{SalesInvoice}}</a>
+                </td>
+                <td> {{Product.ProductName}}</td>
+                <td> {{SizeName}}</td>
+                <td> {{BrandName}}</td>
+                <td> {{Qty}}</td>
+                <td> {{Rate}}</td>
+                <td> {{Amount}}</td>
+                <th> <input type="text" /></th>
+                <td>
+                    <button class="btn btn-danger" onclick="OrderDeliver({{Id}})">Deliver</button>
+                </td>
+            </tr>
+            {{/ProductSearch}}
+        </tbody>
+    </table>
+</script>
+<script src="~/Scripts/app/Sales.js"></script>
+<script>$(document).ready(function () {
+        LoadDeliveryList();
+});
+    function OrderDeliver(Id) {
+        var row = {};
+        var r = true;
+        if (creditLimit != 0 && totalCredit > creditLimit) {
+            r = confirm("Already Limit Over! Do you want to continue ");
+        }
+        $('#productTableModal tr').each(function(i) {
+        if (i > 0) {
+            var rowId = $(this).find('td').eq(0).text();
+            var InvoiceId = $(this).find('td').eq(1).find('input').val();
+            var Notes =  $(this).find('td').eq(8).find('input').val();
+            if (Id==rowId) {
+                row.Id =Id;
+                row.InvoiceId = InvoiceId;
+                row.Notes=Notes
+            }
+
+        }
+    });
+        if (r == true) {
+            var url = '/Sales/Delivery';
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: {
+                    Id: Id,
+                    Notes:row.Notes
+                },
+                success: function (data) {
+                    ShowNotification("1", data);
+                    window.open("/Report/Viewer/ReportViewer.aspx?ReportName=SalesInvoice&customerid=" + res.CustomerID + "&invoiceId=" + row.InvoiceId, "_blank");
+                    setTimeout(location.reload.bind(location), 100);
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+    }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

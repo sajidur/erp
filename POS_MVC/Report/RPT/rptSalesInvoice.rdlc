@@ -6,22 +6,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.40717in</Width>
+              <Width>1.6585in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.70377in</Width>
+              <Width>0.9551in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.67456in</Width>
+              <Width>0.82136in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.96531in</Width>
+              <Width>1.21664in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.81386in</Width>
+              <Width>0.85686in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.99656in</Width>
+              <Width>1.04547in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -663,10 +663,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsSalesInvoice</DataSetName>
-        <Top>2.9in</Top>
-        <Left>1.29652in</Left>
+        <Top>2.8727in</Top>
+        <Left>0.30381in</Left>
         <Height>0.81771in</Height>
-        <Width>5.56123in</Width>
+        <Width>6.55394in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1608,7 +1608,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>7.18763in</Width>
+  <Width>7.23275in</Width>
   <Page>
     <PageFooter>
       <Height>1in</Height>
@@ -1849,6 +1849,10 @@
         <Field Name="IsActive">
           <DataField>IsActive</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="DeliveryStatus">
+          <DataField>DeliveryStatus</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="Id2">
           <DataField>Id2</DataField>

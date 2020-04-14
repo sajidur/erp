@@ -71,7 +71,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<ReportItem> ReportItems { get; set; }
         public virtual DbSet<RoleWiseScreenPermission> RoleWiseScreenPermissions { get; set; }
         public virtual DbSet<SalaryPayment> SalaryPayments { get; set; }
-        public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
         public virtual DbSet<SalesMaster> SalesMasters { get; set; }
         public virtual DbSet<SalesReturn> SalesReturns { get; set; }
         public virtual DbSet<SchClass> SchClasses { get; set; }
@@ -100,7 +99,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<UserUpdate> UserUpdates { get; set; }
         public virtual DbSet<UserUsedSClass> UserUsedSClasses { get; set; }
         public virtual DbSet<VoucherType> VoucherTypes { get; set; }
-        public virtual DbSet<WareHouse> WareHouses { get; set; }
         public virtual DbSet<EmOpLog> EmOpLogs { get; set; }
         public virtual DbSet<ServerLog> ServerLogs { get; set; }
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
@@ -111,7 +109,11 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SalesOrder> SalesOrders { get; set; }
         public virtual DbSet<TempSalesDetail> TempSalesDetails { get; set; }
+        public virtual DbSet<InventoryTransaction> InventoryTransactions { get; set; }
+        public virtual DbSet<TransactionType> TransactionTypes { get; set; }
+        public virtual DbSet<WareHouse> WareHouses { get; set; }
         public virtual DbSet<SalesDetail> SalesDetails { get; set; }
+        public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

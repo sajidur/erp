@@ -1,10 +1,5 @@
 ﻿
 
-function ClearAddBox() {
-    $("#ColorId").val('0');
-    $("#txtColor").val('');
-}
-
 function InsertSuccess(response) {
 
     // debugger;
@@ -104,8 +99,8 @@ function LoadSingleData(parameters) {
 function FormDataAsObject() {
     var object = new Object();
     object.WareHouseName = $('#txtWareHouseName').val();
-    //object.GroupName = $('#txtGroupName').val();
-    //object.Manufacturer = $('#txtColorDes').val();
+    object.WareHouseAddress = $('#txtAddress').val();
+    object.UserId = $('#ddlUsers').val();
     return object;
 }
 
@@ -115,9 +110,7 @@ function Save() {
         alert('WareHouse Name Empty');
         return false;
     }
-
     var formObject = FormDataAsObject();
-
     $.ajax({
         url: '/WareHouse/Create',
         method: 'post',
@@ -126,6 +119,7 @@ function Save() {
         data: {
             Id: formObject.Id,
             WareHouseName: formObject.WareHouseName,
+            UserId: formObject.UserId,
             create: 1
         },
         success: function (data) {

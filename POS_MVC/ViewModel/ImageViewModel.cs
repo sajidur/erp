@@ -7,6 +7,7 @@ namespace RexERP_MVC.ViewModel
 {
     public class ImageViewModel
     {
+        public int EmpId {get;set;}
         public int ImageId { get; set; }
 
         public string ImageTitle { get; set; }

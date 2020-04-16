@@ -213,6 +213,7 @@
     <Compile Include="BAL\DbContextRepository.cs" />
     <Compile Include="BAL\DBService.cs" />
     <Compile Include="BAL\DefaultLedger.cs" />
+    <Compile Include="BAL\DEPARTMENTService.cs" />
     <Compile Include="BAL\EmployeeService.cs" />
     <Compile Include="BAL\ErrorLogger.cs" />
     <Compile Include="BAL\FinancialYearService.cs" />
@@ -250,6 +251,8 @@
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DesignationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\FinancialYearController.cs" />
     <Compile Include="Controllers\GodownTransferController.cs" />
@@ -347,6 +350,9 @@
     <Compile Include="Models\DeptUsedSch.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Designationtbl.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DueSummary_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -435,9 +441,6 @@
       <DependentUpon>posMVCEntity.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>posMVCEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductInfo.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductWiseBestSales_Result.cs">
@@ -604,6 +607,7 @@
     </Compile>
     <Compile Include="Report\mvcReport.cs">
       <DependentUpon>mvcReport.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
@@ -618,6 +622,8 @@
     <Compile Include="ViewModel\AccountLedgerResponse.cs" />
     <Compile Include="ViewModel\CashBookResponse.cs" />
     <Compile Include="ViewModel\CustomerLedgerResultResponse.cs" />
+    <Compile Include="ViewModel\DEPARTMENTResponse.cs" />
+    <Compile Include="ViewModel\DesignationtblResponse.cs" />
     <Compile Include="ViewModel\DueSummaryResponse.cs" />
     <Compile Include="ViewModel\FinancialYearView.cs" />
     <Compile Include="ViewModel\HomePageStatistices.cs" />
@@ -896,6 +902,7 @@
     <Content Include="Scripts\app\Color.js" />
     <Content Include="Scripts\app\CommonLoader.js" />
     <Content Include="Scripts\app\Customer.js" />
+    <Content Include="Scripts\app\Department.js" />
     <Content Include="Scripts\app\Design.js" />
     <Content Include="Scripts\app\Employee.js" />
     <Content Include="Scripts\app\FinishGoodsReport.js" />
@@ -1238,6 +1245,8 @@
     <Content Include="Views\Sales\ItemList.cshtml" />
     <Content Include="Views\Users\CreateRoles.cshtml" />
     <Content Include="Views\Sales\DeliveredList.cshtml" />
+    <Content Include="Views\Department\Department.cshtml" />
+    <Content Include="Views\Designation\Designation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

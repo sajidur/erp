@@ -123,11 +123,17 @@ E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csproj.CopyComplete
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptStockInProcessing.rdlc
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptReceiveVoucher.rdlc
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptPaymentVoucher.rdlc
 D:\Project\RexProject\erp\POS_MVC\bin\SqlServerTypes\x64\msvcr120.dll
 D:\Project\RexProject\erp\POS_MVC\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
 D:\Project\RexProject\erp\POS_MVC\bin\SqlServerTypes\x86\msvcr120.dll
 D:\Project\RexProject\erp\POS_MVC\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
 D:\Project\RexProject\erp\POS_MVC\bin\Report\RPT\rptStockOutForProcessing.rdlc
+D:\Project\RexProject\erp\POS_MVC\bin\Report\RPT\rptStockInProcessing.rdlc
+D:\Project\RexProject\erp\POS_MVC\bin\Report\RPT\rptReceiveVoucher.rdlc
+D:\Project\RexProject\erp\POS_MVC\bin\Report\RPT\rptPaymentVoucher.rdlc
 D:\Project\RexProject\erp\POS_MVC\bin\RiceMill_MVC.dll.config
 D:\Project\RexProject\erp\POS_MVC\bin\RiceMill_MVC.dll
 D:\Project\RexProject\erp\POS_MVC\bin\RiceMill_MVC.pdb
@@ -180,11 +186,7 @@ D:\Project\RexProject\erp\POS_MVC\bin\System.Web.Razor.xml
 D:\Project\RexProject\erp\POS_MVC\bin\System.Web.WebPages.xml
 D:\Project\RexProject\erp\POS_MVC\bin\System.Web.WebPages.Deployment.xml
 D:\Project\RexProject\erp\POS_MVC\bin\System.Web.WebPages.Razor.xml
-D:\Project\RexProject\erp\POS_MVC\obj\Debug\RexERP.csprojResolveAssemblyReference.cache
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.cache
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
-E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptStockInProcessing.rdlc
-E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptReceiveVoucher.rdlc
-E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptPaymentVoucher.rdlc

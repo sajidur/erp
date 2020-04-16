@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DB_9B34E1_erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DB_9B34E1_erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AccountGroup">
     <Key>
       <PropertyRef Name="Id" />
@@ -375,8 +375,18 @@
     <Property Name="DeptId" Type="int" Nullable="false" />
     <Property Name="SchId" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Designationtbl">
+    <Key>
+      <PropertyRef Name="DesignationID" />
+    </Key>
+    <Property Name="DesignationID" Type="int" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EmOpLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -418,13 +428,6 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Property Name="Remarks" Type="nvarchar(max)" />
     <Property Name="LedgerId" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="EXCNOTES">
-          <Property Name="USERID" Type="int" />
-          <Property Name="ATTDATE" Type="datetime" />
-          <Property Name="NOTES" Type="varchar" MaxLength="200" />
-        </EntityType>-->
   <EntityType Name="FaceTemp">
     <Key>
       <PropertyRef Name="TEMPLATEID" />
@@ -680,12 +683,6 @@ warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defi
     <Property Name="SCHCLASSID" Type="int" />
     <Property Name="OverTime" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Ones">
-          <Property Name="Id" Type="int" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
   <EntityType Name="PartyBalance">
     <Key>
       <PropertyRef Name="PartyBalanceId" />
@@ -1032,7 +1029,7 @@ warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined 
     <Property Name="FullControl" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'rexerp.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ServerLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -1095,15 +1092,6 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
     <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="SMSHistory">
-          <Property Name="CustomerId" Type="int" />
-          <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="SMSText" Type="nvarchar" MaxLength="500" />
-          <Property Name="CreatedDate" Type="date" />
-          <Property Name="CustomerType" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
   <EntityType Name="StockIn">
     <Key>
       <PropertyRef Name="Id" />
@@ -1176,16 +1164,6 @@ warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key de
     <Property Name="Remarks" Type="nvarchar(max)" />
     <Property Name="LedgerId" Type="int" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="SystemLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -1211,12 +1189,6 @@ warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key de
     <Property Name="UpdateDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="TBKEY">
-          <Property Name="PreName" Type="varchar" MaxLength="12" />
-          <Property Name="ONEKEY" Type="int" />
-        </EntityType>-->
   <EntityType Name="TBSMSALLOT">
     <Key>
       <PropertyRef Name="REFERENCE" />
@@ -1468,7 +1440,7 @@ warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined
     <Property Name="SetDate" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UsersMachines">
     <Key>
       <PropertyRef Name="ID" />
@@ -1529,35 +1501,6 @@ warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key
     <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="ProductInfo">
-    <Key>
-      <PropertyRef Name="DesignName" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="ColorName" />
-      <PropertyRef Name="DesignCode" />
-      <PropertyRef Name="ProductName" />
-      <PropertyRef Name="Code" />
-      <PropertyRef Name="ProductInfo" />
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="SBarCode" Type="nvarchar" MaxLength="50" />
-    <Property Name="PBarCode" Type="nvarchar" MaxLength="50" />
-    <Property Name="Barcode1" Type="nvarchar" MaxLength="50" />
-    <Property Name="Barcode2" Type="nvarchar" MaxLength="50" />
-    <Property Name="CostPrice" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="RetailPrice" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="WholeSalesPrice" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="DesignName" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ColorName" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="DesignCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ProductName" Type="nvarchar" MaxLength="250" Nullable="false" />
-    <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="ProductInfo" Type="nvarchar" MaxLength="1303" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_AccountLedger_AccountGroup">
     <End Role="AccountGroup" Type="Self.AccountGroup" Multiplicity="0..1" />
@@ -2460,7 +2403,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <Parameter Name="ReportType" Type="int" Mode="In" />
     <Parameter Name="yearId" Type="int" Mode="In" />
   </Function>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="GetBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ledgerId" Type="int" Mode="In" />
     <Parameter Name="yearId" Type="int" Mode="In" />
@@ -2475,9 +2417,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
   <Function Name="IncomeStatement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fromDate" Type="datetime" Mode="In" />
     <Parameter Name="toDate" Type="datetime" Mode="In" />
-  </Function>
-  <Function Name="NumberToWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-    <Parameter Name="Number" Type="bigint" Mode="In" />
   </Function>
   <Function Name="ProductWiseBestSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="ReceiveReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2504,36 +2443,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
   <Function Name="rptSalesInvoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="SalesInvoice" Type="nvarchar" Mode="In" />
   </Function>
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="StockOutChallanList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fromDate" Type="date" Mode="In" />
     <Parameter Name="toDate" Type="date" Mode="In" />
@@ -2568,6 +2477,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DEPARTMENTS" EntityType="Self.DEPARTMENTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSchs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Designationtbl" EntityType="Self.Designationtbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FaceTemp" EntityType="Self.FaceTemp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
@@ -2606,7 +2516,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBSMSALLOT" EntityType="Self.TBSMSALLOT" Schema="dbo" store:Type="Tables" />
@@ -2659,25 +2568,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     [UsersMachines].[USERID] AS [USERID], 
     [UsersMachines].[DEVICEID] AS [DEVICEID]
     FROM [dbo].[UsersMachines] AS [UsersMachines]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ProductInfo].[SBarCode] AS [SBarCode], 
-    [ProductInfo].[PBarCode] AS [PBarCode], 
-    [ProductInfo].[Barcode1] AS [Barcode1], 
-    [ProductInfo].[Barcode2] AS [Barcode2], 
-    [ProductInfo].[CostPrice] AS [CostPrice], 
-    [ProductInfo].[RetailPrice] AS [RetailPrice], 
-    [ProductInfo].[WholeSalesPrice] AS [WholeSalesPrice], 
-    [ProductInfo].[DesignName] AS [DesignName], 
-    [ProductInfo].[Name] AS [Name], 
-    [ProductInfo].[ColorName] AS [ColorName], 
-    [ProductInfo].[DesignCode] AS [DesignCode], 
-    [ProductInfo].[ProductName] AS [ProductName], 
-    [ProductInfo].[Code] AS [Code], 
-    [ProductInfo].[ProductInfo] AS [ProductInfo], 
-    [ProductInfo].[Id] AS [Id]
-    FROM [dbo].[ProductInfo] AS [ProductInfo]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_AccountLedger_AccountGroup" Association="Self.FK_AccountLedger_AccountGroup">
       <End Role="AccountGroup" EntitySet="AccountGroup" />

@@ -1358,33 +1358,6 @@
     <Property Name="USERID" Type="Int32" Nullable="false" />
     <Property Name="DEVICEID" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="ProductInfo">
-    <Key>
-      <PropertyRef Name="DesignName" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="ColorName" />
-      <PropertyRef Name="DesignCode" />
-      <PropertyRef Name="ProductName" />
-      <PropertyRef Name="Code" />
-      <PropertyRef Name="ProductInfo1" />
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="SBarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PBarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Barcode1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Barcode2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CostPrice" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="RetailPrice" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="WholeSalesPrice" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="DesignName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ColorName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DesignCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ProductName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ProductInfo1" Type="String" MaxLength="1303" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Id" Type="Int32" Nullable="false" />
-  </EntityType>
   <Association Name="FK_AccountLedger_AccountGroup">
     <End Role="AccountGroup" Type="Self.AccountGroup" Multiplicity="0..1" />
     <End Role="AccountLedger" Type="Self.AccountLedger" Multiplicity="*" />
@@ -1821,7 +1794,6 @@
     <EntitySet Name="EmOpLogs" EntityType="Self.EmOpLog" />
     <EntitySet Name="ServerLogs" EntityType="Self.ServerLog" />
     <EntitySet Name="UsersMachines" EntityType="Self.UsersMachine" />
-    <EntitySet Name="ProductInfoes" EntityType="Self.ProductInfo" />
     <AssociationSet Name="FK_AccountLedger_AccountGroup" Association="Self.FK_AccountLedger_AccountGroup">
       <End Role="AccountGroup" EntitySet="AccountGroups" />
       <End Role="AccountLedger" EntitySet="AccountLedgers" />
@@ -2234,6 +2206,7 @@
       <End Role="SalesMaster" EntitySet="SalesMasters" />
       <End Role="SalesDelivery" EntitySet="SalesDeliveries" />
     </AssociationSet>
+    <EntitySet Name="Designationtbls" EntityType="DB_9B34E1_erpModel.Designationtbl" />
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3299,4 +3272,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Designationtbl">
+    <Key>
+      <PropertyRef Name="DesignationID" />
+    </Key>
+    <Property Name="DesignationID" Type="Int32" Nullable="false" />
+    <Property Name="DesignationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

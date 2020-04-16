@@ -26,7 +26,7 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.ContraMaster" Width="1.5" PointX="29" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.CreditNoteMaster" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Customer" Width="1.5" PointX="10.375" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9B34E1_erpModel.DEPARTMENT" Width="1.5" PointX="13.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.DEPARTMENT" Width="1.5" PointX="14.25" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.DeptUsedSch" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.Employee" Width="1.5" PointX="23.75" PointY="34.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.FaceTemp" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
@@ -80,7 +80,6 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.EmOpLog" Width="1.5" PointX="29.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.ServerLog" Width="1.5" PointX="30.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.UsersMachine" Width="1.5" PointX="30.75" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DB_9B34E1_erpModel.ProductInfo" Width="1.5" PointX="30.75" PointY="23.75" IsExpanded="true" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_AccountLedger_AccountGroup" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_AdvancePayment_Ledger" ManuallyRouted="false" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_ContraDetails_Ledger" ManuallyRouted="false" />
@@ -165,6 +164,7 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDelivery" Width="1.5" PointX="23.75" PointY="20.625" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_Customer" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_SalesMaster" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Designationtbl" Width="1.5" PointX="5.375" PointY="15.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

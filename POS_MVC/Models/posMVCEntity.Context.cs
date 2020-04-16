@@ -102,7 +102,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<EmOpLog> EmOpLogs { get; set; }
         public virtual DbSet<ServerLog> ServerLogs { get; set; }
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
-        public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<StockIn> StockIns { get; set; }
@@ -114,6 +113,7 @@ namespace RexERP_MVC.Models
         public virtual DbSet<WareHouse> WareHouses { get; set; }
         public virtual DbSet<SalesDetail> SalesDetails { get; set; }
         public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
+        public virtual DbSet<Designationtbl> Designationtbls { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

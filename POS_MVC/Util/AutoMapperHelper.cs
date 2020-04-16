@@ -45,6 +45,9 @@ namespace RexERP_MVC.Util
 
 
                 cfg.CreateMap<Size, SizeResponse>().ReverseMap();
+                cfg.CreateMap<DEPARTMENT, DEPARTMENTResponse>().ReverseMap();
+                cfg.CreateMap<Designationtbl, DesignationtblResponse>().ReverseMap();
+
                 });
         }
     }

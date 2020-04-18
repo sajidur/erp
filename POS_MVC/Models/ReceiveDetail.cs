@@ -18,6 +18,8 @@ namespace RexERP_MVC.Models
         public int ReceiveMasterId { get; set; }
         public int ProductId { get; set; }
         public Nullable<int> WarehouseId { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
         public decimal Qty { get; set; }
         public Nullable<decimal> Rate { get; set; }
         public decimal Amount { get; set; }
@@ -26,13 +28,11 @@ namespace RexERP_MVC.Models
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
-        public Nullable<int> SizeId { get; set; }
-        public Nullable<int> BrandId { get; set; }
     
-        public virtual ReceiveMaster ReceiveMaster { get; set; }
         public virtual Brand Brand { get; set; }
-        public virtual Size Size { get; set; }
         public virtual Product Product { get; set; }
+        public virtual ReceiveMaster ReceiveMaster { get; set; }
+        public virtual Size Size { get; set; }
         public virtual WareHouse WareHouse { get; set; }
     }
 }

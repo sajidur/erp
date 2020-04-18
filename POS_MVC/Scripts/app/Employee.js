@@ -1,9 +1,4 @@
 ﻿
-$(document).ready(function () {
-    LoadEmployeeList();
-});
-
-
 function LoadEmployeeList() {
     var url = '/Employee/GetAll';
     $.ajax({
@@ -62,8 +57,7 @@ function Save() {
         alert('Emloyee Code can not be empty.');
         return false;
     }
-    var object = new Object();
-    
+    var object = new Object();  
     object.Code = $('#txtCode').val();
     object.Designation = $('#txtDesignation').val();
     object.FirstName = $('#txtFirstName').val();
@@ -77,17 +71,16 @@ function Save() {
     object.ZipCode = $('#txtZipCode').val();
     object.Salary = $('#txtSalary').val();
     object.Remarks = $('#txtRemarks').val();
-
-
     $.ajax({
         url: '/Employee/Create',
         method: 'post',
         dataType: 'json',
         async: false,
         data: {
-            employee: object
+            request: object
         },
         success: function (data) {
+            $("#hdId").val(data.Id);
             ShowNotification("1", "Employee Saved!!");
             ResetForm();
             LoadEmployeeList();
@@ -119,6 +112,10 @@ $("#btnUpdate").click(function () {
     object.ZipCode = $('#txtZipCode').val();
     object.Salary = $('#txtSalary').val();
     object.Remarks = $('#txtRemarks').val();
+    var file = $('#photoEmployeePhoto').get(0).files;
+    var data = new FormData;
+    data.append("ImageFile", file[0]);
+    object.imageView = data;
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -207,6 +204,7 @@ function FormDataAsObject() {
 function UploadImage() {
     var file = $('#photoEmployeePhoto').get(0).files;
     var data = new FormData;
+    data.append("EmpId", $("#hdId").val());
     data.append("ImageFile", file[0]);
     $.ajax({
         url: '/Employee/ImageUpload',
@@ -215,7 +213,7 @@ function UploadImage() {
         contentType : false,
         processData : false,
         success: function (imgId) {
-
+            ShowNotification("1", "Employee Deleted!!");
         },
         error: function () {
             ShowNotification("3", "Something Wrong!!");

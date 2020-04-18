@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using RexERP_MVC.Models;
 using RexERP_MVC.ViewModel;
 
 namespace RexERP_MVC.Controllers

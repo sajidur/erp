@@ -1,0 +1,345 @@
+﻿@using RexERP_MVC.Util
+@model WebView.Controllers.EmployeeAttendanceController
+@{
+    ViewBag.Title = "Manual Attendance";
+    ViewBag.Caption = ".: " + ViewBag.Title + " :.";
+}
+
+@section Scripts {
+    <script src="~/Scripts/app/Employee.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+}
+<div class="card">
+    <fieldset>
+        <table id="date">
+            <tr>
+                <td>
+                    Attendance Date
+                </td>
+                <td>
+                    <input id="findAttendanceDate" type="date" value="" />
+                    <input name="findAttendanceDate" type="text" size="1" hidden="hidden" />
+                </td>
+                <td>
+                    <a id="btn_find" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">Find</a>
+                </td>
+            </tr>
+        </table>
+        <div style="overflow: auto">
+            <form id="frm">
+                @*<fieldset class="ui-widget-content ui-corner-all input_form_div">*@
+                <table width="100%" border="0" cellpadding="1" cellspacing="1" class="input_form_tbl">
+                    <tr nowrap>
+                        <td width="139" nowrap style="width: 100px">
+                            <label>Employee ID</label>
+                        </td>
+                        <td width="150">
+                            <input id="EmployeeId" name="EmployeeId" type="text" class="form-control" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Employee</label>
+                        </td>
+                        <td colspan="3">
+                            <input id="empId" name="empId" type="hidden" />
+                            <input id="btnEmployee" name="btnEmployee" type="button" data-toggle="modal" data-target="#employeeModal" style="cursor: pointer;" class="ui-corner-all ui-state-default" value="Search.." />
+                            <input id="txtFirstName" name="txtFirstName" class="form-control" type="text" disabled="disabled" />
+                            <input id="txtLastName" name="txtLastName" class="form-control" type="text" disabled="disabled" />
+                    </tr>
+                    <tr hidden>
+                        <td>
+                            <label>Title</label>
+                        </td>
+                        <td colspan="3">
+                            <input id="TitleInfoId" name="TitleInfoId" hidden class="textright" type="text" size="10" maxlength="7" disabled="disabled" />
+                            <input id="btnTitleInfo" name="btnTitleInfo" type="button" style="cursor: pointer;" class="ui-corner-all ui-state-default" value=".." />
+                            <input id="TitleInfoName" name="TitleInfo" type="text" size="56" maxlength="50" class="editable upper" disabled="disabled" />
+                    </tr>
+                    <tr hidden>
+                        <td>
+                            <label>Division</label>
+                        </td>
+                        <td colspan="3">
+                            <input id="DivisionId" name="DivisionId" hidden class="textright" type="text" size="10" maxlength="7" disabled="disabled" />
+                            <input id="btnDivision" name="btnDivision" type="button" style="cursor: pointer;" class="ui-corner-all ui-state-default" value=".." disabled />
+                            <input id="DivisionName" name="Division" type="text" size="56" maxlength="50" class="editable upper" disabled="disabled" />
+                    </tr>
+                    <tr>
+                        <td>
+                            Attendance Date
+                        </td>
+                        <td>
+                            <input id="AttendanceDate" class="easyui-datebox" title="mm/dd/yyyy" type="text" size="10" value="@DateTime.Today.ToShortDateString()" />
+                            <input name="AttendanceDate" type="text" size="1" hidden="hidden" />
+                        </td>
+                        <td>
+                            <select id="DateRange">
+                                <option value="false">Only</option>
+                                <option value="true">To</option>
+                            </select>
+                        </td>
+                        <td hidden id="ToDate">
+                            <input id="AttendanceDateEnd" class="easyui-datebox" title="mm/dd/yyyy" type="text" size="10" value="@DateTime.Today.ToShortDateString()" />
+                            <input name="AttendanceDateEnd" type="text" size="1" hidden="hidden" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label>Remark</label>
+                        </td>
+                        <td colspan="3">
+                            <label>
+                                <textarea name="Remark" id="Remark" cols="60" rows="3"></textarea>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Shift </label>
+                        </td>
+                        <td>
+                            <select id="Shift" name="Shift">
+                                @foreach (int item in Enum.GetValues(typeof(Constant.WorkingShift)))
+                                {
+                                    <option value="@item">@Enum.GetName(typeof(Constant.WorkingShift), item)</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Status </label>
+                        </td>
+                        <td>
+                            <select id="Status" name="Status">
+                                @foreach (int item in Enum.GetValues(typeof(Constant.AttendanceStatus)))
+                                {
+                                    <option value="@item">@Enum.GetName(typeof(Constant.AttendanceStatus), item)</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            CheckIn
+                        </td>
+                        <td width="160">
+                            <input id="CheckIn" name="CheckIn" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                        </td>
+                    </tr>
+                    <tr hidden>
+                        <td>
+                            BreakOut
+                        </td>
+                        <td width="160">
+                            <input id="BreakOut" name="BreakOut" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                        </td>
+                    </tr>
+                    <tr hidden>
+                        <td>
+                            BreakIn
+                        </td>
+                        <td width="160">
+                            <input id="BreakIn" name="BreakIn" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            CheckOut
+                        </td>
+                        <td width="160">
+                            <input id="CheckOut" name="CheckOut" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div class="modal" id="employeeModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Employee List</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="col-md-12 table-responsive" id="div-employeeGroup">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-w-m btn-info" data-style="expand-left" id="form_btn_save" name="form_btn_save" onclick="SaveAttendance();"><i class="fa fa-save"></i>&nbsp; Save</button>
+        </div>
+    </fieldset>
+    <div>
+        <h3>Attendance </h3>
+        <table id="list">
+        </table>
+    </div>
+</div>
+<script id="templateEmployeeGroupModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="employeeGroupTableModal">
+        <thead>
+        <th>Code</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+            {{#EmployeeGroupSearch}}
+            <tr>
+                <td>{{Code}}</td>
+                <td> {{FirstName}}</td>
+                <td> {{LastName}}</td>
+                <td> {{Email}}</td>
+                <td> {{Phone}}</td>
+                <td class="action-sm">
+                    <a class="btn btn-primary btn-xs" onclick="LoadToAdd('{{Id}}','{{Code}}','{{FirstName}}','{{LastName}}')"><i class="fa fa-edit"></i> Select</a>
+                </td>
+            </tr>
+
+            {{/EmployeeGroupSearch}}
+        </tbody>
+    </table>
+</script>
+<script>
+    $(document).ready(function () {
+           var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            $('#AttendanceDate').val(today);
+        LoadEmployeeList();
+        $("#list").jqGrid({
+            url: '/EmployeeAttendance/GetList',
+            postData: { 'ParentId':0,'findDate':$('#AttendanceDate').val() },
+            datatype: "json",
+            colNames: ['ID', 'Employee ID', 'Name', 'Attendance Date', 'Shift', 'Status', 'CheckIn', 'BreakOut', 'BreakIn', 'CheckOut', 'Remark', 'Created At', 'Updated At'],
+            colModel: [
+                { name: 'id', index: 'id', width: 20, align: "center" },
+                { name: 'employeeid', index: 'employeeid', width: 50, hidden: true },
+                { name: 'employeename', index: 'employeename', width: 150 },
+                { name: 'attendancedate', index: 'attendancedate', search: true, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
+                { name: 'shift', index: 'shift', width: 50, stype: 'select', editoptions: { value: getSelectOption("#Shift") } },
+                { name: 'status', index: 'status', width: 50, stype: 'select', editoptions: { value: getSelectOption("#Status") } },
+                { name: 'checkin', index: 'checkin', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
+                { name: 'breakout', index: 'breakout', hidden: true, search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
+                { name: 'breakin', index: 'breakin', hidden: true, search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
+                { name: 'checkout', index: 'checkout', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
+                { name: 'remark', index: 'remark', width: 100 },
+                { name: 'createdat', index: 'createdat', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
+                { name: 'updatedat', index: 'updatedat', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
+            ],
+            page: '1',
+            pager: $('#pager'),
+            rowNum: 20,
+            rowList: [20, 30, 60],
+            sortname: 'id',
+            del: true,
+            edit:true,
+            viewrecords: true,
+            scrollrows: true,
+            scrollerbar:true,
+            shrinkToFit: false,
+            sortorder: "DESC",
+            width: $("#toolbar").width(),
+            height: $(window).height() - 220,
+            ondblClickRow: function (rowid) {
+                $("#btn_edit").trigger("click");
+            },
+            gridComplete:
+                function () {
+                    var ids = $(this).jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var cl = ids[i];
+                        rowShift = document.getElementById("Shift").options[$(this).getRowData(cl).shift].text;
+                        $(this).jqGrid('setRowData', ids[i], { shift: rowShift });
+
+                        rowStatus = document.getElementById("Status").options[$(this).getRowData(cl).status].text;
+                        $(this).jqGrid('setRowData', ids[i], { status: rowStatus });
+                    }
+                    //var ids = $(this).jqGrid('getDataIDs');
+                    //for (var i = 0; i < ids.length; i++) {
+                    //    var cl = ids[i];
+                    //    rowDel = $(this).getRowData(cl).deletedimg;
+                    //    if (rowDel == 'true') {
+                    //        img = "<img src ='" + base_url + "content/assets/images/remove.png' title='Data has been deleted !' width='16px' height='16px'>";
+
+                    //    } else {
+                    //        img = "";
+                    //    }
+                    //    $(this).jqGrid('setRowData', ids[i], { deletedimg: img });
+                    //}
+                }
+
+        });//END GRID
+       // jQuery('#list').jqGrid('filterToolbar',{stringResult:true, searchOnEnter:true});
+        $('#list').jqGrid('filterToolbar', {
+    stringResult: true
+});
+
+    });
+    function ClearErrorMessage() {
+        $('span[class=errormessage]').text('').remove();
+    }
+    function LoadToAdd(Id, Code, FirstName, LastName) {
+                $("#empId").val(Id);
+                 $("#txtFirstName").val(FirstName);
+                $("#txtLastName").val(LastName);
+        $("#EmployeeId").val(Code);
+           $('#employeeModal').modal('toggle');
+
+    }
+    function SaveAttendance() {
+        ClearErrorMessage();
+
+        var submitURL ='/EmployeeAttendance/Insert';
+        $.ajax({
+            contentType: "application/json",
+            type: 'POST',
+            url: submitURL,
+            data: JSON.stringify({
+                EmployeeId: $("#empId").val(), AttendanceDate: $('#AttendanceDate').val(), AttendanceDateEnd: $('#AttendanceDateEnd').val(), IsDateRange: $("#DateRange").val(),
+                Shift: document.getElementById("Shift").selectedIndex, Status: document.getElementById("Status").selectedIndex,
+                CheckIn: $("#CheckIn").val(), CheckOut: $("#CheckOut").val(),
+                BreakIn: $("#BreakIn").val(), BreakOut: $("#BreakOut").val(),
+            }),
+            async: false,
+            cache: false,
+            timeout: 30000,
+            error: function () {
+                return false;
+            },
+            success: function (result) {
+                if (JSON.stringify(result.Errors) != '{}') {
+                    for (var key in result.Errors) {
+                        if (key != null && key != undefined && key != 'Generic') {
+                            $('input[name=' + key + ']').addClass('errormessage').after('<span class="errormessage">**' + result.Errors[key] + '</span>');
+                            $('textarea[name=' + key + ']').addClass('errormessage').after('<span class="errormessage">**' + result.Errors[key] + '</span>');
+                        }
+                        else {
+                            $.messager.alert('Warning', result.Errors[key], 'warning');
+                        }
+                    }
+                }
+                else {
+                    ReloadGrid();
+                    $("#form_div").dialog('close')
+                }
+            }
+        });
+    }
+</script>

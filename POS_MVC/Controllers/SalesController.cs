@@ -7,11 +7,8 @@ using RexERP_MVC.Util;
 using RexERP_MVC.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RexERP_MVC.Controllers

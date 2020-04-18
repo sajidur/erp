@@ -190,4 +190,9 @@ D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.cache
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
-D:\Project\RexProject\erp\POS_MVC\obj\Debug\RexERP.csprojResolveAssemblyReference.cache
+E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Buffers.dll
+E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Runtime.CompilerServices.Unsafe.dll
+E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Buffers.xml
+E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Runtime.CompilerServices.Unsafe.xml
+E:\My Work\Rex ERP\erp\POS_MVC\bin\log4net.dll
+E:\My Work\Rex ERP\erp\POS_MVC\bin\log4net.xml

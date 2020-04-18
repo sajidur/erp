@@ -13,8 +13,16 @@
                                         Employee Code :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="text" id="txtCode" name="txtCode" class="form-control"/>
+                                        <input type="text" id="txtCode" name="txtCode" class="form-control" />
                                     </div>
+                                    <label class="col-md-2 control-label">
+                                        Employee Photo :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="file" id="photoEmployeePhoto" name="photoEmployeePhoto" class="form-control" />
+                                        <a href="#" class="btn btn-sm btn-danger" onclick="UploadImage()">Upload</a>
+                                    </div>
+                                    <div class="col-md-4 thumbnail" id="UploadedImage"></div>
                                 </div>
                                 
                                 <div class="form-group">
@@ -115,18 +123,6 @@
                                         <input type="text" id="txtSalary" name="txtSalary" class="form-control" />
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">
-                                        Employee Photo :
-                                    </label>
-                                    <div class="col-md-4">
-                                        <input type="file" id="photoEmployeePhoto" name="photoEmployeePhoto" class="form-control" />
-                                        <a href="#" class="btn btn-sm btn-danger" onclick="UploadImage()">Upload</a>
-                                    </div>
-                                    <div class="col-md-4 thumbnail" id="UploadedImage"></div>
-                                </div>
-                                
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Remarks :
@@ -187,7 +183,7 @@
             <td> {{LastName}}</td>
             <td> {{Email}}</td>
             <td> {{Phone}}</td>
-            <td> <img src="data:image/png;base64,{{Photo}}"/></td>
+            <td> <img src="{{PhotoBase64}}"/></td>
             <td class="action-sm">
                 <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
             </td>
@@ -199,3 +195,9 @@
 </script>
 
 <script src="~/Scripts/app/Employee.js"></script>
+<script>
+    $(document).ready(function () {
+    LoadEmployeeList();
+});
+
+</script>

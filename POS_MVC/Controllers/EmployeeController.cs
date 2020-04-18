@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using RexERP_MVC.BAL;
 using RexERP_MVC.Models;
@@ -35,21 +32,16 @@ namespace RexERP_MVC.Controllers
         [HttpPost]
         public ActionResult Create(EmployeeRequest request)
         {
-            var employee = new Employee();
-
             if (ModelState.IsValid)
             {
-                var file = request.imageView.ImageFile;
-                if (file != null)
-                {
-                    //file.SaveAs(Server.MapPath("/UploadEmployeeImage" + file.FileName));
-                    BinaryReader reader = new BinaryReader(file.InputStream);
-                    ImageByte = reader.ReadBytes(file.ContentLength);
-                    employee.Photo = ImageByte;
-                }
-                employee.CreationDate = DateTime.Now;
-                employee.Creator = CurrentSession.GetCurrentSession().UserName;
-                employee.IsActive = true;
+                //var file = request.imageView.ImageFile;
+                //if (file != null)
+                //{
+                //    //file.SaveAs(Server.MapPath("/UploadEmployeeImage" + file.FileName));
+                //    BinaryReader reader = new BinaryReader(file.InputStream);
+                //    ImageByte = reader.ReadBytes(file.ContentLength);
+                //    employee.Photo = ImageByte;
+                //}
                 AccountLedger ledger = new AccountLedger();
                 ledger.AccountGroupId = 1;
                 ledger.Address = request.Address;
@@ -60,22 +52,39 @@ namespace RexERP_MVC.Controllers
                 ledger.CreditLimit = 0.0m;
                 ledger.CreditPeriod = 1;
                 ledger.CrOrDr = "Dr";
-                ledger.Email = employee.Email;
+                ledger.Email = request.Email;
                 ledger.IsDefault = false;
-                ledger.LedgerName = employee.Code+"-"+employee.FirstName;
-                ledger.Mobile = employee.Phone;
+                ledger.LedgerName = request.Code + "-" + request.FirstName;
+                ledger.Mobile = request.Phone;
                 ledger.OpeningBalance = 0.0m;
-               // var saved = Accounts.Save(ledger);
-              //  employee.LedgerId = saved.Id;
-                employee = db.Save(employee);
+                var saved = Accounts.Save(ledger);
+                var employee = new Employee()
+                {
+                    CreationDate = DateTime.Now,
+                    Creator = CurrentSession.GetCurrentSession().UserName,
+                    IsActive = true,
+                    Code = request.Code,
+                    Address = request.Address,
+                    City = request.City,
+                    Email = request.Email,
+                    FatherName = request.FatherName,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    MotherName = request.MotherName,
+                    Phone = request.Phone,
+                    Remarks = request.Remarks,
+                    Salary = request.Salary,
+                    ZipCode = request.ZipCode,
+                    LedgerId = saved.Id
+                };
+                var res=db.Save(employee);
+                return Json(new {Id=res.Id }, JsonRequestBehavior.AllowGet);
             }
-
-            return Json(employee, JsonRequestBehavior.AllowGet);
+            return Json("Failed", JsonRequestBehavior.AllowGet);
         }
         private byte[] ImageByte = null;
         public void ImageUpload(ImageViewModel model)
         {
-            int imgId = 0;
             var file = model.ImageFile;
             if (file != null)
             {
@@ -83,6 +92,9 @@ namespace RexERP_MVC.Controllers
                 BinaryReader reader = new BinaryReader(file.InputStream);
                 ImageByte = reader.ReadBytes(file.ContentLength);
                 ImageViewModel.bufferByte = ImageByte;
+                var employee = db.GetById(model.EmpId);
+                employee.Photo = ImageByte;
+                db.Update(employee, model.EmpId);
             }
         }
 
@@ -94,8 +106,8 @@ namespace RexERP_MVC.Controllers
             {
                 return HttpNotFound();
             }
-            //var result = AutoMapper.Mapper.Map<List<Employee>, List<EmployeeResponse>>(employees);
-            return Json(employees, JsonRequestBehavior.AllowGet);
+            var result = AutoMapper.Mapper.Map<List<Employee>, List<EmployeeResponse>>(employees);
+            return Json(result, JsonRequestBehavior.AllowGet);
 
         }
         public ActionResult GetAllByName(string Name)

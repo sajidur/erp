@@ -3,10 +3,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
-using System.Collections.Generic;
 using RexERP_MVC.BAL;
-using System.IO;
 namespace RexERP_MVC.BLL
 {
     public class GlobalClass

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DB_9B34E1_erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AccountGroup">
     <Key>
       <PropertyRef Name="Id" />
@@ -183,6 +183,28 @@
     <Property Name="CreatedDate" Type="date" />
     <Property Name="CreatedBy" Type="int" />
   </EntityType>
+  <EntityType Name="BranchOffice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="City" Type="nvarchar(max)" />
+    <Property Name="PostalCode" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="FaxNumber" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="Website" Type="nvarchar(max)" />
+    <Property Name="NPWP" Type="nvarchar(max)" />
+    <Property Name="NPWPDate" Type="datetime" />
+    <Property Name="CompanyInfoId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
   <EntityType Name="Brand">
     <Key>
       <PropertyRef Name="Id" />
@@ -265,6 +287,26 @@
     <Property Name="UpdateDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="CompanyInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="City" Type="nvarchar(max)" />
+    <Property Name="PostalCode" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="FaxNumber" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="Website" Type="nvarchar(max)" />
+    <Property Name="NPWP" Type="nvarchar(max)" />
+    <Property Name="NPWPDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
   <EntityType Name="ContraDetails">
     <Key>
       <PropertyRef Name="Id" />
@@ -346,11 +388,25 @@
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="LedgerId" Type="int" />
   </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="BranchOfficeId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
   <EntityType Name="DEPARTMENTS">
     <Key>
-      <PropertyRef Name="DEPTID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="DEPTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DEPTNAME" Type="varchar" MaxLength="30" />
     <Property Name="SUPDEPTID" Type="int" Nullable="false" />
     <Property Name="InheritParentSch" Type="smallint" />
@@ -377,16 +433,30 @@
   </EntityType>
   <EntityType Name="Designationtbl">
     <Key>
-      <PropertyRef Name="DesignationID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="DesignationID" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DesignationName" Type="nvarchar" MaxLength="50" />
     <Property Name="DepartmentID" Type="int" />
     <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
     <Property Name="CreateDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="Division">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EmOpLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -428,6 +498,122 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="Remarks" Type="nvarchar(max)" />
     <Property Name="LedgerId" Type="int" />
   </EntityType>
+  <EntityType Name="EmployeeAttendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AttendanceDate" Type="datetime" Nullable="false" />
+    <Property Name="Shift" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CheckIn" Type="datetime" Nullable="false" />
+    <Property Name="CheckOut" Type="datetime" />
+    <Property Name="BreakOut" Type="datetime" />
+    <Property Name="BreakIn" Type="datetime" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="BreakMinutes" Type="int" Nullable="false" />
+    <Property Name="BreakEarlyMinutes" Type="int" Nullable="false" />
+    <Property Name="BreakLateMinutes" Type="int" Nullable="false" />
+    <Property Name="CheckEarlyMinutes" Type="int" Nullable="false" />
+    <Property Name="CheckLateMinutes" Type="int" Nullable="false" />
+    <Property Name="WorkTimeMinutes" Type="int" Nullable="false" />
+    <Property Name="OverTimeMinutes" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeEducation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Institute" Type="nvarchar(max)" />
+    <Property Name="Major" Type="nvarchar(max)" />
+    <Property Name="Level" Type="nvarchar(max)" />
+    <Property Name="EnrollmentDate" Type="datetime" Nullable="false" />
+    <Property Name="GraduationDate" Type="datetime" />
+    <Property Name="GradeMark" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Formal" Type="bit" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeLeave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="LeaveInterval" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeLoan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="LoanDate" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="SalaryItemId" Type="int" Nullable="false" />
+    <Property Name="Interest" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="InstallmentValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="InstallmentTimes" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeLoanDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeLoanId" Type="int" Nullable="false" />
+    <Property Name="InstallmentMonth" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EmployeeWorkingTime">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkingTimeId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EXCNOTES">
+          <Property Name="USERID" Type="int" />
+          <Property Name="ATTDATE" Type="datetime" />
+          <Property Name="NOTES" Type="varchar" MaxLength="200" />
+        </EntityType>-->
   <EntityType Name="FaceTemp">
     <Key>
       <PropertyRef Name="TEMPLATEID" />
@@ -454,6 +640,132 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="ExtraDate" Type="datetime" />
     <Property Name="Extra1" Type="nvarchar(max)" />
     <Property Name="Extra2" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Formula">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalarySlipDetailId" Type="int" />
+    <Property Name="FirstSalaryItemId" Type="int" Nullable="false" />
+    <Property Name="FormulaOp" Type="nvarchar" MaxLength="3" />
+    <Property Name="IsSecondValue" Type="bit" Nullable="false" />
+    <Property Name="SecondSalaryItemId" Type="int" />
+    <Property Name="SecondValue" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FPAttLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FPUserId" Type="int" Nullable="false" />
+    <Property Name="PIN" Type="int" Nullable="false" />
+    <Property Name="PIN2" Type="bigint" Nullable="false" />
+    <Property Name="Time_second" Type="datetime" Nullable="false" />
+    <Property Name="DeviceID" Type="int" Nullable="false" />
+    <Property Name="VerifyMode" Type="int" Nullable="false" />
+    <Property Name="InOutMode" Type="int" Nullable="false" />
+    <Property Name="WorkCode" Type="int" Nullable="false" />
+    <Property Name="Reserved" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FPMachine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyInfoId" Type="int" Nullable="false" />
+    <Property Name="MachineName" Type="nvarchar(max)" />
+    <Property Name="MachineNumber" Type="int" Nullable="false" />
+    <Property Name="CommType" Type="int" Nullable="false" />
+    <Property Name="EthernetIP" Type="nvarchar(max)" />
+    <Property Name="EthernetPort" Type="int" Nullable="false" />
+    <Property Name="EthernetMAC" Type="nvarchar(max)" />
+    <Property Name="SerialPort" Type="nvarchar(max)" />
+    <Property Name="SerialBaudRate" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="TimeZone" Type="nvarchar(max)" />
+    <Property Name="TimeZoneOffset" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Platform" Type="nvarchar(max)" />
+    <Property Name="FirmwareVer" Type="nvarchar(max)" />
+    <Property Name="ArithmeticVer" Type="nvarchar(max)" />
+    <Property Name="SerialNumber" Type="nvarchar(max)" />
+    <Property Name="UserCount" Type="bigint" Nullable="false" />
+    <Property Name="AdminCount" Type="bigint" Nullable="false" />
+    <Property Name="FPCount" Type="bigint" Nullable="false" />
+    <Property Name="FCCount" Type="bigint" Nullable="false" />
+    <Property Name="PasswordCount" Type="bigint" Nullable="false" />
+    <Property Name="AttLogCount" Type="bigint" Nullable="false" />
+    <Property Name="IsAutoConnect" Type="bit" Nullable="false" />
+    <Property Name="IsDisabled" Type="bit" Nullable="false" />
+    <Property Name="IsClearLogAfterDownload" Type="bit" Nullable="false" />
+    <Property Name="LastSync" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FPTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FPUserId" Type="int" Nullable="false" />
+    <Property Name="Size" Type="int" Nullable="false" />
+    <Property Name="PIN" Type="int" Nullable="false" />
+    <Property Name="FingerID" Type="smallint" Nullable="false" />
+    <Property Name="Valid" Type="tinyint" Nullable="false" />
+    <Property Name="Template" Type="nvarchar(max)" />
+    <Property Name="AlgoVer" Type="nvarchar(max)" />
+    <Property Name="IsInSync" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FPUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="PIN" Type="int" Nullable="false" />
+    <Property Name="Privilege" Type="tinyint" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="5" />
+    <Property Name="Name" Type="nvarchar" MaxLength="8" />
+    <Property Name="Card" Type="nvarchar" MaxLength="5" />
+    <Property Name="Group" Type="tinyint" Nullable="false" />
+    <Property Name="TimeZones" Type="nvarchar(max)" />
+    <Property Name="PIN2" Type="bigint" Nullable="false" />
+    <Property Name="VerifyMode" Type="int" Nullable="false" />
+    <Property Name="Reserved" Type="nvarchar(max)" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="IsEnabled" Type="bit" Nullable="false" />
+    <Property Name="IsInSync" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="GeneralLeave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="HOLIDAYS">
     <Key>
@@ -556,6 +868,22 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="Extra2" Type="nvarchar(max)" />
     <Property Name="CreatedDate" Type="date" />
     <Property Name="CreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="LastEmployment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Company" Type="nvarchar(max)" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="ResignReason" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="LeaveClass">
     <Key>
@@ -683,6 +1011,80 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="SCHCLASSID" Type="int" />
     <Property Name="OverTime" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Ones">
+          <Property Name="Id" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="OtherExpense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsMainSalary" Type="bit" Nullable="false" />
+    <Property Name="IsDetailSalary" Type="bit" Nullable="false" />
+    <Property Name="SalaryStatus" Type="int" Nullable="false" />
+    <Property Name="SalaryItemId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OtherExpenseDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OtherExpenseId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Recurring" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OtherIncome">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsMainSalary" Type="bit" Nullable="false" />
+    <Property Name="IsDetailSalary" Type="bit" Nullable="false" />
+    <Property Name="SalaryStatus" Type="int" Nullable="false" />
+    <Property Name="SalaryItemId" Type="int" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OtherIncomeDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OtherIncomeId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Recurring" Type="int" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
   <EntityType Name="PartyBalance">
     <Key>
       <PropertyRef Name="PartyBalanceId" />
@@ -727,6 +1129,23 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="Bank" Type="nvarchar" MaxLength="50" />
     <Property Name="Notes" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="PensionCompensation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntryDate" Type="datetime" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="PensionDate" Type="datetime" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="PensionValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PensionMultiply" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MedAndHousing" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
   <EntityType Name="Picture">
     <Key>
       <PropertyRef Name="Id" />
@@ -742,6 +1161,22 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="UpdateBy" Type="nchar" MaxLength="24" />
     <Property Name="UpdateDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PPH21SPT">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Percent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MinAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MaxAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsInfiniteMaxAmount" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -764,6 +1199,19 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="UpdateBy" Type="nchar" MaxLength="24" />
     <Property Name="UpdateDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PTKP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="ReceiveDetails">
     <Key>
@@ -839,6 +1287,54 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="SetDate" Type="datetime" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="SalaryEmployee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SalaryEmployeeDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalaryEmployeeId" Type="int" Nullable="false" />
+    <Property Name="SalaryItemId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SalaryItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsLegacy" Type="bit" Nullable="false" />
+    <Property Name="IsMainSalary" Type="bit" Nullable="false" />
+    <Property Name="IsDetailSalary" Type="bit" Nullable="false" />
+    <Property Name="DefaultValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurrentValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="SalaryItemType" Type="int" Nullable="false" />
+    <Property Name="SalarySign" Type="int" Nullable="false" />
+    <Property Name="SalaryItemStatus" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
   <EntityType Name="SalaryPayment">
     <Key>
       <PropertyRef Name="Id" />
@@ -856,6 +1352,72 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="LoanDeduction" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Narration" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="SalarySlip">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Index" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="IsMainSalary" Type="bit" Nullable="false" />
+    <Property Name="IsDetailSalary" Type="bit" Nullable="false" />
+    <Property Name="SalarySign" Type="int" Nullable="false" />
+    <Property Name="SalaryItemId" Type="int" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsPTKP" Type="bit" Nullable="false" />
+    <Property Name="IsPPH21" Type="bit" Nullable="false" />
+    <Property Name="IsEnabled" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SalarySlipDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Index" Type="int" Nullable="false" />
+    <Property Name="SalarySign" Type="int" Nullable="false" />
+    <Property Name="SalarySlipId" Type="int" Nullable="false" />
+    <Property Name="FormulaId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="HasMinValue" Type="bit" Nullable="false" />
+    <Property Name="MinValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="HasMaxValue" Type="bit" Nullable="false" />
+    <Property Name="MaxValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SalaryStandard">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="TitleInfoId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SalaryStandardDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalaryStandardId" Type="int" Nullable="false" />
+    <Property Name="SalaryItemId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="SalesDelivery">
     <Key>
@@ -1029,7 +1591,7 @@ warning 6002: The table/view 'rexerp.dbo.EmOpLog' does not have a primary key de
     <Property Name="FullControl" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'rexerp.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ServerLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -1091,6 +1653,164 @@ warning 6002: The table/view 'rexerp.dbo.ServerLog' does not have a primary key 
     <Property Name="UpdatedBy" Type="nchar" MaxLength="24" />
     <Property Name="UpdatedDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SlipGajiDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="MONTH" Type="datetime" Nullable="false" />
+    <Property Name="NoBadge" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Jabatan" Type="nvarchar(max)" />
+    <Property Name="TanggalPenerimaan" Type="datetime" Nullable="false" />
+    <Property Name="PeriodeAwal" Type="datetime" Nullable="false" />
+    <Property Name="PeriodeAkhir" Type="datetime" Nullable="false" />
+    <Property Name="GajiBasis" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="StatusMarriage" Type="nvarchar(max)" />
+    <Property Name="NoSlip" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur15" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur20" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur30" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur40" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Disiapkan_oleh" Type="nvarchar(max)" />
+    <Property Name="Disetujui_oleh" Type="nvarchar(max)" />
+    <Property Name="Dikoreksi_oleh" Type="nvarchar(max)" />
+    <Property Name="company_code" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SlipGajiDetail1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SlipGajiDetailId" Type="int" Nullable="false" />
+    <Property Name="NoBadge" Type="nvarchar(max)" />
+    <Property Name="Tanggal" Type="datetime" Nullable="false" />
+    <Property Name="Shift" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="jamkerjaActual" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="jamReg" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur15" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur20" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur30" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Lembur40" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="nmhari" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SlipGajiDetail2A">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SlipGajiDetailId" Type="int" Nullable="false" />
+    <Property Name="month" Type="nvarchar(max)" />
+    <Property Name="employee_code" Type="nvarchar(max)" />
+    <Property Name="salary_basic" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="rate_hour" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="allowance_rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="uang_makan" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="jml_jam_lembur" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="jml_lembur" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="jml_hari_absen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tunj_lap" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="insentive_hadir" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="other_allow" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="krg_bln_lalu" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="thr" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_absensi" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_others" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="gaji_kotor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_pinjaman" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_jamsostek" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pjk_jkk_jkm_204" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_dpt_kotor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pjk_tunj_jabatan" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pjk_ptkp" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_pengurang_pajak" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_dpt_kena_pajak" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_dpt_kena_pajak_tahun" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_5_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_15_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_25_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_30_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph21" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="round" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="gaji_bersih" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="SlipGajiDetail_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="SlipGajiMini">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MONTHyear" Type="datetime" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="month" Type="nvarchar(max)" />
+    <Property Name="employee_code" Type="nvarchar(max)" />
+    <Property Name="employee_name" Type="nvarchar(max)" />
+    <Property Name="title_code" Type="nvarchar(max)" />
+    <Property Name="title_name" Type="nvarchar(max)" />
+    <Property Name="start_working" Type="datetime" Nullable="false" />
+    <Property Name="no_rekening" Type="nvarchar(max)" />
+    <Property Name="salary_basic" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="rate_hour" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="allowance_rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="uang_makan" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="jml_jam_lembur" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="jml_lembur" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="jml_hari_absen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tunj_lap" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="insentive_hadir" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="krg_bln_lalu" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="thr" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_absensi" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_others" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="gaji_kotor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_pinjaman" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pot_jamsostek" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pjk_jkk_jkm_204" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_dpt_kotor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pjk_tunj_jabatan" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pjk_ptkp" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_pengurang_pajak" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_dpt_kena_pajak" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="tot_dpt_kena_pajak_tahun" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_5_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_15_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_25_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph_30_persen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="pph21" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="round" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="gaji_bersih" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="company_code" Type="nvarchar(max)" />
+    <Property Name="Disiapkan_oleh" Type="nvarchar(max)" />
+    <Property Name="Disetujui_oleh" Type="nvarchar(max)" />
+    <Property Name="Dikoreksi_oleh" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SMSHistory">
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMSText" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CustomerType" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="SPKL">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="OverTimeInterval" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="StockIn">
     <Key>
@@ -1164,6 +1884,16 @@ warning 6002: The table/view 'rexerp.dbo.ServerLog' does not have a primary key 
     <Property Name="Remarks" Type="nvarchar(max)" />
     <Property Name="LedgerId" Type="int" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="SystemLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -1189,6 +1919,12 @@ warning 6002: The table/view 'rexerp.dbo.ServerLog' does not have a primary key 
     <Property Name="UpdateDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TBKEY">
+          <Property Name="PreName" Type="varchar" MaxLength="12" />
+          <Property Name="ONEKEY" Type="int" />
+        </EntityType>-->
   <EntityType Name="TBSMSALLOT">
     <Key>
       <PropertyRef Name="REFERENCE" />
@@ -1281,6 +2017,51 @@ warning 6002: The table/view 'rexerp.dbo.ServerLog' does not have a primary key 
     <Property Name="DriverName" Type="nvarchar" MaxLength="500" />
     <Property Name="RentAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="YearId" Type="int" />
+  </EntityType>
+  <EntityType Name="THR">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsMainSalary" Type="bit" Nullable="false" />
+    <Property Name="IsDetailSalary" Type="bit" Nullable="false" />
+    <Property Name="SalaryItemId" Type="int" />
+    <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="THRDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="THRId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TitleInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="IsShiftable" Type="bit" Nullable="false" />
+    <Property Name="AccessLevel" Type="int" Nullable="false" />
+    <Property Name="IsSalaryAllIn" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="TransactionType">
     <Key>
@@ -1440,7 +2221,7 @@ warning 6002: The table/view 'rexerp.dbo.ServerLog' does not have a primary key 
     <Property Name="SetDate" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UsersMachines">
     <Key>
       <PropertyRef Name="ID" />
@@ -1501,6 +2282,88 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkingDay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="CheckIn" Type="datetime" Nullable="false" />
+    <Property Name="CheckOut" Type="datetime" Nullable="false" />
+    <Property Name="MinCheckIn" Type="datetime" Nullable="false" />
+    <Property Name="MaxCheckIn" Type="datetime" Nullable="false" />
+    <Property Name="MinCheckOut" Type="datetime" Nullable="false" />
+    <Property Name="MaxCheckOut" Type="datetime" Nullable="false" />
+    <Property Name="BreakIn" Type="datetime" Nullable="false" />
+    <Property Name="BreakOut" Type="datetime" Nullable="false" />
+    <Property Name="CheckInTolerance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CheckOutTolerance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="WorkInterval" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="BreakInterval" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="WorkingTimeId" Type="int" />
+    <Property Name="IsEnabled" Type="bit" Nullable="false" />
+    <Property Name="IsShortestDay" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WorkingTime">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="CheckIn" Type="datetime" Nullable="false" />
+    <Property Name="CheckOut" Type="datetime" Nullable="false" />
+    <Property Name="MinCheckIn" Type="datetime" Nullable="false" />
+    <Property Name="MaxCheckIn" Type="datetime" Nullable="false" />
+    <Property Name="MinCheckOut" Type="datetime" Nullable="false" />
+    <Property Name="MaxCheckOut" Type="datetime" Nullable="false" />
+    <Property Name="BreakIn" Type="datetime" Nullable="false" />
+    <Property Name="BreakOut" Type="datetime" Nullable="false" />
+    <Property Name="CheckInTolerance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CheckOutTolerance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="WorkInterval" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="BreakInterval" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TimeZone" Type="nvarchar(max)" />
+    <Property Name="TimeZoneOffset" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" />
+    <Property Name="DeletedAt" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="DesignName" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="ColorName" />
+      <PropertyRef Name="DesignCode" />
+      <PropertyRef Name="ProductName" />
+      <PropertyRef Name="Code" />
+      <PropertyRef Name="ProductInfo" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="SBarCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="PBarCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Barcode1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Barcode2" Type="nvarchar" MaxLength="50" />
+    <Property Name="CostPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RetailPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WholeSalesPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DesignName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ColorName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="DesignCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ProductInfo" Type="nvarchar" MaxLength="1303" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_AccountLedger_AccountGroup">
     <End Role="AccountGroup" Type="Self.AccountGroup" Multiplicity="0..1" />
@@ -1646,12 +2509,548 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_dbo_BranchOffice_dbo_CompanyInfo_CompanyInfoId">
+    <End Role="CompanyInfo" Type="Self.CompanyInfo" Multiplicity="0..1" />
+    <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BranchOffice">
+        <PropertyRef Name="CompanyInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Department_dbo_BranchOffice_BranchOfficeId">
+    <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="1" />
+    <End Role="Department" Type="Self.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BranchOffice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="BranchOfficeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Division_dbo_Department_DepartmentId">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Division" Type="Self.Division" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Division">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeAttendance" Type="Self.EmployeeAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeAttendance">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeEducation" Type="Self.EmployeeEducation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeEducation">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeLeave" Type="Self.EmployeeLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeLeave">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmployeeLoan" Type="Self.EmployeeLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeLoan">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
+    <End Role="EmployeeLoan" Type="Self.EmployeeLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeLoan">
+        <PropertyRef Name="SalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId">
+    <End Role="EmployeeLoan" Type="Self.EmployeeLoan" Multiplicity="1" />
+    <End Role="EmployeeLoanDetail" Type="Self.EmployeeLoanDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeeLoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeLoanDetail">
+        <PropertyRef Name="EmployeeLoanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EmployeeWorkingTime" Type="Self.EmployeeWorkingTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeWorkingTime">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeWorkingTime_dbo_WorkingTime_WorkingTimeId">
+    <End Role="WorkingTime" Type="Self.WorkingTime" Multiplicity="1" />
+    <End Role="EmployeeWorkingTime" Type="Self.EmployeeWorkingTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkingTime">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeWorkingTime">
+        <PropertyRef Name="WorkingTimeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
+    <End Role="Formula" Type="Self.Formula" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Formula">
+        <PropertyRef Name="FirstSalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
+    <End Role="Formula" Type="Self.Formula" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Formula">
+        <PropertyRef Name="SecondSalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId">
+    <End Role="SalarySlipDetail" Type="Self.SalarySlipDetail" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Formula" Type="Self.Formula" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalarySlipDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Formula">
+        <PropertyRef Name="SalarySlipDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FPAttLog_dbo_FPUser_FPUserId">
+    <End Role="FPUser" Type="Self.FPUser" Multiplicity="1" />
+    <End Role="FPAttLog" Type="Self.FPAttLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FPUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FPAttLog">
+        <PropertyRef Name="FPUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FPMachine_dbo_CompanyInfo_CompanyInfoId">
+    <End Role="CompanyInfo" Type="Self.CompanyInfo" Multiplicity="1" />
+    <End Role="FPMachine" Type="Self.FPMachine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FPMachine">
+        <PropertyRef Name="CompanyInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FPTemplate_dbo_FPUser_FPUserId">
+    <End Role="FPUser" Type="Self.FPUser" Multiplicity="1" />
+    <End Role="FPTemplate" Type="Self.FPTemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FPUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FPTemplate">
+        <PropertyRef Name="FPUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FPUser_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="FPUser" Type="Self.FPUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FPUser">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LastEmployment_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="LastEmployment" Type="Self.LastEmployment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LastEmployment">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
+    <End Role="OtherExpense" Type="Self.OtherExpense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtherExpense">
+        <PropertyRef Name="SalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="OtherExpenseDetail" Type="Self.OtherExpenseDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtherExpenseDetail">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId">
+    <End Role="OtherExpense" Type="Self.OtherExpense" Multiplicity="1" />
+    <End Role="OtherExpenseDetail" Type="Self.OtherExpenseDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OtherExpense">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtherExpenseDetail">
+        <PropertyRef Name="OtherExpenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
+    <End Role="OtherIncome" Type="Self.OtherIncome" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtherIncome">
+        <PropertyRef Name="SalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="OtherIncomeDetail" Type="Self.OtherIncomeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtherIncomeDetail">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId">
+    <End Role="OtherIncome" Type="Self.OtherIncome" Multiplicity="1" />
+    <End Role="OtherIncomeDetail" Type="Self.OtherIncomeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OtherIncome">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OtherIncomeDetail">
+        <PropertyRef Name="OtherIncomeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PensionCompensation_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="PensionCompensation" Type="Self.PensionCompensation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PensionCompensation">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="SalaryEmployee" Type="Self.SalaryEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryEmployee">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryEmployee_SalaryEmployeeId">
+    <End Role="SalaryEmployee" Type="Self.SalaryEmployee" Multiplicity="1" />
+    <End Role="SalaryEmployeeDetail" Type="Self.SalaryEmployeeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryEmployee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryEmployeeDetail">
+        <PropertyRef Name="SalaryEmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
+    <End Role="SalaryEmployeeDetail" Type="Self.SalaryEmployeeDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryEmployeeDetail">
+        <PropertyRef Name="SalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
+    <End Role="SalarySlip" Type="Self.SalarySlip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalarySlip">
+        <PropertyRef Name="SalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalarySlipDetail_dbo_Formula_FormulaId">
+    <End Role="Formula" Type="Self.Formula" Multiplicity="1" />
+    <End Role="SalarySlipDetail" Type="Self.SalarySlipDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Formula">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalarySlipDetail">
+        <PropertyRef Name="FormulaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
+    <End Role="SalarySlip" Type="Self.SalarySlip" Multiplicity="1" />
+    <End Role="SalarySlipDetail" Type="Self.SalarySlipDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalarySlip">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalarySlipDetail">
+        <PropertyRef Name="SalarySlipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalaryStandard_dbo_TitleInfo_TitleInfoId">
+    <End Role="TitleInfo" Type="Self.TitleInfo" Multiplicity="1" />
+    <End Role="SalaryStandard" Type="Self.SalaryStandard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TitleInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryStandard">
+        <PropertyRef Name="TitleInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
+    <End Role="SalaryStandardDetail" Type="Self.SalaryStandardDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryStandardDetail">
+        <PropertyRef Name="SalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalaryStandardDetail_dbo_SalaryStandard_SalaryStandardId">
+    <End Role="SalaryStandard" Type="Self.SalaryStandard" Multiplicity="1" />
+    <End Role="SalaryStandardDetail" Type="Self.SalaryStandardDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryStandard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryStandardDetail">
+        <PropertyRef Name="SalaryStandardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="SlipGajiDetail" Type="Self.SlipGajiDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SlipGajiDetail">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SlipGajiDetail1_dbo_SlipGajiDetail_SlipGajiDetailId">
+    <End Role="SlipGajiDetail" Type="Self.SlipGajiDetail" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SlipGajiDetail1" Type="Self.SlipGajiDetail1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SlipGajiDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SlipGajiDetail1">
+        <PropertyRef Name="SlipGajiDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetail_Id">
+    <End Role="SlipGajiDetail" Type="Self.SlipGajiDetail" Multiplicity="0..1" />
+    <End Role="SlipGajiDetail2A" Type="Self.SlipGajiDetail2A" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SlipGajiDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SlipGajiDetail2A">
+        <PropertyRef Name="SlipGajiDetail_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetailId">
+    <End Role="SlipGajiDetail" Type="Self.SlipGajiDetail" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SlipGajiDetail2A" Type="Self.SlipGajiDetail2A" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SlipGajiDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SlipGajiDetail2A">
+        <PropertyRef Name="SlipGajiDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SPKL_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="SPKL" Type="Self.SPKL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SPKL">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_THR_dbo_SalaryItem_SalaryItemId">
+    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
+    <End Role="THR" Type="Self.THR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="THR">
+        <PropertyRef Name="SalaryItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_THRDetail_dbo_Employee_EmployeeId">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="THRDetail" Type="Self.THRDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="THRDetail">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_THRDetail_dbo_THR_THRId">
+    <End Role="THR" Type="Self.THR" Multiplicity="1" />
+    <End Role="THRDetail" Type="Self.THRDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THR">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="THRDetail">
+        <PropertyRef Name="THRId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_WorkingDay_dbo_WorkingTime_WorkingTimeId">
+    <End Role="WorkingTime" Type="Self.WorkingTime" Multiplicity="0..1" />
+    <End Role="WorkingDay" Type="Self.WorkingDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkingTime">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkingDay">
+        <PropertyRef Name="WorkingTimeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Designationtbl_DEPARTMENTS">
     <End Role="DEPARTMENTS" Type="Self.DEPARTMENTS" Multiplicity="0..1" />
     <End Role="Designationtbl" Type="Self.Designationtbl" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DEPARTMENTS">
-        <PropertyRef Name="DEPTID" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Designationtbl">
         <PropertyRef Name="DepartmentID" />
@@ -2415,6 +3814,7 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <Parameter Name="ReportType" Type="int" Mode="In" />
     <Parameter Name="yearId" Type="int" Mode="In" />
   </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="GetBalance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ledgerId" Type="int" Mode="In" />
     <Parameter Name="yearId" Type="int" Mode="In" />
@@ -2430,11 +3830,20 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <Parameter Name="fromDate" Type="datetime" Mode="In" />
     <Parameter Name="toDate" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="NumberToWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="Number" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="PaymentVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="ProductWiseBestSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="ReceiveReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fromDate" Type="date" Mode="In" />
     <Parameter Name="toDate" Type="date" Mode="In" />
     <Parameter Name="supplierId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ReceiveVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="rptCustomerLedger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ledgerId" Type="int" Mode="In" />
@@ -2455,6 +3864,39 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
   <Function Name="rptSalesInvoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="SalesInvoice" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="StockInInvoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="StockOutChallanList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fromDate" Type="date" Mode="In" />
     <Parameter Name="toDate" Type="date" Mode="In" />
@@ -2465,7 +3907,7 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
   <Function Name="YearClosed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CustomerId" Type="int" Mode="In" />
   </Function>
-  <EntityContainer Name="DB_9B34E1_erpModelStoreContainer">
+  <EntityContainer Name="erpModelStoreContainer">
     <EntitySet Name="AccountGroup" EntityType="Self.AccountGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AccountLedger" EntityType="Self.AccountLedger" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ACGroup" EntityType="Self.ACGroup" Schema="dbo" store:Type="Tables" />
@@ -2478,26 +3920,43 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <EntitySet Name="AuditedExc" EntityType="Self.AuditedExc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AUTHDEVICE" EntityType="Self.AUTHDEVICE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BankReconciliation" EntityType="Self.BankReconciliation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BranchOffice" EntityType="Self.BranchOffice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CHECKEXACT" EntityType="Self.CHECKEXACT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CHECKINOUT" EntityType="Self.CHECKINOUT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyInfo" EntityType="Self.CompanyInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ContraDetails" EntityType="Self.ContraDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ContraMaster" EntityType="Self.ContraMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CreditNoteMaster" EntityType="Self.CreditNoteMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DEPARTMENTS" EntityType="Self.DEPARTMENTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSchs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designationtbl" EntityType="Self.Designationtbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeAttendance" EntityType="Self.EmployeeAttendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeEducation" EntityType="Self.EmployeeEducation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeLeave" EntityType="Self.EmployeeLeave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeLoan" EntityType="Self.EmployeeLoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeLoanDetail" EntityType="Self.EmployeeLoanDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeWorkingTime" EntityType="Self.EmployeeWorkingTime" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FaceTemp" EntityType="Self.FaceTemp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Formula" EntityType="Self.Formula" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPAttLog" EntityType="Self.FPAttLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPMachine" EntityType="Self.FPMachine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPTemplate" EntityType="Self.FPTemplate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FPUser" EntityType="Self.FPUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GeneralLeave" EntityType="Self.GeneralLeave" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HOLIDAYS" EntityType="Self.HOLIDAYS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventoryTransaction" EntityType="Self.InventoryTransaction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JournalDetails" EntityType="Self.JournalDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="JournalMaster" EntityType="Self.JournalMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LastEmployment" EntityType="Self.LastEmployment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeaveClass" EntityType="Self.LeaveClass" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeaveClass1" EntityType="Self.LeaveClass1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LedgerPosting" EntityType="Self.LedgerPosting" Schema="dbo" store:Type="Tables" />
@@ -2505,15 +3964,29 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <EntitySet Name="Machines" EntityType="Self.Machines" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NUM_RUN" EntityType="Self.NUM_RUN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NUM_RUN_DEIL" EntityType="Self.NUM_RUN_DEIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OtherExpense" EntityType="Self.OtherExpense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OtherExpenseDetail" EntityType="Self.OtherExpenseDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OtherIncome" EntityType="Self.OtherIncome" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OtherIncomeDetail" EntityType="Self.OtherIncomeDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartyBalance" EntityType="Self.PartyBalance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartyPaymentHistory" EntityType="Self.PartyPaymentHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PensionCompensation" EntityType="Self.PensionCompensation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PPH21SPT" EntityType="Self.PPH21SPT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PTKP" EntityType="Self.PTKP" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReceiveDetails" EntityType="Self.ReceiveDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReceiveMaster" EntityType="Self.ReceiveMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReportItem" EntityType="Self.ReportItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoleWiseScreenPermission" EntityType="Self.RoleWiseScreenPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryEmployee" EntityType="Self.SalaryEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryEmployeeDetail" EntityType="Self.SalaryEmployeeDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryItem" EntityType="Self.SalaryItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalaryPayment" EntityType="Self.SalaryPayment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalarySlip" EntityType="Self.SalarySlip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalarySlipDetail" EntityType="Self.SalarySlipDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryStandard" EntityType="Self.SalaryStandard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryStandardDetail" EntityType="Self.SalaryStandardDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesDelivery" EntityType="Self.SalesDelivery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesDetails" EntityType="Self.SalesDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesMaster" EntityType="Self.SalesMaster" Schema="dbo" store:Type="Tables" />
@@ -2525,9 +3998,15 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SHIFT" EntityType="Self.SHIFT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlipGajiDetail" EntityType="Self.SlipGajiDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlipGajiDetail1" EntityType="Self.SlipGajiDetail1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlipGajiDetail2A" EntityType="Self.SlipGajiDetail2A" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlipGajiMini" EntityType="Self.SlipGajiMini" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SPKL" EntityType="Self.SPKL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockIn" EntityType="Self.StockIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StockOut" EntityType="Self.StockOut" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SystemLog" EntityType="Self.SystemLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tax" EntityType="Self.Tax" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBSMSALLOT" EntityType="Self.TBSMSALLOT" Schema="dbo" store:Type="Tables" />
@@ -2535,6 +4014,9 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TempSalesDetails" EntityType="Self.TempSalesDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TempSalesMaster" EntityType="Self.TempSalesMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="THR" EntityType="Self.THR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="THRDetail" EntityType="Self.THRDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TitleInfo" EntityType="Self.TitleInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -2549,6 +4031,8 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <EntitySet Name="UserUsedSClasses" EntityType="Self.UserUsedSClasses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VoucherType" EntityType="Self.VoucherType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WareHouse" EntityType="Self.WareHouse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkingDay" EntityType="Self.WorkingDay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkingTime" EntityType="Self.WorkingTime" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmOpLog" EntityType="Self.EmOpLog" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [EmOpLog].[ID] AS [ID], 
@@ -2580,6 +4064,25 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     [UsersMachines].[USERID] AS [USERID], 
     [UsersMachines].[DEVICEID] AS [DEVICEID]
     FROM [dbo].[UsersMachines] AS [UsersMachines]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductInfo].[SBarCode] AS [SBarCode], 
+    [ProductInfo].[PBarCode] AS [PBarCode], 
+    [ProductInfo].[Barcode1] AS [Barcode1], 
+    [ProductInfo].[Barcode2] AS [Barcode2], 
+    [ProductInfo].[CostPrice] AS [CostPrice], 
+    [ProductInfo].[RetailPrice] AS [RetailPrice], 
+    [ProductInfo].[WholeSalesPrice] AS [WholeSalesPrice], 
+    [ProductInfo].[DesignName] AS [DesignName], 
+    [ProductInfo].[Name] AS [Name], 
+    [ProductInfo].[ColorName] AS [ColorName], 
+    [ProductInfo].[DesignCode] AS [DesignCode], 
+    [ProductInfo].[ProductName] AS [ProductName], 
+    [ProductInfo].[Code] AS [Code], 
+    [ProductInfo].[ProductInfo] AS [ProductInfo], 
+    [ProductInfo].[Id] AS [Id]
+    FROM [dbo].[ProductInfo] AS [ProductInfo]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_AccountLedger_AccountGroup" Association="Self.FK_AccountLedger_AccountGroup">
       <End Role="AccountGroup" EntitySet="AccountGroup" />
@@ -2628,6 +4131,182 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <AssociationSet Name="FK_ContraMaster_Year" Association="Self.FK_ContraMaster_Year">
       <End Role="FinancialYear" EntitySet="FinancialYear" />
       <End Role="ContraMaster" EntitySet="ContraMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BranchOffice_dbo_CompanyInfo_CompanyInfoId" Association="Self.FK_dbo_BranchOffice_dbo_CompanyInfo_CompanyInfoId">
+      <End Role="CompanyInfo" EntitySet="CompanyInfo" />
+      <End Role="BranchOffice" EntitySet="BranchOffice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Department_dbo_BranchOffice_BranchOfficeId" Association="Self.FK_dbo_Department_dbo_BranchOffice_BranchOfficeId">
+      <End Role="BranchOffice" EntitySet="BranchOffice" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Division_dbo_Department_DepartmentId" Association="Self.FK_dbo_Division_dbo_Department_DepartmentId">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Division" EntitySet="Division" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeAttendance" EntitySet="EmployeeAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeEducation" EntitySet="EmployeeEducation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeLeave" EntitySet="EmployeeLeave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeLoan" EntitySet="EmployeeLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="EmployeeLoan" EntitySet="EmployeeLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId" Association="Self.FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId">
+      <End Role="EmployeeLoan" EntitySet="EmployeeLoan" />
+      <End Role="EmployeeLoanDetail" EntitySet="EmployeeLoanDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeWorkingTime" EntitySet="EmployeeWorkingTime" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeWorkingTime_dbo_WorkingTime_WorkingTimeId" Association="Self.FK_dbo_EmployeeWorkingTime_dbo_WorkingTime_WorkingTimeId">
+      <End Role="WorkingTime" EntitySet="WorkingTime" />
+      <End Role="EmployeeWorkingTime" EntitySet="EmployeeWorkingTime" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId" Association="Self.FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="Formula" EntitySet="Formula" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId" Association="Self.FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="Formula" EntitySet="Formula" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId" Association="Self.FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId">
+      <End Role="SalarySlipDetail" EntitySet="SalarySlipDetail" />
+      <End Role="Formula" EntitySet="Formula" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FPAttLog_dbo_FPUser_FPUserId" Association="Self.FK_dbo_FPAttLog_dbo_FPUser_FPUserId">
+      <End Role="FPUser" EntitySet="FPUser" />
+      <End Role="FPAttLog" EntitySet="FPAttLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FPMachine_dbo_CompanyInfo_CompanyInfoId" Association="Self.FK_dbo_FPMachine_dbo_CompanyInfo_CompanyInfoId">
+      <End Role="CompanyInfo" EntitySet="CompanyInfo" />
+      <End Role="FPMachine" EntitySet="FPMachine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FPTemplate_dbo_FPUser_FPUserId" Association="Self.FK_dbo_FPTemplate_dbo_FPUser_FPUserId">
+      <End Role="FPUser" EntitySet="FPUser" />
+      <End Role="FPTemplate" EntitySet="FPTemplate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FPUser_dbo_Employee_EmployeeId" Association="Self.FK_dbo_FPUser_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="FPUser" EntitySet="FPUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LastEmployment_dbo_Employee_EmployeeId" Association="Self.FK_dbo_LastEmployment_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="LastEmployment" EntitySet="LastEmployment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="OtherExpense" EntitySet="OtherExpense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="OtherExpenseDetail" EntitySet="OtherExpenseDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId" Association="Self.FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId">
+      <End Role="OtherExpense" EntitySet="OtherExpense" />
+      <End Role="OtherExpenseDetail" EntitySet="OtherExpenseDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="OtherIncome" EntitySet="OtherIncome" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="OtherIncomeDetail" EntitySet="OtherIncomeDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId" Association="Self.FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId">
+      <End Role="OtherIncome" EntitySet="OtherIncome" />
+      <End Role="OtherIncomeDetail" EntitySet="OtherIncomeDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PensionCompensation_dbo_Employee_EmployeeId" Association="Self.FK_dbo_PensionCompensation_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="PensionCompensation" EntitySet="PensionCompensation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="SalaryEmployee" EntitySet="SalaryEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryEmployee_SalaryEmployeeId" Association="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryEmployee_SalaryEmployeeId">
+      <End Role="SalaryEmployee" EntitySet="SalaryEmployee" />
+      <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="SalarySlip" EntitySet="SalarySlip" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalarySlipDetail_dbo_Formula_FormulaId" Association="Self.FK_dbo_SalarySlipDetail_dbo_Formula_FormulaId">
+      <End Role="Formula" EntitySet="Formula" />
+      <End Role="SalarySlipDetail" EntitySet="SalarySlipDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId" Association="Self.FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
+      <End Role="SalarySlip" EntitySet="SalarySlip" />
+      <End Role="SalarySlipDetail" EntitySet="SalarySlipDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalaryStandard_dbo_TitleInfo_TitleInfoId" Association="Self.FK_dbo_SalaryStandard_dbo_TitleInfo_TitleInfoId">
+      <End Role="TitleInfo" EntitySet="TitleInfo" />
+      <End Role="SalaryStandard" EntitySet="SalaryStandard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="SalaryStandardDetail" EntitySet="SalaryStandardDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalaryStandardDetail_dbo_SalaryStandard_SalaryStandardId" Association="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryStandard_SalaryStandardId">
+      <End Role="SalaryStandard" EntitySet="SalaryStandard" />
+      <End Role="SalaryStandardDetail" EntitySet="SalaryStandardDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="SlipGajiDetail" EntitySet="SlipGajiDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SlipGajiDetail1_dbo_SlipGajiDetail_SlipGajiDetailId" Association="Self.FK_dbo_SlipGajiDetail1_dbo_SlipGajiDetail_SlipGajiDetailId">
+      <End Role="SlipGajiDetail" EntitySet="SlipGajiDetail" />
+      <End Role="SlipGajiDetail1" EntitySet="SlipGajiDetail1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetail_Id" Association="Self.FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetail_Id">
+      <End Role="SlipGajiDetail" EntitySet="SlipGajiDetail" />
+      <End Role="SlipGajiDetail2A" EntitySet="SlipGajiDetail2A" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetailId" Association="Self.FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetailId">
+      <End Role="SlipGajiDetail" EntitySet="SlipGajiDetail" />
+      <End Role="SlipGajiDetail2A" EntitySet="SlipGajiDetail2A" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SPKL_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SPKL_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="SPKL" EntitySet="SPKL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_THR_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_THR_dbo_SalaryItem_SalaryItemId">
+      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="THR" EntitySet="THR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_THRDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_THRDetail_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="THRDetail" EntitySet="THRDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_THRDetail_dbo_THR_THRId" Association="Self.FK_dbo_THRDetail_dbo_THR_THRId">
+      <End Role="THR" EntitySet="THR" />
+      <End Role="THRDetail" EntitySet="THRDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_WorkingDay_dbo_WorkingTime_WorkingTimeId" Association="Self.FK_dbo_WorkingDay_dbo_WorkingTime_WorkingTimeId">
+      <End Role="WorkingTime" EntitySet="WorkingTime" />
+      <End Role="WorkingDay" EntitySet="WorkingDay" />
     </AssociationSet>
     <AssociationSet Name="FK_Designationtbl_DEPARTMENTS" Association="Self.FK_Designationtbl_DEPARTMENTS">
       <End Role="DEPARTMENTS" EntitySet="DEPARTMENTS" />

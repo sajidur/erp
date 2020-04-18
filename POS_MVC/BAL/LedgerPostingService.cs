@@ -7,7 +7,6 @@ using System.Data;
 using System.Data.Entity.Core.Objects;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
 
 namespace RexERP_MVC.BAL
 {

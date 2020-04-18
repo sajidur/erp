@@ -18,6 +18,20 @@ namespace RexERP_MVC.Models
         public Employee()
         {
             this.AdvancePayments = new HashSet<AdvancePayment>();
+            this.EmployeeAttendances = new HashSet<EmployeeAttendance>();
+            this.EmployeeEducations = new HashSet<EmployeeEducation>();
+            this.EmployeeLeaves = new HashSet<EmployeeLeave>();
+            this.EmployeeLoans = new HashSet<EmployeeLoan>();
+            this.EmployeeWorkingTimes = new HashSet<EmployeeWorkingTime>();
+            this.FPUsers = new HashSet<FPUser>();
+            this.LastEmployments = new HashSet<LastEmployment>();
+            this.OtherExpenseDetails = new HashSet<OtherExpenseDetail>();
+            this.OtherIncomeDetails = new HashSet<OtherIncomeDetail>();
+            this.PensionCompensations = new HashSet<PensionCompensation>();
+            this.SalaryEmployees = new HashSet<SalaryEmployee>();
+            this.SlipGajiDetails = new HashSet<SlipGajiDetail>();
+            this.SPKLs = new HashSet<SPKL>();
+            this.THRDetails = new HashSet<THRDetail>();
         }
     
         public int Id { get; set; }
@@ -43,5 +57,33 @@ namespace RexERP_MVC.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdvancePayment> AdvancePayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeAttendance> EmployeeAttendances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeEducation> EmployeeEducations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeLeave> EmployeeLeaves { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeLoan> EmployeeLoans { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeWorkingTime> EmployeeWorkingTimes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FPUser> FPUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LastEmployment> LastEmployments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OtherExpenseDetail> OtherExpenseDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OtherIncomeDetail> OtherIncomeDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PensionCompensation> PensionCompensations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalaryEmployee> SalaryEmployees { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SlipGajiDetail> SlipGajiDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SPKL> SPKLs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<THRDetail> THRDetails { get; set; }
     }
 }

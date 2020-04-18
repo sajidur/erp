@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace RexERP_MVC.BAL
 {
@@ -22,6 +21,11 @@ namespace RexERP_MVC.BAL
             return service.GetById(id);
         }
 
+        internal Employee GetObjectById(int employeeId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Employee Save(Employee cus)
         {
             return service.Save(cus);
@@ -35,6 +39,11 @@ namespace RexERP_MVC.BAL
         public int Delete(int id)
         {
             return service.Delete(id);
+        }
+
+        internal IList<Employee> GetObjectsByTitleInfoId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

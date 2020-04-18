@@ -121,6 +121,6 @@ $(function () {
 	$('.sidebar').slimScroll({
 		height: ($(window).height() - $(".main-header").height()) + "px",
 		color: "rgba(0,0,0,0.8)",
-		size: "3px"
+		size: "5px"
 	});
 });

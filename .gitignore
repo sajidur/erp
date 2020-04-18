@@ -16,6 +16,7 @@ POS_MVC/obj/Debug/RexERP.csproj.FileListAbsolute.txt
 .vs/RexERP/v16/.suo
 *.pdb
 *.pdb
+/packages
 erp.bak
 POS_MVC/bin/RiceMill_MVC.dll
 POS_MVC/bin/RiceMill_MVC.pdb

@@ -1,0 +1,242 @@
+﻿@{
+    ViewBag.Title = "Employee Leave";
+    //string Caption = ".: " + ViewBag.Title + " :.";
+    ViewBag.Caption = ".: " + ViewBag.Title + " :.";
+}@section Scripts {
+    <script src="~/Scripts/app/Employee.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+}
+
+<div class="card">
+
+    <fieldset>
+        <div style="overflow: auto">
+            <form id="frm">
+                <table width="100%" border="0" cellpadding="1" cellspacing="1" class="input_form_tbl">
+                    <tr nowrap>
+                        <td width="80" nowrap style="width: 80px">
+                            <label>Employee ID</label>
+                        </td>
+                        <td width="160">
+                            <input id="EmployeeId" name="EmployeeId" type="text" class="form-control" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Employee</label>
+                        </td>
+                        <td colspan="3">
+                            <input id="empId" name="empId" type="hidden" />
+                            <input id="btnEmployee" name="btnEmployee" type="button" data-toggle="modal" data-target="#employeeModal" style="cursor: pointer;" class="ui-corner-all ui-state-default" value="Search.." />
+                            <input id="txtFirstName" name="txtFirstName" class="form-control" type="text" disabled="disabled" />
+                            <input id="txtLastName" name="txtLastName" class="form-control" type="text" disabled="disabled" />
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Start Date</label>
+                        </td>
+                        <td>
+                            <div id="StartDateDiv">
+                                <input id="StartDate" type="date" size="10" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>End Date</label>
+                        </td>
+                        <td>
+                            <div id="EndDateDiv">
+                                <input id="EndDate" type="date"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Leave Interval </label>
+                        </td>
+                        <td>
+                            <input id="LeaveInterval" name="LeaveInterval" type="text" size="10" maxlength="20" class="textright easyui-numberbox" data-options="min:0,precision:1" disabled />Hours
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label>Remark</label>
+                        </td>
+                        <td colspan="3">
+                            <label>
+                                <textarea name="Remark" id="Remark" cols="60" rows="3"></textarea>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <div id="tabledetail_div" hidden>
+                    <div id="toolbardetail" class="grid_toolbar">
+                        <a id="btn_edit_detail" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'">Edit</a>
+                    </div>
+                    <table id="listdetail" class="scroll" cellpadding="0" cellspacing="0"></table>
+                    <div id="pagerdetail" class="scroll" style="text-align: center;"></div>
+                </div>
+            </form>
+            <div class="modal" id="employeeModal" style="width:70%;left:20%;top:10%" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Employee List</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="col-md-12 table-responsive" id="div-employeeGroup">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-w-m btn-info" data-style="expand-left" id="form_btn_save" name="form_btn_save" onclick="SaveLeave();"><i class="fa fa-save"></i>&nbsp; Save</button>
+        </div>
+    </fieldset>
+    <div>
+        <h3>Leave </h3>
+        <table id="list">
+        </table>
+    </div>
+</div>
+
+<script id="templateEmployeeGroupModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="employeeGroupTableModal">
+        <thead>
+        <th>Code</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+            {{#EmployeeGroupSearch}}
+            <tr>
+                <td>{{Code}}</td>
+                <td> {{FirstName}}</td>
+                <td> {{LastName}}</td>
+                <td> {{Email}}</td>
+                <td> {{Phone}}</td>
+                <td class="action-sm">
+                    <a class="btn btn-primary btn-xs" onclick="LoadToAdd('{{Id}}','{{Code}}','{{FirstName}}','{{LastName}}')"><i class="fa fa-edit"></i> Select</a>
+                </td>
+            </tr>
+
+            {{/EmployeeGroupSearch}}
+        </tbody>
+    </table>
+</script>
+<script>
+    $(document).ready(function () {
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#AttendanceDate').val(today);
+        $('#StartDate').val(today);
+        $('#EndDate').val(today);
+
+        LoadEmployeeList();
+     //GRID +++++++++++++++
+    $("#list").jqGrid({
+        url: '/EmployeeLeave/GetList',
+        postData: { 'ParentId':0},
+        datatype: "json",
+        colNames: ['ID', 'Employee ID', 'Employee Name',  'Start Date', 'End Date', 'Remark', 'Created At', 'Updated At'],
+        colModel: [
+    			  { name: 'id', index: 'id', width: 80, align: "center" },
+                  { name: 'employeeid', index: 'employeeid', width: 100, hidden: true },
+                  { name: 'employeename', index: 'employeename', width: 150 },
+                  { name: 'startdate', index: 'startdate', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
+                  { name: 'enddate', index: 'enddate', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
+                  { name: 'remark', index: 'remark', width: 200 },
+				  { name: 'createdat', index: 'createdat', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
+				  { name: 'updatedat', index: 'updatedat', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
+        ],
+        page: '1',
+        pager: $('#pager'),
+        rowNum: 20,
+        rowList: [20, 30, 60],
+        sortname: 'id',
+        viewrecords: true,
+        scrollrows: true,
+        shrinkToFit: false,
+        sortorder: "DESC",
+        width: $("#toolbar").width(),
+        height: $(window).height() - 200,
+        ondblClickRow: function (rowid) {
+            $("#btn_edit").trigger("click");
+        },
+        gridComplete:
+		  function () {
+		      //var ids = $(this).jqGrid('getDataIDs');
+		      //for (var i = 0; i < ids.length; i++) {
+		      //    var cl = ids[i];
+		      //    rowDel = $(this).getRowData(cl).deletedimg;
+		      //    if (rowDel == 'true') {
+		      //        img = "<img src ='" + base_url + "content/assets/images/remove.png' title='Data has been deleted !' width='16px' height='16px'>";
+
+		      //    } else {
+		      //        img = "";
+		      //    }
+		      //    $(this).jqGrid('setRowData', ids[i], { deletedimg: img });
+		      //}
+		  }
+
+    });//END GRID
+    $("#list").jqGrid('navGrid', '#toolbar_cont', { del: false, add: false, edit: false, search: false })
+           .jqGrid('filterToolbar', { stringResult: true, searchOnEnter: true });
+
+    });
+     function LoadToAdd(Id, Code, FirstName, LastName) {
+                $("#empId").val(Id);
+                 $("#txtFirstName").val(FirstName);
+                $("#txtLastName").val(LastName);
+        $("#EmployeeId").val(Code);
+           $('#employeeModal').modal('toggle');
+
+    }
+    
+    function ClearErrorMessage() {
+        $('span[class=errormessage]').text('').remove();
+    }
+      function SaveLeave() {
+        ClearErrorMessage();
+
+        var submitURL = '/EmployeeLeave/Insert';
+
+        $.ajax({
+            contentType: "application/json",
+            type: 'POST',
+            url: submitURL,
+            data: JSON.stringify({
+                Remark: $("#Remark").val(), EmployeeId: $("#empId").val(),
+                StartDate: $("#StartDate").val(), EndDate: $("#EndDate").val()
+            }),
+            async: false,
+            cache: false,
+            timeout: 30000,
+            error: function () {
+                return false;
+            },
+            success: function (result) {
+                ShowNotification(result.MessageId, result.Message);
+            }
+        });
+    }
+</script>
+

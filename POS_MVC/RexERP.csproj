@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
+  <Import Project="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props')" />
+  <Import Project="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -31,6 +36,8 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,6 +72,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -124,12 +134,18 @@
       <HintPath>..\..\..\..\Downloads\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -200,32 +216,51 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BAL\AccountGroupService.cs" />
     <Compile Include="BAL\AccountLedgerService.cs" />
+    <Compile Include="BAL\BranchOfficeService.cs" />
     <Compile Include="BAL\BrandService.cs" />
     <Compile Include="BAL\CategoryService.cs" />
+    <Compile Include="BAL\CompanyInfoService.cs" />
     <Compile Include="BAL\CompanyService.cs" />
     <Compile Include="BAL\CustomerService.cs" />
     <Compile Include="BAL\DbContextRepository.cs" />
     <Compile Include="BAL\DBService.cs" />
     <Compile Include="BAL\DefaultLedger.cs" />
     <Compile Include="BAL\DEPARTMENTService.cs" />
+    <Compile Include="BAL\DivisionService.cs" />
+    <Compile Include="BAL\EmployeeAttendanceService.cs" />
+    <Compile Include="BAL\EmployeeEducationService.cs" />
+    <Compile Include="BAL\EmployeeLeaveService.cs" />
     <Compile Include="BAL\EmployeeService.cs" />
+    <Compile Include="BAL\EmployeeWorkingTimeService.cs" />
     <Compile Include="BAL\ErrorLogger.cs" />
     <Compile Include="BAL\FinancialYearService.cs" />
+    <Compile Include="BAL\FormulaService.cs" />
+    <Compile Include="BAL\GeneralLeaveService.cs" />
     <Compile Include="BAL\GenericRepository.cs" />
     <Compile Include="BAL\GlobalClass.cs" />
     <Compile Include="BAL\GoodsReceiveService.cs" />
     <Compile Include="BAL\InventoryService.cs" />
     <Compile Include="BAL\JournalPostingService.cs" />
+    <Compile Include="BAL\LastEmploymentService.cs" />
     <Compile Include="BAL\LedgerPostingService.cs" />
     <Compile Include="BAL\LoginService.cs" />
     <Compile Include="BAL\PartyBalanceService.cs" />
     <Compile Include="BAL\PaymentService.cs" />
     <Compile Include="BAL\PictureService.cs" />
+    <Compile Include="BAL\PPH21SPTService.cs" />
     <Compile Include="BAL\ProductService.cs" />
+    <Compile Include="BAL\PTKPService.cs" />
     <Compile Include="BAL\Result.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="BAL\SalaryEmployeeDetailService.cs" />
+    <Compile Include="BAL\SalaryEmployeeService.cs" />
+    <Compile Include="BAL\SalaryItemService.cs" />
     <Compile Include="BAL\SalaryPaymentService.cs" />
+    <Compile Include="BAL\SalarySlipDetailService.cs" />
+    <Compile Include="BAL\SalarySlipService.cs" />
+    <Compile Include="BAL\SalaryStandardDetailService.cs" />
+    <Compile Include="BAL\SalaryStandardService.cs" />
     <Compile Include="BAL\SalesDeliveryService.cs" />
     <Compile Include="BAL\SalesService.cs" />
     <Compile Include="BAL\SizeService.cs" />
@@ -237,17 +272,24 @@
     <Compile Include="BAL\SupplierService.cs" />
     <Compile Include="BAL\T.cs" />
     <Compile Include="BAL\TaxService.cs" />
+    <Compile Include="BAL\TitleInfoService.cs" />
     <Compile Include="BAL\UnitService.cs" />
     <Compile Include="BAL\WareHouseService.cs" />
+    <Compile Include="BAL\WorkingDayService.cs" />
+    <Compile Include="BAL\WorkingTimeService.cs" />
     <Compile Include="Controllers\AccountGroupController.cs" />
     <Compile Include="Controllers\AccountLedgerController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CompanyInfoController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DesignationController.cs" />
+    <Compile Include="Controllers\DivisionController.cs" />
+    <Compile Include="Controllers\EmployeeAttendanceController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmployeeLeaveController.cs" />
     <Compile Include="Controllers\FinancialYearController.cs" />
     <Compile Include="Controllers\GodownTransferController.cs" />
     <Compile Include="Controllers\GoodsReceiveController.cs" />
@@ -256,13 +298,170 @@
     <Compile Include="Controllers\LedgerPostingController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PictureUploadController.cs" />
+    <Compile Include="Controllers\PPH21SPTController.cs" />
     <Compile Include="Controllers\ProductionProcessingController.cs" />
+    <Compile Include="Controllers\PTKPController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
+    <Compile Include="Controllers\SalaryItemController.cs" />
     <Compile Include="Controllers\SalaryPaymentController.cs" />
+    <Compile Include="Controllers\SalarySlipController.cs" />
+    <Compile Include="Controllers\SalaryStandardController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\SizeSetupController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
+    <Compile Include="Controllers\TitleInfoController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WorkingDayController.cs" />
+    <Compile Include="Controllers\WorkingTimeController.cs" />
+    <Compile Include="DAL\BranchOfficeRepository.cs" />
+    <Compile Include="DAL\CompanyInfoRepository.cs" />
+    <Compile Include="DAL\DivisionRepository.cs" />
+    <Compile Include="DAL\EfRepository.cs" />
+    <Compile Include="DAL\EmployeeAttendanceRepository.cs" />
+    <Compile Include="DAL\EmployeeEducationRepository.cs" />
+    <Compile Include="DAL\EmployeeLeaveRepository.cs" />
+    <Compile Include="DAL\EmployeeRepository.cs" />
+    <Compile Include="DAL\EmployeeWorkingTimeRepository.cs" />
+    <Compile Include="DAL\FormulaRepository.cs" />
+    <Compile Include="DAL\GeneralLeaveRepository.cs" />
+    <Compile Include="DAL\LastEmploymentRepository.cs" />
+    <Compile Include="DAL\PPH21SPTRepository.cs" />
+    <Compile Include="DAL\PTKPRepository.cs" />
+    <Compile Include="DAL\SalaryEmployeeDetailRepository.cs" />
+    <Compile Include="DAL\SalaryEmployeeRepository.cs" />
+    <Compile Include="DAL\SalaryItemRepository.cs" />
+    <Compile Include="DAL\SalarySlipDetailRepository.cs" />
+    <Compile Include="DAL\SalarySlipRepository.cs" />
+    <Compile Include="DAL\SalaryStandardDetailRepository.cs" />
+    <Compile Include="DAL\SalaryStandardRepository.cs" />
+    <Compile Include="DAL\TitleInfoRepository.cs" />
+    <Compile Include="DAL\WorkingDayRepository.cs" />
+    <Compile Include="DAL\WorkingTimeRepository.cs" />
+    <Compile Include="Interface\Repository\FingerPrint\IFPAttLogRepository.cs" />
+    <Compile Include="Interface\Repository\FingerPrint\IFPMachineRepository.cs" />
+    <Compile Include="Interface\Repository\FingerPrint\IFPTemplateRepository.cs" />
+    <Compile Include="Interface\Repository\FingerPrint\IFPUserRepository.cs" />
+    <Compile Include="Interface\Repository\IRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IBranchOfficeRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ICompanyInfoRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IDivisionRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IEmployeeEducationRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IEmployeeRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IEmployeeWorkingTimeRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IFormulaRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ILastEmploymentRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IPPH21SPTRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IPTKPRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ISalaryEmployeeDetailRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ISalaryEmployeeRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ISalaryItemRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ISalarySlipDetailRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ISalarySlipRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ISalaryStandardDetailRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ISalaryStandardRepository.cs" />
+    <Compile Include="Interface\Repository\Master\ITitleInfoRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IWorkingDayRepository.cs" />
+    <Compile Include="Interface\Repository\Master\IWorkingTimeRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IEmployeeAttendanceRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IEmployeeLeaveRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IEmployeeLoanDetailRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IEmployeeLoanRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IGeneralLeaveRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IOtherExpenseDetailRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IOtherExpenseRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IOtherIncomeDetailRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IOtherIncomeRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\IPensionCompensationRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\ISPKLRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\ITHRDetailRepository.cs" />
+    <Compile Include="Interface\Repository\Utility\ITHRRepository.cs" />
+    <Compile Include="Interface\Repository\ViewModel\ISlipGajiDetail1Repository.cs" />
+    <Compile Include="Interface\Repository\ViewModel\ISlipGajiDetail2ARepository.cs" />
+    <Compile Include="Interface\Repository\ViewModel\ISlipGajiDetailRepository.cs" />
+    <Compile Include="Interface\Repository\ViewModel\ISlipGajiMiniRepository.cs" />
+    <Compile Include="Interface\Service\FingerPrint\IFPAttLogService.cs" />
+    <Compile Include="Interface\Service\FingerPrint\IFPMachineService.cs" />
+    <Compile Include="Interface\Service\FingerPrint\IFPTemplateService.cs" />
+    <Compile Include="Interface\Service\FingerPrint\IFPUserService.cs" />
+    <Compile Include="Interface\Service\Master\IBranchOfficeService.cs" />
+    <Compile Include="Interface\Service\Master\ICompanyInfoService.cs" />
+    <Compile Include="Interface\Service\Master\IDivisionService.cs" />
+    <Compile Include="Interface\Service\Master\IEmployeeEducationService.cs" />
+    <Compile Include="Interface\Service\Master\IEmployeeWorkingTimeService.cs" />
+    <Compile Include="Interface\Service\Master\IFormulaService.cs" />
+    <Compile Include="Interface\Service\Master\ILastEmploymentService.cs" />
+    <Compile Include="Interface\Service\Master\IPPH21SPTService.cs" />
+    <Compile Include="Interface\Service\Master\IPTKPService.cs" />
+    <Compile Include="Interface\Service\Master\ISalaryEmployeeDetailService.cs" />
+    <Compile Include="Interface\Service\Master\ISalaryEmployeeService.cs" />
+    <Compile Include="Interface\Service\Master\ISalaryItemService.cs" />
+    <Compile Include="Interface\Service\Master\ISalarySlipDetailService.cs" />
+    <Compile Include="Interface\Service\Master\ISalarySlipService.cs" />
+    <Compile Include="Interface\Service\Master\ISalaryStandardDetailService.cs" />
+    <Compile Include="Interface\Service\Master\ISalaryStandardService.cs" />
+    <Compile Include="Interface\Service\Master\ITitleInfoService.cs" />
+    <Compile Include="Interface\Service\Master\IWorkingDayService.cs" />
+    <Compile Include="Interface\Service\Master\IWorkingTimeService.cs" />
+    <Compile Include="Interface\Service\Utility\IEmployeeAttendanceService.cs" />
+    <Compile Include="Interface\Service\Utility\IEmployeeLeaveService.cs" />
+    <Compile Include="Interface\Service\Utility\IEmployeeLoanDetailService.cs" />
+    <Compile Include="Interface\Service\Utility\IEmployeeLoanService.cs" />
+    <Compile Include="Interface\Service\Utility\IGeneralLeaveService.cs" />
+    <Compile Include="Interface\Service\Utility\IOtherExpenseDetailService.cs" />
+    <Compile Include="Interface\Service\Utility\IOtherExpenseService.cs" />
+    <Compile Include="Interface\Service\Utility\IOtherIncomeDetailService.cs" />
+    <Compile Include="Interface\Service\Utility\IOtherIncomeService.cs" />
+    <Compile Include="Interface\Service\Utility\IPensionCompensationService.cs" />
+    <Compile Include="Interface\Service\Utility\ISalaryProcessService.cs" />
+    <Compile Include="Interface\Service\Utility\ISPKLService.cs" />
+    <Compile Include="Interface\Service\Utility\ITHRDetailService.cs" />
+    <Compile Include="Interface\Service\Utility\ITHRService.cs" />
+    <Compile Include="Interface\Service\ViewModel\ISlipGajiDetail1Service.cs" />
+    <Compile Include="Interface\Service\ViewModel\ISlipGajiDetail2AService.cs" />
+    <Compile Include="Interface\Service\ViewModel\ISlipGajiDetailService.cs" />
+    <Compile Include="Interface\Service\ViewModel\ISlipGajiMiniService.cs" />
+    <Compile Include="Interface\Validation\FingerPrint\IFPAttLogValidator.cs" />
+    <Compile Include="Interface\Validation\FingerPrint\IFPMachineValidator.cs" />
+    <Compile Include="Interface\Validation\FingerPrint\IFPTemplateValidator.cs" />
+    <Compile Include="Interface\Validation\FingerPrint\IFPUserValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IBranchOfficeValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ICompanyInfoValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IDivisionValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IEmployeeEducationValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IEmployeeValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IEmployeeWorkingTimeValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IFormulaValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ILastEmploymentValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IPPH21SPTValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IPTKPValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ISalaryEmployeeDetailValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ISalaryEmployeeValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ISalaryItemValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ISalarySlipDetailValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ISalarySlipValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ISalaryStandardDetailValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ISalaryStandardValidator.cs" />
+    <Compile Include="Interface\Validation\Master\ITitleInfoValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IWorkingDayValidator.cs" />
+    <Compile Include="Interface\Validation\Master\IWorkingTimeValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IEmployeeAttendanceValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IEmployeeLeaveValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IEmployeeLoanDetailValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IEmployeeLoanValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IGeneralLeaveValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IOtherExpenseDetailValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IOtherExpenseValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IOtherIncomeDetailValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IOtherIncomeValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\IPensionCompensationValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\ISalaryProcessValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\ISPKLValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\ITHRDetailValidator.cs" />
+    <Compile Include="Interface\Validation\Utility\ITHRValidator.cs" />
+    <Compile Include="Interface\Validation\ViewModel\ISlipGajiDetail1Validator.cs" />
+    <Compile Include="Interface\Validation\ViewModel\ISlipGajiDetail2AValidator.cs" />
+    <Compile Include="Interface\Validation\ViewModel\ISlipGajiDetailValidator.cs" />
+    <Compile Include="Interface\Validation\ViewModel\ISlipGajiMiniValidator.cs" />
     <Compile Include="Models\AccountGroup.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -299,6 +498,9 @@
     <Compile Include="Models\BankReconciliation.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BranchOffice.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Brand.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -315,6 +517,9 @@
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Company.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyInfo.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContraDetail.cs">
@@ -341,10 +546,16 @@
     <Compile Include="Models\DEPARTMENT.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Department1.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DeptUsedSch.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Designationtbl.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Division.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DueSummary_Result.cs">
@@ -356,10 +567,46 @@
     <Compile Include="Models\Employee.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeAttendance.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeEducation.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeLeave.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeLoan.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeLoanDetail.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeWorkingTime.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FaceTemp.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FinancialYear.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Formula.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FPAttLog.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FPMachine.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FPTemplate.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FPUser.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GeneralLeave.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetBalance_Result.cs">
@@ -389,6 +636,9 @@
     <Compile Include="Models\JournalMaster.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LastEmployment.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LeaveClass.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -410,10 +660,28 @@
     <Compile Include="Models\NUM_RUN_DEIL.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OtherExpense.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OtherExpenseDetail.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OtherIncome.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OtherIncomeDetail.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PartyBalance.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PartyPaymentHistory.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentVoucher_Result.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PensionCompensation.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Picture.cs">
@@ -434,10 +702,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>posMVCEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PPH21SPT.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductInfo.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductWiseBestSales_Result.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PTKP.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReceiveDetail.cs">
@@ -449,6 +726,9 @@
     <Compile Include="Models\ReceiveReport_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReceiveVoucher_Result.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ReportItem.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -456,9 +736,6 @@
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rptCustomerLedger_Result.cs">
-      <DependentUpon>posMVCEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\rptCustomerRecive_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rptCustomerTransaction_Result.cs">
@@ -470,7 +747,28 @@
     <Compile Include="Models\rptSalesInvoice_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SalaryEmployee.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalaryEmployeeDetail.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalaryItem.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SalaryPayment.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalarySlip.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalarySlipDetail.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalaryStandard.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SalaryStandardDetail.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SalesDelivery.cs">
@@ -509,13 +807,25 @@
     <Compile Include="Models\Size.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="Models\SlipGajiDetail.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+    <Compile Include="Models\SlipGajiDetail1.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SlipGajiDetail2A.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SlipGajiMini.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SPKL.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StockIn.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StockInInvoice_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StockOut.cs">
@@ -552,6 +862,15 @@
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TempSalesMaster.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\THR.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\THRDetail.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TitleInfo.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TransactionType.cs">
@@ -599,19 +918,51 @@
     <Compile Include="Models\WareHouse.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WorkingDay.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkingTime.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Report\mvcReport.cs">
       <DependentUpon>mvcReport.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
+    <Compile Include="ResponseModel\BaseResponse.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Util\Constant.cs" />
+    <Compile Include="Util\GeneralFunction.cs" />
     <Compile Include="Util\RexEnum.cs" />
+    <Compile Include="Validator\BranchOfficeValidator.cs" />
+    <Compile Include="Validator\CompanyInfoValidator.cs" />
+    <Compile Include="Validator\DivisionValidator.cs" />
+    <Compile Include="Validator\EmployeeAttendanceValidator.cs" />
+    <Compile Include="Validator\EmployeeEducationValidator.cs" />
+    <Compile Include="Validator\EmployeeLeaveValidator.cs" />
+    <Compile Include="Validator\EmployeeValidator.cs" />
+    <Compile Include="Validator\EmployeeWorkingTimeValidator.cs" />
+    <Compile Include="Validator\FormulaValidator.cs" />
+    <Compile Include="Validator\GeneralLeaveValidator.cs" />
+    <Compile Include="Validator\LastEmploymentValidator.cs" />
+    <Compile Include="Validator\PPH21SPTValidator.cs" />
+    <Compile Include="Validator\PTKPValidator.cs" />
+    <Compile Include="Validator\SalaryEmployeeDetailValidator.cs" />
+    <Compile Include="Validator\SalaryEmployeeValidator.cs" />
+    <Compile Include="Validator\SalaryItemValidator.cs" />
+    <Compile Include="Validator\SalaryProcessValidator.cs" />
+    <Compile Include="Validator\SalarySlipDetailValidator.cs" />
+    <Compile Include="Validator\SalarySlipValidator.cs" />
+    <Compile Include="Validator\SalaryStandardDetailValidator.cs" />
+    <Compile Include="Validator\SalaryStandardValidator.cs" />
+    <Compile Include="Validator\TitleInfoValidator.cs" />
+    <Compile Include="Validator\WorkingDayValidator.cs" />
+    <Compile Include="Validator\WorkingTimeValidator.cs" />
     <Compile Include="ViewModel\AccountGroupResponse.cs" />
     <Compile Include="ViewModel\AccountLedgerResponse.cs" />
     <Compile Include="ViewModel\CashBookResponse.cs" />
@@ -856,6 +1207,37 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\images\arrow_off.png" />
+    <Content Include="Content\images\arrow_on.png" />
+    <Content Include="Content\images\arrow_right.png" />
+    <Content Include="Content\images\arrow_white.png" />
+    <Content Include="Content\images\bg_top.png" />
+    <Content Include="Content\images\freight-forwarding.jpg" />
+    <Content Include="Content\images\freight.jpg" />
+    <Content Include="Content\images\green_bg_body.jpg" />
+    <Content Include="Content\images\home-tab.jpg" />
+    <Content Include="Content\images\icon\icon plane.png" />
+    <Content Include="Content\images\icon\icon ship.png" />
+    <Content Include="Content\images\icon\iconBL.png" />
+    <Content Include="Content\images\icon\iconPR.png" />
+    <Content Include="Content\images\icon\iconSA.png" />
+    <Content Include="Content\images\icon\iconSI.png" />
+    <Content Include="Content\images\infossSSD - Copy %282%29.jpg" />
+    <Content Include="Content\images\infossSSD - Copy.jpg" />
+    <Content Include="Content\images\infossSSD.jpg" />
+    <Content Include="Content\images\loading\ajax-loader-1.gif" />
+    <Content Include="Content\images\loading\ajax-loader-7.gif" />
+    <Content Include="Content\images\loading\bg.png" />
+    <Content Include="Content\images\loading\spinner.gif" />
+    <Content Include="Content\images\logo\FESUB.png" />
+    <Content Include="Content\images\logo\logoBCR.png" />
+    <Content Include="Content\images\logo\logoFEI.png" />
+    <Content Include="Content\images\logo\logoFLI.png" />
+    <Content Include="Content\images\logo\logoMEP.png" />
+    <Content Include="Content\images\logo\logoPNS.png" />
+    <Content Include="Content\images\padlock.png" />
+    <Content Include="Content\images\SUBMITicon.png" />
+    <Content Include="Content\images\tab.png" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -1061,8 +1443,6 @@
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.msgBox.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1241,6 +1621,23 @@
     <Content Include="Views\Sales\DeliveredList.cshtml" />
     <Content Include="Views\Department\Department.cshtml" />
     <Content Include="Views\Designation\Designation.cshtml" />
+    <Content Include="Views\CompanyInfo\Index.cshtml" />
+    <Content Include="Views\Division\Index.cshtml" />
+    <Content Include="Views\EmployeeAttendance\Index.cshtml" />
+    <Content Include="Views\EmployeeLeave\Index.cshtml" />
+    <Content Include="Views\EmployeeWorkingTime\Index.cshtml" />
+    <Content Include="Views\GeneralLeave\Index.cshtml" />
+    <Content Include="Views\OtherExpense\Index.cshtml" />
+    <Content Include="Views\OtherIncome\Index.cshtml" />
+    <Content Include="Views\PTKP\Index.cshtml" />
+    <Content Include="Views\SalaryEmployee\Index.cshtml" />
+    <Content Include="Views\SalaryItem\Index.cshtml" />
+    <Content Include="Views\SalaryProcess\Index.cshtml" />
+    <Content Include="Views\SalarySlip\Index.cshtml" />
+    <Content Include="Views\SalaryStandard\Index.cshtml" />
+    <Content Include="Views\WorkingDay\Index.cshtml" />
+    <Content Include="Views\WorkingTime\Index.cshtml" />
+    <Content Include="Views\TitleInfo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1284,6 +1681,17 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Humanizer.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1322,6 +1730,16 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.8\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeQuality.Analyzers.2.9.8\build\Microsoft.CodeQuality.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetCore.Analyzers.2.9.8\build\Microsoft.NetCore.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetFramework.Analyzers.2.9.8\build\Microsoft.NetFramework.Analyzers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.8\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

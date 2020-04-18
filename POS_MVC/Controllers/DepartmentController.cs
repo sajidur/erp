@@ -1,11 +1,8 @@
 ﻿using RexERP_MVC.BAL;
 using RexERP_MVC.Models;
 using RexERP_MVC.ViewModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RexERP_MVC.Controllers
@@ -64,7 +61,7 @@ namespace RexERP_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DEPARTMENT product = db.GetById(model.DEPTID);
+            DEPARTMENT product = db.GetById(model.Id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -72,7 +69,7 @@ namespace RexERP_MVC.Controllers
             //model.IsActive = true;
             //model.UpdateDate = DateTime.Now;
             //model.UpdateBy = CurrentSession.GetCurrentSession().UserName;
-            db.Update(model, model.DEPTID);
+            db.Update(model, model.Id);
             return Json("Updated", JsonRequestBehavior.AllowGet);
         }
 

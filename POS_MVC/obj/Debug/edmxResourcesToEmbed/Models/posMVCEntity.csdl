@@ -399,6 +399,7 @@
     <Property Name="ATT" Type="Int16" />
     <Property Name="Holiday" Type="Int16" />
     <Property Name="OverTime" Type="Int16" />
+    <NavigationProperty Name="Designationtbls" Relationship="DB_9B34E1_erpModel.FK_Designationtbl_DEPARTMENTS" FromRole="DEPARTMENT" ToRole="Designationtbl" />
   </EntityType>
   <EntityType Name="DeptUsedSch">
     <Key>
@@ -2207,6 +2208,10 @@
       <End Role="SalesDelivery" EntitySet="SalesDeliveries" />
     </AssociationSet>
     <EntitySet Name="Designationtbls" EntityType="DB_9B34E1_erpModel.Designationtbl" />
+    <AssociationSet Name="FK_Designationtbl_DEPARTMENTS" Association="DB_9B34E1_erpModel.FK_Designationtbl_DEPARTMENTS">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENTS" />
+      <End Role="Designationtbl" EntitySet="Designationtbls" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3281,5 +3286,18 @@
     <Property Name="DepartmentID" Type="Int32" />
     <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="DEPARTMENT" Relationship="DB_9B34E1_erpModel.FK_Designationtbl_DEPARTMENTS" FromRole="Designationtbl" ToRole="DEPARTMENT" />
   </EntityType>
+  <Association Name="FK_Designationtbl_DEPARTMENTS">
+    <End Type="DB_9B34E1_erpModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.Designationtbl" Role="Designationtbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="DEPTID" />
+      </Principal>
+      <Dependent Role="Designationtbl">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

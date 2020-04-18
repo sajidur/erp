@@ -1646,6 +1646,18 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Designationtbl_DEPARTMENTS">
+    <End Role="DEPARTMENTS" Type="Self.DEPARTMENTS" Multiplicity="0..1" />
+    <End Role="Designationtbl" Type="Self.Designationtbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENTS">
+        <PropertyRef Name="DEPTID" />
+      </Principal>
+      <Dependent Role="Designationtbl">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Inventory_Brand">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
     <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
@@ -2616,6 +2628,10 @@ warning 6002: The table/view 'rexerp.dbo.UsersMachines' does not have a primary 
     <AssociationSet Name="FK_ContraMaster_Year" Association="Self.FK_ContraMaster_Year">
       <End Role="FinancialYear" EntitySet="FinancialYear" />
       <End Role="ContraMaster" EntitySet="ContraMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Designationtbl_DEPARTMENTS" Association="Self.FK_Designationtbl_DEPARTMENTS">
+      <End Role="DEPARTMENTS" EntitySet="DEPARTMENTS" />
+      <End Role="Designationtbl" EntitySet="Designationtbl" />
     </AssociationSet>
     <AssociationSet Name="FK_Inventory_Brand" Association="Self.FK_Inventory_Brand">
       <End Role="Brand" EntitySet="Brand" />

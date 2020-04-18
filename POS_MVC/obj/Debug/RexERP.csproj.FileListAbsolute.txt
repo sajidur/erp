@@ -190,3 +190,4 @@ D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.cache
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RdlCompile.compiled
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.dll
 D:\Project\RexProject\erp\POS_MVC\obj\Debug\RiceMill_MVC.pdb
+D:\Project\RexProject\erp\POS_MVC\obj\Debug\RexERP.csprojResolveAssemblyReference.cache

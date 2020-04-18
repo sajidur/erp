@@ -19,5 +19,7 @@ namespace RexERP_MVC.Models
         public Nullable<int> DepartmentID { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+    
+        public virtual DEPARTMENT DEPARTMENT { get; set; }
     }
 }

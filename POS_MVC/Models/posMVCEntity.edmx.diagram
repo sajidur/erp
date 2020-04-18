@@ -164,7 +164,8 @@
         <EntityTypeShape EntityType="DB_9B34E1_erpModel.SalesDelivery" Width="1.5" PointX="23.75" PointY="20.625" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_Customer" />
         <AssociationConnector Association="DB_9B34E1_erpModel.FK_SalesDelivery_SalesMaster" />
-        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Designationtbl" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="DB_9B34E1_erpModel.Designationtbl" Width="1.5" PointX="16.5" PointY="32.75" />
+        <AssociationConnector Association="DB_9B34E1_erpModel.FK_Designationtbl_DEPARTMENTS" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

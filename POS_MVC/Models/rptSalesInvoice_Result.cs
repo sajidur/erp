@@ -35,6 +35,10 @@ namespace RexERP_MVC.Models
         public int SalesMasterId { get; set; }
         public string SalesInvoice1 { get; set; }
         public int ProductId { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public string SizeName { get; set; }
+        public Nullable<int> BrandId { get; set; }
+        public string BrandName { get; set; }
         public decimal Qty { get; set; }
         public decimal Rate { get; set; }
         public decimal Amount { get; set; }
@@ -45,6 +49,7 @@ namespace RexERP_MVC.Models
         public string UpdatedBy { get; set; }
         public string UpdatedDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<int> DeliveryStatus { get; set; }
         public int Id2 { get; set; }
         public string Code { get; set; }
         public string ProductName { get; set; }
@@ -52,6 +57,11 @@ namespace RexERP_MVC.Models
         public Nullable<int> CategoryId { get; set; }
         public string ProductType { get; set; }
         public Nullable<int> ProductTypeId { get; set; }
+        public Nullable<int> MinStock { get; set; }
+        public Nullable<int> TaxId { get; set; }
+        public Nullable<int> MaxStock { get; set; }
+        public string Unit { get; set; }
+        public Nullable<int> ReorderLevel { get; set; }
         public string CreatedBy1 { get; set; }
         public Nullable<System.DateTime> CreatedDate1 { get; set; }
         public string UpdateBy { get; set; }

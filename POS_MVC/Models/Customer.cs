@@ -17,10 +17,10 @@ namespace RexERP_MVC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.SalesMasters = new HashSet<SalesMaster>();
-            this.TempSalesMasters = new HashSet<TempSalesMaster>();
-            this.SalesOrders = new HashSet<SalesOrder>();
             this.SalesDeliveries = new HashSet<SalesDelivery>();
+            this.SalesMasters = new HashSet<SalesMaster>();
+            this.SalesOrders = new HashSet<SalesOrder>();
+            this.TempSalesMasters = new HashSet<TempSalesMaster>();
         }
     
         public int Id { get; set; }
@@ -43,12 +43,12 @@ namespace RexERP_MVC.Models
         public Nullable<int> LedgerId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SalesMaster> SalesMasters { get; set; }
+        public virtual ICollection<SalesDelivery> SalesDeliveries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TempSalesMaster> TempSalesMasters { get; set; }
+        public virtual ICollection<SalesMaster> SalesMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesOrder> SalesOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SalesDelivery> SalesDeliveries { get; set; }
+        public virtual ICollection<TempSalesMaster> TempSalesMasters { get; set; }
     }
 }

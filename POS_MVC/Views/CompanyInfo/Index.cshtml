@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Company Info";
+}
+
+@section Scripts {
+    <script type="text/javascript" src="@Url.Content("~/Content/apps_js/tools.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/apps_js/companyinfo.js")"></script>
+}
+
+<div class="row">
+    <div class="card">
+        <div class="well bs-component">
+
+            <form id="frm">
+                <fieldset class="ui-widget-content ui-corner-all input_form_div">
+                    <table width="100%" border="0" cellpadding="1" cellspacing="1" class="input_form_tbl">
+                        <tr nowrap>
+                            <td width="139" nowrap style="width: 100px">
+                                <label>ID</label>
+                            </td>
+                            <td width="226">
+                                <input id="id" type="text" size="10" disabled="disabled" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Name</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="Name" name="Name" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label>Address</label>
+                            </td>
+                            <td colspan="3">
+                                <label>
+                                    <textarea name="Address" id="Address" cols="60" rows="3"></textarea>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>City</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="City" name="City" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Postal Code</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="PostalCode" name="PostalCode" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Phone Number</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="PhoneNumber" name="PhoneNumber" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Fax Number</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="FaxNumber" name="FaxNumber" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Email</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="Email" name="Email" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Website</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="Website" name="Website" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>NPWP</label>
+                            </td>
+                            <td colspan="3">
+                                <input id="NPWP" name="NPWP" type="text" size="60" maxlength="60" align="left" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                NPWP Date
+                            </td>
+                            <td>
+                                <input id="NPWPDate" class="easyui-datebox" title="mm/dd/yyyy" type="text" size="10" value="@DateTime.Today.ToShortDateString()" />
+                                <input name="NPWPDate" type="text" size="1" hidden="hidden" />
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+                <button class="btn btn-w-m btn-info" data-style="expand-left" id="form_btn_save" type="button"><i class="fa fa-save"></i>&nbsp; Save</button>
+
+            </form>
+        </div>
+        </div>
+    </div>
+<script>
+        $("#form_btn_save").click(function () {
+        ClearErrorMessage();
+        var submitURL = '';
+        // Update
+        if (id != undefined && id != '' && !isNaN(id) && id > 0) {
+            submitURL = '/CompanyInfo/Update';
+        }
+            // Insert
+        else {
+            submitURL = '/CompanyInfo/Insert';
+        }
+
+        $.ajax({
+            contentType: "application/json",
+            type: 'POST',
+            url: submitURL,
+            data: JSON.stringify({
+                Id: id, Name: $("#Name").val(), Address: $("#Address").val(), City: $("#City").val(), PostalCode: $("#PostalCode").val(),
+                PhoneNumber: $("#PhoneNumber").val(), FaxNumber: $("#FaxNumber").val(),
+                Email: $("#Email").val(), Website: $("#Website").val(), NPWP: $("#NPWP").val(), NPWPDate: $('#NPWPDate').val(),
+            }),
+            async: false,
+            cache: false,
+            timeout: 30000,
+            error: function () {
+                return false;
+            },
+            success: function (result) {
+                if (JSON.stringify(result.Errors) != '{}') {
+                     for (var key in result.Errors) {
+                        if (key != null && key != undefined && key != 'Generic') {
+                            $('input[name=' + key + ']').addClass('errormessage').after('<span class="errormessage">**' + result.Errors[key] + '</span>');
+                            $('textarea[name=' + key + ']').addClass('errormessage').after('<span class="errormessage">**' + result.Errors[key] + '</span>');
+                        }
+                        else {
+                            $.messager.alert('Warning', result.Errors[key], 'warning');
+                        }
+                    }
+                }
+                else {
+                    ReloadGrid();
+                    $("#form_div").dialog('close')
+                }
+            }
+        });
+        });
+
+    function ClearErrorMessage() {
+        $('span[class=errormessage]').text('').remove();
+    }
+</script>

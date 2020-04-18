@@ -50,10 +50,13 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DEPARTMENT> DEPARTMENTS { get; set; }
         public virtual DbSet<DeptUsedSch> DeptUsedSchs { get; set; }
+        public virtual DbSet<Designationtbl> Designationtbls { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<FaceTemp> FaceTemps { get; set; }
         public virtual DbSet<FinancialYear> FinancialYears { get; set; }
         public virtual DbSet<HOLIDAY> HOLIDAYS { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<InventoryTransaction> InventoryTransactions { get; set; }
         public virtual DbSet<JournalDetail> JournalDetails { get; set; }
         public virtual DbSet<JournalMaster> JournalMasters { get; set; }
         public virtual DbSet<LeaveClass> LeaveClasses { get; set; }
@@ -66,18 +69,24 @@ namespace RexERP_MVC.Models
         public virtual DbSet<PartyBalance> PartyBalances { get; set; }
         public virtual DbSet<PartyPaymentHistory> PartyPaymentHistories { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ReceiveDetail> ReceiveDetails { get; set; }
         public virtual DbSet<ReceiveMaster> ReceiveMasters { get; set; }
         public virtual DbSet<ReportItem> ReportItems { get; set; }
         public virtual DbSet<RoleWiseScreenPermission> RoleWiseScreenPermissions { get; set; }
         public virtual DbSet<SalaryPayment> SalaryPayments { get; set; }
+        public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
+        public virtual DbSet<SalesDetail> SalesDetails { get; set; }
         public virtual DbSet<SalesMaster> SalesMasters { get; set; }
+        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
         public virtual DbSet<SalesReturn> SalesReturns { get; set; }
         public virtual DbSet<SchClass> SchClasses { get; set; }
         public virtual DbSet<Screen> Screens { get; set; }
         public virtual DbSet<SECURITYDETAIL> SECURITYDETAILS { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<SHIFT> SHIFTs { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -86,7 +95,9 @@ namespace RexERP_MVC.Models
         public virtual DbSet<TBSMSALLOT> TBSMSALLOTs { get; set; }
         public virtual DbSet<TBSMSINFO> TBSMSINFOes { get; set; }
         public virtual DbSet<TEMPLATE> TEMPLATEs { get; set; }
+        public virtual DbSet<TempSalesDetail> TempSalesDetails { get; set; }
         public virtual DbSet<TempSalesMaster> TempSalesMasters { get; set; }
+        public virtual DbSet<TransactionType> TransactionTypes { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<USER_OF_RUN> USER_OF_RUN { get; set; }
@@ -99,21 +110,52 @@ namespace RexERP_MVC.Models
         public virtual DbSet<UserUpdate> UserUpdates { get; set; }
         public virtual DbSet<UserUsedSClass> UserUsedSClasses { get; set; }
         public virtual DbSet<VoucherType> VoucherTypes { get; set; }
+        public virtual DbSet<WareHouse> WareHouses { get; set; }
         public virtual DbSet<EmOpLog> EmOpLogs { get; set; }
         public virtual DbSet<ServerLog> ServerLogs { get; set; }
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
-        public virtual DbSet<Size> Sizes { get; set; }
-        public virtual DbSet<Inventory> Inventories { get; set; }
-        public virtual DbSet<StockIn> StockIns { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
-        public virtual DbSet<TempSalesDetail> TempSalesDetails { get; set; }
-        public virtual DbSet<InventoryTransaction> InventoryTransactions { get; set; }
-        public virtual DbSet<TransactionType> TransactionTypes { get; set; }
-        public virtual DbSet<WareHouse> WareHouses { get; set; }
-        public virtual DbSet<SalesDetail> SalesDetails { get; set; }
-        public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
-        public virtual DbSet<Designationtbl> Designationtbls { get; set; }
+        public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
+        public virtual DbSet<BranchOffice> BranchOffices { get; set; }
+        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
+        public virtual DbSet<Department1> Department1 { get; set; }
+        public virtual DbSet<Division> Divisions { get; set; }
+        public virtual DbSet<EmployeeAttendance> EmployeeAttendances { get; set; }
+        public virtual DbSet<EmployeeEducation> EmployeeEducations { get; set; }
+        public virtual DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
+        public virtual DbSet<EmployeeLoan> EmployeeLoans { get; set; }
+        public virtual DbSet<EmployeeLoanDetail> EmployeeLoanDetails { get; set; }
+        public virtual DbSet<EmployeeWorkingTime> EmployeeWorkingTimes { get; set; }
+        public virtual DbSet<Formula> Formulae { get; set; }
+        public virtual DbSet<FPAttLog> FPAttLogs { get; set; }
+        public virtual DbSet<FPMachine> FPMachines { get; set; }
+        public virtual DbSet<FPTemplate> FPTemplates { get; set; }
+        public virtual DbSet<FPUser> FPUsers { get; set; }
+        public virtual DbSet<GeneralLeave> GeneralLeaves { get; set; }
+        public virtual DbSet<LastEmployment> LastEmployments { get; set; }
+        public virtual DbSet<OtherExpense> OtherExpenses { get; set; }
+        public virtual DbSet<OtherExpenseDetail> OtherExpenseDetails { get; set; }
+        public virtual DbSet<OtherIncome> OtherIncomes { get; set; }
+        public virtual DbSet<OtherIncomeDetail> OtherIncomeDetails { get; set; }
+        public virtual DbSet<PensionCompensation> PensionCompensations { get; set; }
+        public virtual DbSet<PPH21SPT> PPH21SPT { get; set; }
+        public virtual DbSet<PTKP> PTKPs { get; set; }
+        public virtual DbSet<SalaryEmployee> SalaryEmployees { get; set; }
+        public virtual DbSet<SalaryEmployeeDetail> SalaryEmployeeDetails { get; set; }
+        public virtual DbSet<SalaryItem> SalaryItems { get; set; }
+        public virtual DbSet<SalarySlip> SalarySlips { get; set; }
+        public virtual DbSet<SalarySlipDetail> SalarySlipDetails { get; set; }
+        public virtual DbSet<SalaryStandard> SalaryStandards { get; set; }
+        public virtual DbSet<SalaryStandardDetail> SalaryStandardDetails { get; set; }
+        public virtual DbSet<SlipGajiDetail> SlipGajiDetails { get; set; }
+        public virtual DbSet<SlipGajiDetail1> SlipGajiDetail1 { get; set; }
+        public virtual DbSet<SlipGajiDetail2A> SlipGajiDetail2A { get; set; }
+        public virtual DbSet<SlipGajiMini> SlipGajiMinis { get; set; }
+        public virtual DbSet<SPKL> SPKLs { get; set; }
+        public virtual DbSet<THR> THRs { get; set; }
+        public virtual DbSet<THRDetail> THRDetails { get; set; }
+        public virtual DbSet<TitleInfo> TitleInfoes { get; set; }
+        public virtual DbSet<WorkingDay> WorkingDays { get; set; }
+        public virtual DbSet<WorkingTime> WorkingTimes { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {
@@ -250,6 +292,15 @@ namespace RexERP_MVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IncomeStatement_Result>("IncomeStatement", fromDateParameter, toDateParameter);
         }
     
+        public virtual ObjectResult<PaymentVoucher_Result> PaymentVoucher(string invoiceNo)
+        {
+            var invoiceNoParameter = invoiceNo != null ?
+                new ObjectParameter("InvoiceNo", invoiceNo) :
+                new ObjectParameter("InvoiceNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PaymentVoucher_Result>("PaymentVoucher", invoiceNoParameter);
+        }
+    
         public virtual ObjectResult<ProductWiseBestSales_Result> ProductWiseBestSales()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductWiseBestSales_Result>("ProductWiseBestSales");
@@ -270,6 +321,15 @@ namespace RexERP_MVC.Models
                 new ObjectParameter("supplierId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReceiveReport_Result>("ReceiveReport", fromDateParameter, toDateParameter, supplierIdParameter);
+        }
+    
+        public virtual ObjectResult<ReceiveVoucher_Result> ReceiveVoucher(string invoiceNo)
+        {
+            var invoiceNoParameter = invoiceNo != null ?
+                new ObjectParameter("InvoiceNo", invoiceNo) :
+                new ObjectParameter("InvoiceNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReceiveVoucher_Result>("ReceiveVoucher", invoiceNoParameter);
         }
     
         public virtual ObjectResult<rptCustomerLedger_Result> rptCustomerLedger(Nullable<int> ledgerId, Nullable<int> type, Nullable<int> yearId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
@@ -295,19 +355,6 @@ namespace RexERP_MVC.Models
                 new ObjectParameter("toDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptCustomerLedger_Result>("rptCustomerLedger", ledgerIdParameter, typeParameter, yearIdParameter, fromDateParameter, toDateParameter);
-        }
-    
-        public virtual ObjectResult<rptCustomerRecive_Result> rptCustomerRecive(Nullable<int> customerId, string invoiceId)
-        {
-            var customerIdParameter = customerId.HasValue ?
-                new ObjectParameter("CustomerId", customerId) :
-                new ObjectParameter("CustomerId", typeof(int));
-    
-            var invoiceIdParameter = invoiceId != null ?
-                new ObjectParameter("invoiceId", invoiceId) :
-                new ObjectParameter("invoiceId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<rptCustomerRecive_Result>("rptCustomerRecive", customerIdParameter, invoiceIdParameter);
         }
     
         public virtual ObjectResult<rptCustomerTransaction_Result> rptCustomerTransaction(Nullable<int> customerId)
@@ -404,7 +451,7 @@ namespace RexERP_MVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        public virtual int sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
         {
             var diagramnameParameter = diagramname != null ?
                 new ObjectParameter("diagramname", diagramname) :
@@ -414,10 +461,10 @@ namespace RexERP_MVC.Models
                 new ObjectParameter("owner_id", owner_id) :
                 new ObjectParameter("owner_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        public virtual int sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
         {
             var diagramnameParameter = diagramname != null ?
                 new ObjectParameter("diagramname", diagramname) :
@@ -427,7 +474,7 @@ namespace RexERP_MVC.Models
                 new ObjectParameter("owner_id", owner_id) :
                 new ObjectParameter("owner_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
@@ -450,6 +497,15 @@ namespace RexERP_MVC.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<StockInInvoice_Result> StockInInvoice(string invoiceNo)
+        {
+            var invoiceNoParameter = invoiceNo != null ?
+                new ObjectParameter("InvoiceNo", invoiceNo) :
+                new ObjectParameter("InvoiceNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StockInInvoice_Result>("StockInInvoice", invoiceNoParameter);
         }
     
         public virtual ObjectResult<StockOutChallanList_Result> StockOutChallanList(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)

@@ -36,11 +36,11 @@ namespace RexERP_MVC.Models
         public string SizeName { get; set; }
         public string BrandName { get; set; }
     
-        public virtual Supplier Supplier { get; set; }
-        public virtual Product Product { get; set; }
         public virtual Brand Brand { get; set; }
         public virtual Inventory Inventory { get; set; }
+        public virtual Product Product { get; set; }
         public virtual Size Size { get; set; }
+        public virtual Supplier Supplier { get; set; }
         public virtual WareHouse WareHouse { get; set; }
     }
 }

@@ -1,18 +1,14 @@
-﻿using Microsoft.Ajax.Utilities;
-using RexERP_MVC.BAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Linq.Expressions;
-using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Data;
 
 namespace RexERP_MVC.BAL
-{                                   
-     public class DbContextRepository<T> : GenericRepository<T>
+{
+    public class DbContextRepository<T> : GenericRepository<T>
         where T : class
     {
         protected DbContext Context;

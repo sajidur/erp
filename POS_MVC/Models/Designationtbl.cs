@@ -14,10 +14,12 @@ namespace RexERP_MVC.Models
     
     public partial class Designationtbl
     {
-        public int DesignationID { get; set; }
+        public int Id { get; set; }
         public string DesignationName { get; set; }
         public Nullable<int> DepartmentID { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+    
+        public virtual DEPARTMENT DEPARTMENT { get; set; }
     }
 }

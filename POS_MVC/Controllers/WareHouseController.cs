@@ -3,8 +3,6 @@ using RexERP_MVC.Models;
 using RexERP_MVC.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using RexERP_MVC.Util;
 using System.Net;

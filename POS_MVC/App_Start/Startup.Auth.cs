@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Builder;
-using Owin;
+﻿using Microsoft.Owin.Builder;
 
 namespace RexERP_MVC
 {

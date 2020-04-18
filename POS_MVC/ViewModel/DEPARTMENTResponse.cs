@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RexERP_MVC.ViewModel
 {
     public class DEPARTMENTResponse
     {
-        public int DEPTID { get; set; }
+        public int Id { get; set; }
         public string DEPTNAME { get; set; }
         public int SUPDEPTID { get; set; }
         public Nullable<short> InheritParentSch { get; set; }

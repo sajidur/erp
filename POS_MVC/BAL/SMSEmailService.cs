@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using RexERP_MVC.ServiceReference1;
 using RestSharp;
 using System.Configuration;

@@ -45,13 +45,13 @@ namespace RexERP_MVC.Models
         public bool IsActive { get; set; }
     
         public virtual Brand Brand { get; set; }
+        public virtual Product Product { get; set; }
         public virtual Size Size { get; set; }
         public virtual Supplier Supplier { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual WareHouse WareHouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesOrder> SalesOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockOut> StockOuts { get; set; }
-        public virtual WareHouse WareHouse { get; set; }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace RexERP_MVC.Util
+﻿namespace RexERP_MVC.Util
 {
     public enum TransactionType
     {

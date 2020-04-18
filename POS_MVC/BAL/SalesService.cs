@@ -1,15 +1,11 @@
-﻿using Microsoft.Build.Framework;
-using Microsoft.Owin.Logging;
-using RexERP_MVC.Models;
+﻿using RexERP_MVC.Models;
 using RexERP_MVC.Util;
 using RexERP_MVC.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Web;
 
 namespace RexERP_MVC.BAL
 {

@@ -14,7 +14,13 @@ namespace RexERP_MVC.Models
     
     public partial class DEPARTMENT
     {
-        public int DEPTID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DEPARTMENT()
+        {
+            this.Designationtbls = new HashSet<Designationtbl>();
+        }
+    
+        public int Id { get; set; }
         public string DEPTNAME { get; set; }
         public int SUPDEPTID { get; set; }
         public Nullable<short> InheritParentSch { get; set; }
@@ -30,5 +36,8 @@ namespace RexERP_MVC.Models
         public Nullable<short> ATT { get; set; }
         public Nullable<short> Holiday { get; set; }
         public Nullable<short> OverTime { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Designationtbl> Designationtbls { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Owin;
 using Microsoft.Owin.Builder;
-using Owin;
 
 [assembly: OwinStartupAttribute(typeof(RexERP_MVC.Startup))]
 namespace RexERP_MVC

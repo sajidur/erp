@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Script.Serialization;
-using RexERP_MVC.Models;
 
 
 namespace RexERP_MVC.ViewModel

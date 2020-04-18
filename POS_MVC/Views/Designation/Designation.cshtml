@@ -25,14 +25,14 @@
                     <div class="well bs-component">
                         <form class="form-horizontal">
                             <fieldset>
-                                @Html.HiddenFor(m => m.DepartmentID)
+                                @Html.HiddenFor(m => m.Id)
 
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Department Name:
                                     </label>
                                     <div class="col-md-4">
-                                        @Html.DropDownList("DepartmentID", (IEnumerable<SelectListItem>)ViewBag.DepartmentList, new { @class = "form-control chosen" })
+                                        @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.DepartmentList, new { @class = "form-control chosen" })
                                     </div>
                                 </div>
 
@@ -100,10 +100,10 @@
                                     <tbody>
                                         {{#ProductGroupSearch}}
                                         <tr>
-                                            <td> {{DEPTID}}</td>
+                                            <td> {{Id}}</td>
                                             <td> {{DEPTNAME}}</td>
                                             <td class="action-sm">
-                                                <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{DEPTID}}')"><i class="fa fa-edit"></i> Select</a>
+                                                <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
                                             </td>
                                         </tr>
 

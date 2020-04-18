@@ -1,9 +1,4 @@
 ﻿
-$(document).ready(function () {
-    LoadEmployeeList();
-});
-
-
 function LoadEmployeeList() {
     var url = '/Employee/GetAll';
     $.ajax({

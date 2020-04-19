@@ -13,6 +13,6 @@
     public enum DeliveryStatus
     {
         Delivered = 1,
-        Pending = 2
+        Pending = 0
     }
 }

@@ -18,7 +18,7 @@
                                         Dates:
                                     </label>
                                     <div class="col-md-3">
-                                        <input type="date" id="txtDates" name="txtDates" class="form-control" style="width:200px; height:40px"/>
+                                        <input type="date" required id="txtDates" name="txtDates" class="form-control" style="width:200px; height:40px"/>
                                     </div>
                                     <label class="col-md-1 control-label">
                                         Notes:
@@ -101,7 +101,7 @@
                     </div>                    
                     <div class="form-actions">
                         <div class="col-md-12">
-                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SaveForLocalMarket()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="JournalPosting()"><i class="fa fa-save"></i>&nbsp; Save</button>
                             <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
                         </div>
                     </div>
@@ -141,9 +141,7 @@
     </table>
 </script>
 <script>
-     function calculateRow(row) {
-         var price = +row.find('input[name^="price"]').val();
-     }
+    var ledgerPostingList = [];
      function calculateGrandTotal() {
          var grandTotal = 0;
          $("table.order-list").find('input[name^="price"]').each(function () {
@@ -151,9 +149,92 @@
          });
          $("#grandtotal").text(grandTotal.toFixed(2));
      }
-     $(document).ready(function () {
+    $(document).ready(function () {
+           var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
+            $('#txtDates').val(today);
          LoadAccountLedger("ddlLedger");
      });
+    function JournalPosting() {
+    var isOK = CheckValidate();
+    if (isOK) {
+        $.ajax({
+            url: '/Journal/JournalSave',
+            method: 'post',
+            dataType: 'json',
+            async: false,
+            data: {
+                voucherNo: $('#txtPoNo').val(),
+                GroupUnder: $('#ddlUnder').val(),
+                notes: $('#txtDescription').val(),
+                voucherDate: $('#txtDates').val(),
+                ledgerPosting: ledgerPostingList
+            },
+            success: function (data) {
+                ShowNotification("1", "Journal Saved!!");
+               // setTimeout(location.reload.bind(location), 1000);
+
+                window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=JournalVoucher&invoiceId=" + $("#txtPoNo").val();
+            },
+            error: function () {
+            }
+        });
+    }
+
+}
+
+function CheckValidate() {
+    var credit = 0;
+    ledgerPostingList.filter(a => a.DrOrCr == 'Cr').forEach(val => {
+        credit = credit + val.Amount;
+    });
+    var Debit = 0;
+    ledgerPostingList.filter(a => a.DrOrCr == 'Dr').forEach(val => {
+        Debit = Debit + val.Amount;
+    });
+    if (credit != Debit) {
+        ShowNotification("1", "Debit and Credit should be equal!!");
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+var count = 0;
+function AddJournalToGrid() {
+    var Ledger = "";
+    var DrOrCr = '';
+    var Amount = '';
+    var ChequeNo = '';
+    var ChequeDate = '';
+    $('#myTable tr').each(function (i) {
+        if (i == "1") {
+            var countCount = count++;
+            LedgerId = $("#ddlLedger option:selected").val();
+            LedgerName = $("#ddlLedger option:selected").text();
+            DrOrCr = $(this).find('td').eq(1).find('select').val();
+            Amount = parseInt($(this).find('td').eq(3).find('input').val());
+            ChequeNo = $(this).find('td').eq(4).find('input').val();
+            ChequeDate = $(this).find('td').eq(5).find('input').val();
+        }
+
+    });
+    var object = {
+        Id: count,
+        LedgerId: LedgerId,
+        LedgerName:LedgerName,
+        DrOrCr: DrOrCr,
+        Amount: Amount,
+        ChequeNo: ChequeNo,
+        ChequeDate: ChequeDate
+    };
+    ledgerPostingList.push(object);
+    var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: ledgerPostingList });
+    $("#div-product-add").empty().html(templateWithData);
+}
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/Accounts.js"></script>

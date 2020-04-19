@@ -120,6 +120,8 @@ namespace RexERP_MVC.BAL
             {
                 ledger.VoucherNo = max.VoucherNo + 1;
             }
+            ledger.CreatedDate = DateTime.Now;
+            ledger.CreatedBy = CurrentSession.GetCurrentSession().UserId;
             ledger.YearId = CurrentSession.GetCurrentSession().FinancialYear;
             ledger.IsLastYear = true;
             ledger.IsActive = true;

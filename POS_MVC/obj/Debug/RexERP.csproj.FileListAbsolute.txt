@@ -196,3 +196,5 @@ E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Buffers.xml
 E:\My Work\Rex ERP\erp\POS_MVC\bin\System.Runtime.CompilerServices.Unsafe.xml
 E:\My Work\Rex ERP\erp\POS_MVC\bin\log4net.dll
 E:\My Work\Rex ERP\erp\POS_MVC\bin\log4net.xml
+E:\My Work\Rex ERP\erp\POS_MVC\bin\Report\RPT\rptJournalVoucher.rdlc
+E:\My Work\Rex ERP\erp\POS_MVC\obj\Debug\RexERP.csprojAssemblyReference.cache

@@ -1,5 +1,4 @@
-﻿var ledgerPostingList = [];
-function LoadForEdit(parameters) {
+﻿function LoadForEdit(parameters) {
     $("#ui-id-1").html("Modify Account");
     $("#btnSave").hide();
     $("#btnUpdate").show();
@@ -372,59 +371,4 @@ function ChangeLedgerGroup() {
 
 }
 
-function JournalPosting() {
-    $.ajax({
-        url: '/AccountGroup/Create',
-        method: 'post',
-        dataType: 'json',
-        async: false,
-        data: {
-            AccountGroupName: $('#txtGroupName').val(),
-            GroupUnder: $('#ddlUnder').val(),
-            Narration: $('#txtDescription').val(),
-            Nature: $('#ddlNature').val(),
-            create: 1
-        },
-        success: function (data) {
-            setTimeout(location.reload.bind(location), 10000);
-            ShowNotification("1", "Account Saved Saved!!");
-            ResetForm();
-            LoadCustomerList();
-        },
-        error: function () {
-        }
-    });
-}
 
-var count = 0;
-function AddJournalToGrid() {
-    var Ledger = "";
-    var DrOrCr = '';
-    var Amount = '';
-    var ChequeNo = '';
-    var ChequeDate = '';
-    $('#myTable tr').each(function (i) {
-        if (i == "1") {
-            var countCount = count++;
-            LedgerId = $("#ddlLedger option:selected").val();
-            LedgerName = $("#ddlLedger option:selected").text();
-            DrOrCr = $(this).find('td').eq(1).find('select').val();
-            Amount = $(this).find('td').eq(3).find('input').val();
-            ChequeNo = $(this).find('td').eq(4).find('input').val();
-            ChequeDate = $(this).find('td').eq(5).find('input').val();
-        }
-
-    });
-    var object = {
-        Id: count,
-        LedgerId: LedgerId,
-        LedgerName:LedgerName,
-        DrOrCr: DrOrCr,
-        Amount: Amount,
-        ChequeNo: ChequeNo,
-        ChequeDate: ChequeDate
-    };
-    ledgerPostingList.push(object);
-    var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: ledgerPostingList });
-    $("#div-product-add").empty().html(templateWithData);
-}

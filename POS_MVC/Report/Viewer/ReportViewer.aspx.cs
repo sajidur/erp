@@ -73,12 +73,30 @@ namespace RexERP_MVC.Report.Viewer
                     {
                         PaymentVoucher();
                     }
+                    if (reportType == "JournalVoucher")
+                    {
+                        JournalVoucher();
+                    }
                 }
                 catch (Exception ex)
                 {
                     lblMsg.Text = ex.Message;
                 }
             }
+        }
+
+        private void JournalVoucher()
+        {
+            string invoiceId = Request.QueryString["invoiceId"].ToString();
+            string query = @"exec SP_JournalVoucher '" + invoiceId + "'";
+            oResult = oDAL.Select(query);
+            DataTable dt = null;
+            dt = oResult.Data as DataTable;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptJournalVoucher.rdlc");
+            ReportDataSource datasource = new ReportDataSource("dsJournalVoucher", dt);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
         }
 
         private void ReceiveVoucher()

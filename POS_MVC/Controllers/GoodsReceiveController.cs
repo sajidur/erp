@@ -201,7 +201,7 @@ namespace RexERP_MVC.Controllers
 
         }
 
-        public ActionResult PaddyReceiveReport()
+        public ActionResult ReceiveReport()
         {
             return View();
         }

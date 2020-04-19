@@ -1,7 +1,4 @@
-﻿/// <reference path="site.common.js" />
-
-
-//#region Notification 
+﻿//#region Notification 
 function MakePagination(tableId) {
     $('#' + tableId).dataTable({
         "paging": true,

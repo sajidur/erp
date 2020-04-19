@@ -2,6 +2,7 @@
 using RexERP_MVC.BAL;
 using RexERP_MVC.BLL;
 using RexERP_MVC.Models;
+using RexERP_MVC.RequestModel;
 using RexERP_MVC.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace RexERP_MVC.Controllers
     {
         // GET: LedgerPosting
         LedgerPostingService postingService = new LedgerPostingService();
+        JournalPostingService journalPostingService = new JournalPostingService();
         PartyBalanceService partyBalanceService = new PartyBalanceService();
 
-        JournalPostingService journalPostingService = new JournalPostingService();
         AccountGroupService accountGroupService = new AccountGroupService();
         AccountLedgerService accledgerService = new AccountLedgerService();
         CustomerService customerService = new CustomerService();
@@ -224,127 +225,6 @@ namespace RexERP_MVC.Controllers
             string xx = "JO" + invoice.PadLeft(6, '0');
             return Json(xx, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult AddIncomeJournalSave(string voucherNo, int CostHeadId, DateTime voucherDate, string notes, List<JournalDetail> journalDetails, decimal TotalAmount, string ChkNo)
-        {
-            JournalMaster jmaster = new JournalMaster();
-            JournalDetail jd = new JournalDetail();
-
-            jmaster.InvoiceNo = voucherNo;
-            jmaster.LadgerDate = voucherDate;
-            jmaster.Narration = notes;
-            jmaster.TotalAmount = TotalAmount;
-            journalPostingService.Save(jmaster);
-
-            jd.LedgerId = CostHeadId;
-            jd.Credit = TotalAmount;
-            jd.Credit = 0;
-            jd.ChequeNo = ChkNo;
-            jd.ChequeDate = voucherDate;
-            journalPostingService.Save(jd);
-            foreach (var item in journalDetails)
-            {
-                JournalDetail jdetails = new JournalDetail();
-
-                jdetails.LedgerId = item.LedgerId;
-                jdetails.Credit = 0;
-                jdetails.Debit = item.Credit;
-                jdetails.ChequeNo = "";
-                jdetails.ChequeDate = voucherDate;
-                journalPostingService.Save(jdetails);
-
-            }
-
-            //credit
-            foreach (var item in journalDetails)
-            {
-                LedgerPosting lposting = new LedgerPosting();
-                lposting.Credit = 0;
-                lposting.VoucherNo = voucherNo;
-                lposting.LedgerId = item.LedgerId;
-                lposting.Debit = item.Debit ?? 0 + item.Credit ?? 0;
-                lposting.PostingDate = voucherDate;
-                lposting.ChequeDate = DateTime.Now;
-                lposting.ChequeNo = "";
-                lposting.VoucherTypeId = 4;
-                lposting.Extra1 = "Voucher:" + voucherNo + " " + notes;
-                postingService.Save(lposting);
-            }
-            //debit
-            LedgerPosting posting = new LedgerPosting();
-            posting.ChequeDate = DateTime.Now;
-            posting.VoucherNo = voucherNo;
-            posting.ChequeNo = "";
-            posting.VoucherTypeId = 4;
-            posting.LedgerId = CostHeadId;
-            posting.PostingDate = voucherDate;
-            posting.Credit = TotalAmount;
-            posting.Debit = 0;
-            posting.Extra1 = "Voucher:" + voucherNo + " " + notes;
-            postingService.Save(posting);
-
-            return Json("", JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult AddExpenseJournalSave(string voucherNo, int CostHeadId, DateTime voucherDate, string notes, List<JournalDetail> journalDetails,decimal TotalAmount, string ChkNo)
-        {
-            JournalMaster jmaster = new JournalMaster();
-            JournalDetail jd = new JournalDetail();
-
-            jmaster.InvoiceNo = voucherNo;
-            jmaster.LadgerDate = voucherDate;
-            jmaster.Narration = notes;
-            jmaster.TotalAmount = TotalAmount;
-            journalPostingService.Save(jmaster);
-
-            jd.LedgerId = CostHeadId;
-            jd.Credit = TotalAmount;
-            jd.Credit = 0;
-            jd.ChequeNo = ChkNo;
-            jd.ChequeDate = voucherDate;
-            journalPostingService.Save(jd);
-            foreach (var item in journalDetails)
-            {
-                JournalDetail jdetails = new JournalDetail();
-
-                jdetails.LedgerId = item.LedgerId;
-                jdetails.Credit = 0;
-                jdetails.Debit = item.Credit;
-                jdetails.ChequeNo = "";
-                jdetails.ChequeDate = voucherDate;
-                journalPostingService.Save(jdetails);
-
-            }
-
-            //credit
-            foreach (var item in journalDetails)
-            {
-                LedgerPosting lposting = new LedgerPosting();
-                lposting.Credit = item.Debit ?? 0 + item.Credit ?? 0; ;
-                lposting.VoucherNo = voucherNo;
-                lposting.LedgerId = item.LedgerId;
-                lposting.Debit = 0;
-                lposting.PostingDate = voucherDate;
-                lposting.ChequeDate = DateTime.Now;
-                lposting.ChequeNo = "";
-                lposting.VoucherTypeId = 4;
-                lposting.Extra1 = "Voucher:" + voucherNo + " " + notes;
-                postingService.Save(lposting);
-            }
-            //debit
-            LedgerPosting posting = new LedgerPosting();
-            posting.ChequeDate = DateTime.Now;
-            posting.VoucherNo = voucherNo;
-            posting.ChequeNo = "";
-            posting.VoucherTypeId = 4;
-            posting.LedgerId = CostHeadId;
-            posting.PostingDate = voucherDate;
-            posting.Credit = 0;
-            posting.Debit = TotalAmount;
-            posting.Extra1 = "Voucher:" + voucherNo + " " + notes;
-            postingService.Save(posting);
-
-            return Json("", JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult AddContraSave(string voucherNo, int CostHeadId, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPostion, string CostChkNo, decimal TotalAmount, string Radio)
         {
             if (Radio == "Debit")
@@ -402,30 +282,5 @@ namespace RexERP_MVC.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult JournalSave(string voucherNo, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPostion)
-        {
-            foreach (var item in ledgerPostion)
-            {
-                LedgerPosting ledgersave = new LedgerPosting();
-                ledgersave.VoucherTypeId = 6;
-                ledgersave.VoucherNo = voucherNo;
-                ledgersave.LedgerId = item.LedgerId;
-                int a = ledgersave.LedgerId??0;
-                if (a == 1 || a == 2 || a == 4 || a == 7 || a == 8 || a == 11 || a == 15 || a == 17 || a == 21 || a == 23)
-                {
-                    ledgersave.Debit = item.Credit;
-                    ledgersave.Credit = 0;
-                }
-                else {
-                    ledgersave.Credit = item.Credit;
-                    ledgersave.Debit = 0;
-                }
-                ledgersave.InvoiceNo = voucherNo;
-                ledgersave.ChequeNo = item.ChequeNo;
-                ledgersave.ChequeDate = item.ChequeDate;
-                postingService.Save(ledgersave);
-            }
-            return Json("", JsonRequestBehavior.AllowGet);
-        }
     }
 }

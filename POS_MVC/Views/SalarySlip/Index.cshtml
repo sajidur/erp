@@ -1,4 +1,5 @@
-﻿@{
+﻿@using RexERP_MVC.Util
+@{
     ViewBag.Title = "Salary Slip";
     //string Caption = ".: " + ViewBag.Title + " :.";
     ViewBag.Caption = ".: " + ViewBag.Title + " :.";
@@ -43,9 +44,9 @@
                                 <label>Salary Sign </label></td>
                             <td>
                                 <select id="SalarySign" name="SalarySign">
-                                    @foreach (int item in Enum.GetValues(typeof(Core.Constants.Constant.SalarySign)))
+                                    @foreach (int item in Enum.GetValues(typeof(Constant.SalarySign)))
                                     {
-                                        <option value="@item">@Enum.GetName(typeof(Core.Constants.Constant.SalarySign), item)</option>
+                                        <option value="@item">@Enum.GetName(typeof(Constant.SalarySign), item)</option>
                                     }
                                 </select>
                             </td>
@@ -124,9 +125,9 @@
                                 <label>Salary Sign </label></td>
                             <td>
                                 <select id="SalaryItemSign" name="SalarySign">
-                                    @foreach (int item in Enum.GetValues(typeof(Core.Constants.Constant.SalarySign)))
+                                    @foreach (int item in Enum.GetValues(typeof(Constant.SalarySign)))
                                     {
-                                        <option value="@item">@Enum.GetName(typeof(Core.Constants.Constant.SalarySign), item)</option>
+                                        <option value="@item">@Enum.GetName(typeof(Constant.SalarySign), item)</option>
                                     }
                                 </select>
                             </td>

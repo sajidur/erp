@@ -1,0 +1,86 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Delivery Details";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox-title">
+            <h3>Delivered Product List</h3>
+        </div>
+        <div class="ibox-content" id="divInfo">
+            <div class="form-group">
+                <div class="col-md-12 table-responsive" id="div-product">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="templateProductModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="productTableModal">
+        <th>Id</th>
+        <th>Invoice No</th>
+        <th>Product Name</th>
+        <th>Size</th>
+        <th>Brand</th>
+        <th>Qty</th>
+        <th>Rate</th>
+        <th>Amount</th>
+        <th>Notes</th>
+        <tbody>
+            {{#ProductSearch}}
+            <tr>
+                <td>
+                    {{Id}}
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="/Report/Viewer/ReportViewer.aspx?ReportName=SalesInvoice&invoiceId={{SalesInvoice}}&customerid={{CustomerID}}">{{SalesInvoice}}</a>
+                </td>
+                <td> {{Product.ProductName}}</td>
+                <td> {{SizeName}}</td>
+                <td> {{BrandName}}</td>
+                <td> {{Qty}}</td>
+                <td> {{Rate}}</td>
+                <td> {{Amount}}</td>
+                <th> {{Notes}}</th>
+            </tr>
+            {{/ProductSearch}}
+        </tbody>
+    </table>
+</script>
+<script>
+$(document).ready(function () {
+        LoadApprovedDeliveryList();
+});
+    function LoadApprovedDeliveryList() {
+    var url = '/Sales/DeliveryApprovedList';
+    $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (res) {
+            console.log(res);
+            var templateWithData = Mustache.to_html($("#templateProductModal").html(), { ProductSearch: res });
+            $("#div-product").empty().html(templateWithData);
+            MakePagination('productTableModal');
+        },
+        error: function () {
+        }
+    });
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

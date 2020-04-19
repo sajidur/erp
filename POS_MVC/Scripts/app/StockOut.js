@@ -54,9 +54,9 @@ function GetStockOutReport() {
                 }
             },
             { "data": "InvoiceNo" },
-            { "data": "BaleWeight" },
+            { "data": "Product.ProductName" },
             { "data": "BaleQty" },
-            { "data": "WeightInMon" },
+            { "data": "WareHouse.WareHouseName" },
             { "data": "Notes" }
 
         ],

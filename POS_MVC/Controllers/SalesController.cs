@@ -80,10 +80,14 @@ namespace RexERP_MVC.Controllers
         {
             return View();
         }
+        public ActionResult ApprovedDeliveryList()
+        {
+            return View();
+        }
+        [HttpGet]
         public ActionResult DeliveryPendingList()
         {
-            ActionResult actionResult;
-            List<SalesDetail> category = null;
+            List<SalesDetail> category = new List<SalesDetail>();
             var wareHouse = _wareHouseService.GetByUserId(CurrentSession.GetCurrentSession().UserId);
             if (wareHouse!=null)
             {
@@ -91,13 +95,32 @@ namespace RexERP_MVC.Controllers
             }
             if (category != null)
             {
-                actionResult = base.Json(Mapper.Map<List<SalesDetailResponse>>(category), 0);
+              var  result = Mapper.Map<List<SalesDetailResponse>>(category);
+              return Json(result, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                actionResult = base.HttpNotFound();
+                return Json(category, JsonRequestBehavior.AllowGet);
             }
-            return actionResult;
+        }
+        [HttpGet]
+        public ActionResult DeliveryApprovedList()
+        {
+            List<SalesDetail> category = new List<SalesDetail>();
+            var wareHouse = _wareHouseService.GetByUserId(CurrentSession.GetCurrentSession().UserId);
+            if (wareHouse != null)
+            {
+                category = this.salesService.GetAll(0, (int)DeliveryStatus.Delivered, wareHouse.Id);
+            }
+            if (category != null)
+            {
+                var result =Mapper.Map<List<SalesDetailResponse>>(category);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(category, JsonRequestBehavior.AllowGet);
+            }
         }
         public ActionResult Delivery(int Id,string Notes)
         {

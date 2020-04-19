@@ -203,7 +203,7 @@
         var voucherDate = $("#txtDate").val();
         var notes = $("#txtDescriptions").val();
         var TotalAmount = parseFloat($("#lblTotalAmount").text());
-        var url = '/LedgerPosting/AddExpenseJournalSave';
+        var url = '/Journal/AddExpenseJournalSave';
         if (CostHeadId <= 0) {
             ShowNotification("3", "Choose Cash/Bank!!");
             return;

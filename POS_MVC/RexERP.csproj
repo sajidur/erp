@@ -928,6 +928,7 @@
       <DependentUpon>mvcReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
+    <Compile Include="RequestModel\JournalRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
     <Compile Include="ResponseModel\BaseResponse.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
@@ -1576,7 +1577,7 @@
     <Content Include="Views\Inventory\PaddyReport.cshtml" />
     <Content Include="Views\Inventory\FinishGoodsReport.cshtml" />
     <Content Include="Views\Sales\SalesReport.cshtml" />
-    <Content Include="Views\GoodsReceive\PaddyReceiveReport.cshtml" />
+    <Content Include="Views\GoodsReceive\ReceiveReport.cshtml" />
     <None Include="Service References\ServiceReference1\sendsms.wsdl" />
     <Content Include="Views\AccountGroup\Index.cshtml" />
     <Content Include="Views\Suppliers\Transaction.cshtml" />
@@ -1638,6 +1639,7 @@
     <Content Include="Views\WorkingDay\Index.cshtml" />
     <Content Include="Views\WorkingTime\Index.cshtml" />
     <Content Include="Views\TitleInfo\Index.cshtml" />
+    <Content Include="Views\Sales\ApprovedDeliveryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1660,6 +1662,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="Report\RPT\rptStockOutForProcessing.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\RPT\rptJournalVoucher.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Report\RPT\rptSalesInvoice.rdlc" />

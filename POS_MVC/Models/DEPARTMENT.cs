@@ -20,7 +20,11 @@ namespace RexERP_MVC.Models
             this.Designationtbls = new HashSet<Designationtbl>();
         }
     
+<<<<<<< HEAD
+        public int DEPTID { get; set; }
+=======
         public int Id { get; set; }
+>>>>>>> 8ed7350915792fc0485aba4bb79f4caf594b7434
         public string DEPTNAME { get; set; }
         public int SUPDEPTID { get; set; }
         public Nullable<short> InheritParentSch { get; set; }

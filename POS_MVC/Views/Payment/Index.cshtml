@@ -155,7 +155,6 @@
     var details = [];
     $(document).ready(function () {
         LoadSupplierCombo('ddlSupplier');
-        GetBankCashLedgerList('ddlBankCash');
         $("#ddlBankCash").change(function () {
             var selectedVal = this.value;
             GetBankCashLedgerList("ddlItem", selectedVal);

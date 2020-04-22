@@ -154,10 +154,10 @@ namespace RexERP_MVC.Controllers
             foreach (var item in journalDetails)
             {
                 LedgerPosting lposting = new LedgerPosting();
-                lposting.Credit = item.Debit ?? 0 + item.Credit ?? 0; ;
+                lposting.Debit = item.Debit ?? 0 + item.Credit ?? 0; ;
                 lposting.VoucherNo = voucherNo;
                 lposting.LedgerId = item.LedgerId;
-                lposting.Debit = 0;
+                lposting.Credit = 0;
                 lposting.PostingDate = voucherDate;
                 lposting.ChequeDate = DateTime.Now;
                 lposting.ChequeNo = "";
@@ -173,8 +173,8 @@ namespace RexERP_MVC.Controllers
             posting.VoucherTypeId = 4;
             posting.LedgerId = CostHeadId;
             posting.PostingDate = voucherDate;
-            posting.Credit = 0;
-            posting.Debit = TotalAmount;
+            posting.Credit = TotalAmount;
+            posting.Debit = 0;
             posting.Extra1 = "Voucher:" + voucherNo + " " + notes;
             postingService.Save(posting);
 

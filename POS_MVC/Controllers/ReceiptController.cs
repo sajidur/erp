@@ -64,6 +64,7 @@ namespace RexERP_MVC.Controllers
             return Json(transferMessage,JsonRequestBehavior.AllowGet);
         }
 
+        //receive
         public ActionResult ReceivePayment(string voucherNo, int supplierId, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPosting, bool isSendSMS)
         {
             ActionResult actionResult;

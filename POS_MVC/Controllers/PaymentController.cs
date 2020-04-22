@@ -112,7 +112,7 @@ namespace RexERP_MVC.Controllers
             return Json(paymentList, JsonRequestBehavior.AllowGet);
 
         }
-
+        //payment
         public ActionResult ReceivePayment(string voucherNo, int supplierId, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPosting,bool isSendSMS)
         {
             decimal? credit;

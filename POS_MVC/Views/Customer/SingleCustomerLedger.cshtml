@@ -125,8 +125,9 @@ padding: 0;"><label>Phone:</label><label id="lblPhone"></label></p>
         <thead>
         <th>Voucher No</th>
         <th>Product</th>
-        <th>বস্তা/কেজি</th>
-        <th>Total বস্তা</th>
+        <th>Size</th>
+        <th>Brand</th>
+        <th>Qty</th>
         <th>Rate</th>
         <th>Amount</th>
         </thead>
@@ -135,8 +136,9 @@ padding: 0;"><label>Phone:</label><label id="lblPhone"></label></p>
             <tr>
                 <td> {{SalesInvoice}}</td>
                 <td>{{Product.ProductName}}</td>
-                <td>{{BaleWeight}}</td>
-                <td>{{BaleQty}}</td>
+                <td>{{SizeName}}</td>
+                <td>{{SizeName}}</td>
+                <td>{{Qty}}</td>
                 <td>{{Rate}}</td>
                 <td>{{Amount}}</td>
             </tr>
@@ -153,6 +155,7 @@ padding: 0;"><label>Phone:</label><label id="lblPhone"></label></p>
                 <td>
                     Total Amount:
                 </td>
+                <td></td>
                 <td>
                     <b> {{TotalAmount}}</b>
                 </td>

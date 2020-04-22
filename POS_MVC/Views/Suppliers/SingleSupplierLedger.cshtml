@@ -119,8 +119,9 @@ padding: 0;"><label>Phone:</label><label id="lblPhone"></label></p>
     <table class="table table-bordered table-striped table-hover" id="salesDetailsModal">
         <thead>
         <th>Product</th>
-        <th>বস্তা/কেজি</th>
-        <th>Total বস্তা</th>
+        <th>Size</th>
+        <th>Brand</th>
+        <th>qty</th>
         <th>Rate</th>
         <th>Amount</th>
         </thead>
@@ -128,11 +129,11 @@ padding: 0;"><label>Phone:</label><label id="lblPhone"></label></p>
             {{#ledgerSearch}}
             <tr>
                 <td>{{Product.ProductName}}</td>
-                <td>{{QtyInBale}}</td>
-                <td>{{TotalBale}}</td>
+                <td>{{SizeName}}</td>
+                <td>{{BrandName}}</td>
+                <td>{{Qty}}</td>
                 <td>{{Amount}}</td>
                 <td>{{Amount}}</td>
-
             </tr>
             {{/ledgerSearch}}
         </tbody>
@@ -143,6 +144,7 @@ padding: 0;"><label>Phone:</label><label id="lblPhone"></label></p>
                 <td>
                     Total Amount:
                 </td>
+                <td></td>
                 <td>
                     <b> {{TotalAmount}}</b>
                 </td>

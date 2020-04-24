@@ -6,19 +6,19 @@ namespace RexERP_MVC.BAL
 {
     public class DEPARTMENTService
     {
-        DBService<DEPARTMENT> service = new DBService<DEPARTMENT>();
-        public List<DEPARTMENT> GetAll()
+        DBService<Department> service = new DBService<Department>();
+        public List<Department> GetAll()
         {
             return service.GetAll().ToList();
         }
-        public DEPARTMENT GetById(int? id = 0)
+        public Department GetById(int? id = 0)
         {
             return service.GetById(id);
         }
 
-        public DEPARTMENT Save(DEPARTMENT cus)
+        public Department Save(Department cus)
         {
-            var isExists = service.GetAll().Where(a => a.DEPTNAME == cus.DEPTNAME).FirstOrDefault();
+            var isExists = service.GetAll().Where(a => a.Name == cus.Name).FirstOrDefault();
             if (isExists != null)
             {
                 return null;
@@ -27,7 +27,7 @@ namespace RexERP_MVC.BAL
             return cus;
 
         }
-        public DEPARTMENT Update(DEPARTMENT t, int id)
+        public Department Update(Department t, int id)
         {
             return service.Update(t, id);
         }

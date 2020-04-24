@@ -13,8 +13,7 @@ namespace RexERP_MVC.BAL
     {  // SQLDAL objSqlData = new SQLDAL();
         Result oResult = new Result();
         DBService<SalesDetail> salesDetailsService = new DBService<SalesDetail>();
-        Entities entity = new Entities();
-        InventoryService inventoryService = new InventoryService();
+        DBService<InventoryTransaction> _invTransactionService = new DBService<InventoryTransaction>();
         DBService<TopSellResponse> topSellResponse = new DBService<TopSellResponse>();
         DBService<SalesOrder> serviceSalesOrder = new DBService<SalesOrder>();
         DBService<SalesMaster> serviceSalesMaster = new DBService<SalesMaster>();
@@ -250,23 +249,10 @@ namespace RexERP_MVC.BAL
             SalesMaster result = this.serviceSalesMaster.Save(salesMaster);
             if ((result != null ? true : result.Id > 0))
             {
-                foreach (SalesDetail salesDetail in salesMaster.SalesDetails)
-                {
-                    List<Inventory> existingItem = this.inventory.GetAll((Inventory a) => a.ProductId == salesDetail.ProductId && a.IsActive && a.WarehouseId == salesDetail.WarehouseId && a.SizeId==salesDetail.SizeId&&a.BrandId==salesDetail.BrandId).ToList<Inventory>();
-                    if (existingItem.Count > 0)
-                    {
-                        foreach (Inventory inv in existingItem)
-                        {
-                            inv.UpdatedDate = new DateTime?(DateTime.Now);
-                            inv.UpdatedBy = "";
-                            Inventory nullable = inv;
-                            decimal? salesQty = inv.SalesQty;
-                            nullable.SalesQty = new decimal?((salesQty.HasValue ? salesQty.GetValueOrDefault() : salesDetail.Qty));
-                            inv.BalanceQty = inv.BalanceQty - salesDetail.Qty;
-                            this.inventory.Update(inv, inv.Id);
-                        }
-                    }
-                }
+                //foreach (SalesDetail salesDetail in salesMaster.SalesDetails)
+                //{
+
+                //}
                 Customer customer = this.customerService.GetById(new int?(salesMaster.CustomerID));
                 LedgerPosting ledgerObj = new LedgerPosting()
                 {
@@ -351,9 +337,47 @@ namespace RexERP_MVC.BAL
             return serviceSalesOrder.Update(t, id);
 
         }
-        public SalesDetail Update(SalesDetail t, int id)
+        public SalesDetail Update(SalesDetail salesDetail, int id)
         {
-            return salesDetailsService.Update(t, id);
+            var balance = 0.0m;
+              List<Inventory> existingItem = this.inventory.GetAll((Inventory a) => a.ProductId == salesDetail.ProductId && a.IsActive && a.WarehouseId == salesDetail.WarehouseId && a.SizeId==salesDetail.SizeId&&a.BrandId==salesDetail.BrandId).ToList<Inventory>();
+                    if (existingItem.Count > 0)
+                    {
+                        foreach (Inventory inv in existingItem)
+                        {
+                            inv.UpdatedDate = new DateTime?(DateTime.Now);
+                            inv.UpdatedBy = "";
+                            Inventory nullable = inv;
+                            decimal? salesQty = inv.SalesQty;
+                            nullable.SalesQty = new decimal?((salesQty.HasValue ? salesQty.GetValueOrDefault() : salesDetail.Qty));
+                            inv.BalanceQty = inv.BalanceQty - salesDetail.Qty;
+                            this.inventory.Update(inv, inv.Id);
+                            balance = inv.BalanceQty;
+                        }
+                    }
+            var invTransaction = new InventoryTransaction()
+            {
+                APIId = salesDetail.APIId,
+                BalanceQty = balance,
+                BrandId = salesDetail.BrandId,
+                CreatedBy = CurrentSession.GetCurrentSession().UserName,
+                CreatedDate = DateTime.Now,
+                GoodsType ="Finished Goods",
+                InventoryGuid = Guid.NewGuid().ToString(),
+                InvoiceNo = "",
+                IsActive = true,
+                ProductId = salesDetail.ProductId,
+                PurchasePrice = salesDetail.Rate,
+                Qty = salesDetail.Qty,
+                SalesPrice = salesDetail.Rate,
+                SizeId = salesDetail.SizeId,
+                SupplierId = salesDetail.SalesMaster.CustomerID,
+               
+                TransactionType = (int)Util.TransactionType.SalesQty,
+                WarehouseId = salesDetail.WarehouseId
+            };
+            _invTransactionService.Save(invTransaction);
+            return salesDetailsService.Update(salesDetail, id);
 
         }
         public TempSalesMaster Update(TempSalesMaster t, int id)

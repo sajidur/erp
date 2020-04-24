@@ -14,12 +14,19 @@ namespace RexERP_MVC.Models
     
     public partial class Designationtbl
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Designationtbl()
+        {
+            this.Employees = new HashSet<Employee>();
+        }
+    
         public int Id { get; set; }
         public string DesignationName { get; set; }
         public Nullable<int> DepartmentID { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
     
-        public virtual DEPARTMENT DEPARTMENT { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

@@ -142,15 +142,17 @@ function LoadForAdd(parameters) {
     var WareHouse = "";
     var Qty = '0';
     var ProductId = '0';
+    var APIName = '';
     $('#inventoryGroupTableModal tr').each(function (i) {
         if ($(this).find('td').eq(0).text() == parameters) {
             Id = $(this).find('td').eq(0).html();
             ProductName = $(this).find('td').eq(1).html();
-            SizeName = $(this).find('td').eq(2).html();
-            BrandName = $(this).find('td').eq(3).html();
-            WareHouse = $(this).find('td').eq(5).html();
+            BrandName = $(this).find('td').eq(2).html();
+            APIName = $(this).find('td').eq(3).html();
+            SizeName = $(this).find('td').eq(4).html();          
+            WareHouse = $(this).find('td').eq(6).html();
             ProductId = Id;
-            Qty = $(this).find('td').eq(7).find('input').val();
+            Qty = $(this).find('td').eq(8).find('input').val();
           }
         });         
             var object = {
@@ -159,6 +161,7 @@ function LoadForAdd(parameters) {
                 InventoryId: Id,
                 Qty: Qty,
                 SizeName: SizeName,
+                APIName: APIName,
                 BrandName: BrandName,
                 WareHouse: WareHouse
             };

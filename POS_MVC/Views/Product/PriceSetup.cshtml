@@ -1,0 +1,100 @@
+﻿<div class="row">
+    <label>Price Setup</label>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox-content" id="divInfo">
+                        <div class="form-group">
+                            <div class="col-md-12 table-responsive" id="div-inventoryGroup">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script id="templateInventoryGroupModal" type="text/html">
+        <table class="table table-bordered table-striped table-hover" id="inventoryGroupTableModal">
+            <thead>
+            <th>Id</th>
+            <th>Item/Product</th>
+            <th>Grade</th>
+            <th>API</th>
+            <th>Size</th>
+            <th>Godown</th>
+            <th>Available Qty</th>
+            <th>Sales Price</th>
+            <th>Action</th>
+            </thead>
+            <tbody>
+                {{#InventoryGroupSearch}}
+                <tr>
+                    <td>{{Id}}</td>
+                    <td> {{Product.ProductName}}</td>
+                    <td>{{Brand.BrandName}}</td>
+                    <td>{{API.APIName}}</td>
+                    <td>{{Size.Name}}</td>
+                    <td>{{WareHouse.WareHouseName}}</td>
+                    <td> {{BalanceQty}}</td>
+                    <td width="10px">
+                        <input type="text" name="txtRate" value="{{SalesPrice}}" id="txtRate" class="datatable-textbox-style" />
+                    </td>
+                    <td class="action-sm">
+                        <a class="datatable-submit-button" id="btnAdd" onclick="SavePrice('{{Id}}')"><i class="fa fa-edit"></i>Save</a>
+                    </td>
+                </tr>
+                {{/InventoryGroupSearch}}
+            </tbody>
+        </table>
+    </script>
+<script>
+    $(document).ready(function () {
+        LoadInventoryList();
+});
+function LoadInventoryList() {
+    var url = '/Sales/GetAllInventoryforSales';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        success: function (res) {
+            var templateWithData = Mustache.to_html($("#templateInventoryGroupModal").html(), { InventoryGroupSearch: res });
+            $("#div-inventoryGroup").empty().html(templateWithData);
+            MakePagination('inventoryGroupTableModal');
+        },
+        error: function (error, r) {
+            ShowNotification("3", "Something Wrong!!");
+        }
+    });
+}
+
+    function SavePrice(InvId) {
+    var SalesPrice = '0';
+    $('#inventoryGroupTableModal tr').each(function (i) {
+        if ($(this).find('td').eq(0).text() == InvId) {
+            SalesPrice = $(this).find('td').eq(6).find('input').val();
+        }
+    });
+    if (SalesPrice <= 0) {
+        ShowNotification("3", "Amount empty!!");
+        return;
+    }
+    var object = {
+        InventoryId: InvId,
+        SalesPrice: SalesPrice,
+        };
+    var url = '/Product/PriceSetup';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data:object,
+        success: function (res) {
+             ShowNotification("1", "Price Saved!!");
+        },
+        error: function (error, r) {
+            ShowNotification("3", "Something Wrong!!");
+        }
+    });
+}
+</script>

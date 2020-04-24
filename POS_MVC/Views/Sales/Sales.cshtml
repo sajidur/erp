@@ -10,41 +10,50 @@
                         <form class="form-horizontal" style="height:75px">
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="col-md-1 control-label"> Invoice No:</label>
                                     <div class="col-md-2">
-                                        <input type="text" value="001" readonly id="txtPoNo" name="txtPoNo" class="form-control" style="width:200px; height:35px" />
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label class="col-md-1 col-md-offset-4 control-label">Customer:</label>
+                                        <label class="control-label"> Invoice No:</label>
+                                        <input type="text" value="001" readonly id="txtPoNo" name="txtPoNo" class="form-control" style="height:35px;" />
                                     </div>
                                     <div class="col-md-2">
-                                        <select class="form-control" id="ddlCustomer" name="ddlCustomer" onchange="LoadSalesOrderList()" style="width:200px; height:35px"></select>
+                                        <label class="control-label">Customer:</label>
+                                        <select class="form-control" id="ddlCustomer" name="ddlCustomer" onchange="LoadSalesOrderList()"style="height:35px;"></select>
                                     </div>
-                                    <label class="col-md-1 control-label">
-                                        Notes:
-                                    </label>
                                     <div class="col-md-2">
-                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" style="width:200px; height:35px" placeholder="Notes" />
+                                        <label class="control-label">
+                                            Notes:
+                                        </label>
+                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control"style="height:35px;" placeholder="Notes" />
                                     </div>
-                                    <div class="col-md-3" style="text-align:left;">
+                                    <div class="col-md-2">
+                                        <label class="control-label">
+                                            Sales Man:
+                                        </label>
+                                        <select class="form-control" id="ddlSalesMan" name="ddlSalesMan" style="height:35px;"></select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label">
+                                            Sales date:
+                                        </label>
+                                        <input type="date" id="txtDate" name="txtDate" class="form-control" style="height:35px;" placeholder="Dates" />
+                                    </div>
+                                    <div class="col-md-2" style="text-align:left;">
                                         <label class="control-label" style="color:red;" id="lblBalance">
-
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group" style="display:none;">
+                                @*<div class="form-group">
                                     <div class="col-md-2">
-                                        <input type="text" id="txtCoutha" name="txtCoutha" readonly class="form-control" style="width:200px; height:35px" placeholder="Challan No" />
+                                        <input type="text" id="txtCoutha" name="txtCoutha" readonly class="form-control"  height:35px" placeholder="Challan No" />
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="date" id="txtDate" name="txtDate" class="form-control" style="width:200px; height:35px" placeholder="Dates" />
+                                        <input type="date" id="txtDate" name="txtDate" class="form-control" height:35px" placeholder="Dates" />
                                     </div>
                                     <div class="col-md-3 form-group">
                                         <div class="text-center">
                                             <button class="btn btn-primary" id="btnAddFromOrders" type="button" data-toggle="modal" data-target="#myModal">Add Sell From Orders</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
 
                             </fieldset>
                         </form>
@@ -98,8 +107,11 @@
                                             <label class="col-md-4 col-sm-6 control-label">
                                                 Discount:
                                             </label>
-                                            <div class="col-md-8 col-sm-6">
+                                            <div class="col-md-6 col-sm-6">
                                                 <input type="text" id="txtDiscount" value="0" class="form-control" style="height:32px;" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                (%)
                                             </div>
                                         </div>
 
@@ -153,8 +165,9 @@
                                     <thead>
                                     <th>Id</th>
                                     <th>Item/Product</th>
+                                    <th>Grade</th>
                                     <th>Size</th>
-                                    <th>Brand</th>
+                                    <th>API</th>
                                     <th>Godown</th>
                                     <th>Available Qty</th>
                                     <th>Sale Qty</th>
@@ -166,15 +179,16 @@
                                         <tr>
                                             <td>{{Id}}</td>
                                             <td> {{Product.ProductName}}</td>
-                                            <td>{{Size.Name}}</td>
                                             <td>{{Brand.BrandName}}</td>
+                                            <td>{{Size.Name}}</td>
+                                            <td>{{API.APIName}}</td>
                                             <td>{{WareHouse.WareHouseName}}</td>
                                             <td> {{BalanceQty}}</td>
                                             <td width="10px">
                                                 <input type="text" name="txtSalesQty" id="txtSalesQty" class="datatable-textbox-style" />
                                             </td>
                                             <td width="10px">
-                                                <input type="text" name="txtRate" id="txtRate" class="datatable-textbox-style" />
+                                                <input type="text" name="txtRate" value="{{SalesPrice}}" id="txtRate" class="datatable-textbox-style" />
                                             </td>
                                             <td class="action-sm">
                                                 <a class="datatable-submit-button" id="btnAdd" onclick="LoadForAdd('{{Id}}')"><i class="fa fa-edit"></i>Add</a>
@@ -211,7 +225,7 @@
 
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="Save(this)"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SalesSave(this)"><i class="fa fa-save"></i>&nbsp; Save</button>
                             <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
                         </div>
                     </div>
@@ -299,9 +313,6 @@
             </script>
         </form>
     </div>
-
-
-
     <script id="templateSalesGroupModalGrid" type="text/html">
         <table class="table table-bordered table-hover" id="salesGroupTableModalGrid">
             <thead>
@@ -311,7 +322,6 @@
             <th>Qty</th>
             <th>Rate</th>
             <th>Total Amount</th>
-            <th>Order Id</th>
             <th>Action</th>
             </thead>
             <tbody>
@@ -323,7 +333,6 @@
                     <td>{{Qty}}</td>
                     <td>{{Rate}}</td>
                     <td>{{Amount}}</td>
-                    <td>{{SalesOrderId}}</td>
                     <td class="action-sm">
                         <a class="btn btn-danger" onclick="OnDeleteSalesOrder('{{countCount}}')"><i class="fa fa-trash-o"></i></a>
                     </td>
@@ -334,6 +343,7 @@
     </script>
     <script src="~/Scripts/app/CommonLoader.js"></script>
     <script src="~/Scripts/app/Sales.js"></script>
+<script src="~/Scripts/app/Employee.js"></script>
     <script>
 //        extend: all the CSS files and inline styles
 //style: only inline styles
@@ -358,6 +368,7 @@
             LoadInvoiceNo("txtPoNo");
             LoadInventoryList();
             LoadCustomerCombo("ddlCustomer");
+            LoadEmployeeCombo('ddlSalesMan');
             Expression();
         });
         $('.element').printElement({

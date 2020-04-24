@@ -42,10 +42,11 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<Employee, EmployeeResponse>().ReverseMap();
 
                 cfg.CreateMap<Size, SizeResponse>().ReverseMap();
-                cfg.CreateMap<DEPARTMENT, DEPARTMENTResponse>().ReverseMap();
+                cfg.CreateMap<Department, DEPARTMENTResponse>().ReverseMap();
                 cfg.CreateMap<Designationtbl, DesignationtblResponse>().ReverseMap();
+                cfg.CreateMap<API, APIResponse>().ReverseMap();
 
-                });
+            });
         }
     }
 }

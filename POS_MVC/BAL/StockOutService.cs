@@ -19,7 +19,7 @@ namespace RexERP_MVC.BAL
         public List<string> GetAllStockChallan()
         {
             DateTime fromDate = DateTime.Now.AddMonths(-1);
-            return service.GetAll(a=>a.ProductionDate>fromDate).OrderBy(a=>a.ProductionDate).Select(a=>a.InvoiceNo).Distinct().ToList();
+            return service.GetAll(a=>a.ProductionDate>fromDate && a.AlreadyProcessed==false).OrderBy(a=>a.ProductionDate).Select(a=>a.InvoiceNo).Distinct().ToList();
             //List<SqlParameter> parameters = new List<SqlParameter>();
             //SqlParameter param1 = new SqlParameter("@fromDate", DateTime.Now.AddMonths(-1));
             //parameters.Add(param1);
@@ -72,6 +72,7 @@ namespace RexERP_MVC.BAL
                         SizeName=inv.Size.Name,
                         BrandId=inv.BrandId,
                         BrandName=inv.Brand.BrandName,
+                        APIId=inv.APIId,
                         InventoryId=inv.Id,
                         ProductionDate=DateTime.Now
                     };

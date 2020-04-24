@@ -12,16 +12,21 @@ $("#btnAdd").click(function () {
         var Size = $("#ddlSize option:selected").text();
         var BrandId = $("#ddlBrand option:selected").val();
         var Brand = $("#ddlBrand option:selected").text();
+        var apiId = $("#ddlAPI option:selected").val();
+        var apiName = $("#ddlAPI option:selected").text();
 
     var BaleQty = $("#txtBaleQty").val();
         var object = {
+            StockOutInvoiceNo: $("#ddlStockOutInvoice option:selected").text(),
         Count: Count,
         Item: item, ProductId: ProductId, WarehouseId: WarehouseId,
         WarehouseName: WarehouseName,
         BaleQty: BaleQty, SizeId: SizeId,
         Size: Size,
         BrandId: BrandId,
-        Brand:Brand
+            Brand: Brand,
+            APIId: apiId,
+            APIName: apiName
     };
     detailsStockIn.push(object);
     var templateWithData = Mustache.to_html($("#templateProductModalAdded").html(), { ProductSearchAdded: detailsStockIn });
@@ -102,7 +107,7 @@ function LoadInvoiceNo(controlId) {
 }
 
 
-function Save() {
+function SaveStockIn() {
     GetDataFromDatatable();
     var url = '/ProductionProcessing/SaveStockIn';
     $.ajax({

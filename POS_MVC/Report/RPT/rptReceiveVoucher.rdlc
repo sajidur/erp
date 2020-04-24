@@ -17,7 +17,7 @@
               </TextRun>
             </TextRuns>
             <Style>
-              <TextAlign>Center</TextAlign>
+              <TextAlign>Left</TextAlign>
             </Style>
           </Paragraph>
         </Paragraphs>
@@ -504,7 +504,7 @@
         <Top>1.57167in</Top>
         <Left>0.87375in</Left>
         <Height>0.75in</Height>
-        <Width>5.59375in</Width>
+        <Width>5.59374in</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>

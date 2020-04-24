@@ -24,7 +24,7 @@ namespace RexERP_MVC.Models
         public string SalesInvoice { get; set; }
         public Nullable<int> SalesOrderId { get; set; }
         public Nullable<System.DateTime> SalesDate { get; set; }
-        public string SalesBy { get; set; }
+        public Nullable<int> SalesBy { get; set; }
         public int CustomerID { get; set; }
         public decimal AdditionalCost { get; set; }
         public decimal Discount { get; set; }

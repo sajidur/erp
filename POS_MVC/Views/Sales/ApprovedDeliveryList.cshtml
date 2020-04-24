@@ -1,6 +1,4 @@
 ﻿
-
-
 @{
     ViewBag.Title = "Delivery Details";
 }
@@ -22,8 +20,9 @@
         <th>Id</th>
         <th>Invoice No</th>
         <th>Product Name</th>
+        <th>Grade</th>
+        <th>API</th>
         <th>Size</th>
-        <th>Brand</th>
         <th>Qty</th>
         <th>Rate</th>
         <th>Amount</th>
@@ -38,8 +37,9 @@
                     <a class="btn btn-primary btn-xs" href="/Report/Viewer/ReportViewer.aspx?ReportName=SalesInvoice&invoiceId={{SalesInvoice}}&customerid={{CustomerID}}">{{SalesInvoice}}</a>
                 </td>
                 <td> {{Product.ProductName}}</td>
-                <td> {{SizeName}}</td>
                 <td> {{BrandName}}</td>
+                <td> {{APIName}}</td>
+                <td> {{SizeName}}</td>
                 <td> {{Qty}}</td>
                 <td> {{Rate}}</td>
                 <td> {{Amount}}</td>

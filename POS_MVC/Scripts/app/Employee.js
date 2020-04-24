@@ -14,6 +14,32 @@ function LoadEmployeeList() {
         }
     });
 }
+function LoadEmployeeCombo(controlId) {
+    var url = '/Employee/GetAllByDesignation';
+    $.ajax({
+        url: url,
+        method: 'GET',
+        data: {'designationId':'1'},
+        success: function (res) {
+            var data = res;
+            //alert('Success');
+            $("#" + controlId).empty();
+            $("#" + controlId).get(0).options.length = 0;
+            if (true) {
+                $("#" + controlId).get(0).options[0] = new Option("-Select-", "");
+            }
+            if (data != null) {
+                $.each(data, function (index, item) {
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Code + '-' + item.FirstName, item.Id);
+                });
+            }
+            $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!" });
+        },
+        error: function (error, r) {
+            ShowNotification("3", "Something Wrong!!");
+        }
+    });
+}
 
 function LoadForEdit(parameters) {
     $("#btnSave").hide();

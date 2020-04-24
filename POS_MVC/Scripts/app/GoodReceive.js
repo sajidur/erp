@@ -59,6 +59,9 @@ $("#btnAdd").click(function () {
     var brandId = $("#ddlBrand option:selected").val();
     var brand = $("#ddlBrand option:selected").text();
 
+    var apiId = $("#ddlAPI option:selected").val();
+    var api = $("#ddlAPI option:selected").text();
+
     var qty = $("#txtQty").val();
     var Amount = $("#txtAmount").val();
     var TotalAmount = $("#txtTotalAmount").val();
@@ -76,7 +79,7 @@ $("#btnAdd").click(function () {
         return;
     }
     //var object = {Id:Id, Item: item, BaleQty: BaleQty, QtyPerBale: QtyPerBale, UnitStyle: UnitStyle, Amount: Amount, TotalKg: TotalKg, TotalQty: TotalQty, TotalAmount: TotalAmount };
-    var object = { countAddedProductCount: countAddedProductCount, Id: ProductId, Item: item, ProductId: ProductId, WarehouseId: WarehouseId, SizeId: sizeId, Size: size, BrandId: brandId,Brand:brand, QTY: qty, Amount: Amount, TotalAmount: TotalAmount };
+    var object = { countAddedProductCount: countAddedProductCount, Id: ProductId, Item: item, ProductId: ProductId, WarehouseId: WarehouseId, SizeId: sizeId, Size: size, BrandId: brandId, Brand: brand, API: api, APIId: apiId, QTY: qty, Amount: Amount, TotalAmount: TotalAmount };
     details.push(object);
     var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
     $("#div-product-add").empty().html(templateWithData);
@@ -218,6 +221,7 @@ function GoodReceiveSave()
             totalAmount: $("#lblTotalAmount").text(),
             supplierId: supplierId,
             descriptions: $("#txtDescriptions").val(),
+            LcNo: $("#txtLCNo").val(),
             WarehouseId: godown,
             dates: $("#txtDates").val(),
             Discount: $("#txtDiscount").val(),

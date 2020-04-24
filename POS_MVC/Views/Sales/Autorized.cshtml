@@ -9,7 +9,7 @@
                         </div>
                     </div>
                     <div>
-                        <label><input type="checkbox" id="chkSendSMS" checked="checked">Send SMS</label>
+                        <label style="margin-left;"><input type="checkbox" id="chkSendSMS" checked="checked">Send SMS</label>
                     </div>
                 </div>
 
@@ -51,23 +51,25 @@
                 <table class="table table-bordered table-striped table-hover" id="productGroupTable">
                     <thead>
                     <th>Id</th>
-                    <th>Order No</th>
                     <th>Item</th>
+                    <th>Grade</th>
+                    <th>API</th>
+                    <th>Size</th>
                     <th>Qty</th>
                     <th>Rate</th>
                     <th>Amount</th>
-                    <th style="display:none">ProductId</th>
                     </thead>
                     <tbody>
                         {{#ProductGroupSearch}}
                         <tr>
                             <td>{{Id}}</td>
-                            <td> {{SalesOrderId}}</td>
                             <td> {{Product.ProductName}}</td>
-                            <td> {{BaleQty}}</td>
+                            <td> {{Brand.BrandName}}</td>
+                            <td> {{API.APIName}}</td>
+                            <td> {{Size.Name}}</td>
+                            <td> {{Qty}}</td>
                             <td> {{Rate}}</td>
                             <td> {{Amount}}</td>
-                            <td style="display:none;"> {{ProductId}}</td>
                         </tr>
                         {{/ProductGroupSearch}}
                     </tbody>
@@ -79,11 +81,11 @@
                                 Total:
                             </td>
                             <td>
-                                {{TotalBale}}
                             </td>
                             <td></td>
-                            <td>{{TotalAmount}}</td>
+                            <td>{{TotalQty}}</td>
                             <td></td>
+                            <td>{{TotalAmount}}</td>
 
                         </tr>
 
@@ -98,11 +100,11 @@
                     <th>Invoice No</th>
                     <th>Customer Name</th>
                     <th>Product</th>
-                    <th>Total Amount</th>
                     <th>Details</th>
-                    <th>Truck</th>
-                    <th>Driver</th>
-                    <th>Rent</th>
+                    <th>Total Amount</th>
+                    <th>Add.Cost</th>
+                    <th>Discount</th>
+                    <th>GrandTotal</th>
                     <th>Authorized</th>
                     <th>Delete</th>
                     </thead>
@@ -114,14 +116,13 @@
                             <td> {{SalesInvoice}}</td>
                             <td>{{Customer.Code}}-{{Customer.Name}}</td>
                             <td> {{ProductList}}</td>
-                            <td> {{TotalAmount}}</td>
-
                             <td class="action-sm">
                                 <button class="btn btn-primary" id="btnAddFromOrders" type="button" data-toggle="modal" data-target="#myModal" onclick="Details('{{Id}}')">Details</button>
                             </td>
-                            <td> {{TransportType}}</td>
-                            <td> {{DriverName}}</td>
-                            <td> {{RentAmount}}</td>
+                            <td> {{TotalAmount}}</td>
+                            <td> {{AdditionalCost}}</td>
+                            <td> {{Discount}}</td>
+                            <td> {{GrandTotal}}</td>
 
                             <td class="action-sm">
                                 <a class="btn btn-primary btn-xs" onclick="Authorized('{{Id}}')"><i class="fa fa-edit"></i> Authorized</a>
@@ -208,15 +209,13 @@
                 var invoice = $("#txtPoNo").val();
                 $("#lblPONo").html(res.SalesInvoice);
                 $("#txtPostDate").html(res.PostDate);
-                var baleqty = 0;
                 var qty = 0;
                 var amount = 0;
                 $.each(res.TempSalesDetails, function (index, value) {
-                    baleqty+= parseInt(value.BaleQty);
-                    qty+= parseInt(value.TotalQtyInKG);
+                    qty+= parseInt(value.Qty);
                     amount+= parseInt(value.Amount);
                 });
-                var templateWithData = Mustache.to_html($("#templateProductGroup").html(), { ProductGroupSearch: res.TempSalesDetails, TotalBale: baleqty, SumTotalQtyInKG: qty, TotalAmount: amount });
+                var templateWithData = Mustache.to_html($("#templateProductGroup").html(), { ProductGroupSearch: res.TempSalesDetails, TotalQty: qty, TotalAmount: amount });
                 $("#div-salesOrderGroup").empty().html(templateWithData);
                 MakePagination('productGroupTable');
             },

@@ -19,10 +19,10 @@
                                 <select class="form-control" id="ddlSupplier" name="ddlSupplier" style="height:35px"></select>
                             </div>
                             <label class="col-md-1 control-label">
-                                Challan No:
+                                LC No:
                             </label>
                             <div class="col-md-1">
-                                <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" />
+                                <input type="text" id="txtLCNo" name="txtLCNo" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -51,12 +51,13 @@
                         <table id="myTable" class="table order-list">
                             <thead>
                                 <tr>
-                                    <td>Item</td>
+                                    <td>Product</td>
+                                    <td>Grade</td>
+                                    <td>API</td>
                                     <td>Size</td>
-                                    <td>Brand</td>
                                     <td>Qty</td>
                                     <td>Rate</td>
-                                    <td>Total Amount </td>
+                                    <td>Total Amt </td>
                                     <td>Warehouse</td>
                                 </tr>
                             </thead>
@@ -67,39 +68,30 @@
                                             <option value="0">Select</option>
                                         </select>
                                     </td>
-                                    <td class="col-sm-3">
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <select id="ddlSize" class="form-control">
-                                                    <option value="0">Select</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <button id="btnSizeAdd">+</button>
-                                            </div>
-                                        </div>
+                                    <td class="col-sm-2">
+                                        <select id="ddlBrand" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
                                     </td>
-                                    <td class="col-sm-3">
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <select id="ddlBrand" class="form-control">
-                                                    <option value="0">Select</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <button id="btnBrandAdd">+</button>
-                                            </div>
-                                        </div>
+                                    <td class="col-sm-2">
+                                        <select id="ddlAPI" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </td>
+                                    <td class="col-sm-2">
+                                        <select id="ddlSize" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
                                     </td>
                                     <td class="col-sm-1">
-                                        <input type="number" name="txtQty" id="txtQty" value="0" class="form-control" style="height:35px" />
+                                        <input type="number" name="txtQty" id="txtQty" value="0" style="height:35px" class="form-control" />
                                     </td>
 
                                     <td class="col-sm-1">
-                                        <input type="number" name="txtAmount" id="txtAmount" value="0" class="form-control" style="height:35px" />
+                                        <input type="number" name="txtAmount" id="txtAmount" value="0" style="height:35px" class="form-control" />
                                     </td>
-                                    <td class="col-sm-2">
-                                        <input type="number" readonly name="txtTotalAmount" id="txtTotalAmount" class="form-control" style="height:35px" />
+                                    <td class="col-sm-1">
+                                        <input type="number" readonly name="txtTotalAmount" id="txtTotalAmount" value="0" style="height:35px" class="form-control"/>
                                     </td>
                                     <td class="col-md-2">
                                         <select class="form-control" id="ddlWareHouse" name="ddlWareHouse"></select>
@@ -214,8 +206,9 @@
         <thead>
         <th> </th>
         <th>Item</th>
+        <th>Grade</th>
+        <th>API</th>
         <th>Size</th>
-        <th>Brand</th>
         <th>Qty</th>
         <th>Rate</th>
         <th>Total Amount </th>
@@ -226,8 +219,9 @@
             <tr>
                 <td>{{countAddedProductCount}}</td>
                 <td>{{Item}}</td>
-                <td>{{Size}}</td>
                 <td>{{Brand}}</td>
+                <td>{{API}}</td>
+                <td>{{Size}}</td>
                 <td> {{QTY}}</td>
                 <td> {{Amount}}</td>
                 <td> {{TotalAmount}}</td>
@@ -289,6 +283,7 @@
         LoadAllProduct('ddlItem');
         LoadAllWareHouse("ddlWareHouse");
         LoadSupplier("ddlSupplier");
+        LoadAllAPI("ddlAPI");
         var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
         $("#div-product-add").empty().html(templateWithData);
 
@@ -348,3 +343,4 @@
 <script src="~/Scripts/app/Accounts.js"></script>
 <script src="~/Scripts/app/Brand.js"></script>
 <script src="~/Scripts/app/Size.js"></script>
+<script src="~/Scripts/app/API.js"></script>

@@ -7,6 +7,8 @@ namespace RexERP_MVC.BAL
     public class ProductService
     {
         DBService<Product> service = new DBService<Product>();
+        DBService<PriceSetup> _priceSetupService = new DBService<PriceSetup>();
+
         public List<Product> GetAll(int type)
         {
             if (type==0)
@@ -31,6 +33,11 @@ namespace RexERP_MVC.BAL
         public Product Save(Product cus)
         {
             return service.Save(cus);
+
+        }
+        public PriceSetup SavePrice(PriceSetup cus)
+        {
+            return _priceSetupService.Save(cus);
 
         }
         public Product Update(Product t, int id)

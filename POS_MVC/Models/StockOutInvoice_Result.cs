@@ -26,6 +26,7 @@ namespace RexERP_MVC.Models
         public Nullable<System.DateTime> ProductionDate1 { get; set; }
         public Nullable<decimal> BaleQty { get; set; }
         public Nullable<decimal> WeightInMon { get; set; }
+        public Nullable<int> APIId { get; set; }
         public string Notes { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

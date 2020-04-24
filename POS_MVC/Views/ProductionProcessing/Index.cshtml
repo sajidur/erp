@@ -51,8 +51,9 @@
                         <table id="myTable" class="table order-list">
                             <thead>
                             <th>Item</th>
-                            <th>Size</th>
                             <th>Brand</th>
+                            <th>API</th>
+                            <th>Size</th>
                             <th>Qty</th>
                             <th>Godown</th>
                             </thead>
@@ -64,12 +65,17 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="ddlSize" class="form-control">
+                                        <select id="ddlBrand" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </td>
+                                    <td class="col-sm-2">
+                                        <select id="ddlAPI" class="form-control">
                                             <option value="0">Select</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <select id="ddlBrand" class="form-control">
+                                        <select id="ddlSize" class="form-control">
                                             <option value="0">Select</option>
                                         </select>
                                     </td>
@@ -103,7 +109,7 @@
 
                     <div class="form-actions">
                         <div class="col-md-12">
-                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="Save()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SaveStockIn()"><i class="fa fa-save"></i>&nbsp; Save</button>
                             <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
                         </div>
                     </div>
@@ -117,8 +123,9 @@
         <thead>
         <th>SL </th>
         <th>Item</th>
-        <th>Size</th>
         <th>Brand</th>
+        <th>API</th>
+        <th>Size</th>
         <th>Qty</th>
         <th>Godown</th>
         </thead>
@@ -127,8 +134,9 @@
             <tr>
                 <td>{{Count}}</td>
                 <td>{{Item}}</td>
-                <td>{{Size}}</td>
                 <td>{{Brand}}</td>
+                <td>{{APIName}}</td>
+                <td>{{Size}}</td>
                 <td> {{BaleQty}}</td>
                 <td> {{WarehouseName}}</td>
                 <td>
@@ -158,9 +166,12 @@
         LoadAllProduct('ddlItem');
         LoadAllSize("ddlSize");
         LoadAllBrand("ddlBrand");
+                LoadAllAPI("ddlAPI");
+
     });
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/StockIn.js"></script>
 <script src="~/Scripts/app/Brand.js"></script>
 <script src="~/Scripts/app/Size.js"></script>
+<script src="~/Scripts/app/API.js"></script>

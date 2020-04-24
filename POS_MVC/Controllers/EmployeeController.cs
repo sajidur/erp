@@ -110,6 +110,18 @@ namespace RexERP_MVC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult GetAllByDesignation(int designationId)
+        {
+            List<Employee> employees = db.GetAll();
+            if (employees == null)
+            {
+                return HttpNotFound();
+            }
+            var result = AutoMapper.Mapper.Map<List<Employee>, List<EmployeeResponse>>(employees);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
         public ActionResult GetAllByName(string Name)
         {
             List<Employee> employees = db.GetAll(Name);

@@ -20,7 +20,7 @@ namespace RexERP_MVC.Models
         public decimal GrandTotal { get; set; }
         public int Id { get; set; }
         public Nullable<System.DateTime> PricingDate { get; set; }
-        public string SalesBy { get; set; }
+        public Nullable<int> SalesBy { get; set; }
         public Nullable<System.DateTime> SalesDate { get; set; }
         public string SalesInvoice { get; set; }
         public decimal TotalAmount { get; set; }
@@ -36,6 +36,8 @@ namespace RexERP_MVC.Models
         public string SalesInvoice1 { get; set; }
         public int ProductId { get; set; }
         public Nullable<int> SizeId { get; set; }
+        public Nullable<int> APIId { get; set; }
+        public string APIName { get; set; }
         public string SizeName { get; set; }
         public Nullable<int> BrandId { get; set; }
         public string BrandName { get; set; }

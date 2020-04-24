@@ -42,11 +42,11 @@ namespace RexERP_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(string totalAmount, string PONo,int supplierId,string descriptions,int WarehouseId,DateTime dates, List<GoodsReceiveResponse> response,List<AdditionalCost> ledgerPosting,decimal Discount)
+        public ActionResult Save(string totalAmount, string PONo,int supplierId,string descriptions,string LcNo,int WarehouseId,DateTime dates, List<GoodsReceiveResponse> response,List<AdditionalCost> ledgerPosting,decimal Discount)
         {           
             string ID = "";
             ReceiveMaster master = new ReceiveMaster();
-            master.InvoiceNoPaper= descriptions;
+            master.InvoiceNoPaper= LcNo;
             master.InvoiceDate = dates;
             master.TotalAmount = decimal.Parse(totalAmount);
             master.InvoiceNo = new GlobalClass().GetMaxIdWithPrfix("InvoiceNo", "8", "00000001", "ReceiveMaster", "GR");
@@ -61,6 +61,7 @@ namespace RexERP_MVC.Controllers
                 details.SizeId = item.SizeId;
                 details.ProductId = item.ProductId;
                 details.WarehouseId = item.WarehouseId;
+                details.APIId = item.APIId;
                 details.Qty = item.QTY;
                 details.Rate = item.Amount;             
                 details.Amount = details.Qty*details.Rate??0;

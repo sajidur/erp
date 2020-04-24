@@ -22,16 +22,20 @@ namespace RexERP_MVC.Models
         public int WarehouseId { get; set; }
         public Nullable<int> SizeId { get; set; }
         public Nullable<int> BrandId { get; set; }
+        public Nullable<int> APIId { get; set; }
         public Nullable<decimal> Qty { get; set; }
         public decimal BalanceQty { get; set; }
         public Nullable<int> TransactionType { get; set; }
         public string GoodsType { get; set; }
+        public Nullable<decimal> PurchasePrice { get; set; }
+        public Nullable<decimal> SalesPrice { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public bool IsActive { get; set; }
     
+        public virtual API API { get; set; }
         public virtual Brand Brand { get; set; }
         public virtual InventoryTransaction InventoryTransaction1 { get; set; }
         public virtual InventoryTransaction InventoryTransaction2 { get; set; }

@@ -280,6 +280,7 @@
     <Compile Include="Controllers\AccountGroupController.cs" />
     <Compile Include="Controllers\AccountLedgerController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\APISetupController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CompanyInfoController.cs" />
@@ -486,6 +487,9 @@
     <Compile Include="Models\AlarmLog.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\API.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AttParam.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -543,10 +547,7 @@
     <Compile Include="Models\DailyTransaction_Result.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DEPARTMENT.cs">
-      <DependentUpon>posMVCEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Department1.cs">
+    <Compile Include="Models\Department.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DeptUsedSch.cs">
@@ -705,6 +706,9 @@
     <Compile Include="Models\PPH21SPT.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PriceSetup.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Product.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -822,6 +826,9 @@
     <Compile Include="Models\SPKL.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_JournalVoucher_Result.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StockIn.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
@@ -929,6 +936,7 @@
     </Compile>
     <Compile Include="RequestModel\EmployeeRequest.cs" />
     <Compile Include="RequestModel\JournalRequest.cs" />
+    <Compile Include="RequestModel\PriceSetupRequest.cs" />
     <Compile Include="RequestModel\SalesOrderRequest.cs" />
     <Compile Include="ResponseModel\BaseResponse.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
@@ -966,6 +974,7 @@
     <Compile Include="Validator\WorkingTimeValidator.cs" />
     <Compile Include="ViewModel\AccountGroupResponse.cs" />
     <Compile Include="ViewModel\AccountLedgerResponse.cs" />
+    <Compile Include="ViewModel\APIResponse.cs" />
     <Compile Include="ViewModel\CashBookResponse.cs" />
     <Compile Include="ViewModel\CustomerLedgerResultResponse.cs" />
     <Compile Include="ViewModel\DEPARTMENTResponse.cs" />
@@ -1276,7 +1285,7 @@
     <Content Include="Scripts\app\Accounts.js" />
     <Content Include="Scripts\app\Brand.js" />
     <Content Include="Scripts\app\Category.js" />
-    <Content Include="Scripts\app\Color.js" />
+    <Content Include="Scripts\app\API.js" />
     <Content Include="Scripts\app\CommonLoader.js" />
     <Content Include="Scripts\app\Customer.js" />
     <Content Include="Scripts\app\Department.js" />
@@ -1640,10 +1649,12 @@
     <Content Include="Views\WorkingTime\Index.cshtml" />
     <Content Include="Views\TitleInfo\Index.cshtml" />
     <Content Include="Views\Sales\ApprovedDeliveryList.cshtml" />
+    <Content Include="Views\Product\PriceSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadEmployeeImage\" />
+    <Folder Include="Views\APISetup\" />
     <Folder Include="Views\PictureUpload\" />
   </ItemGroup>
   <ItemGroup>

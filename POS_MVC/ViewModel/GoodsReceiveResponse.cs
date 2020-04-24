@@ -21,12 +21,14 @@ namespace RexERP_MVC.ViewModel
         public Nullable<int> WarehouseId { get; set; }
         public Nullable<int> SizeId { get; set; }
         public Nullable<int> BrandId { get; set; }
+        public Nullable<int> APIId { get; set; }
+
 
         public decimal QTY { get; set; }
-        public int QtyInBale { get; set; }
-        public decimal WeightInKG { get; set; }
-        public decimal WeightType { get; set; }
-        public decimal WeightInMon { get; set; }
+        //public int QtyInBale { get; set; }
+        //public decimal WeightInKG { get; set; }
+        //public decimal WeightType { get; set; }
+        //public decimal WeightInMon { get; set; }
         public decimal Amount { get; set; }
         public decimal TotalAmount { get; set; }
         public string CreatedBy { get; set; }

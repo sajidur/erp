@@ -145,6 +145,7 @@ namespace RexERP_MVC.Controllers
             };
             salesDeliveryService.Save(salesDelivery);
             salesDetails.DeliveryStatus =(int) DeliveryStatus.Delivered;
+            salesDetails.Notes = Notes;
             salesService.Update(salesDetails, Id);
             return Json("Delivered Sucess", JsonRequestBehavior.AllowGet);
         }
@@ -170,7 +171,7 @@ namespace RexERP_MVC.Controllers
                 {
                     result.SalesDate = new DateTime?(DateTime.Now);
                 }
-                result.SalesBy = CurrentSession.GetCurrentSession().UserName;
+                result.SalesBy = item.SalesBy;
                 result.CustomerID = item.CustomerID;
                 result.AdditionalCost = decimal.Zero;
                 result.Discount = item.Discount;
@@ -193,6 +194,7 @@ namespace RexERP_MVC.Controllers
                         ProductId = itemDetails.ProductId,
                         Qty = itemDetails.Qty,    
                         SizeId=itemDetails.SizeId,
+                        APIId=itemDetails.APIId,
                         SizeName=itemDetails.Size.Name,
                         BrandName=itemDetails.Brand.BrandName,
                         BrandId=itemDetails.BrandId,
@@ -202,7 +204,8 @@ namespace RexERP_MVC.Controllers
                         CreatedBy = CurrentSession.GetCurrentSession().UserName,
                         CreatedDate = new DateTime?(DateTime.Now),
                         IsActive = new bool?(true),
-                        WarehouseId = itemDetails.WarehouseId
+                        WarehouseId = itemDetails.WarehouseId,
+                        DeliveryStatus=(int)DeliveryStatus.Pending
                     };
                     count += itemDetails.Qty;
                     result.SalesDetails.Add(resultDetail);
@@ -641,7 +644,7 @@ namespace RexERP_MVC.Controllers
                     {
                         result.SalesDate = new DateTime?(DateTime.Now);
                     }
-                    result.SalesBy = CurrentSession.GetCurrentSession().UserName;
+                    result.SalesBy = item.SalesBy;
                     result.CustomerID = item.CustomerID;
                     result.AdditionalCost = decimal.Zero;
                     result.Discount = Discount;
@@ -681,6 +684,7 @@ namespace RexERP_MVC.Controllers
                     //    IsActive = new bool?(true),
                     //    WarehouseId = item.WarehouseId
                     //};
+                    item.APIId = inventory.APIId;
                     item.BrandId = inventory.BrandId;
                     item.ProductId = inventory.ProductId;
                     item.SizeId = inventory.SizeId;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DB_9B34E1_erpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AccountGroup">
     <Key>
       <PropertyRef Name="Id" />
@@ -140,6 +140,18 @@
     <Property Name="LogTime" Type="datetime" />
     <Property Name="MachineAlias" Type="varchar" MaxLength="20" />
     <Property Name="AlarmType" Type="int" />
+  </EntityType>
+  <EntityType Name="API">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="APIName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="AttParam">
     <Key>
@@ -402,27 +414,6 @@
     <Property Name="UpdatedAt" Type="datetime" />
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
-  <EntityType Name="DEPARTMENTS">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DEPTNAME" Type="varchar" MaxLength="30" />
-    <Property Name="SUPDEPTID" Type="int" Nullable="false" />
-    <Property Name="InheritParentSch" Type="smallint" />
-    <Property Name="InheritDeptSch" Type="smallint" />
-    <Property Name="InheritDeptSchClass" Type="smallint" />
-    <Property Name="AutoSchPlan" Type="smallint" />
-    <Property Name="InLate" Type="smallint" />
-    <Property Name="OutEarly" Type="smallint" />
-    <Property Name="InheritDeptRule" Type="smallint" />
-    <Property Name="MinAutoSchInterval" Type="int" />
-    <Property Name="RegisterOT" Type="smallint" />
-    <Property Name="DefaultSchId" Type="int" Nullable="false" />
-    <Property Name="ATT" Type="smallint" />
-    <Property Name="Holiday" Type="smallint" />
-    <Property Name="OverTime" Type="smallint" />
-  </EntityType>
   <EntityType Name="DeptUsedSchs">
     <Key>
       <PropertyRef Name="DeptId" />
@@ -456,7 +447,7 @@
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EmOpLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -483,6 +474,7 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Property Name="LastName" Type="nvarchar(max)" />
     <Property Name="FatherName" Type="nvarchar(max)" />
     <Property Name="MotherName" Type="nvarchar(max)" />
+    <Property Name="DesignationId" Type="int" />
     <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="City" Type="nvarchar(max)" />
     <Property Name="Phone" Type="nvarchar(max)" />
@@ -608,7 +600,7 @@ warning 6002: The table/view 'ERP.dbo.EmOpLog' does not have a primary key defin
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="EXCNOTES">
           <Property Name="USERID" Type="int" />
           <Property Name="ATTDATE" Type="datetime" />
@@ -795,6 +787,7 @@ warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defi
     <Property Name="WarehouseId" Type="int" Nullable="false" />
     <Property Name="SizeId" Type="int" />
     <Property Name="BrandId" Type="int" />
+    <Property Name="APIId" Type="int" />
     <Property Name="OpeningQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ReceiveQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ProductionIn" Type="decimal" Precision="18" Scale="2" />
@@ -803,6 +796,8 @@ warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defi
     <Property Name="Faulty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="SalesQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BalanceQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
@@ -823,10 +818,13 @@ warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defi
     <Property Name="WarehouseId" Type="int" Nullable="false" />
     <Property Name="SizeId" Type="int" />
     <Property Name="BrandId" Type="int" />
+    <Property Name="APIId" Type="int" />
     <Property Name="Qty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BalanceQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="TransactionType" Type="int" />
     <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
@@ -1012,7 +1010,7 @@ warning 6013: The table/view 'ERP.dbo.EXCNOTES' does not have a primary key defi
     <Property Name="OverTime" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Ones">
           <Property Name="Id" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
@@ -1178,6 +1176,21 @@ warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined 
     <Property Name="UpdatedAt" Type="datetime" />
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
+  <EntityType Name="PriceSetup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InventoryId" Type="int" Nullable="false" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="Id" />
@@ -1223,6 +1236,7 @@ warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined 
     <Property Name="WarehouseId" Type="int" />
     <Property Name="SizeId" Type="int" />
     <Property Name="BrandId" Type="int" />
+    <Property Name="APIId" Type="int" />
     <Property Name="Qty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1451,6 +1465,8 @@ warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined 
     <Property Name="SalesInvoice" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
     <Property Name="SizeId" Type="int" />
+    <Property Name="APIId" Type="int" />
+    <Property Name="APIName" Type="nvarchar" MaxLength="500" />
     <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
     <Property Name="BrandId" Type="int" />
     <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
@@ -1474,7 +1490,7 @@ warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined 
     <Property Name="SalesInvoice" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="SalesOrderId" Type="int" />
     <Property Name="SalesDate" Type="datetime" />
-    <Property Name="SalesBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesBy" Type="int" />
     <Property Name="CustomerID" Type="int" Nullable="false" />
     <Property Name="AdditionalCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Discount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1591,7 +1607,7 @@ warning 6013: The table/view 'ERP.dbo.Ones' does not have a primary key defined 
     <Property Name="FullControl" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ServerLog">
     <Key>
       <PropertyRef Name="ID" />
@@ -1789,7 +1805,7 @@ warning 6002: The table/view 'ERP.dbo.ServerLog' does not have a primary key def
     <Property Name="Dikoreksi_oleh" Type="nvarchar(max)" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="SMSHistory">
           <Property Name="CustomerId" Type="int" />
           <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
@@ -1828,6 +1844,8 @@ warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key de
     <Property Name="BrandId" Type="int" />
     <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
     <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="APIId" Type="int" />
+    <Property Name="APIName" Type="nvarchar" MaxLength="500" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="CreatedBy" Type="char" MaxLength="24" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -1848,6 +1866,7 @@ warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key de
     <Property Name="ProductionDate" Type="date" />
     <Property Name="BaleQty" Type="decimal" Precision="18" Scale="2" />
     <Property Name="WeightInMon" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="APIId" Type="int" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="CreatedBy" Type="char" MaxLength="24" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -1920,7 +1939,7 @@ warning 6013: The table/view 'ERP.dbo.SMSHistory' does not have a primary key de
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="TBKEY">
           <Property Name="PreName" Type="varchar" MaxLength="12" />
           <Property Name="ONEKEY" Type="int" />
@@ -1978,6 +1997,7 @@ warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined
     <Property Name="ProductId" Type="int" Nullable="false" />
     <Property Name="SizeId" Type="int" />
     <Property Name="BrandId" Type="int" />
+    <Property Name="APIId" Type="int" />
     <Property Name="Qty" Type="int" Nullable="false" />
     <Property Name="WarehouseId" Type="int" Nullable="false" />
     <Property Name="Rate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1997,7 +2017,7 @@ warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined
     <Property Name="SalesInvoice" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="SalesOrderId" Type="int" />
     <Property Name="SalesDate" Type="datetime" />
-    <Property Name="SalesBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesBy" Type="int" />
     <Property Name="CustomerID" Type="int" Nullable="false" />
     <Property Name="AdditionalCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Discount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -2221,7 +2241,7 @@ warning 6013: The table/view 'ERP.dbo.TBKEY' does not have a primary key defined
     <Property Name="SetDate" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DB_9B34E1_erp.dbo.UsersMachines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UsersMachines">
     <Key>
       <PropertyRef Name="ID" />
@@ -2337,7 +2357,7 @@ warning 6002: The table/view 'ERP.dbo.UsersMachines' does not have a primary key
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ProductInfo">
     <Key>
       <PropertyRef Name="DesignName" />
@@ -3045,15 +3065,27 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Designationtbl_DEPARTMENTS">
-    <End Role="DEPARTMENTS" Type="Self.DEPARTMENTS" Multiplicity="0..1" />
-    <End Role="Designationtbl" Type="Self.Designationtbl" Multiplicity="*" />
+  <Association Name="FK_Employee_Designationtbl">
+    <End Role="Designationtbl" Type="Self.Designationtbl" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DEPARTMENTS">
+      <Principal Role="Designationtbl">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Designationtbl">
-        <PropertyRef Name="DepartmentID" />
+      <Dependent Role="Employee">
+        <PropertyRef Name="DesignationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Inventory_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="APIId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3114,6 +3146,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Principal>
       <Dependent Role="Inventory">
         <PropertyRef Name="WarehouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InventoryTransaction_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="InventoryTransaction" Type="Self.InventoryTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventoryTransaction">
+        <PropertyRef Name="APIId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3321,6 +3365,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ReceiveDetails_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="ReceiveDetails" Type="Self.ReceiveDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReceiveDetails">
+        <PropertyRef Name="APIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ReceiveDetails_Brand">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
     <End Role="ReceiveDetails" Type="Self.ReceiveDetails" Multiplicity="*" />
@@ -3429,6 +3485,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SalesDetails_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesDetails">
+        <PropertyRef Name="APIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SalesDetails_Brand">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
     <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="*" />
@@ -3486,6 +3554,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Principal>
       <Dependent Role="SalesMaster">
         <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesMaster_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="SalesMaster" Type="Self.SalesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesMaster">
+        <PropertyRef Name="SalesBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3561,6 +3641,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StockIn_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockIn">
+        <PropertyRef Name="APIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StockIn_Brand">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
     <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
@@ -3618,6 +3710,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Principal>
       <Dependent Role="StockIn">
         <PropertyRef Name="WarehouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockOut_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="StockOut" Type="Self.StockOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockOut">
+        <PropertyRef Name="APIId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3690,6 +3794,18 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       </Principal>
       <Dependent Role="StockOut">
         <PropertyRef Name="WarehouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TempSalesDetails_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="TempSalesDetails" Type="Self.TempSalesDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TempSalesDetails">
+        <PropertyRef Name="APIId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3888,6 +4004,9 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_JournalVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -3907,7 +4026,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
   <Function Name="YearClosed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CustomerId" Type="int" Mode="In" />
   </Function>
-  <EntityContainer Name="erpModelStoreContainer">
+  <EntityContainer Name="DB_9B34E1_erpModelStoreContainer">
     <EntitySet Name="AccountGroup" EntityType="Self.AccountGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AccountLedger" EntityType="Self.AccountLedger" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ACGroup" EntityType="Self.ACGroup" Schema="dbo" store:Type="Tables" />
@@ -3916,6 +4035,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <EntitySet Name="AdditionalCost" EntityType="Self.AdditionalCost" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AdvancePayment" EntityType="Self.AdvancePayment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AlarmLog" EntityType="Self.AlarmLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="API" EntityType="Self.API" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AttParam" EntityType="Self.AttParam" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AuditedExc" EntityType="Self.AuditedExc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AUTHDEVICE" EntityType="Self.AUTHDEVICE" Schema="dbo" store:Type="Tables" />
@@ -3932,7 +4052,6 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <EntitySet Name="CreditNoteMaster" EntityType="Self.CreditNoteMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DEPARTMENTS" EntityType="Self.DEPARTMENTS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSchs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Designationtbl" EntityType="Self.Designationtbl" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Division" EntityType="Self.Division" Schema="dbo" store:Type="Tables" />
@@ -3973,6 +4092,7 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <EntitySet Name="PensionCompensation" EntityType="Self.PensionCompensation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PPH21SPT" EntityType="Self.PPH21SPT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PriceSetup" EntityType="Self.PriceSetup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PTKP" EntityType="Self.PTKP" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReceiveDetails" EntityType="Self.ReceiveDetails" Schema="dbo" store:Type="Tables" />
@@ -4308,9 +4428,13 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       <End Role="WorkingTime" EntitySet="WorkingTime" />
       <End Role="WorkingDay" EntitySet="WorkingDay" />
     </AssociationSet>
-    <AssociationSet Name="FK_Designationtbl_DEPARTMENTS" Association="Self.FK_Designationtbl_DEPARTMENTS">
-      <End Role="DEPARTMENTS" EntitySet="DEPARTMENTS" />
+    <AssociationSet Name="FK_Employee_Designationtbl" Association="Self.FK_Employee_Designationtbl">
       <End Role="Designationtbl" EntitySet="Designationtbl" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Inventory_API" Association="Self.FK_Inventory_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="Inventory" EntitySet="Inventory" />
     </AssociationSet>
     <AssociationSet Name="FK_Inventory_Brand" Association="Self.FK_Inventory_Brand">
       <End Role="Brand" EntitySet="Brand" />
@@ -4331,6 +4455,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <AssociationSet Name="FK_Inventory_WareHouse" Association="Self.FK_Inventory_WareHouse">
       <End Role="WareHouse" EntitySet="WareHouse" />
       <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InventoryTransaction_API" Association="Self.FK_InventoryTransaction_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="InventoryTransaction" EntitySet="InventoryTransaction" />
     </AssociationSet>
     <AssociationSet Name="FK_InventoryTransaction_Brand" Association="Self.FK_InventoryTransaction_Brand">
       <End Role="Brand" EntitySet="Brand" />
@@ -4400,6 +4528,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
+    <AssociationSet Name="FK_ReceiveDetails_API" Association="Self.FK_ReceiveDetails_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="ReceiveDetails" EntitySet="ReceiveDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_ReceiveDetails_Brand" Association="Self.FK_ReceiveDetails_Brand">
       <End Role="Brand" EntitySet="Brand" />
       <End Role="ReceiveDetails" EntitySet="ReceiveDetails" />
@@ -4436,6 +4568,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       <End Role="SalesMaster" EntitySet="SalesMaster" />
       <End Role="SalesDelivery" EntitySet="SalesDelivery" />
     </AssociationSet>
+    <AssociationSet Name="FK_SalesDetails_API" Association="Self.FK_SalesDetails_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="SalesDetails" EntitySet="SalesDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_SalesDetails_Brand" Association="Self.FK_SalesDetails_Brand">
       <End Role="Brand" EntitySet="Brand" />
       <End Role="SalesDetails" EntitySet="SalesDetails" />
@@ -4454,6 +4590,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     </AssociationSet>
     <AssociationSet Name="FK_SalesMaster_Customer" Association="Self.FK_SalesMaster_Customer">
       <End Role="Customer" EntitySet="Customer" />
+      <End Role="SalesMaster" EntitySet="SalesMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesMaster_Employee" Association="Self.FK_SalesMaster_Employee">
+      <End Role="Employee" EntitySet="Employee" />
       <End Role="SalesMaster" EntitySet="SalesMaster" />
     </AssociationSet>
     <AssociationSet Name="FK_SalesMaster_Salesorder" Association="Self.FK_SalesMaster_Salesorder">
@@ -4480,6 +4620,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
       <End Role="Size" EntitySet="Size" />
       <End Role="SalesOrder" EntitySet="SalesOrder" />
     </AssociationSet>
+    <AssociationSet Name="FK_StockIn_API" Association="Self.FK_StockIn_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="StockIn" EntitySet="StockIn" />
+    </AssociationSet>
     <AssociationSet Name="FK_StockIn_Brand" Association="Self.FK_StockIn_Brand">
       <End Role="Brand" EntitySet="Brand" />
       <End Role="StockIn" EntitySet="StockIn" />
@@ -4499,6 +4643,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <AssociationSet Name="FK_StockIn_Warehouse" Association="Self.FK_StockIn_Warehouse">
       <End Role="WareHouse" EntitySet="WareHouse" />
       <End Role="StockIn" EntitySet="StockIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockOut_API" Association="Self.FK_StockOut_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="StockOut" EntitySet="StockOut" />
     </AssociationSet>
     <AssociationSet Name="FK_StockOut_Brand" Association="Self.FK_StockOut_Brand">
       <End Role="Brand" EntitySet="Brand" />
@@ -4523,6 +4671,10 @@ warning 6002: The table/view 'ERP.dbo.ProductInfo' does not have a primary key d
     <AssociationSet Name="FK_StockOut_Warehouse" Association="Self.FK_StockOut_Warehouse">
       <End Role="WareHouse" EntitySet="WareHouse" />
       <End Role="StockOut" EntitySet="StockOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TempSalesDetails_API" Association="Self.FK_TempSalesDetails_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="TempSalesDetails" EntitySet="TempSalesDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_TempSalesDetails_Brand" Association="Self.FK_TempSalesDetails_Brand">
       <End Role="Brand" EntitySet="Brand" />

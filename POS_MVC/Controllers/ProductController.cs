@@ -1,5 +1,6 @@
 ﻿using RexERP_MVC.BAL;
 using RexERP_MVC.Models;
+using RexERP_MVC.RequestModel;
 using RexERP_MVC.Util;
 using RexERP_MVC.ViewModel;
 using System;
@@ -12,6 +13,8 @@ namespace RexERP_MVC.Controllers
     public class ProductController : Controller
     {
         private ProductService db = new ProductService();
+        private InventoryService _inventoryService = new InventoryService();
+
 
         // GET: /Category/
         public ActionResult Index()
@@ -19,6 +22,10 @@ namespace RexERP_MVC.Controllers
 
             ViewBag.Title = "Product";
             return View(new Product());
+        }
+        public ActionResult PriceSetup()
+        {
+            return View();
         }
         public ActionResult BestSelling()
         {
@@ -79,6 +86,19 @@ namespace RexERP_MVC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult PriceSetup(PriceSetupRequest request)
+        {
+            var inventory = _inventoryService.GetById(request.InventoryId);
+            if (inventory!=null)
+            {
+                PriceSetup price = new PriceSetup() {InventoryId=inventory.Id,SalesPrice=request.SalesPrice,PurchasePrice=inventory.PurchasePrice,Active=true,CreatedDate=DateTime.Now,CreatedBy=CurrentSession.GetCurrentSession().UserName };
+                db.SavePrice(price);
+                inventory.SalesPrice = request.SalesPrice;
+                _inventoryService.Update(inventory);
+            }
+            return Json("Saved Sucess!!", JsonRequestBehavior.AllowGet);
+        }
         // GET: /Category/Edit/5
         [HttpPost]
         public ActionResult Edit(Product model)

@@ -140,7 +140,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Brand</Value>
+                              <Value>Grade</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>Underline</TextDecoration>
@@ -666,7 +666,7 @@
         <Top>2.8727in</Top>
         <Left>0.30381in</Left>
         <Height>0.81771in</Height>
-        <Width>6.55394in</Width>
+        <Width>6.55393in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1316,72 +1316,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Coutha">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!Coutha.Value, "dsSalesInvoice")</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Left</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Coutha</rd:DefaultName>
-        <Top>1.2375in</Top>
-        <Left>3.77503in</Left>
-        <Height>0.25in</Height>
-        <Width>1in</Width>
-        <ZIndex>21</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox29">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Chalan No:</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.2375in</Top>
-        <Left>2.81125in</Left>
-        <Height>0.25in</Height>
-        <Width>0.96378in</Width>
-        <ZIndex>22</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Id">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1405,7 +1339,7 @@
         <Left>5.48732in</Left>
         <Height>0.25in</Height>
         <Width>1.24546in</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1439,7 +1373,7 @@
         <Left>4.78903in</Left>
         <Height>0.25in</Height>
         <Width>0.56213in</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1455,7 +1389,7 @@
         <Left>0.02724in</Left>
         <Height>0in</Height>
         <Width>7.13315in</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1467,7 +1401,7 @@
         <Left>0.02724in</Left>
         <Height>1.15139in</Height>
         <Width>7.08053in</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1493,7 +1427,7 @@
         <Left>2.42583in</Left>
         <Height>0.25in</Height>
         <Width>3.91667in</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1527,7 +1461,7 @@
         <Left>4.11542in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1559,7 +1493,7 @@
         <Left>5.60778in</Left>
         <Height>0.25in</Height>
         <Width>1.24997in</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1589,7 +1523,7 @@
         <Left>1.30427in</Left>
         <Height>0.25in</Height>
         <Width>3.47076in</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>

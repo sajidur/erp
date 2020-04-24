@@ -75,8 +75,8 @@ namespace RexERP_MVC.Controllers
             StockIn result = new StockIn();
             var brands =_brandService.GetAll();
             var sizes =_sizeService.GetAll();
-            //if (ModelState.IsValid)
-            {
+            var stockOutInvoice = "";
+
                 foreach (var item in stockIns)
                 {
                     var brand = brands.Where(a => a.Id == item.BrandId).FirstOrDefault();
@@ -92,9 +92,10 @@ namespace RexERP_MVC.Controllers
                         item.ProductionDate = DateTime.Now;
                     }
                     serviceStockIn.Save(item);
+                stockOutInvoice = item.StockOutInvoiceNo;
                 }
                 //stocOut Invoice Update
-                var stockOuts = stockOutService.GetStockChallan(InvoiceNo);
+                var stockOuts = stockOutService.GetStockChallan(stockOutInvoice);
                 foreach (var item in stockOuts)
                 {
                     item.AlreadyProcessed = true;
@@ -102,8 +103,6 @@ namespace RexERP_MVC.Controllers
                     item.UpdatedBy = CurrentSession.GetCurrentSession().UserName;
                     stockOutService.Update(item, item.Id);
                 }
-            }
-
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

@@ -55,6 +55,10 @@ namespace RexERP_MVC.BAL
         {
             return service.GetAll().ToList();
         }
+        public Inventory Update(Inventory inventory)
+        {
+            return service.Update(inventory,inventory.Id);
+        }
 
         public List<Inventory> GetAllFinishGoodsFilteredBySupplier(int supplierId)
         {

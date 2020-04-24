@@ -35,30 +35,47 @@ namespace RexERP_MVC.Models
         public virtual DbSet<AdditionalCost> AdditionalCosts { get; set; }
         public virtual DbSet<AdvancePayment> AdvancePayments { get; set; }
         public virtual DbSet<AlarmLog> AlarmLogs { get; set; }
+        public virtual DbSet<API> APIs { get; set; }
         public virtual DbSet<AttParam> AttParams { get; set; }
         public virtual DbSet<AuditedExc> AuditedExcs { get; set; }
         public virtual DbSet<AUTHDEVICE> AUTHDEVICEs { get; set; }
         public virtual DbSet<BankReconciliation> BankReconciliations { get; set; }
+        public virtual DbSet<BranchOffice> BranchOffices { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CHECKEXACT> CHECKEXACTs { get; set; }
         public virtual DbSet<CHECKINOUT> CHECKINOUTs { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
         public virtual DbSet<ContraDetail> ContraDetails { get; set; }
         public virtual DbSet<ContraMaster> ContraMasters { get; set; }
         public virtual DbSet<CreditNoteMaster> CreditNoteMasters { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<DEPARTMENT> DEPARTMENTS { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<DeptUsedSch> DeptUsedSchs { get; set; }
         public virtual DbSet<Designationtbl> Designationtbls { get; set; }
+        public virtual DbSet<Division> Divisions { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<EmployeeAttendance> EmployeeAttendances { get; set; }
+        public virtual DbSet<EmployeeEducation> EmployeeEducations { get; set; }
+        public virtual DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
+        public virtual DbSet<EmployeeLoan> EmployeeLoans { get; set; }
+        public virtual DbSet<EmployeeLoanDetail> EmployeeLoanDetails { get; set; }
+        public virtual DbSet<EmployeeWorkingTime> EmployeeWorkingTimes { get; set; }
         public virtual DbSet<FaceTemp> FaceTemps { get; set; }
         public virtual DbSet<FinancialYear> FinancialYears { get; set; }
+        public virtual DbSet<Formula> Formulae { get; set; }
+        public virtual DbSet<FPAttLog> FPAttLogs { get; set; }
+        public virtual DbSet<FPMachine> FPMachines { get; set; }
+        public virtual DbSet<FPTemplate> FPTemplates { get; set; }
+        public virtual DbSet<FPUser> FPUsers { get; set; }
+        public virtual DbSet<GeneralLeave> GeneralLeaves { get; set; }
         public virtual DbSet<HOLIDAY> HOLIDAYS { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<InventoryTransaction> InventoryTransactions { get; set; }
         public virtual DbSet<JournalDetail> JournalDetails { get; set; }
         public virtual DbSet<JournalMaster> JournalMasters { get; set; }
+        public virtual DbSet<LastEmployment> LastEmployments { get; set; }
         public virtual DbSet<LeaveClass> LeaveClasses { get; set; }
         public virtual DbSet<LeaveClass1> LeaveClass1 { get; set; }
         public virtual DbSet<LedgerPosting> LedgerPostings { get; set; }
@@ -66,15 +83,30 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Machine> Machines { get; set; }
         public virtual DbSet<NUM_RUN> NUM_RUN { get; set; }
         public virtual DbSet<NUM_RUN_DEIL> NUM_RUN_DEIL { get; set; }
+        public virtual DbSet<OtherExpense> OtherExpenses { get; set; }
+        public virtual DbSet<OtherExpenseDetail> OtherExpenseDetails { get; set; }
+        public virtual DbSet<OtherIncome> OtherIncomes { get; set; }
+        public virtual DbSet<OtherIncomeDetail> OtherIncomeDetails { get; set; }
         public virtual DbSet<PartyBalance> PartyBalances { get; set; }
         public virtual DbSet<PartyPaymentHistory> PartyPaymentHistories { get; set; }
+        public virtual DbSet<PensionCompensation> PensionCompensations { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
+        public virtual DbSet<PPH21SPT> PPH21SPT { get; set; }
+        public virtual DbSet<PriceSetup> PriceSetups { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<PTKP> PTKPs { get; set; }
         public virtual DbSet<ReceiveDetail> ReceiveDetails { get; set; }
         public virtual DbSet<ReceiveMaster> ReceiveMasters { get; set; }
         public virtual DbSet<ReportItem> ReportItems { get; set; }
         public virtual DbSet<RoleWiseScreenPermission> RoleWiseScreenPermissions { get; set; }
+        public virtual DbSet<SalaryEmployee> SalaryEmployees { get; set; }
+        public virtual DbSet<SalaryEmployeeDetail> SalaryEmployeeDetails { get; set; }
+        public virtual DbSet<SalaryItem> SalaryItems { get; set; }
         public virtual DbSet<SalaryPayment> SalaryPayments { get; set; }
+        public virtual DbSet<SalarySlip> SalarySlips { get; set; }
+        public virtual DbSet<SalarySlipDetail> SalarySlipDetails { get; set; }
+        public virtual DbSet<SalaryStandard> SalaryStandards { get; set; }
+        public virtual DbSet<SalaryStandardDetail> SalaryStandardDetails { get; set; }
         public virtual DbSet<SalesDelivery> SalesDeliveries { get; set; }
         public virtual DbSet<SalesDetail> SalesDetails { get; set; }
         public virtual DbSet<SalesMaster> SalesMasters { get; set; }
@@ -86,6 +118,11 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<SHIFT> SHIFTs { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<SlipGajiDetail> SlipGajiDetails { get; set; }
+        public virtual DbSet<SlipGajiDetail1> SlipGajiDetail1 { get; set; }
+        public virtual DbSet<SlipGajiDetail2A> SlipGajiDetail2A { get; set; }
+        public virtual DbSet<SlipGajiMini> SlipGajiMinis { get; set; }
+        public virtual DbSet<SPKL> SPKLs { get; set; }
         public virtual DbSet<StockIn> StockIns { get; set; }
         public virtual DbSet<StockOut> StockOuts { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
@@ -97,6 +134,9 @@ namespace RexERP_MVC.Models
         public virtual DbSet<TEMPLATE> TEMPLATEs { get; set; }
         public virtual DbSet<TempSalesDetail> TempSalesDetails { get; set; }
         public virtual DbSet<TempSalesMaster> TempSalesMasters { get; set; }
+        public virtual DbSet<THR> THRs { get; set; }
+        public virtual DbSet<THRDetail> THRDetails { get; set; }
+        public virtual DbSet<TitleInfo> TitleInfoes { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -111,51 +151,12 @@ namespace RexERP_MVC.Models
         public virtual DbSet<UserUsedSClass> UserUsedSClasses { get; set; }
         public virtual DbSet<VoucherType> VoucherTypes { get; set; }
         public virtual DbSet<WareHouse> WareHouses { get; set; }
+        public virtual DbSet<WorkingDay> WorkingDays { get; set; }
+        public virtual DbSet<WorkingTime> WorkingTimes { get; set; }
         public virtual DbSet<EmOpLog> EmOpLogs { get; set; }
         public virtual DbSet<ServerLog> ServerLogs { get; set; }
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
-        public virtual DbSet<BranchOffice> BranchOffices { get; set; }
-        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
-        public virtual DbSet<Department1> Department1 { get; set; }
-        public virtual DbSet<Division> Divisions { get; set; }
-        public virtual DbSet<EmployeeAttendance> EmployeeAttendances { get; set; }
-        public virtual DbSet<EmployeeEducation> EmployeeEducations { get; set; }
-        public virtual DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
-        public virtual DbSet<EmployeeLoan> EmployeeLoans { get; set; }
-        public virtual DbSet<EmployeeLoanDetail> EmployeeLoanDetails { get; set; }
-        public virtual DbSet<EmployeeWorkingTime> EmployeeWorkingTimes { get; set; }
-        public virtual DbSet<Formula> Formulae { get; set; }
-        public virtual DbSet<FPAttLog> FPAttLogs { get; set; }
-        public virtual DbSet<FPMachine> FPMachines { get; set; }
-        public virtual DbSet<FPTemplate> FPTemplates { get; set; }
-        public virtual DbSet<FPUser> FPUsers { get; set; }
-        public virtual DbSet<GeneralLeave> GeneralLeaves { get; set; }
-        public virtual DbSet<LastEmployment> LastEmployments { get; set; }
-        public virtual DbSet<OtherExpense> OtherExpenses { get; set; }
-        public virtual DbSet<OtherExpenseDetail> OtherExpenseDetails { get; set; }
-        public virtual DbSet<OtherIncome> OtherIncomes { get; set; }
-        public virtual DbSet<OtherIncomeDetail> OtherIncomeDetails { get; set; }
-        public virtual DbSet<PensionCompensation> PensionCompensations { get; set; }
-        public virtual DbSet<PPH21SPT> PPH21SPT { get; set; }
-        public virtual DbSet<PTKP> PTKPs { get; set; }
-        public virtual DbSet<SalaryEmployee> SalaryEmployees { get; set; }
-        public virtual DbSet<SalaryEmployeeDetail> SalaryEmployeeDetails { get; set; }
-        public virtual DbSet<SalaryItem> SalaryItems { get; set; }
-        public virtual DbSet<SalarySlip> SalarySlips { get; set; }
-        public virtual DbSet<SalarySlipDetail> SalarySlipDetails { get; set; }
-        public virtual DbSet<SalaryStandard> SalaryStandards { get; set; }
-        public virtual DbSet<SalaryStandardDetail> SalaryStandardDetails { get; set; }
-        public virtual DbSet<SlipGajiDetail> SlipGajiDetails { get; set; }
-        public virtual DbSet<SlipGajiDetail1> SlipGajiDetail1 { get; set; }
-        public virtual DbSet<SlipGajiDetail2A> SlipGajiDetail2A { get; set; }
-        public virtual DbSet<SlipGajiMini> SlipGajiMinis { get; set; }
-        public virtual DbSet<SPKL> SPKLs { get; set; }
-        public virtual DbSet<THR> THRs { get; set; }
-        public virtual DbSet<THRDetail> THRDetails { get; set; }
-        public virtual DbSet<TitleInfo> TitleInfoes { get; set; }
-        public virtual DbSet<WorkingDay> WorkingDays { get; set; }
-        public virtual DbSet<WorkingTime> WorkingTimes { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {
@@ -475,6 +476,15 @@ namespace RexERP_MVC.Models
                 new ObjectParameter("owner_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<SP_JournalVoucher_Result> SP_JournalVoucher(string invoiceNo)
+        {
+            var invoiceNoParameter = invoiceNo != null ?
+                new ObjectParameter("InvoiceNo", invoiceNo) :
+                new ObjectParameter("InvoiceNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_JournalVoucher_Result>("SP_JournalVoucher", invoiceNoParameter);
         }
     
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)

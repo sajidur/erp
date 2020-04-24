@@ -9,6 +9,8 @@ namespace RexERP_MVC.ViewModel
         public Nullable<int> QtyInBale { get; set; }
         public int SupplierId { get; set; }
         public int WarehouseId { get; set; }
+        public Nullable<int> APIId { get; set; }
+
         public Nullable<decimal> OpeningQty { get; set; }
         public Nullable<decimal> SalesQty { get; set; }
         public Nullable<decimal> ReceiveQty { get; set; }
@@ -18,6 +20,8 @@ namespace RexERP_MVC.ViewModel
         public Nullable<decimal> Faulty { get; set; }
         public decimal BalanceQty { get; set; }
         public decimal BalanceQtyInKG { get; set; }
+        public Nullable<decimal> PurchasePrice { get; set; }
+        public Nullable<decimal> SalesPrice { get; set; }
         public string Notes { get; set; }
         public string GoodsType { get; set; }
         public string CreatedBy { get; set; }
@@ -32,5 +36,7 @@ namespace RexERP_MVC.ViewModel
         public WareHouseResponse WareHouse { get; set; }
         public virtual BrandResponse Brand { get; set; }
         public virtual SizeResponse Size { get; set; }
+        public virtual APIResponse API { get; set; }
+
     }
 }

@@ -16,7 +16,7 @@ namespace RexERP_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DEPARTMENT category, int create)
+        public ActionResult Create(Department category, int create)
         {
             var result = category;
             if (ModelState.IsValid)
@@ -30,12 +30,12 @@ namespace RexERP_MVC.Controllers
 
         public ActionResult GetAll()
         {
-            List<DEPARTMENT> products = db.GetAll();
+            List<Department> products = db.GetAll();
             if (products == null)
             {
                 return HttpNotFound();
             }
-            var result = AutoMapper.Mapper.Map<List<DEPARTMENT>, List<DEPARTMENTResponse>>(products);
+            var result = AutoMapper.Mapper.Map<List<Department>, List<DEPARTMENTResponse>>(products);
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
@@ -45,23 +45,23 @@ namespace RexERP_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DEPARTMENT product = db.GetById(id);
+            Department product = db.GetById(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
-            var result = AutoMapper.Mapper.Map<DEPARTMENT, DEPARTMENTResponse>(product);
+            var result = AutoMapper.Mapper.Map<Department, DEPARTMENTResponse>(product);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult UpdateDepartment(DEPARTMENT model)
+        public ActionResult UpdateDepartment(Department model)
         {
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DEPARTMENT product = db.GetById(model.Id);
+            Department product = db.GetById(model.Id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace RexERP_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DEPARTMENT product = db.GetById(id);
+            Department product = db.GetById(id);
             if (product == null)
             {
                 return HttpNotFound();

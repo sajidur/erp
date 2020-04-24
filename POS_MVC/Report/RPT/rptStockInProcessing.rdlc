@@ -262,7 +262,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Brand Name</Value>
+                              <Value>Grade</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -292,7 +292,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Bale Qty</Value>
+                              <Value>Qty</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -682,8 +682,8 @@
         <DataSetName>dsProductProcessingInInvoice</DataSetName>
         <Top>1.61333in</Top>
         <Left>0.66542in</Left>
-        <Height>0.70833in</Height>
-        <Width>6.28125in</Width>
+        <Height>0.70834in</Height>
+        <Width>6.28124in</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>

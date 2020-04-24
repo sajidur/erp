@@ -12,6 +12,10 @@ namespace RexERP_MVC.BAL
         {
             return service.GetAll(a => a.IsActive == true).ToList();
         }
+        public List<Employee> GetAll(int designationId)
+        {
+            return service.GetAll(a => a.IsActive == true).ToList();
+        }
         public List<Employee> GetAll(string name)
         {
             return service.GetAll(a => a.FirstName == name).ToList();

@@ -11,8 +11,9 @@ namespace RexERP_MVC.BAL
     {
         DBService<ReceiveMaster> service = new DBService<ReceiveMaster>();
         DBService<ReceiveDetail> serviceDetails = new DBService<ReceiveDetail>();
+        DBService<InventoryTransaction> _invTransactionService = new DBService<InventoryTransaction>();
 
-        DBService<Inventory> inventory = new DBService<Inventory>();
+        DBService<Inventory> _inventoryService = new DBService<Inventory>();
         LedgerPostingService ledgerService = new LedgerPostingService();
         SupplierService supplierService = new SupplierService();
         FinancialYearService year = new FinancialYearService();
@@ -36,7 +37,8 @@ namespace RexERP_MVC.BAL
             {
                 foreach (var item in cus.ReceiveDetails)
                 {
-                    var existingItem = inventory.GetAll(a=>a.ProductId==item.ProductId && a.IsActive==true && a.WarehouseId==wareHouseId && a.SizeId==item.SizeId&&a.BrandId==item.BrandId).ToList();
+                    var balance = 0.0m;
+                    var existingItem = _inventoryService.GetAll(a=>a.ProductId==item.ProductId && a.IsActive==true && a.WarehouseId==wareHouseId && a.SizeId==item.SizeId&&a.BrandId==item.BrandId && a.APIId==item.APIId).ToList();
                     if (existingItem.Count>0)
                     {
                         foreach (var inv in existingItem)
@@ -45,7 +47,8 @@ namespace RexERP_MVC.BAL
                             inv.UpdatedBy = "";
                             inv.BalanceQty = inv.BalanceQty + item.Qty;
                             inv.ReceiveQty = inv.ReceiveQty??0 + item.Qty;
-                            inventory.Update(inv, inv.Id);
+                            _inventoryService.Update(inv, inv.Id);
+                            balance = inv.BalanceQty;
                         }
 
                     }
@@ -61,12 +64,37 @@ namespace RexERP_MVC.BAL
                         inv.WarehouseId = wareHouseId;
                         inv.BrandId = item.BrandId;
                         inv.SizeId = item.SizeId;
+                        inv.APIId = item.APIId;
                         inv.Faulty = 0;
                         inv.OpeningQty = 0;
                         inv.BalanceQty = item.Qty;
+                        inv.PurchasePrice = item.Rate;
                         inv.GoodsType = goodsType.ToString();
-                        inventory.Save(inv);
+                        _inventoryService.Save(inv);
+                        balance = item.Qty;
                     }
+
+                    var invTransaction = new InventoryTransaction()
+                    {
+                        APIId = item.APIId,
+                        BalanceQty = balance,
+                        BrandId = item.BrandId,
+                        CreatedBy = CurrentSession.GetCurrentSession().UserName,
+                        CreatedDate = DateTime.Now,
+                        GoodsType = goodsType.ToString(),
+                        InventoryGuid = Guid.NewGuid().ToString(),
+                        InvoiceNo = cus.InvoiceNo,
+                        IsActive = true,
+                        ProductId = item.ProductId,
+                        PurchasePrice = item.Rate,
+                        Qty = item.Qty,
+                        SalesPrice = 0,
+                        SizeId = item.SizeId,
+                        SupplierId = cus.SupplierID,
+                        TransactionType = (int)Util.TransactionType.ReceiveQty,
+                        WarehouseId = item.WarehouseId??0
+                    };
+                    _invTransactionService.Save(invTransaction);
 
                 }
                 // Ledger posting debit to purchase account
@@ -144,7 +172,7 @@ namespace RexERP_MVC.BAL
                 var isDeleted = service.Delete(master.Id);
                 foreach (var item in master.ReceiveDetails)
                 {
-                    var existingItem = inventory.GetAll(a => a.ProductId == item.ProductId && a.IsActive == true && a.WarehouseId == item.WarehouseId).ToList();
+                    var existingItem = _inventoryService.GetAll(a => a.ProductId == item.ProductId && a.IsActive == true && a.WarehouseId == item.WarehouseId).ToList();
                     if (existingItem.Count > 0)
                     {
                         foreach (var inv in existingItem)
@@ -153,7 +181,7 @@ namespace RexERP_MVC.BAL
                             inv.UpdatedBy = "";
                             inv.BalanceQty = inv.BalanceQty - item.Qty;
                             inv.ReceiveQty = inv.ReceiveQty ?? 0 - item.Qty;
-                            inventory.Update(inv, inv.Id);
+                            _inventoryService.Update(inv, inv.Id);
                         }
 
                     }

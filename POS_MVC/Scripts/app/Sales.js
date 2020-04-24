@@ -92,9 +92,9 @@ function LoadForAdd(InvId) {
             Id = $(this).find('td').eq(0).html();
             ProductName = $(this).find('td').eq(1).html();
             ProductId = Id;
-            BaleQty = $(this).find('td').eq(6).find('input').val();
+            BaleQty = $(this).find('td').eq(7).find('input').val();
             BaleWeight = $(this).find('td').eq(2).text();
-            Rate = $(this).find('td').eq(7).find('input').val();
+            Rate = $(this).find('td').eq(8).find('input').val();
             WarehouseId = $(this).find('td').eq(9).text();
         }
     });
@@ -109,7 +109,7 @@ function LoadForAdd(InvId) {
         Id: Id,
         ProductId:Id,
         ProductName: ProductName,
-        Qty: BaleQty,
+        Qty: parseFloat(BaleQty),
         Rate: Rate,
         Amount: Amount,
         SalesOrderId: SalesOrderId,
@@ -184,10 +184,6 @@ function LoadForAddOrder(parameters) {
             IsActive: IsActive,
             WarehouseId: WarehouseId
         };
-      
-        var object2 = {
-            BaleQty: BaleQty
-        };
         console.log(object);
         orderDeliveryQty.push(object);
         orderElements.push(object);
@@ -215,12 +211,16 @@ function LoadForAddOrder(parameters) {
 
     function GrandTotal() {
        
-        var discount = $("#txtDiscount").val();
+        var discount = parseFloat($("#txtDiscount").val());
         var totalAmount = parseFloat($("#txtTotalAmt").val());
+        var discountAmount = discount / totalAmount*100;
         if (discount != 0) {
-            var GTotal = totalAmount - discount;
+            var GTotal = totalAmount - discountAmount;
             $("#txtNetTotalAmt").val(GTotal.toFixed(2));
-        } else { $("#txtNetTotalAmt").val(totalAmount); }
+        }
+        else {
+            $("#txtNetTotalAmt").val(totalAmount);
+        }
     }
 
     function Expression() { 
@@ -235,12 +235,17 @@ function LoadForAddOrder(parameters) {
         return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
     }
 
-function Save(e) {
+function SalesSave(e) {
         var CustomerID = $("#ddlCustomer option:selected").val();
         if (CustomerID == "") {
             ShowNotification("3", "Please select Customer!!");
             return;
-        }
+    }
+    var salesManId = $("#ddlSalesMan option:selected").val();
+    if (salesManId == "") {
+        ShowNotification("3", "Please select SalesMan!!");
+        return;
+    }
         GetDataFromDatatable();
         var IsActive;
         if (detailsSales.length <= 0) {
@@ -310,7 +315,8 @@ function GetDataFromDatatable() {
                     TotalAmount: Amount,
                     SalesDate:SalesDate,
                     Notes: Notes,
-                    Coutha:Coutha,
+                    Coutha: Coutha,
+                    SalesBy: $("#ddlSalesMan option:selected").val(),
                     SalesOrderId: SalesOrderId,
                     DiscountPurpose: $("#txtDiscountNotes").val(),
                     TransportType: $("#txtDelivery").val(),
@@ -320,8 +326,6 @@ function GetDataFromDatatable() {
             }
         });
     }
-
-
     function OnDeleteSalesOrder(Id) {
         for (var i = 0; i < detailsSales.length; i++) {
             if (detailsSales[i].countCount == Id) {

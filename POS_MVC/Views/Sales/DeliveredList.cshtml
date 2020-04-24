@@ -21,8 +21,9 @@
         <th>Id</th>
         <th>Invoice No</th>
         <th>Product Name</th>
+        <th>Grade</th>
+        <th>API</th>
         <th>Size</th>
-        <th>Brand</th>
         <th>Qty</th>
         <th>Rate</th>
         <th>Amount</th>
@@ -39,8 +40,9 @@
                     <a class="btn btn-primary btn-xs" href="/Report/Viewer/ReportViewer.aspx?ReportName=SalesInvoice&invoiceId={{SalesInvoice}}&customerid={{CustomerID}}">{{SalesInvoice}}</a>
                 </td>
                 <td> {{Product.ProductName}}</td>
-                <td> {{SizeName}}</td>
                 <td> {{BrandName}}</td>
+                <td> {{APIName}}</td>
+                <td> {{SizeName}}</td>
                 <td> {{Qty}}</td>
                 <td> {{Rate}}</td>
                 <td> {{Amount}}</td>
@@ -67,7 +69,7 @@
         if (i > 0) {
             var rowId = $(this).find('td').eq(0).text();
             var InvoiceId = $(this).find('td').eq(1).find('input').val();
-            var Notes =  $(this).find('td').eq(8).find('input').val();
+            var Notes =  $(this).find('td').eq(9).find('input').val();
             if (Id==rowId) {
                 row.Id =Id;
                 row.InvoiceId = InvoiceId;

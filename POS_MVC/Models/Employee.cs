@@ -32,6 +32,7 @@ namespace RexERP_MVC.Models
             this.SlipGajiDetails = new HashSet<SlipGajiDetail>();
             this.SPKLs = new HashSet<SPKL>();
             this.THRDetails = new HashSet<THRDetail>();
+            this.SalesMasters = new HashSet<SalesMaster>();
         }
     
         public int Id { get; set; }
@@ -40,6 +41,7 @@ namespace RexERP_MVC.Models
         public string LastName { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
+        public Nullable<int> DesignationId { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
@@ -57,6 +59,7 @@ namespace RexERP_MVC.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdvancePayment> AdvancePayments { get; set; }
+        public virtual Designationtbl Designationtbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeAttendance> EmployeeAttendances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -85,5 +88,7 @@ namespace RexERP_MVC.Models
         public virtual ICollection<SPKL> SPKLs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THRDetail> THRDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesMaster> SalesMasters { get; set; }
     }
 }

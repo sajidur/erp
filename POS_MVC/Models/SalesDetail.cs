@@ -19,6 +19,8 @@ namespace RexERP_MVC.Models
         public string SalesInvoice { get; set; }
         public int ProductId { get; set; }
         public Nullable<int> SizeId { get; set; }
+        public Nullable<int> APIId { get; set; }
+        public string APIName { get; set; }
         public string SizeName { get; set; }
         public Nullable<int> BrandId { get; set; }
         public string BrandName { get; set; }
@@ -34,6 +36,7 @@ namespace RexERP_MVC.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<int> DeliveryStatus { get; set; }
     
+        public virtual API API { get; set; }
         public virtual Brand Brand { get; set; }
         public virtual Product Product { get; set; }
         public virtual SalesMaster SalesMaster { get; set; }

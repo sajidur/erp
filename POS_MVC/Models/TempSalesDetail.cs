@@ -20,6 +20,7 @@ namespace RexERP_MVC.Models
         public int ProductId { get; set; }
         public Nullable<int> SizeId { get; set; }
         public Nullable<int> BrandId { get; set; }
+        public Nullable<int> APIId { get; set; }
         public int Qty { get; set; }
         public int WarehouseId { get; set; }
         public decimal Rate { get; set; }
@@ -31,6 +32,7 @@ namespace RexERP_MVC.Models
         public string UpdatedDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
+        public virtual API API { get; set; }
         public virtual Brand Brand { get; set; }
         public virtual Product Product { get; set; }
         public virtual Size Size { get; set; }

@@ -134,6 +134,13 @@ namespace RexERP_MVC.Controllers
                 {
 
                 }
+                var lastId = db.LastId();
+                if (string.IsNullOrEmpty(customer.Area))
+                {
+                    return Json(new { Id = 2, message = "Area Empty" }, JsonRequestBehavior.AllowGet);
+
+                }
+                customer.Code = customer.District.Substring(0, 2).ToUpper()+"_"+ customer.Area.Substring(0, 2).ToUpper() + "_"+db.LastId();
                 customer.CreatedDate = DateTime.Now;
                 customer.UpdatedDate = DateTime.Now;
                 customer.CreatedBy = CurrentSession.GetCurrentSession().UserName;
@@ -193,7 +200,7 @@ namespace RexERP_MVC.Controllers
                 }
             }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(new { Id = 1, message = "Customer Saved Sucess" }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -212,7 +219,7 @@ namespace RexERP_MVC.Controllers
             }
             customer.Address = model.Address;
             customer.City = model.City;
-            customer.Code = model.Code;
+           // customer.Code = model.Code;
             customer.Name = model.Name;
             customer.Phone = model.Phone;
             customer.ContactPersonName = model.ContactPersonName;

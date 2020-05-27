@@ -15,14 +15,17 @@ namespace RexERP_MVC.ViewModel
         public string Phone { get; set; }
         public string Email { get; set; }
         public string ZipCode { get; set; }
-        public string PhotoBase64
-        {
-            get
-            {
-                return "data:image/jpg;base64," + Convert.ToBase64String(Photo, 0, Photo.Length);
-            }
-        }
-        public byte[] Photo { get; set; }
+        public decimal Salary { get; set; }
+        public string Photo { get; set; }
+        public string CV { get; set; }
+        public System.DateTime DOB { get; set; }
+        public System.DateTime JoiningDate { get; set; }
+        public Nullable<System.DateTime> TerminationDate { get; set; }
+        public string Qualification { get; set; }
+        public string BloodGroup { get; set; }
+        public int SalaryPackage { get; set; }
+        public string EmployeeType { get; set; }
+        public string Gender { get; set; }
         public string Creator { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public string UpdateBy { get; set; }

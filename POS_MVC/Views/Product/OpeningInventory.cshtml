@@ -1,0 +1,324 @@
+﻿
+<div class="row">
+    <label>Opening Balance</label>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="well bs-component">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        Invoice No:
+                                    </label>
+                                    <div class="col-md-2">
+                                        <input type="text" value="001" readonly id="txtPoNo" name="txtPoNo" class="form-control" style="width:200px" />
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <label class="col-md-2 control-label">
+                                        Supplier:
+                                    </label>
+                                    <div class="col-md-3">
+                                        <select class="form-control" id="ddlSupplier" name="ddlSupplier" style="width:200px"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        Notes:
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" style="width:200px" />
+                                    </div>
+                                    <label class="col-md-2 control-label">
+                                        Date:
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input type="date" id="txtDate" name="txtDate" class="form-control" style="width:200px; height:40px " />
+                                    </div>
+                                </div>
+                                <div class="ibox-content" id="divInfo">
+                                    <div class="form-group">
+                                        <div class="col-md-12 table-responsive" id="div-productGroup">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div>
+                        <table id="myTable" class="table order-list">
+                            <thead>
+                            <th>Item</th>
+                            <th>Brand</th>
+                            <th>API</th>
+                            <th>Size</th>
+                            <th>Qty</th>
+                            <th>Rate</th>
+                            <th>Godown</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select id="ddlItem" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="ddlBrand" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </td>
+                                    <td class="col-sm-2">
+                                        <select id="ddlAPI" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="ddlSize" class="form-control">
+                                            <option value="0">Select</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="txtBaleQty" id="txtBaleQty" class="form-control" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="txtRate" id="txtRate" class="form-control" />
+                                    </td>
+                                    <td>
+                                        <select class="form-control" id="ddlWareHouse" name="ddlWareHouse">
+                                            @foreach (var item in Model)
+                                            {
+                                                <option value=@item.Id>@item.WareHouseName</option>
+                                            }
+                                        </select>
+                                    </td>
+                                    <td class="col-sm-1">
+                                        <input type="button" class="btn btn-primary " id="btnAdd" name="btnAdd" value="Add" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="ibox-content">
+                            <div class="form-group">
+                                <h4>Added Product</h4>
+                                <div class="col-md-12 table-responsive" id="div-product-added">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="col-md-12">
+                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SaveOpening()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                            <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="templateProductModalAdded" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="productTableModal">
+        <thead>
+        <th>SL </th>
+        <th>Item</th>
+        <th>Brand</th>
+        <th>API</th>
+        <th>Size</th>
+        <th>Qty</th>
+        <th>Rate</th>
+        <th>Amount</th>
+        <th>Godown</th>
+        </thead>
+        <tbody>
+            {{#ProductSearchAdded}}
+            <tr>
+                <td>{{Count}}</td>
+                <td>{{Item}}</td>
+                <td>{{Brand}}</td>
+                <td>{{APIName}}</td>
+                <td>{{Size}}</td>
+                <td> {{BaleQty}}</td>
+                <td> {{Rate}}</td>
+                <td> {{Amount}}</td>
+                <td> {{WarehouseName}}</td>
+                <td>
+                    <a class="btn btn-danger" onclick="OnDeleteProduct('{{datatableRowCount}}')"><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+            {{/ProductSearchAdded}}
+        </tbody>
+    </table>
+</script>
+<script>
+    function calculateRow(row) {
+        var price = +row.find('input[name^="price"]').val();
+    }
+
+    function calculateGrandTotal() {
+        var grandTotal = 0;
+        $("table.order-list").find('input[name^="price"]').each(function () {
+            grandTotal += +$(this).val();
+        });
+        $("#grandtotal").text(grandTotal.toFixed(2));
+    }
+
+    $(document).ready(function () {
+        LoadInvoiceNo("txtPoNo");
+        LoadAllProduct('ddlItem');
+        LoadAllSize("ddlSize");
+        LoadAllBrand("ddlBrand");
+        LoadAllAPI("ddlAPI");
+        LoadSupplierCombo("ddlSupplier");
+    });
+    var detailsStockIn = [];
+var Count = 0;
+
+$("#btnAdd").click(function () {
+    try {
+        Count++;
+    var item = $("#ddlItem option:selected").text();
+    var ProductId = $("#ddlItem option:selected").val();
+    var WarehouseId = $("#ddlWareHouse option:selected").val();
+        var WarehouseName = $("#ddlWareHouse option:selected").text();
+        var SizeId = $("#ddlSize option:selected").val();
+        var Size = $("#ddlSize option:selected").text();
+        var BrandId = $("#ddlBrand option:selected").val();
+        var Brand = $("#ddlBrand option:selected").text();
+        var apiId = $("#ddlAPI option:selected").val();
+        var apiName = $("#ddlAPI option:selected").text();
+            var rate = $("#txtRate").val();
+    var BaleQty = $("#txtBaleQty").val();
+
+        var object = {
+            StockOutInvoiceNo: $("#ddlStockOutInvoice option:selected").text(),
+        Count: Count,
+        Item: item, ProductId: ProductId, WarehouseId: WarehouseId,
+        WarehouseName: WarehouseName,
+        BaleQty: BaleQty, SizeId: SizeId,
+        Size: Size,
+        BrandId: BrandId,
+            Brand: Brand,
+            APIId: apiId,
+            APIName: apiName,
+            Rate: rate,
+            Amount: rate * BaleQty
+    };
+    detailsStockIn.push(object);
+    var templateWithData = Mustache.to_html($("#templateProductModalAdded").html(), { ProductSearchAdded: detailsStockIn });
+    $("#div-product-added").empty().html(templateWithData);
+
+    } catch (e) {
+        console.log(e);
+
+    }
+});
+
+$("#txtBaleQty").on("propertychange change keyup paste input", function () {
+    // do stuff;
+    Calculation();
+});
+$("#txtBaleWeight").on("propertychange change keyup paste input", function () {
+    // do stuff;
+    Calculation();
+});
+function Calculation() {
+    var BaleQty = $("#txtBaleQty").val();
+    var QtyPerBale = $("#txtBaleWeight").val();
+    if (BaleQty == '') {
+        BaleQty = 0;
+    }
+    if (QtyPerBale == '') {
+        QtyPerBale = 0;
+    }
+    var totalInKG = QtyPerBale * BaleQty;
+    $("#txtWeightInMon").val(totalInKG);
+}
+
+function OnDeleteProduct(Id) {
+    detailsStockIn.splice(Id, 1);
+    datatableRowCount--;
+    var templateWithData = Mustache.to_html($("#templateProductModalAdded").html(), { ProductSearchAdded: detailsStockIn });
+    $("#div-product-added").empty().html(templateWithData);
+}
+
+function LoadInvoiceNo(controlId) {
+    var url = "/ProductionProcessing/GetInvoiceNumberForStockIn";
+    $.ajax({
+        url: url,
+        method: "POST",
+        success: function (res) {
+            var data = res;
+            $("#" + controlId).val("OP"+data);
+        },
+        error: function () {
+        }
+    });
+}
+
+
+function SaveOpening() {
+    GetDataFromDatatable();
+    var url = '/Inventory/OpeningInventory';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: {
+            InvoiceNo: $("#txtPoNo").val(),
+            //SupplierId: $("#ddlSupplier option:selected").val(),
+            Notes: $("#txtDescriptions").val(),
+            stockIns: detailsStockIn
+        },
+        success: function (data) {
+            ShowNotification("1", "Stock In Saved!!");
+          //  $('#StockTableAdd').val("");
+         //   window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=StockInForProcessing&invoiceId=" + $("#txtPoNo").val();
+           setTimeout(location.reload.bind(location), 1000);
+        },
+        error: function (err) {
+            ShowNotification("4", "ERROR!!"+err);
+
+        }
+    });
+
+}
+
+function GetDataFromDatatable() {
+    $('#inventoryGroupTableModal tr').each(function(i) {
+        if (i > 0) {
+            var ProductId = $(this).find('td').eq(0).text();
+            var BaleQty = $(this).find('td').eq(2).find('input').val();
+            var BaleWeight = $(this).find('td').eq(3).find('input').val();
+            var WeightInMon = $(this).find('td').eq(4).find('input').val();
+            var WarehouseId = $(this).find('td').eq(5).find('select').val();
+            var SupplierId = $("#ddlSupplier option:selected").val();
+            //var SupplierId = GetSupplierId(ProductId);
+
+            var object = {
+                ProductId: ProductId,
+                WarehouseId: WarehouseId,
+                BaleQty: BaleQty,
+                BaleWeight: BaleWeight,
+                WeightInMon: WeightInMon,
+                SupplierId: SupplierId,
+                StockOutInvoiceNo: $("#ddlStockOutInvoice option:selected").val(),
+                ProductionDate: $("#txtDate").val()
+            };
+
+            detailsStockIn.push(object);
+
+        }
+    });
+}
+
+</script>
+<script src="~/Scripts/app/CommonLoader.js"></script>
+<script src="~/Scripts/app/Brand.js"></script>
+<script src="~/Scripts/app/Size.js"></script>
+<script src="~/Scripts/app/API.js"></script>
+

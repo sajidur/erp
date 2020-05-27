@@ -1,7 +1,6 @@
-﻿@model WebView.Controllers.SalaryItemController
+﻿@model RexERP_MVC.Controllers.SalaryItemController
 @{
     ViewBag.Title = "Salary Item";
-    Layout = "~/Views/Shared/_Layout.cshtml";
     //string Caption = ".: " + ViewBag.Title + " :.";
     ViewBag.Caption = ".: " + ViewBag.Title + " :.";
 }
@@ -15,35 +14,6 @@
 }
 <div id="ua_panel" class="easyui-panel" style="text-align: left;" data-options="modal:true" 
     title="@ViewBag.Caption">
-<div id="toolbar" class="grid_toolbar">
-       <div style="float: left">
-           <a id="btn_reload" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reload'">Reload Data</a>
-           @*<a id="btn_add_new" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">Add New</a>
-           <a id="btn_edit" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'">Edit Data</a>
-           <a id="btn_del" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">Delete</a>*@
-           @*<a id="btn_find" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">Find</a>*@
-       </div>
-       @*<div id="parent" style="float: right; background: #357eb4; color: #fff; height: 25px; padding: 0 10px; font-size: 12px; vertical-align:middle">
-           <label style="font-size: 14px; font-weight: bold; vertical-align:middle">Department : </label>
-           <select id="parenttype" >
-               <option value="0">--Select Department--</option>
-               @foreach (var item in Model._departmentService.GetObjectsByBranchOfficeId())
-               {
-                   <option value="@item.Id">@item.Name</option>
-               }
-           </select>
-       </div>
-        <div id="branchoffice" style="float: right; background: #357eb4; color: #fff; height: 25px; padding: 0 10px; font-size: 12px; vertical-align:middle">
-           <label style="font-size: 14px; font-weight: bold; vertical-align:middle">Branch Office : </label>
-           <select id="branchofficetype" >
-               @foreach (var item in Model._branchOfficeService.GetAll())
-               {
-                   <option value="@item.Id">@item.Name</option>
-               }
-           </select>
-       </div>*@
-   </div>
-
     <div id="table_div">
         <table id="list"></table>
         <div id="pager" class="scroll" style="text-align: center;"></div>
@@ -91,37 +61,11 @@
                         <tr>
                             <td>
                                 <label>Salary Item Type </label></td>
-                            <td>
-                                <select id="SalaryItemType" name="SalaryItemType">
-                                    @*<option value="0">Salary</option>
-                                    <option value="1">Attendance</option>
-                                    <option value="2">OtherIncome</option>
-                                    <option value="3">OtherExpense</option>
-                                    <option value="4">SalarySlip</option>
-                                    <option value="5">PPH21</option>
-                                    <option value="6">THR</option>
-                                    <option value="7">PTKP</option>*@
-                                    @foreach (int item in Enum.GetValues(typeof(Core.Constants.Constant.SalaryItemType)))
-                                    {
-                                        <option value="@item">@Enum.GetName(typeof(Core.Constants.Constant.SalaryItemType), item)</option>
-                                    }
-                                </select></td>
                         </tr>
                         <tr>
                             <td>
                                 <label>Salary Item Status </label></td>
-                            <td>
-                                <select id="SalaryItemStatus" name="SalaryItemStatus">
-                                    @*<option value="0">Evently</option>
-                                    <option value="1">Daily</option>
-                                    <option value="2">Weekly</option>
-                                    <option value="3">Monthly</option>
-                                    <option value="4">Yearly</option>*@
-                                    @foreach (int item in Enum.GetValues(typeof(Core.Constants.Constant.SalaryItemStatus)))
-                                    {
-                                        <option value="@item">@Enum.GetName(typeof(Core.Constants.Constant.SalaryItemStatus), item)</option>
-                                    }
-                                </select></td>
+     
                         </tr>
                     </table>
                 @*</fieldset>*@

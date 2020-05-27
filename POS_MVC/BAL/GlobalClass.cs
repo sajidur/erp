@@ -103,7 +103,7 @@ namespace RexERP_MVC.BLL
         {
             string maxId = "";
 
-            _selectQuery = "SELECT MAX(CONVERT(numeric,(" + coloumName + "))) +1+(select max(id) from TempSalesMaster) AS " + coloumName + " FROM " + tableName;
+            _selectQuery = "SELECT MAX(CONVERT(numeric,(" + coloumName + "))) +1 as "+coloumName+" FROM " + tableName;
 
             SQLDALService dal = new SQLDALService();
             DataTable dt = dal.Select(_selectQuery).Data;
@@ -118,6 +118,22 @@ namespace RexERP_MVC.BLL
             }
 
             return maxId;
+        }
+        public string GetEmployeeCode(string coloumName, string tableName)
+        {
+            int maxId = 1;
+
+            _selectQuery = "SELECT MAX(CONVERT(numeric,(" + coloumName + "))) +1 as " + coloumName + " FROM " + tableName;
+
+            SQLDALService dal = new SQLDALService();
+            DataTable dt = dal.Select(_selectQuery).Data;
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                maxId = Convert.ToInt32(dt.Rows[0][coloumName]);
+            }
+
+            return DateTime.Now.Year+""+DateTime.Now.Month.ToString("D2")+maxId.ToString("D4");
         }
 
         public string GetInvoiceNo(string coloumName, string tableName)

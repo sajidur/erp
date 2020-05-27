@@ -1,0 +1,139 @@
+﻿<title>
+    :Salary Process
+</title>
+<label>Salary Process</label>
+<div class="col-md-12">
+    <div class="card">
+        <div class="row">
+            <form class="form-horizontal" style="height:75px">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label class="control-label">Select Year</label>
+                            <select class="form-control" id="ddlYear" name="ddlYear" style="height:35px;">
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Select Month</label>
+                            <select class="form-control" id="ddlMonth" name="ddlMonth" style="height:35px;">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">Agust</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Employee</label>
+                            <select class="form-control" id="ddlEmployee" name="ddlEmployee" style="height:35px;">
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">
+                                <input type="checkbox" value="All" />  Select and Process
+                            </label>
+                            <button class="btn btn-primary" id="btnProcess" onclick="SalaryProcess();" type="button">Process</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+        <div class="row">
+            <div class="ibox-content" id="div-info" style="overflow:scroll;">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script id="templateInventoryGroupModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="inventoryGroupTableModal">
+        <thead>
+        <th>Id</th>
+        <th>Employee Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Designation</th>
+        <th>Attendance</th>
+        <th>Leave</th>
+        <th>Absent</th>
+        @*<th>Other Deduction</th>
+        <th>Other Additions</th>*@
+        <th>
+            Action
+        </th>
+        <tbody>
+            {{#InventoryGroupSearch}}
+            <tr>
+                <td>{{Id}}</td>
+                <td> {{Code}}</td>
+                <td>{{FirstName}} {{LastName}}</td>
+                <td>{{DepartmentName}}</td>
+                <td>{{AttendanceCount}}</td>
+                <td>{{LeaveCount}}</td>
+                <td> {{AbsenceCount}}</td>
+                <td width="10px">
+                </td>
+                @*<td width="10px">
+                    <input type="text" id="txtAddition" name="txtAddition" class="form-control"/>
+                </td>
+                <td class="action-sm">
+                    <input type="text" placeholder="" id="txtDiduction" name="txtDiduction" class="form-control" />
+                </td>*@
+                <td>
+                    <input type="checkbox" class="checkbox-inline" value="Process"></>
+                </td>
+            </tr>
+            {{/InventoryGroupSearch}}
+        </tbody>
+    </table>
+</script>
+<script src="~/Scripts/app/CommonLoader.js"></script>
+<script src="~/Scripts/app/Salary.js"></script>
+<script src="~/Scripts/app/Employee.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#txtDate').val(today);
+        LoadEmployeeCombo("ddlEmployee");
+        //  LoadEmployeeAttendence();
+    });
+    function SalaryProcess() {
+        var year = $("#ddlYear option:selected").val();
+
+        var month = $("#ddlMonth option:selected").val();
+        var employeeId = $("#ddlEmployee option:selected").val();
+        $.ajax({
+            url: '/Salary/GetAttendance',
+            method: 'GET',
+            dataType: 'json',
+            data: { "year": year, "month": month, "employeeId": employeeId },
+            async: false,
+            success: function (data) {
+               var templateWithData = Mustache.to_html($("#templateInventoryGroupModal").html(), { InventoryGroupSearch: data });
+                 $("#div-info").empty().html(templateWithData);
+                 MakePagination('inventoryGroupTableModal');
+            },
+            error: function () {
+                ShowNotification("3", "Something Wrong!!");
+            }
+        });
+    }
+
+</script>
+

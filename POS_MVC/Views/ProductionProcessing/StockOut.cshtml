@@ -1,4 +1,6 @@
-﻿
+﻿<style>
+
+</style>
 
 <div class="row">
     <label>Stock out to Production</label>
@@ -73,7 +75,8 @@
                                     <th>Supplier</th>
                                     <th>WarehouseId</th>
                                     <th>BalanceQty</th>
-                                    <th>ProductionQty</th>
+                                    <th style="width:20px;">ProductionQty</th>
+                                    <th style="width:20px;">Rate</th>
                                     <th>Action</th>
                                     </thead>
                                     <tbody>
@@ -87,8 +90,11 @@
                                             <td> {{Supplier.Name}}</td>
                                             <td> {{WareHouse.WareHouseName}}</td>
                                             <td> {{BalanceQty}}</td>
-                                            <td>
-                                                <input type="text" name="txtProductionQty" id="txtProductionQty" class="form-control" />
+                                            <td style="width:20px;">
+                                                <input type="text" name="txtProductionQty" id="txtProductionQty" class="" />
+                                            </td>
+                                            <td  style="width:20px;">
+                                                <input type="text" name="txtRate" readonly id="txtRate" value="{{Costprice}}" class="" />
                                             </td>
                                             <td class="action-sm">
                                                 <a class="btn btn-primary btn-xs" id="btnAdd" onclick="LoadForAdd('{{Id}}')"><i class="fa fa-edit"></i> Add</a>
@@ -123,6 +129,8 @@
         <th>Size</th>
         <th>Godown</th>
         <th>Qty</th>
+        <th>Rate</th>
+        <th>Amount</th>
         <th>Action </th>
         </thead>
         <tbody>
@@ -135,6 +143,9 @@
                 <td>{{SizeName}}</td>
                 <td> {{WareHouse}}</td>
                 <td> {{Qty}}</td>
+                <td> {{Rate}}</td>
+                <td> {{Amount}}</td>
+
                 <td>
                     <a class="btn btn-danger" onclick="OnDeleteStockOut('{{inventoryCountCount}}')"><i class="fa fa-trash-o"></i></a>
                 </td>
@@ -155,6 +166,14 @@
         });
         $("#grandtotal").text(grandTotal.toFixed(2));
     }
+    
+$(document).ready(function () {
+    LoadInvoiceNo("txtPoNo");  
+    LoadInventoryList();
+    var templateWithData = Mustache.to_html($("#templateStockOutModal").html(), { StockTableAdd: detailsStockOut });
+    $("#div-stockOut-add").empty().html(templateWithData);
+});
+
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/StockOut.js"></script>

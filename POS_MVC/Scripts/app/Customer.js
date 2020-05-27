@@ -32,11 +32,11 @@ function LoadCustomerList(controlId) {
             $("#" + controlId).empty();
             $("#" + controlId).get(0).options.length = 0;
             if (true) {
-                $("#" + controlId).get(0).options[0] = new Option("-পছন্দ করুন-", "-1");
+                $("#" + controlId).get(0).options[0] = new Option("-Select-", "-1");
             }
             if (data != null) {
                 $.each(data, function (index, item) {
-                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.ProductName, item.Id);
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Name, item.Id);
                 });
             }
             $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!" });
@@ -79,8 +79,14 @@ function FormDataAsObject() {
 	object.Phone = $('#txtPhone').val();
 	object.Email = $('#txtEmail').val();
 	object.Limit = $('#txtLimit').val();
-	object.Description = $('#txtDescription').val();
-	
+    object.Description = $('#txtDescription').val();
+    //
+    object.Dealer = $('#ddlDealer option:selected').val();
+    object.District = $('#ddlDistrict option:selected').val();
+
+    object.TradeLicense = $('#txtTradeLicense').val();
+    object.VATNo = $('#txtVATNo').val();
+    object.Area = $('#txtArea').val();	
 	return object;
 }
 
@@ -102,31 +108,40 @@ function Save() {
         alert('Please give customer name.');
         return false;
     }
-	var formObject = FormDataAsObject();
+    var formObject = FormDataAsObject();
+    if (formObject.Area === "") {
+        alert('Please give Area name.');
+        return false;
+    }
 	$.ajax({
 		url: '/Customer/Create',
 		method: 'post',
 		dataType: 'json',
 		async: false,
-		data: {
-		    Name: formObject.Name,
-            Code:formObject.Code,
-			ContactPersonName: formObject.ContactPersonName,
-			Address: formObject.Address,
-			Phone: formObject.Phone,
-			Email: formObject.Email,
-			Description: formObject.Description,
-			OpeningBalance: $('#txtOpeningBalance').val(),
-			CrOrDr: $('#ddlNature').val(),
-            Limit:formObject.Limit,
-			create: 1
-		},
-		success: function (data) {
-		    ShowNotification("1", "Customer Saved!!");
-		    ResetForm();
-		    LoadListData();
-		    LoadCustomerList();
-		},
+        data: {
+            Name: formObject.Name,
+            Code: formObject.Code,
+            ContactPersonName: formObject.ContactPersonName,
+            Address: formObject.Address,
+            Dealer: formObject.Dealer,
+            District: formObject.District,
+            TradeLicense: formObject.TradeLicense,
+            VATNo: formObject.VATNo,
+            Phone: formObject.Phone,
+            Area: formObject.Area,
+            Email: formObject.Email,
+            Description: formObject.Description,
+            OpeningBalance: $('#txtOpeningBalance').val(),
+            CrOrDr: $('#ddlNature').val(),
+            Limit: formObject.Limit,
+            create: 1
+        },
+        success: function (data) {
+            ShowNotification(data.Id, data.message);
+            ResetForm();
+            LoadListData();
+            LoadCustomerList();
+        },
 		error: function () {
 
 		}

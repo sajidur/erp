@@ -389,6 +389,11 @@
     <Property Name="ContactPersonPhone" Type="nvarchar(max)" />
     <Property Name="City" Type="nvarchar(max)" />
     <Property Name="Phone" Type="nvarchar(max)" />
+    <Property Name="Dealer" Type="int" />
+    <Property Name="District" Type="nvarchar" MaxLength="500" />
+    <Property Name="TradeLicense" Type="nvarchar" MaxLength="500" />
+    <Property Name="VATNo" Type="nvarchar" MaxLength="500" />
+    <Property Name="Area" Type="nvarchar" MaxLength="500" />
     <Property Name="Email" Type="nvarchar(max)" />
     <Property Name="Web" Type="nvarchar(max)" />
     <Property Name="Limit" Type="decimal" Precision="18" Scale="2" />
@@ -408,11 +413,11 @@
     <Property Name="Code" Type="nvarchar(max)" />
     <Property Name="Name" Type="nvarchar(max)" />
     <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="BranchOfficeId" Type="int" Nullable="false" />
-    <Property Name="IsDeleted" Type="bit" Nullable="false" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-    <Property Name="UpdatedAt" Type="datetime" />
-    <Property Name="DeletedAt" Type="datetime" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedBy" Type="int" />
   </EntityType>
   <EntityType Name="DeptUsedSchs">
     <Key>
@@ -470,18 +475,28 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LastName" Type="nvarchar(max)" />
     <Property Name="FatherName" Type="nvarchar(max)" />
     <Property Name="MotherName" Type="nvarchar(max)" />
-    <Property Name="DesignationId" Type="int" />
+    <Property Name="DesignationId" Type="int" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" />
     <Property Name="City" Type="nvarchar(max)" />
     <Property Name="Phone" Type="nvarchar(max)" />
     <Property Name="Email" Type="nvarchar(max)" />
     <Property Name="ZipCode" Type="nvarchar(max)" />
-    <Property Name="Salary" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Photo" Type="image" />
+    <Property Name="Salary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CV" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="JoiningDate" Type="date" Nullable="false" />
+    <Property Name="TerminationDate" Type="date" />
+    <Property Name="Qualification" Type="nvarchar" MaxLength="500" />
+    <Property Name="BloodGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalaryPackage" Type="int" Nullable="false" />
+    <Property Name="EmployeeType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Creator" Type="nvarchar(max)" />
     <Property Name="CreationDate" Type="datetime" />
     <Property Name="UpdateBy" Type="nvarchar(max)" />
@@ -599,13 +614,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
     <Property Name="UpdatedAt" Type="datetime" />
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="EXCNOTES">
-          <Property Name="USERID" Type="int" />
-          <Property Name="ATTDATE" Type="datetime" />
-          <Property Name="NOTES" Type="varchar" MaxLength="200" />
-        </EntityType>-->
   <EntityType Name="FaceTemp">
     <Key>
       <PropertyRef Name="TEMPLATEID" />
@@ -798,6 +806,8 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primar
     <Property Name="BalanceQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
     <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Costprice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionPrice" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
@@ -825,6 +835,8 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primar
     <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
     <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
     <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CostPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionPrice" Type="decimal" Precision="18" Scale="2" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="nvarchar" MaxLength="250" />
@@ -1009,12 +1021,6 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primar
     <Property Name="SCHCLASSID" Type="int" />
     <Property Name="OverTime" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Ones">
-          <Property Name="Id" Type="int" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
   <EntityType Name="OtherExpense">
     <Key>
       <PropertyRef Name="Id" />
@@ -1126,6 +1132,64 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary ke
     <Property Name="ChecqueDate" Type="date" />
     <Property Name="Bank" Type="nvarchar" MaxLength="50" />
     <Property Name="Notes" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PayHead">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="IsMainSalary" Type="bit" Nullable="false" />
+    <Property Name="IsDetailSalary" Type="bit" Nullable="false" />
+    <Property Name="SalaryItemType" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PaymentDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentMasterId" Type="int" />
+    <Property Name="LedgerId" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ExchangeRate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ChequeNo" Type="varchar(max)" />
+    <Property Name="ChequeDate" Type="datetime" />
+    <Property Name="ExtraDate" Type="datetime" />
+    <Property Name="Extra1" Type="varchar(max)" />
+    <Property Name="Extra2" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="IsApproved" Type="bit" />
+    <Property Name="ApprovedNotes" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApprovedBy" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PaymentMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VoucherNo" Type="varchar(max)" />
+    <Property Name="InvoiceNo" Type="varchar(max)" />
+    <Property Name="SuffixPrefixId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="LedgerDate" Type="datetime" />
+    <Property Name="LedgerId" Type="int" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="5" />
+    <Property Name="Narration" Type="varchar(max)" />
+    <Property Name="VoucherTypeId" Type="int" />
+    <Property Name="FinancialYearId" Type="int" />
+    <Property Name="ExtraDate" Type="datetime" />
+    <Property Name="Extra1" Type="varchar(max)" />
+    <Property Name="Extra2" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsApproved" Type="bit" />
+    <Property Name="ApprovedNotes" Type="nvarchar" MaxLength="500" />
+    <Property Name="ApprovedBy" Type="datetime" />
   </EntityType>
   <EntityType Name="PensionCompensation">
     <Key>
@@ -1328,26 +1392,30 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary ke
     <Property Name="UpdatedAt" Type="datetime" />
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
-  <EntityType Name="SalaryItem">
+  <EntityType Name="SalaryPackage">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Code" Type="nvarchar(max)" />
-    <Property Name="Name" Type="nvarchar(max)" />
-    <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="IsLegacy" Type="bit" Nullable="false" />
-    <Property Name="IsMainSalary" Type="bit" Nullable="false" />
-    <Property Name="IsDetailSalary" Type="bit" Nullable="false" />
-    <Property Name="DefaultValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="CurrentValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="SalaryItemType" Type="int" Nullable="false" />
-    <Property Name="SalarySign" Type="int" Nullable="false" />
-    <Property Name="SalaryItemStatus" Type="int" Nullable="false" />
-    <Property Name="IsDeleted" Type="bit" Nullable="false" />
-    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-    <Property Name="UpdatedAt" Type="datetime" />
-    <Property Name="DeletedAt" Type="datetime" />
+    <Property Name="SalaryPackageName" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SalaryPackageDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalaryPackageId" Type="int" Nullable="false" />
+    <Property Name="PayHeadId" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Narration" Type="varchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
   </EntityType>
   <EntityType Name="SalaryPayment">
     <Key>
@@ -1366,6 +1434,25 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary ke
     <Property Name="LoanDeduction" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Narration" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="SalaryProcess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="500" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Attendance" Type="int" />
+    <Property Name="Leave" Type="int" />
+    <Property Name="Absent" Type="int" />
+    <Property Name="Addition" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Deduction" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="bit" />
+    <Property Name="SalaryYear" Type="datetime" />
+    <Property Name="Month" Type="datetime" />
+    <Property Name="ProcessDate" Type="datetime" />
   </EntityType>
   <EntityType Name="SalarySlip">
     <Key>
@@ -1546,9 +1633,12 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary ke
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SalesId" Type="nvarchar" MaxLength="50" />
-    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="SalesInvoice" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesDetailsId" Type="int" Nullable="false" />
     <Property Name="ItemId" Type="int" Nullable="false" />
+    <Property Name="SizeId" Type="int" />
+    <Property Name="BrandId" Type="int" />
+    <Property Name="APIId" Type="int" />
     <Property Name="Qty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Date" Type="datetime" />
@@ -1804,15 +1894,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a prima
     <Property Name="Disetujui_oleh" Type="nvarchar(max)" />
     <Property Name="Dikoreksi_oleh" Type="nvarchar(max)" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="SMSHistory">
-          <Property Name="CustomerId" Type="int" />
-          <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="SMSText" Type="nvarchar" MaxLength="500" />
-          <Property Name="CreatedDate" Type="date" />
-          <Property Name="CustomerType" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
   <EntityType Name="SPKL">
     <Key>
       <PropertyRef Name="Id" />
@@ -1841,11 +1922,13 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a prim
     <Property Name="SupplierId" Type="int" />
     <Property Name="ProductionDate" Type="date" />
     <Property Name="BaleQty" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
     <Property Name="BrandId" Type="int" />
     <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
     <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
     <Property Name="APIId" Type="int" />
     <Property Name="APIName" Type="nvarchar" MaxLength="500" />
+    <Property Name="StockInPrice" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="CreatedBy" Type="char" MaxLength="24" />
     <Property Name="CreatedDate" Type="datetime" />
@@ -1865,6 +1948,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a prim
     <Property Name="SupplierId" Type="int" />
     <Property Name="ProductionDate" Type="date" />
     <Property Name="BaleQty" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
     <Property Name="WeightInMon" Type="decimal" Precision="18" Scale="2" />
     <Property Name="APIId" Type="int" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
@@ -1879,6 +1963,7 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a prim
     <Property Name="BrandId" Type="int" />
     <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
     <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+    <Property Name="StockOutPrice" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -1938,12 +2023,6 @@ warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a prim
     <Property Name="UpdateDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DB_9B34E1_erp.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="TBKEY">
-          <Property Name="PreName" Type="varchar" MaxLength="12" />
-          <Property Name="ONEKEY" Type="int" />
-        </EntityType>-->
   <EntityType Name="TBSMSALLOT">
     <Key>
       <PropertyRef Name="REFERENCE" />
@@ -2541,18 +2620,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_Department_dbo_BranchOffice_BranchOfficeId">
-    <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="1" />
-    <End Role="Department" Type="Self.Department" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BranchOffice">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Department">
-        <PropertyRef Name="BranchOfficeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_Division_dbo_Department_DepartmentId">
     <End Role="Department" Type="Self.Department" Multiplicity="1" />
     <End Role="Division" Type="Self.Division" Multiplicity="*" />
@@ -2614,10 +2681,10 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
+    <End Role="PayHead" Type="Self.PayHead" Multiplicity="1" />
     <End Role="EmployeeLoan" Type="Self.EmployeeLoan" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SalaryItem">
+      <Principal Role="PayHead">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="EmployeeLoan">
@@ -2660,30 +2727,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Principal>
       <Dependent Role="EmployeeWorkingTime">
         <PropertyRef Name="WorkingTimeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
-    <End Role="Formula" Type="Self.Formula" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Formula">
-        <PropertyRef Name="FirstSalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="Formula" Type="Self.Formula" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Formula">
-        <PropertyRef Name="SecondSalaryItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2737,54 +2780,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_FPUser_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="FPUser" Type="Self.FPUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="FPUser">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_LastEmployment_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="LastEmployment" Type="Self.LastEmployment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="LastEmployment">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="OtherExpense" Type="Self.OtherExpense" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherExpense">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="OtherExpenseDetail" Type="Self.OtherExpenseDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherExpenseDetail">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId">
     <End Role="OtherExpense" Type="Self.OtherExpense" Multiplicity="1" />
     <End Role="OtherExpenseDetail" Type="Self.OtherExpenseDetail" Multiplicity="*" />
@@ -2794,30 +2789,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Principal>
       <Dependent Role="OtherExpenseDetail">
         <PropertyRef Name="OtherExpenseId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="OtherIncome" Type="Self.OtherIncome" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherIncome">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="OtherIncomeDetail" Type="Self.OtherIncomeDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherIncomeDetail">
-        <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2869,30 +2840,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
-    <End Role="SalaryEmployeeDetail" Type="Self.SalaryEmployeeDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryEmployeeDetail">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="SalarySlip" Type="Self.SalarySlip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalarySlip">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_SalarySlipDetail_dbo_Formula_FormulaId">
     <End Role="Formula" Type="Self.Formula" Multiplicity="1" />
     <End Role="SalarySlipDetail" Type="Self.SalarySlipDetail" Multiplicity="*" />
@@ -2929,18 +2876,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
-    <End Role="SalaryStandardDetail" Type="Self.SalaryStandardDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryStandardDetail">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_SalaryStandardDetail_dbo_SalaryStandard_SalaryStandardId">
     <End Role="SalaryStandard" Type="Self.SalaryStandard" Multiplicity="1" />
     <End Role="SalaryStandardDetail" Type="Self.SalaryStandardDetail" Multiplicity="*" />
@@ -2950,18 +2885,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Principal>
       <Dependent Role="SalaryStandardDetail">
         <PropertyRef Name="SalaryStandardId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="SlipGajiDetail" Type="Self.SlipGajiDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SlipGajiDetail">
-        <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3005,42 +2928,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_SPKL_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="SPKL" Type="Self.SPKL" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SPKL">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_THR_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="THR" Type="Self.THR" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="THR">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_THRDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="THRDetail" Type="Self.THRDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="THRDetail">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_THRDetail_dbo_THR_THRId">
     <End Role="THR" Type="Self.THR" Multiplicity="1" />
     <End Role="THRDetail" Type="Self.THRDetail" Multiplicity="*" />
@@ -3065,8 +2952,20 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Employee_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Employee_Designationtbl">
-    <End Role="Designationtbl" Type="Self.Designationtbl" Multiplicity="0..1" />
+    <End Role="Designationtbl" Type="Self.Designationtbl" Multiplicity="1" />
     <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Designationtbl">
@@ -3353,6 +3252,30 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PaymentDetails_AccountLedger">
+    <End Role="AccountLedger" Type="Self.AccountLedger" Multiplicity="0..1" />
+    <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountLedger">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaymentDetails">
+        <PropertyRef Name="LedgerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentDetails_PaymentMaster">
+    <End Role="PaymentMaster" Type="Self.PaymentMaster" Multiplicity="0..1" />
+    <End Role="PaymentDetails" Type="Self.PaymentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaymentDetails">
+        <PropertyRef Name="PaymentMasterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Product_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
@@ -3458,6 +3381,30 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Principal>
       <Dependent Role="RoleWiseScreenPermission">
         <PropertyRef Name="ScreenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryPackageDetails_SalaryPackage">
+    <End Role="SalaryPackage" Type="Self.SalaryPackage" Multiplicity="1" />
+    <End Role="SalaryPackageDetails" Type="Self.SalaryPackageDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryPackageDetails">
+        <PropertyRef Name="SalaryPackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryPackageDetails_SalaryPackageDetails">
+    <End Role="SalaryPackageDetails" Type="Self.SalaryPackageDetails" Multiplicity="1" />
+    <End Role="SalaryPackageDetails1" Type="Self.SalaryPackageDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryPackageDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryPackageDetails1">
+        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3637,6 +3584,54 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SalesOrder">
+        <PropertyRef Name="SizeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesReturn_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
+        <PropertyRef Name="APIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesReturn_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesReturn_SalesDetails">
+    <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
+        <PropertyRef Name="SalesDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesReturn_Size">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
         <PropertyRef Name="SizeId" />
       </Dependent>
     </ReferentialConstraint>
@@ -3977,9 +3972,16 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <Parameter Name="IsSupplier" Type="int" Mode="In" />
     <Parameter Name="invoiceId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="rptPaymentInitateVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="rptPurchaseChallan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="rptSalesInvoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="SalesInvoice" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="rptUnApprovedPaymentList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -4006,6 +4008,11 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
   </Function>
   <Function Name="SP_JournalVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_ProcessAttendance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employeeId" Type="int" Mode="In" />
+    <Parameter Name="year" Type="int" Mode="In" />
+    <Parameter Name="month" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -4089,6 +4096,9 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <EntitySet Name="OtherIncomeDetail" EntityType="Self.OtherIncomeDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartyBalance" EntityType="Self.PartyBalance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PartyPaymentHistory" EntityType="Self.PartyPaymentHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayHead" EntityType="Self.PayHead" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentMaster" EntityType="Self.PaymentMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PensionCompensation" EntityType="Self.PensionCompensation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PPH21SPT" EntityType="Self.PPH21SPT" Schema="dbo" store:Type="Tables" />
@@ -4101,8 +4111,10 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <EntitySet Name="RoleWiseScreenPermission" EntityType="Self.RoleWiseScreenPermission" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalaryEmployee" EntityType="Self.SalaryEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalaryEmployeeDetail" EntityType="Self.SalaryEmployeeDetail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SalaryItem" EntityType="Self.SalaryItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryPackage" EntityType="Self.SalaryPackage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryPackageDetails" EntityType="Self.SalaryPackageDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalaryPayment" EntityType="Self.SalaryPayment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryProcess" EntityType="Self.SalaryProcess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalarySlip" EntityType="Self.SalarySlip" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalarySlipDetail" EntityType="Self.SalarySlipDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalaryStandard" EntityType="Self.SalaryStandard" Schema="dbo" store:Type="Tables" />
@@ -4256,10 +4268,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       <End Role="CompanyInfo" EntitySet="CompanyInfo" />
       <End Role="BranchOffice" EntitySet="BranchOffice" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_Department_dbo_BranchOffice_BranchOfficeId" Association="Self.FK_dbo_Department_dbo_BranchOffice_BranchOfficeId">
-      <End Role="BranchOffice" EntitySet="BranchOffice" />
-      <End Role="Department" EntitySet="Department" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_Division_dbo_Department_DepartmentId" Association="Self.FK_dbo_Division_dbo_Department_DepartmentId">
       <End Role="Department" EntitySet="Department" />
       <End Role="Division" EntitySet="Division" />
@@ -4281,7 +4289,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       <End Role="EmployeeLoan" EntitySet="EmployeeLoan" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
+      <End Role="PayHead" EntitySet="PayHead" />
       <End Role="EmployeeLoan" EntitySet="EmployeeLoan" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId" Association="Self.FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId">
@@ -4295,14 +4303,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <AssociationSet Name="FK_dbo_EmployeeWorkingTime_dbo_WorkingTime_WorkingTimeId" Association="Self.FK_dbo_EmployeeWorkingTime_dbo_WorkingTime_WorkingTimeId">
       <End Role="WorkingTime" EntitySet="WorkingTime" />
       <End Role="EmployeeWorkingTime" EntitySet="EmployeeWorkingTime" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId" Association="Self.FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="Formula" EntitySet="Formula" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId" Association="Self.FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="Formula" EntitySet="Formula" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId" Association="Self.FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId">
       <End Role="SalarySlipDetail" EntitySet="SalarySlipDetail" />
@@ -4320,33 +4320,9 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       <End Role="FPUser" EntitySet="FPUser" />
       <End Role="FPTemplate" EntitySet="FPTemplate" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_FPUser_dbo_Employee_EmployeeId" Association="Self.FK_dbo_FPUser_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="FPUser" EntitySet="FPUser" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_LastEmployment_dbo_Employee_EmployeeId" Association="Self.FK_dbo_LastEmployment_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="LastEmployment" EntitySet="LastEmployment" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="OtherExpense" EntitySet="OtherExpense" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="OtherExpenseDetail" EntitySet="OtherExpenseDetail" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId" Association="Self.FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId">
       <End Role="OtherExpense" EntitySet="OtherExpense" />
       <End Role="OtherExpenseDetail" EntitySet="OtherExpenseDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="OtherIncome" EntitySet="OtherIncome" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="OtherIncomeDetail" EntitySet="OtherIncomeDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId" Association="Self.FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId">
       <End Role="OtherIncome" EntitySet="OtherIncome" />
@@ -4364,14 +4340,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       <End Role="SalaryEmployee" EntitySet="SalaryEmployee" />
       <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="SalarySlip" EntitySet="SalarySlip" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_SalarySlipDetail_dbo_Formula_FormulaId" Association="Self.FK_dbo_SalarySlipDetail_dbo_Formula_FormulaId">
       <End Role="Formula" EntitySet="Formula" />
       <End Role="SalarySlipDetail" EntitySet="SalarySlipDetail" />
@@ -4384,17 +4352,9 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       <End Role="TitleInfo" EntitySet="TitleInfo" />
       <End Role="SalaryStandard" EntitySet="SalaryStandard" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="SalaryStandardDetail" EntitySet="SalaryStandardDetail" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_SalaryStandardDetail_dbo_SalaryStandard_SalaryStandardId" Association="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryStandard_SalaryStandardId">
       <End Role="SalaryStandard" EntitySet="SalaryStandard" />
       <End Role="SalaryStandardDetail" EntitySet="SalaryStandardDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="SlipGajiDetail" EntitySet="SlipGajiDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_SlipGajiDetail1_dbo_SlipGajiDetail_SlipGajiDetailId" Association="Self.FK_dbo_SlipGajiDetail1_dbo_SlipGajiDetail_SlipGajiDetailId">
       <End Role="SlipGajiDetail" EntitySet="SlipGajiDetail" />
@@ -4408,18 +4368,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       <End Role="SlipGajiDetail" EntitySet="SlipGajiDetail" />
       <End Role="SlipGajiDetail2A" EntitySet="SlipGajiDetail2A" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_SPKL_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SPKL_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="SPKL" EntitySet="SPKL" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_THR_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_THR_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItem" />
-      <End Role="THR" EntitySet="THR" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_THRDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_THRDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="THRDetail" EntitySet="THRDetail" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_THRDetail_dbo_THR_THRId" Association="Self.FK_dbo_THRDetail_dbo_THR_THRId">
       <End Role="THR" EntitySet="THR" />
       <End Role="THRDetail" EntitySet="THRDetail" />
@@ -4427,6 +4375,10 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <AssociationSet Name="FK_dbo_WorkingDay_dbo_WorkingTime_WorkingTimeId" Association="Self.FK_dbo_WorkingDay_dbo_WorkingTime_WorkingTimeId">
       <End Role="WorkingTime" EntitySet="WorkingTime" />
       <End Role="WorkingDay" EntitySet="WorkingDay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
     </AssociationSet>
     <AssociationSet Name="FK_Employee_Designationtbl" Association="Self.FK_Employee_Designationtbl">
       <End Role="Designationtbl" EntitySet="Designationtbl" />
@@ -4524,6 +4476,14 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       <End Role="VoucherType" EntitySet="VoucherType" />
       <End Role="PartyBalance" EntitySet="PartyBalance" />
     </AssociationSet>
+    <AssociationSet Name="FK_PaymentDetails_AccountLedger" Association="Self.FK_PaymentDetails_AccountLedger">
+      <End Role="AccountLedger" EntitySet="AccountLedger" />
+      <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentDetails_PaymentMaster" Association="Self.FK_PaymentDetails_PaymentMaster">
+      <End Role="PaymentMaster" EntitySet="PaymentMaster" />
+      <End Role="PaymentDetails" EntitySet="PaymentDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
@@ -4559,6 +4519,14 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <AssociationSet Name="FK_RoleWiseScreenPermission_Screens" Association="Self.FK_RoleWiseScreenPermission_Screens">
       <End Role="Screens" EntitySet="Screens" />
       <End Role="RoleWiseScreenPermission" EntitySet="RoleWiseScreenPermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackage" Association="Self.FK_SalaryPackageDetails_SalaryPackage">
+      <End Role="SalaryPackage" EntitySet="SalaryPackage" />
+      <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackageDetails" Association="Self.FK_SalaryPackageDetails_SalaryPackageDetails">
+      <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
+      <End Role="SalaryPackageDetails1" EntitySet="SalaryPackageDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_SalesDelivery_Customer" Association="Self.FK_SalesDelivery_Customer">
       <End Role="Customer" EntitySet="Customer" />
@@ -4619,6 +4587,22 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <AssociationSet Name="FK_SalesOrder_Size" Association="Self.FK_SalesOrder_Size">
       <End Role="Size" EntitySet="Size" />
       <End Role="SalesOrder" EntitySet="SalesOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_API" Association="Self.FK_SalesReturn_API">
+      <End Role="API" EntitySet="API" />
+      <End Role="SalesReturn" EntitySet="SalesReturn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_Brand" Association="Self.FK_SalesReturn_Brand">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="SalesReturn" EntitySet="SalesReturn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_SalesDetails" Association="Self.FK_SalesReturn_SalesDetails">
+      <End Role="SalesDetails" EntitySet="SalesDetails" />
+      <End Role="SalesReturn" EntitySet="SalesReturn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_Size" Association="Self.FK_SalesReturn_Size">
+      <End Role="Size" EntitySet="Size" />
+      <End Role="SalesReturn" EntitySet="SalesReturn" />
     </AssociationSet>
     <AssociationSet Name="FK_StockIn_API" Association="Self.FK_StockIn_API">
       <End Role="API" EntitySet="API" />

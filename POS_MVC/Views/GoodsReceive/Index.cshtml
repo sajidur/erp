@@ -282,7 +282,8 @@
         LoadInvoiceNo("txtPoNo");
         LoadAllProduct('ddlItem');
         LoadAllWareHouse("ddlWareHouse");
-        LoadSupplier("ddlSupplier");
+      //  LoadSupplier("ddlSupplier");
+        LoadSupplierCombo("ddlSupplier");
         LoadAllAPI("ddlAPI");
         var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
         $("#div-product-add").empty().html(templateWithData);
@@ -293,28 +294,6 @@
         Calculation();
         CalculationExpense();
         $(function (){
-        $('#btnBrandAdd').click(function() {
-            var url = '/Brand/Add';
-            var dialog = $('<div style="display:none"></div>').appendTo('body');
-            dialog.load(url, {}, 
-                function (responseText, textStatus, XMLHttpRequest) {
-                    dialog.dialog({
-                    maxWidth:600,
-                    maxHeight: 500,
-                    width: 600,
-                    height: 500,
-                    modal: true,
-                    title:"Add Brand",
-                        close: function (event, ui) {
-                         LoadAllBrand("ddlBrand");
-                        dialog.remove();
-                    }
-                });
-            });
-            return false;
-        });
-        });
-                $(function (){
         $('#btnSizeAdd').click(function() {
             var url = '/SizeSetup/Add';
             var dialog = $('<div style="display:none"></div>').appendTo('body');

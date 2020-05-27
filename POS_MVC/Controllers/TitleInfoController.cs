@@ -10,7 +10,7 @@ using System.Data.Entity;
 using RexERP_MVC.BAL;
 using RexERP_MVC.Models;
 
-namespace WebView.Controllers
+namespace RexERP_MVC.Controllers
 {
 
     public class TitleInfoController : Controller

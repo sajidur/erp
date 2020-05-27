@@ -15,12 +15,20 @@ namespace RexERP_MVC.Models
     public partial class SalesReturn
     {
         public int Id { get; set; }
-        public string SalesId { get; set; }
-        public int BranchId { get; set; }
+        public string SalesInvoice { get; set; }
+        public int SalesDetailsId { get; set; }
         public int ItemId { get; set; }
+        public Nullable<int> SizeId { get; set; }
+        public Nullable<int> BrandId { get; set; }
+        public Nullable<int> APIId { get; set; }
         public decimal Qty { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public string Notes { get; set; }
+    
+        public virtual API API { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual SalesDetail SalesDetail { get; set; }
+        public virtual Size Size { get; set; }
     }
 }

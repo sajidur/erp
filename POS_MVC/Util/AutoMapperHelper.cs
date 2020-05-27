@@ -10,7 +10,6 @@ namespace RexERP_MVC.Util
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<User, UserInfoResponse>().ReverseMap();
                 cfg.CreateMap<Category, CategoryResponse>().ReverseMap();
                 cfg.CreateMap<Product, ProductResponse>().ReverseMap();
                 cfg.CreateMap<UserRole, UserRoleResponse>().ReverseMap();
@@ -45,6 +44,11 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<Department, DEPARTMENTResponse>().ReverseMap();
                 cfg.CreateMap<Designationtbl, DesignationtblResponse>().ReverseMap();
                 cfg.CreateMap<API, APIResponse>().ReverseMap();
+                cfg.CreateMap<PaymentMaster, PaymentMasterResponse>().ReverseMap();
+                cfg.CreateMap<PaymentDetail, PaymentDetailResponse>().ReverseMap();
+                cfg.CreateMap<RoleWiseScreenPermission, RoleWiseScreenPermissionResponse>().ForMember(a=>a.Role,opt=>opt.Ignore()).ReverseMap();
+                cfg.CreateMap<PayHead, SalaryItemNewViewModel>().ReverseMap();
+
 
             });
         }

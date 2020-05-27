@@ -27,6 +27,10 @@ namespace Data.Repository
         {
             return FindAll(x => !x.IsDeleted).ToList();
         }
+        public IList<EmployeeLeave> GetAll(List<int> employeeIds)
+        {
+            return FindAll(x => !x.IsDeleted && employeeIds.Contains(x.EmployeeId)).ToList();
+        }
 
         public EmployeeLeave GetObjectById(int Id)
         {

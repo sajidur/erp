@@ -1,4 +1,5 @@
 ﻿using RexERP_MVC.Models;
+using RexERP_MVC.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +9,9 @@ namespace RexERP_MVC.BAL
     {
 
         DBService<LedgerPosting> service = new DBService<LedgerPosting>();
-        
+        DBService<PaymentMaster> _paymentMaster = new DBService<PaymentMaster>();
+        DBService<PaymentDetail> _paymentDetails = new DBService<PaymentDetail>();
+
         public List<LedgerPosting> GetAll()
         {
             return service.GetAll().ToList();
@@ -33,13 +36,50 @@ namespace RexERP_MVC.BAL
         //    return cus;
 
         //}
+        public PaymentMaster SavePayment(PaymentMaster paymentMaster)
+        {
+            try
+            {
+                return _paymentMaster.Save(paymentMaster);
+
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public List<PaymentMaster> GetAllPendingPayment()
+        {
+            return _paymentMaster.GetAll(a=>a.IsApproved==false).ToList();
+        }
+        public List<PaymentMaster> GetAllPayment()
+        {
+            return _paymentMaster.GetAll(a => a.IsApproved == true).ToList();
+        }
+        public PaymentMaster GetPaymentById(int Id)
+        {
+            return _paymentMaster.GetAll(a => a.Id == Id).FirstOrDefault();
+        }
         public LedgerPosting Update(LedgerPosting t, int id)
         {
             return service.Update(t, id);
         }
-        public int Delete(int id)
+        public PaymentMaster Update(PaymentMaster t, int id)
         {
-            return service.Delete(id);
+            return _paymentMaster.Update(t, id);
+        }
+        public PaymentDetail Update(PaymentDetail t, int id)
+        {
+            return _paymentDetails.Update(t, id);
+        }
+        public int DeletePayment(PaymentMasterResponse payment)
+        {
+            //foreach (var item in payment.PaymentDetails)
+            //{
+            //   _= _paymentDetails.Delete(item.Id);
+            //}
+            return _paymentMaster.Delete(payment.Id);
         }
     }
 }

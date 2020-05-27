@@ -24,9 +24,9 @@ namespace RexERP_MVC.Report.Viewer
                     {
                         //LoadRevenueReport();
                     }
-                    if (reportType == "EXECLIPARTReport")
+                    if (reportType == "PurchaseInvoice")
                     {
-                        // LoadEXECLIPARTReport();
+                        PurchaseInvoice();
                     }
                     if (reportType == "SalesInvoice")
                     {
@@ -73,6 +73,14 @@ namespace RexERP_MVC.Report.Viewer
                     {
                         PaymentVoucher();
                     }
+                    if (reportType == "PaymentInitVoucher")
+                    {
+                        PaymentInitVoucher();
+                    }
+                    if (reportType == "UnApprovedPaymentVoucherList")
+                    {
+                        UnApprovedPaymentVoucherList();
+                    }
                     if (reportType == "JournalVoucher")
                     {
                         JournalVoucher();
@@ -83,6 +91,34 @@ namespace RexERP_MVC.Report.Viewer
                     lblMsg.Text = ex.Message;
                 }
             }
+        }
+
+        private void UnApprovedPaymentVoucherList()
+        {
+            string invoiceId = Request.QueryString["invoiceId"].ToString();
+            string query = @"exec rptUnApprovedPaymentList";
+            oResult = oDAL.Select(query);
+            DataTable dt = null;
+            dt = oResult.Data as DataTable;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/UnApprovedPaymentList.rdlc");
+            ReportDataSource datasource = new ReportDataSource("dsrptUnApprovedPaymentList", dt);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
+        }
+
+        private void PaymentInitVoucher()
+        {
+            string invoiceId = Request.QueryString["invoiceId"].ToString();
+            string query = @"exec rptPaymentInitateVoucher '" + invoiceId + "'";
+            oResult = oDAL.Select(query);
+            DataTable dt = null;
+            dt = oResult.Data as DataTable;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptPaymentInitiateVoucher.rdlc");
+            ReportDataSource datasource = new ReportDataSource("dsPaymentInitiateVoucher", dt);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
         }
 
         private void JournalVoucher()
@@ -126,7 +162,19 @@ namespace RexERP_MVC.Report.Viewer
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.LocalReport.DataSources.Add(datasource);
         }
-
+        private void PurchaseInvoice()
+        {
+            string invoiceId = Request.QueryString["invoiceId"].ToString();
+            string query = @"exec rptPurchaseChallan '" + invoiceId + "'";
+            oResult = oDAL.Select(query);
+            DataTable dt = null;
+            dt = oResult.Data as DataTable;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath("~/Report/RPT/rptPurchaseInvoice.rdlc");
+            ReportDataSource datasource = new ReportDataSource("dsPurchaseChallan", dt);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.DataSources.Add(datasource);
+        }
         private void StockInForProcessing()
         {
             string invoiceId = Request.QueryString["invoiceId"].ToString();

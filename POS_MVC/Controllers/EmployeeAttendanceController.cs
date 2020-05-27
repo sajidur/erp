@@ -16,7 +16,7 @@ using System.Data.Entity.Core.Objects;
 using RexERP_MVC.Util;
 using EmployeeService = RexERP_MVC.BAL.EmployeeService;
 
-namespace WebView.Controllers
+namespace RexERP_MVC.Controllers
 {
     
     public class EmployeeAttendanceController : Controller

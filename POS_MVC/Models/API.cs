@@ -21,6 +21,7 @@ namespace RexERP_MVC.Models
             this.InventoryTransactions = new HashSet<InventoryTransaction>();
             this.ReceiveDetails = new HashSet<ReceiveDetail>();
             this.SalesDetails = new HashSet<SalesDetail>();
+            this.SalesReturns = new HashSet<SalesReturn>();
             this.StockIns = new HashSet<StockIn>();
             this.StockOuts = new HashSet<StockOut>();
             this.TempSalesDetails = new HashSet<TempSalesDetail>();
@@ -42,6 +43,8 @@ namespace RexERP_MVC.Models
         public virtual ICollection<ReceiveDetail> ReceiveDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesDetail> SalesDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesReturn> SalesReturns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockIn> StockIns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

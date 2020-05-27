@@ -1,0 +1,227 @@
+﻿<div class="row">
+    <label>Payment Autorization</label>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="ibox-content" id="divInfo">
+                    <div class="form-group">
+                        <div class="col-md-12 table-responsive" id="div-productGroup">
+                        </div>
+                    </div>
+                    <div style="margin-left:10px;">
+                       <a class="btn-primary" href="~/Report/Viewer/ReportViewer.aspx?ReportName=UnApprovedPaymentVoucherList&invoiceId=1" id="btnPrintList" onclick="~/">Print List</a>
+                    </div>
+                </div>
+
+            </div>
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Invoice No: <label id="lblPONo"></label>
+                                </div>
+                                <div class="col-md-4">
+                                    Date: <label id="txtPostDate"></label>
+                                </div>
+                                <div class="col-md-4">
+                                    Invoice No: <label id="lblPONo"></label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="ibox-content" id="divInfo2">
+                                    <br /><br />
+                                    <div class="form-group">
+                                        <div class="col-md-12 table-responsive" id="div-salesOrderGroup">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script id="templateProductGroup" type="text/html">
+                <table class="table table-bordered table-striped table-hover" id="productGroupTable">
+                    <thead>
+                    <th>Date</th>
+                    <th>Ledger</th>
+                    <th>ChequeNo</th>
+                    <th>ChequeDate</th>
+                    <th>Notes</th>
+                    <th>Amount</th>
+                    </thead>
+                    <tbody>
+                        {{#ProductGroupSearch}}
+                        <tr>
+                            <td> {{PostDate}}</td>
+                            <td> {{AccountLedger.LedgerName}}</td>
+                            <td> {{ChequeNo}}</td>
+                            <td> {{ChequeDateString}}</td>
+                            <td> {{ApprovedNotes}}</td>
+                            <td> {{Amount}}</td>
+                        </tr>
+                        {{/ProductGroupSearch}}
+                    </tbody>
+                </table>
+            </script>
+            <script id="templateProductGroupModal" type="text/html">
+                <table class="table table-bordered table-striped table-hover" id="productGroupTableModal">
+                    <thead>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Voucher</th>
+                    <th>Supplier</th>
+                    <th>Notes</th>
+                    <th>Amount</th>
+                    <th>App Amount</th>
+                    <th>Notes</th>
+                    <th></th>
+                    <th></th>
+
+                    </thead>
+                    <tbody>
+                        {{#ProductGroupSearch}}
+                        <tr>
+                            <td>{{Id}}</td>
+                            <td> {{PostDate}}</td>
+                            <td>
+                                <button class="btn btn-primary" id="btnAddFromOrders" type="button" data-toggle="modal" data-target="#myModal" onclick="Details('{{Id}}')">{{InvoiceNo}}</button>
+                            </td>
+                            <td> {{AccountLedger.LedgerName}}</td>
+                            <td> {{Narration}}</td>
+                            <td> {{TotalAmount}}</td>
+                            <td>
+                                <input type="number" name="txtApproveAmount" id="txtApproveAmount" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" name="txtApproveNote" id="txtApproveNote" class="form-control" />
+                            </td>
+
+                            <td class="action-sm">
+                                <button onclick="Authorized('{{Id}}')"><i class="icon-ok"></i>Approve</button>
+                            </td>
+                            <td class="action-sm">
+                                <button  onclick="Delete('{{Id}}')"><i class="icon-ok"></i>Delete</button>
+                            </td>
+                        </tr>
+                        {{/ProductGroupSearch}}
+                    </tbody>
+                </table>
+            </script>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        LoadListData();
+    });
+
+    var data = [];
+    function LoadListData() {
+        var url = '/Payment/GetAllPendingPayment';
+        $.ajax({
+            url: url,
+            method: 'POST',
+            success: function (res) {
+                console.log(res)
+                data = res;
+                var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { ProductGroupSearch: res });
+                $("#div-productGroup").empty().html(templateWithData);
+                MakePagination('productGroupTableModal');
+            },
+            error: function (error, r) {
+                console.log(error);
+                console.log(r.responseText);
+                ShowNotification("3", "Something Wrong!!");
+            }
+        });
+    }
+
+    function Authorized(id) {
+        var obj = {Id:0,Amount:0,Notes:""};
+        $('#productGroupTableModal tr').each(function (i) {
+            if (i > 0) {
+                var Id = $(this).find('td').eq(0).text();
+                if (Id == id) {
+                    var Amount = $(this).find('td').eq(6).find('input').val();
+                    var Notes = $(this).find('td').eq(7).find('select').val();
+                    obj.Id = Id;
+                    obj.Amount = Amount;
+                    obj.Notes = Notes;
+                }
+
+            }
+        });
+        if (obj.Amount <= 0) {
+            ShowNotification("3", "Amount Should be greater then 0!");
+            return;
+        }
+        var url = '/Payment/Authorize';
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: obj,
+            success: function (res) {
+                console.log(res);
+                ShowNotification("1", "Order Authrozed!!");
+                window.open("/Report/Viewer/ReportViewer.aspx?ReportName=SalesInvoice&customerid=" + res.CustomerID + "&invoiceId=" + res.SalesInvoice, "_blank");
+                setTimeout(location.reload.bind(location), 5000);
+
+            },
+            error: function (error, r) {
+                ShowNotification("3", "Something Wrong!!" + error);
+            }
+        });
+    }
+    function Delete(id) {
+        var url = '/Payment/DeleteTempPayment';
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: { Id: id},
+            success: function (res) {
+                console.log(res);
+                ShowNotification("1", "Sales Deleted!!");
+                setTimeout(location.reload.bind(location), 5000);
+
+            },
+            error: function (error, r) {
+                ShowNotification("3", "Something Wrong!!" + error);
+            }
+        });
+    }
+    function Details(id) {
+        //var url = '/Sales/GetUnAutorizedSales';
+        //$.ajax({
+        //    url: url,
+        //    method: 'POST',
+        //    data: { id: id },
+        //    success: function (res) {
+
+        //    },
+        //    error: function (error, r) {
+        //        ShowNotification("3", "Something Wrong!!" + error);
+        //    }
+        //});
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].Id == id) {
+                $("#lblPONo").html(data[i].InvoiceNo);
+                console.log(data[i]);
+                $("#txtPostDate").html(data[i].LedgerDate);
+                var templateWithData = Mustache.to_html($("#templateProductGroup").html(), { ProductGroupSearch: data[i].PaymentDetails, PostDate: data[i].PostDate });
+                $("#div-salesOrderGroup").empty().html(templateWithData);
+                MakePagination('productGroupTable');
+                break;
+            }
+        }
+    }
+
+
+</script>

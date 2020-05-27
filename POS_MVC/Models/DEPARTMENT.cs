@@ -18,20 +18,22 @@ namespace RexERP_MVC.Models
         public Department()
         {
             this.Divisions = new HashSet<Division>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int BranchOfficeId { get; set; }
-        public bool IsDeleted { get; set; }
-        public System.DateTime CreatedAt { get; set; }
-        public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
+        public bool Active { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
     
-        public virtual BranchOffice BranchOffice { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Division> Divisions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

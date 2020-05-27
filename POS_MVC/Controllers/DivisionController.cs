@@ -11,7 +11,7 @@ using RexERP_MVC.Util;
 using RexERP_MVC.Models;
 using RexERP_MVC.BAL;
 
-namespace WebView.Controllers
+namespace RexERP_MVC.Controllers
 {
 
     public class DivisionController : Controller

@@ -39,6 +39,8 @@ namespace RexERP_MVC.Models
         public decimal BalanceQty { get; set; }
         public Nullable<decimal> PurchasePrice { get; set; }
         public Nullable<decimal> SalesPrice { get; set; }
+        public Nullable<decimal> Costprice { get; set; }
+        public Nullable<decimal> ProductionPrice { get; set; }
         public string Notes { get; set; }
         public string GoodsType { get; set; }
         public string CreatedBy { get; set; }

@@ -100,6 +100,8 @@ function LoadSingleData(parameters) {
 function FormDataAsObject() {
     var object = new Object();
     object.DEPTNAME = $('#txtDepartmentName').val();
+    object.Description = $('#txtDescription').val();
+
     //object.GroupName = $('#txtGroupName').val();
     //object.Manufacturer = $('#txtColorDes').val();
     return object;
@@ -120,8 +122,8 @@ function Save() {
         async: false,
         data: {
             //Id: formObject.Id,
-            DEPTNAME: formObject.DEPTNAME,
-            //Descriptions: formObject.GroupDescription,
+            Name: formObject.DEPTNAME,
+            Descriptions: formObject.Description,
             //Manufacturer: formObject.Manufacturer,
             create: 1
         },

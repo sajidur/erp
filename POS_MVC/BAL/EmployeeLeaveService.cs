@@ -33,7 +33,10 @@ namespace Service.Service
         {
             return _repository.GetAll();
         }
-
+        public IList<EmployeeLeave> GetAll(List<int> employeeIds)
+        {
+            return _repository.GetAll(employeeIds);
+        }
         public EmployeeLeave GetObjectById(int Id)
         {
             return _repository.GetObjectById(Id);

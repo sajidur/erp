@@ -88,7 +88,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="StockOutInvoiceTableAdapter" GeneratorDataComponentClassName="StockOutInvoiceTableAdapter" Name="StockOutInvoice" UserDataComponentName="StockOutInvoiceTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="ERP.dbo.StockOutInvoice" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.StockOutInvoice" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.StockOutInvoice</CommandText>
@@ -126,6 +126,10 @@
               <Mapping SourceColumn="BrandId" DataSetColumn="BrandId" />
               <Mapping SourceColumn="SizeName" DataSetColumn="SizeName" />
               <Mapping SourceColumn="BrandName" DataSetColumn="BrandName" />
+              <Mapping SourceColumn="Rate" DataSetColumn="Rate" />
+              <Mapping SourceColumn="APIId" DataSetColumn="APIId" />
+              <Mapping SourceColumn="StockOutPrice" DataSetColumn="StockOutPrice" />
+              <Mapping SourceColumn="APIName" DataSetColumn="APIName" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -348,7 +352,7 @@
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="StockInInvoiceTableAdapter" GeneratorDataComponentClassName="StockInInvoiceTableAdapter" Name="StockInInvoice" UserDataComponentName="StockInInvoiceTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="ERP.dbo.StockInInvoice" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.StockInInvoice" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.StockInInvoice</CommandText>
@@ -383,6 +387,10 @@
               <Mapping SourceColumn="UpdatedBy" DataSetColumn="UpdatedBy" />
               <Mapping SourceColumn="UpdatedDate" DataSetColumn="UpdatedDate" />
               <Mapping SourceColumn="IsActive" DataSetColumn="IsActive" />
+              <Mapping SourceColumn="Rate" DataSetColumn="Rate" />
+              <Mapping SourceColumn="APIId" DataSetColumn="APIId" />
+              <Mapping SourceColumn="APIName" DataSetColumn="APIName" />
+              <Mapping SourceColumn="StockInPrice" DataSetColumn="StockInPrice" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -497,9 +505,51 @@
             </Mappings>
             <Sources />
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SP_JournalVoucherTableAdapter" GeneratorDataComponentClassName="SP_JournalVoucherTableAdapter" Name="SP_JournalVoucher" UserDataComponentName="SP_JournalVoucherTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.SP_JournalVoucher" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.SP_JournalVoucher</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@InvoiceNo" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="PostingDate" DataSetColumn="PostingDate" />
+              <Mapping SourceColumn="VoucherTypeId" DataSetColumn="VoucherTypeId" />
+              <Mapping SourceColumn="VoucherNo" DataSetColumn="VoucherNo" />
+              <Mapping SourceColumn="LedgerId" DataSetColumn="LedgerId" />
+              <Mapping SourceColumn="Debit" DataSetColumn="Debit" />
+              <Mapping SourceColumn="Credit" DataSetColumn="Credit" />
+              <Mapping SourceColumn="YearId" DataSetColumn="YearId" />
+              <Mapping SourceColumn="InvoiceNo" DataSetColumn="InvoiceNo" />
+              <Mapping SourceColumn="ChequeNo" DataSetColumn="ChequeNo" />
+              <Mapping SourceColumn="ChequeDate" DataSetColumn="ChequeDate" />
+              <Mapping SourceColumn="ExtraDate" DataSetColumn="ExtraDate" />
+              <Mapping SourceColumn="Extra1" DataSetColumn="Extra1" />
+              <Mapping SourceColumn="Extra2" DataSetColumn="Extra2" />
+              <Mapping SourceColumn="IsActive" DataSetColumn="IsActive" />
+              <Mapping SourceColumn="IsLastYear" DataSetColumn="IsLastYear" />
+              <Mapping SourceColumn="MasterId" DataSetColumn="MasterId" />
+              <Mapping SourceColumn="CreatedDate" DataSetColumn="CreatedDate" />
+              <Mapping SourceColumn="CreatedBy" DataSetColumn="CreatedBy" />
+              <Mapping SourceColumn="LedgerName" DataSetColumn="LedgerName" />
+              <Mapping SourceColumn="Address" DataSetColumn="Address" />
+              <Mapping SourceColumn="Email" DataSetColumn="Email" />
+              <Mapping SourceColumn="Phone" DataSetColumn="Phone" />
+              <Mapping SourceColumn="Mobile" DataSetColumn="Mobile" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="rptSalesInvoiceTableAdapter" GeneratorDataComponentClassName="rptSalesInvoiceTableAdapter" Name="rptSalesInvoice" UserDataComponentName="rptSalesInvoiceTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="ERP.dbo.rptSalesInvoice" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.rptSalesInvoice" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.rptSalesInvoice</CommandText>
@@ -535,6 +585,8 @@
               <Mapping SourceColumn="SalesInvoice1" DataSetColumn="SalesInvoice1" />
               <Mapping SourceColumn="ProductId" DataSetColumn="ProductId" />
               <Mapping SourceColumn="SizeId" DataSetColumn="SizeId" />
+              <Mapping SourceColumn="APIId" DataSetColumn="APIId" />
+              <Mapping SourceColumn="APIName" DataSetColumn="APIName" />
               <Mapping SourceColumn="SizeName" DataSetColumn="SizeName" />
               <Mapping SourceColumn="BrandId" DataSetColumn="BrandId" />
               <Mapping SourceColumn="BrandName" DataSetColumn="BrandName" />
@@ -587,12 +639,12 @@
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SP_JournalVoucherTableAdapter" GeneratorDataComponentClassName="SP_JournalVoucherTableAdapter" Name="SP_JournalVoucher" UserDataComponentName="SP_JournalVoucherTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="rptPurchaseChallanTableAdapter" GeneratorDataComponentClassName="rptPurchaseChallanTableAdapter" Name="rptPurchaseChallan" UserDataComponentName="rptPurchaseChallanTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.SP_JournalVoucher" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.rptPurchaseChallan" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
-                    <CommandText>dbo.SP_JournalVoucher</CommandText>
+                    <CommandText>dbo.rptPurchaseChallan</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@InvoiceNo" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -602,30 +654,137 @@
               </DbSource>
             </MainSource>
             <Mappings>
+              <Mapping SourceColumn="SizeName" DataSetColumn="SizeName" />
+              <Mapping SourceColumn="BrandName" DataSetColumn="BrandName" />
+              <Mapping SourceColumn="APIName" DataSetColumn="APIName" />
+              <Mapping SourceColumn="AdditionalCost" DataSetColumn="AdditionalCost" />
+              <Mapping SourceColumn="InvoiceNoPaper" DataSetColumn="InvoiceNoPaper" />
+              <Mapping SourceColumn="BillDiscount" DataSetColumn="BillDiscount" />
+              <Mapping SourceColumn="Notes" DataSetColumn="Notes" />
+              <Mapping SourceColumn="GrandTotal" DataSetColumn="GrandTotal" />
               <Mapping SourceColumn="Id" DataSetColumn="Id" />
-              <Mapping SourceColumn="PostingDate" DataSetColumn="PostingDate" />
-              <Mapping SourceColumn="VoucherTypeId" DataSetColumn="VoucherTypeId" />
-              <Mapping SourceColumn="VoucherNo" DataSetColumn="VoucherNo" />
+              <Mapping SourceColumn="InvoiceDate" DataSetColumn="InvoiceDate" />
+              <Mapping SourceColumn="AdditionalCostPurpose" DataSetColumn="AdditionalCostPurpose" />
+              <Mapping SourceColumn="InvoiceNo" DataSetColumn="InvoiceNo" />
+              <Mapping SourceColumn="TotalAmount" DataSetColumn="TotalAmount" />
+              <Mapping SourceColumn="TransportNo" DataSetColumn="TransportNo" />
+              <Mapping SourceColumn="TransportType" DataSetColumn="TransportType" />
+              <Mapping SourceColumn="GrandTotalInWord" DataSetColumn="GrandTotalInWord" />
+              <Mapping SourceColumn="Id1" DataSetColumn="Id1" />
+              <Mapping SourceColumn="ReceiveMasterId" DataSetColumn="ReceiveMasterId" />
+              <Mapping SourceColumn="ProductId" DataSetColumn="ProductId" />
+              <Mapping SourceColumn="WarehouseId" DataSetColumn="WarehouseId" />
+              <Mapping SourceColumn="SizeId" DataSetColumn="SizeId" />
+              <Mapping SourceColumn="BrandId" DataSetColumn="BrandId" />
+              <Mapping SourceColumn="APIId" DataSetColumn="APIId" />
+              <Mapping SourceColumn="Qty" DataSetColumn="Qty" />
+              <Mapping SourceColumn="Rate" DataSetColumn="Rate" />
+              <Mapping SourceColumn="Amount" DataSetColumn="Amount" />
+              <Mapping SourceColumn="CreatedBy" DataSetColumn="CreatedBy" />
+              <Mapping SourceColumn="CreatedDate" DataSetColumn="CreatedDate" />
+              <Mapping SourceColumn="UpdatedBy" DataSetColumn="UpdatedBy" />
+              <Mapping SourceColumn="UpdatedDate" DataSetColumn="UpdatedDate" />
+              <Mapping SourceColumn="IsActive" DataSetColumn="IsActive" />
+              <Mapping SourceColumn="Id2" DataSetColumn="Id2" />
+              <Mapping SourceColumn="Code" DataSetColumn="Code" />
+              <Mapping SourceColumn="ProductName" DataSetColumn="ProductName" />
+              <Mapping SourceColumn="ProductNameBangla" DataSetColumn="ProductNameBangla" />
+              <Mapping SourceColumn="CategoryId" DataSetColumn="CategoryId" />
+              <Mapping SourceColumn="ProductType" DataSetColumn="ProductType" />
+              <Mapping SourceColumn="ProductTypeId" DataSetColumn="ProductTypeId" />
+              <Mapping SourceColumn="MinStock" DataSetColumn="MinStock" />
+              <Mapping SourceColumn="TaxId" DataSetColumn="TaxId" />
+              <Mapping SourceColumn="MaxStock" DataSetColumn="MaxStock" />
+              <Mapping SourceColumn="Unit" DataSetColumn="Unit" />
+              <Mapping SourceColumn="ReorderLevel" DataSetColumn="ReorderLevel" />
+              <Mapping SourceColumn="CreatedBy1" DataSetColumn="CreatedBy1" />
+              <Mapping SourceColumn="CreatedDate1" DataSetColumn="CreatedDate1" />
+              <Mapping SourceColumn="UpdateBy" DataSetColumn="UpdateBy" />
+              <Mapping SourceColumn="UpdateDate" DataSetColumn="UpdateDate" />
+              <Mapping SourceColumn="IsActive1" DataSetColumn="IsActive1" />
+              <Mapping SourceColumn="Id3" DataSetColumn="Id3" />
+              <Mapping SourceColumn="Code1" DataSetColumn="Code1" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Address" DataSetColumn="Address" />
+              <Mapping SourceColumn="ContactPersonName" DataSetColumn="ContactPersonName" />
+              <Mapping SourceColumn="ContactPersonPhone" DataSetColumn="ContactPersonPhone" />
+              <Mapping SourceColumn="City" DataSetColumn="City" />
+              <Mapping SourceColumn="Phone" DataSetColumn="Phone" />
+              <Mapping SourceColumn="Email" DataSetColumn="Email" />
+              <Mapping SourceColumn="Web" DataSetColumn="Web" />
+              <Mapping SourceColumn="SupplierType" DataSetColumn="SupplierType" />
+              <Mapping SourceColumn="Creator" DataSetColumn="Creator" />
+              <Mapping SourceColumn="CreationDate" DataSetColumn="CreationDate" />
+              <Mapping SourceColumn="UpdateBy1" DataSetColumn="UpdateBy1" />
+              <Mapping SourceColumn="UpdateDate1" DataSetColumn="UpdateDate1" />
+              <Mapping SourceColumn="IsActive2" DataSetColumn="IsActive2" />
+              <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
               <Mapping SourceColumn="LedgerId" DataSetColumn="LedgerId" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="rptPaymentInitateVoucherTableAdapter" GeneratorDataComponentClassName="rptPaymentInitateVoucherTableAdapter" Name="rptPaymentInitateVoucher" UserDataComponentName="rptPaymentInitateVoucherTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.rptPaymentInitateVoucher" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.rptPaymentInitateVoucher</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="nvarchar" DbType="String" Direction="Input" ParameterName="@InvoiceNo" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="PostingDate" DataSetColumn="PostingDate" />
               <Mapping SourceColumn="Debit" DataSetColumn="Debit" />
               <Mapping SourceColumn="Credit" DataSetColumn="Credit" />
-              <Mapping SourceColumn="YearId" DataSetColumn="YearId" />
-              <Mapping SourceColumn="InvoiceNo" DataSetColumn="InvoiceNo" />
-              <Mapping SourceColumn="ChequeNo" DataSetColumn="ChequeNo" />
               <Mapping SourceColumn="ChequeDate" DataSetColumn="ChequeDate" />
-              <Mapping SourceColumn="ExtraDate" DataSetColumn="ExtraDate" />
-              <Mapping SourceColumn="Extra1" DataSetColumn="Extra1" />
-              <Mapping SourceColumn="Extra2" DataSetColumn="Extra2" />
-              <Mapping SourceColumn="IsActive" DataSetColumn="IsActive" />
-              <Mapping SourceColumn="IsLastYear" DataSetColumn="IsLastYear" />
-              <Mapping SourceColumn="MasterId" DataSetColumn="MasterId" />
-              <Mapping SourceColumn="CreatedDate" DataSetColumn="CreatedDate" />
+              <Mapping SourceColumn="ChequeNo" DataSetColumn="ChequeNo" />
               <Mapping SourceColumn="CreatedBy" DataSetColumn="CreatedBy" />
+              <Mapping SourceColumn="InvoiceNo" DataSetColumn="InvoiceNo" />
+              <Mapping SourceColumn="VoucherTypeId" DataSetColumn="VoucherTypeId" />
               <Mapping SourceColumn="LedgerName" DataSetColumn="LedgerName" />
               <Mapping SourceColumn="Address" DataSetColumn="Address" />
               <Mapping SourceColumn="Email" DataSetColumn="Email" />
               <Mapping SourceColumn="Phone" DataSetColumn="Phone" />
               <Mapping SourceColumn="Mobile" DataSetColumn="Mobile" />
+              <Mapping SourceColumn="Extra1" DataSetColumn="Extra1" />
+              <Mapping SourceColumn="Extra2" DataSetColumn="Extra2" />
+              <Mapping SourceColumn="ExtraDate" DataSetColumn="ExtraDate" />
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="LedgerDate" DataSetColumn="LedgerDate" />
+              <Mapping SourceColumn="Narration" DataSetColumn="Narration" />
+              <Mapping SourceColumn="VoucherNo" DataSetColumn="VoucherNo" />
+              <Mapping SourceColumn="TotalAmount" DataSetColumn="TotalAmount" />
+              <Mapping SourceColumn="LedgerId" DataSetColumn="LedgerId" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="rptUnApprovedPaymentListTableAdapter" GeneratorDataComponentClassName="rptUnApprovedPaymentListTableAdapter" Name="rptUnApprovedPaymentList" UserDataComponentName="rptUnApprovedPaymentListTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DefaultConnection (Web.config)" DbObjectName="DB_9B34E1_erp.dbo.rptUnApprovedPaymentList" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.rptUnApprovedPaymentList</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="InvoiceNo" DataSetColumn="InvoiceNo" />
+              <Mapping SourceColumn="LedgerDate" DataSetColumn="LedgerDate" />
+              <Mapping SourceColumn="Narration" DataSetColumn="Narration" />
+              <Mapping SourceColumn="VoucherNo" DataSetColumn="VoucherNo" />
+              <Mapping SourceColumn="TotalAmount" DataSetColumn="TotalAmount" />
+              <Mapping SourceColumn="LedgerId" DataSetColumn="LedgerId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -637,7 +796,7 @@
   <xs:element name="mvcReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="mvcReport" msprop:Generator_UserDSName="mvcReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="sp_GRChallanReport" msprop:Generator_TableClassName="sp_GRChallanReportDataTable" msprop:Generator_TableVarName="tablesp_GRChallanReport" msprop:Generator_RowChangedName="sp_GRChallanReportRowChanged" msprop:Generator_TablePropName="sp_GRChallanReport" msprop:Generator_RowDeletingName="sp_GRChallanReportRowDeleting" msprop:Generator_RowChangingName="sp_GRChallanReportRowChanging" msprop:Generator_RowEvHandlerName="sp_GRChallanReportRowChangeEventHandler" msprop:Generator_RowDeletedName="sp_GRChallanReportRowDeleted" msprop:Generator_RowClassName="sp_GRChallanReportRow" msprop:Generator_UserTableName="sp_GRChallanReport" msprop:Generator_RowEvArgName="sp_GRChallanReportRowChangeEvent">
+        <xs:element name="sp_GRChallanReport" msprop:Generator_TableClassName="sp_GRChallanReportDataTable" msprop:Generator_TableVarName="tablesp_GRChallanReport" msprop:Generator_TablePropName="sp_GRChallanReport" msprop:Generator_RowDeletingName="sp_GRChallanReportRowDeleting" msprop:Generator_RowChangingName="sp_GRChallanReportRowChanging" msprop:Generator_RowEvHandlerName="sp_GRChallanReportRowChangeEventHandler" msprop:Generator_RowDeletedName="sp_GRChallanReportRowDeleted" msprop:Generator_UserTableName="sp_GRChallanReport" msprop:Generator_RowChangedName="sp_GRChallanReportRowChanged" msprop:Generator_RowEvArgName="sp_GRChallanReportRowChangeEvent" msprop:Generator_RowClassName="sp_GRChallanReportRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -660,7 +819,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="sp_reportAllStoockSummary" msprop:Generator_TableClassName="sp_reportAllStoockSummaryDataTable" msprop:Generator_TableVarName="tablesp_reportAllStoockSummary" msprop:Generator_RowChangedName="sp_reportAllStoockSummaryRowChanged" msprop:Generator_TablePropName="sp_reportAllStoockSummary" msprop:Generator_RowDeletingName="sp_reportAllStoockSummaryRowDeleting" msprop:Generator_RowChangingName="sp_reportAllStoockSummaryRowChanging" msprop:Generator_RowEvHandlerName="sp_reportAllStoockSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="sp_reportAllStoockSummaryRowDeleted" msprop:Generator_RowClassName="sp_reportAllStoockSummaryRow" msprop:Generator_UserTableName="sp_reportAllStoockSummary" msprop:Generator_RowEvArgName="sp_reportAllStoockSummaryRowChangeEvent">
+        <xs:element name="sp_reportAllStoockSummary" msprop:Generator_TableClassName="sp_reportAllStoockSummaryDataTable" msprop:Generator_TableVarName="tablesp_reportAllStoockSummary" msprop:Generator_TablePropName="sp_reportAllStoockSummary" msprop:Generator_RowDeletingName="sp_reportAllStoockSummaryRowDeleting" msprop:Generator_RowChangingName="sp_reportAllStoockSummaryRowChanging" msprop:Generator_RowEvHandlerName="sp_reportAllStoockSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="sp_reportAllStoockSummaryRowDeleted" msprop:Generator_UserTableName="sp_reportAllStoockSummary" msprop:Generator_RowChangedName="sp_reportAllStoockSummaryRowChanged" msprop:Generator_RowEvArgName="sp_reportAllStoockSummaryRowChangeEvent" msprop:Generator_RowClassName="sp_reportAllStoockSummaryRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="BalanceQty" msprop:Generator_ColumnVarNameInTable="columnBalanceQty" msprop:Generator_ColumnPropNameInRow="BalanceQty" msprop:Generator_ColumnPropNameInTable="BalanceQtyColumn" msprop:Generator_UserColumnName="BalanceQty" type="xs:decimal" />
@@ -684,7 +843,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rptCustomerLedger" msprop:Generator_TableClassName="rptCustomerLedgerDataTable" msprop:Generator_TableVarName="tablerptCustomerLedger" msprop:Generator_RowChangedName="rptCustomerLedgerRowChanged" msprop:Generator_TablePropName="rptCustomerLedger" msprop:Generator_RowDeletingName="rptCustomerLedgerRowDeleting" msprop:Generator_RowChangingName="rptCustomerLedgerRowChanging" msprop:Generator_RowEvHandlerName="rptCustomerLedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="rptCustomerLedgerRowDeleted" msprop:Generator_RowClassName="rptCustomerLedgerRow" msprop:Generator_UserTableName="rptCustomerLedger" msprop:Generator_RowEvArgName="rptCustomerLedgerRowChangeEvent">
+        <xs:element name="rptCustomerLedger" msprop:Generator_TableClassName="rptCustomerLedgerDataTable" msprop:Generator_TableVarName="tablerptCustomerLedger" msprop:Generator_TablePropName="rptCustomerLedger" msprop:Generator_RowDeletingName="rptCustomerLedgerRowDeleting" msprop:Generator_RowChangingName="rptCustomerLedgerRowChanging" msprop:Generator_RowEvHandlerName="rptCustomerLedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="rptCustomerLedgerRowDeleted" msprop:Generator_UserTableName="rptCustomerLedger" msprop:Generator_RowChangedName="rptCustomerLedgerRowChanged" msprop:Generator_RowEvArgName="rptCustomerLedgerRowChangeEvent" msprop:Generator_RowClassName="rptCustomerLedgerRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
@@ -729,7 +888,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="StockOutInvoice" msprop:Generator_TableClassName="StockOutInvoiceDataTable" msprop:Generator_TableVarName="tableStockOutInvoice" msprop:Generator_TablePropName="StockOutInvoice" msprop:Generator_RowDeletingName="StockOutInvoiceRowDeleting" msprop:Generator_RowChangingName="StockOutInvoiceRowChanging" msprop:Generator_RowEvHandlerName="StockOutInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="StockOutInvoiceRowDeleted" msprop:Generator_UserTableName="StockOutInvoice" msprop:Generator_RowChangedName="StockOutInvoiceRowChanged" msprop:Generator_RowEvArgName="StockOutInvoiceRowChangeEvent" msprop:Generator_RowClassName="StockOutInvoiceRow">
+        <xs:element name="StockOutInvoice" msprop:Generator_TableClassName="StockOutInvoiceDataTable" msprop:Generator_TableVarName="tableStockOutInvoice" msprop:Generator_RowChangedName="StockOutInvoiceRowChanged" msprop:Generator_TablePropName="StockOutInvoice" msprop:Generator_RowDeletingName="StockOutInvoiceRowDeleting" msprop:Generator_RowChangingName="StockOutInvoiceRowChanging" msprop:Generator_RowEvHandlerName="StockOutInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="StockOutInvoiceRowDeleted" msprop:Generator_RowClassName="StockOutInvoiceRow" msprop:Generator_UserTableName="StockOutInvoice" msprop:Generator_RowEvArgName="StockOutInvoiceRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ProductName" msprop:Generator_ColumnVarNameInTable="columnProductName" msprop:Generator_ColumnPropNameInRow="ProductName" msprop:Generator_ColumnPropNameInTable="ProductNameColumn" msprop:Generator_UserColumnName="ProductName">
@@ -811,10 +970,20 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_UserColumnName="Rate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="APIId" msprop:Generator_ColumnVarNameInTable="columnAPIId" msprop:Generator_ColumnPropNameInRow="APIId" msprop:Generator_ColumnPropNameInTable="APIIdColumn" msprop:Generator_UserColumnName="APIId" type="xs:int" minOccurs="0" />
+              <xs:element name="StockOutPrice" msprop:Generator_ColumnVarNameInTable="columnStockOutPrice" msprop:Generator_ColumnPropNameInRow="StockOutPrice" msprop:Generator_ColumnPropNameInTable="StockOutPriceColumn" msprop:Generator_UserColumnName="StockOutPrice" type="xs:decimal" minOccurs="0" />
+              <xs:element name="APIName" msprop:Generator_ColumnVarNameInTable="columnAPIName" msprop:Generator_ColumnPropNameInRow="APIName" msprop:Generator_ColumnPropNameInTable="APINameColumn" msprop:Generator_UserColumnName="APIName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="CustomerDueSummary" msprop:Generator_TableClassName="CustomerDueSummaryDataTable" msprop:Generator_TableVarName="tableCustomerDueSummary" msprop:Generator_TablePropName="CustomerDueSummary" msprop:Generator_RowDeletingName="CustomerDueSummaryRowDeleting" msprop:Generator_RowChangingName="CustomerDueSummaryRowChanging" msprop:Generator_RowEvHandlerName="CustomerDueSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomerDueSummaryRowDeleted" msprop:Generator_UserTableName="CustomerDueSummary" msprop:Generator_RowChangedName="CustomerDueSummaryRowChanged" msprop:Generator_RowEvArgName="CustomerDueSummaryRowChangeEvent" msprop:Generator_RowClassName="CustomerDueSummaryRow">
+        <xs:element name="CustomerDueSummary" msprop:Generator_TableClassName="CustomerDueSummaryDataTable" msprop:Generator_TableVarName="tableCustomerDueSummary" msprop:Generator_RowChangedName="CustomerDueSummaryRowChanged" msprop:Generator_TablePropName="CustomerDueSummary" msprop:Generator_RowDeletingName="CustomerDueSummaryRowDeleting" msprop:Generator_RowChangingName="CustomerDueSummaryRowChanging" msprop:Generator_RowEvHandlerName="CustomerDueSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="CustomerDueSummaryRowDeleted" msprop:Generator_RowClassName="CustomerDueSummaryRow" msprop:Generator_UserTableName="CustomerDueSummary" msprop:Generator_RowEvArgName="CustomerDueSummaryRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
@@ -830,7 +999,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GetPartyPayment" msprop:Generator_TableClassName="GetPartyPaymentDataTable" msprop:Generator_TableVarName="tableGetPartyPayment" msprop:Generator_RowChangedName="GetPartyPaymentRowChanged" msprop:Generator_TablePropName="GetPartyPayment" msprop:Generator_RowDeletingName="GetPartyPaymentRowDeleting" msprop:Generator_RowChangingName="GetPartyPaymentRowChanging" msprop:Generator_RowEvHandlerName="GetPartyPaymentRowChangeEventHandler" msprop:Generator_RowDeletedName="GetPartyPaymentRowDeleted" msprop:Generator_RowClassName="GetPartyPaymentRow" msprop:Generator_UserTableName="GetPartyPayment" msprop:Generator_RowEvArgName="GetPartyPaymentRowChangeEvent">
+        <xs:element name="GetPartyPayment" msprop:Generator_TableClassName="GetPartyPaymentDataTable" msprop:Generator_TableVarName="tableGetPartyPayment" msprop:Generator_TablePropName="GetPartyPayment" msprop:Generator_RowDeletingName="GetPartyPaymentRowDeleting" msprop:Generator_RowChangingName="GetPartyPaymentRowChanging" msprop:Generator_RowEvHandlerName="GetPartyPaymentRowChangeEventHandler" msprop:Generator_RowDeletedName="GetPartyPaymentRowDeleted" msprop:Generator_UserTableName="GetPartyPayment" msprop:Generator_RowChangedName="GetPartyPaymentRowChanged" msprop:Generator_RowEvArgName="GetPartyPaymentRowChangeEvent" msprop:Generator_RowClassName="GetPartyPaymentRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="InvoiceNo" msprop:Generator_ColumnVarNameInTable="columnInvoiceNo" msprop:Generator_ColumnPropNameInRow="InvoiceNo" msprop:Generator_ColumnPropNameInTable="InvoiceNoColumn" msprop:Generator_UserColumnName="InvoiceNo" minOccurs="0">
@@ -869,7 +1038,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rptSalesCreditDescription" msprop:Generator_TableClassName="rptSalesCreditDescriptionDataTable" msprop:Generator_TableVarName="tablerptSalesCreditDescription" msprop:Generator_RowChangedName="rptSalesCreditDescriptionRowChanged" msprop:Generator_TablePropName="rptSalesCreditDescription" msprop:Generator_RowDeletingName="rptSalesCreditDescriptionRowDeleting" msprop:Generator_RowChangingName="rptSalesCreditDescriptionRowChanging" msprop:Generator_RowEvHandlerName="rptSalesCreditDescriptionRowChangeEventHandler" msprop:Generator_RowDeletedName="rptSalesCreditDescriptionRowDeleted" msprop:Generator_RowClassName="rptSalesCreditDescriptionRow" msprop:Generator_UserTableName="rptSalesCreditDescription" msprop:Generator_RowEvArgName="rptSalesCreditDescriptionRowChangeEvent">
+        <xs:element name="rptSalesCreditDescription" msprop:Generator_TableClassName="rptSalesCreditDescriptionDataTable" msprop:Generator_TableVarName="tablerptSalesCreditDescription" msprop:Generator_TablePropName="rptSalesCreditDescription" msprop:Generator_RowDeletingName="rptSalesCreditDescriptionRowDeleting" msprop:Generator_RowChangingName="rptSalesCreditDescriptionRowChanging" msprop:Generator_RowEvHandlerName="rptSalesCreditDescriptionRowChangeEventHandler" msprop:Generator_RowDeletedName="rptSalesCreditDescriptionRowDeleted" msprop:Generator_UserTableName="rptSalesCreditDescription" msprop:Generator_RowChangedName="rptSalesCreditDescriptionRowChanged" msprop:Generator_RowEvArgName="rptSalesCreditDescriptionRowChangeEvent" msprop:Generator_RowClassName="rptSalesCreditDescriptionRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
@@ -877,7 +1046,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="IncomeStatement" msprop:Generator_TableClassName="IncomeStatementDataTable" msprop:Generator_TableVarName="tableIncomeStatement" msprop:Generator_RowChangedName="IncomeStatementRowChanged" msprop:Generator_TablePropName="IncomeStatement" msprop:Generator_RowDeletingName="IncomeStatementRowDeleting" msprop:Generator_RowChangingName="IncomeStatementRowChanging" msprop:Generator_RowEvHandlerName="IncomeStatementRowChangeEventHandler" msprop:Generator_RowDeletedName="IncomeStatementRowDeleted" msprop:Generator_RowClassName="IncomeStatementRow" msprop:Generator_UserTableName="IncomeStatement" msprop:Generator_RowEvArgName="IncomeStatementRowChangeEvent">
+        <xs:element name="IncomeStatement" msprop:Generator_TableClassName="IncomeStatementDataTable" msprop:Generator_TableVarName="tableIncomeStatement" msprop:Generator_TablePropName="IncomeStatement" msprop:Generator_RowDeletingName="IncomeStatementRowDeleting" msprop:Generator_RowChangingName="IncomeStatementRowChanging" msprop:Generator_RowEvHandlerName="IncomeStatementRowChangeEventHandler" msprop:Generator_RowDeletedName="IncomeStatementRowDeleted" msprop:Generator_UserTableName="IncomeStatement" msprop:Generator_RowChangedName="IncomeStatementRowChanged" msprop:Generator_RowEvArgName="IncomeStatementRowChangeEvent" msprop:Generator_RowClassName="IncomeStatementRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
@@ -916,7 +1085,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DueSummary" msprop:Generator_TableClassName="DueSummaryDataTable" msprop:Generator_TableVarName="tableDueSummary" msprop:Generator_RowChangedName="DueSummaryRowChanged" msprop:Generator_TablePropName="DueSummary" msprop:Generator_RowDeletingName="DueSummaryRowDeleting" msprop:Generator_RowChangingName="DueSummaryRowChanging" msprop:Generator_RowEvHandlerName="DueSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="DueSummaryRowDeleted" msprop:Generator_RowClassName="DueSummaryRow" msprop:Generator_UserTableName="DueSummary" msprop:Generator_RowEvArgName="DueSummaryRowChangeEvent">
+        <xs:element name="DueSummary" msprop:Generator_TableClassName="DueSummaryDataTable" msprop:Generator_TableVarName="tableDueSummary" msprop:Generator_TablePropName="DueSummary" msprop:Generator_RowDeletingName="DueSummaryRowDeleting" msprop:Generator_RowChangingName="DueSummaryRowChanging" msprop:Generator_RowEvHandlerName="DueSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="DueSummaryRowDeleted" msprop:Generator_UserTableName="DueSummary" msprop:Generator_RowChangedName="DueSummaryRowChanged" msprop:Generator_RowEvArgName="DueSummaryRowChangeEvent" msprop:Generator_RowClassName="DueSummaryRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" />
@@ -971,7 +1140,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rptIndividualLedger" msprop:Generator_TableClassName="rptIndividualLedgerDataTable" msprop:Generator_TableVarName="tablerptIndividualLedger" msprop:Generator_RowChangedName="rptIndividualLedgerRowChanged" msprop:Generator_TablePropName="rptIndividualLedger" msprop:Generator_RowDeletingName="rptIndividualLedgerRowDeleting" msprop:Generator_RowChangingName="rptIndividualLedgerRowChanging" msprop:Generator_RowEvHandlerName="rptIndividualLedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="rptIndividualLedgerRowDeleted" msprop:Generator_RowClassName="rptIndividualLedgerRow" msprop:Generator_UserTableName="rptIndividualLedger" msprop:Generator_RowEvArgName="rptIndividualLedgerRowChangeEvent">
+        <xs:element name="rptIndividualLedger" msprop:Generator_TableClassName="rptIndividualLedgerDataTable" msprop:Generator_TableVarName="tablerptIndividualLedger" msprop:Generator_TablePropName="rptIndividualLedger" msprop:Generator_RowDeletingName="rptIndividualLedgerRowDeleting" msprop:Generator_RowChangingName="rptIndividualLedgerRowChanging" msprop:Generator_RowEvHandlerName="rptIndividualLedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="rptIndividualLedgerRowDeleted" msprop:Generator_UserTableName="rptIndividualLedger" msprop:Generator_RowChangedName="rptIndividualLedgerRowChanged" msprop:Generator_RowEvArgName="rptIndividualLedgerRowChangeEvent" msprop:Generator_RowClassName="rptIndividualLedgerRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" minOccurs="0" />
@@ -1021,7 +1190,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rptCustomerTransaction" msprop:Generator_TableClassName="rptCustomerTransactionDataTable" msprop:Generator_TableVarName="tablerptCustomerTransaction" msprop:Generator_TablePropName="rptCustomerTransaction" msprop:Generator_RowDeletingName="rptCustomerTransactionRowDeleting" msprop:Generator_RowChangingName="rptCustomerTransactionRowChanging" msprop:Generator_RowEvHandlerName="rptCustomerTransactionRowChangeEventHandler" msprop:Generator_RowDeletedName="rptCustomerTransactionRowDeleted" msprop:Generator_UserTableName="rptCustomerTransaction" msprop:Generator_RowChangedName="rptCustomerTransactionRowChanged" msprop:Generator_RowEvArgName="rptCustomerTransactionRowChangeEvent" msprop:Generator_RowClassName="rptCustomerTransactionRow">
+        <xs:element name="rptCustomerTransaction" msprop:Generator_TableClassName="rptCustomerTransactionDataTable" msprop:Generator_TableVarName="tablerptCustomerTransaction" msprop:Generator_RowChangedName="rptCustomerTransactionRowChanged" msprop:Generator_TablePropName="rptCustomerTransaction" msprop:Generator_RowDeletingName="rptCustomerTransactionRowDeleting" msprop:Generator_RowChangingName="rptCustomerTransactionRowChanging" msprop:Generator_RowEvHandlerName="rptCustomerTransactionRowChangeEventHandler" msprop:Generator_RowDeletedName="rptCustomerTransactionRowDeleted" msprop:Generator_RowClassName="rptCustomerTransactionRow" msprop:Generator_UserTableName="rptCustomerTransaction" msprop:Generator_RowEvArgName="rptCustomerTransactionRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
@@ -1031,7 +1200,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rptBalanceByInvoice" msprop:Generator_TableClassName="rptBalanceByInvoiceDataTable" msprop:Generator_TableVarName="tablerptBalanceByInvoice" msprop:Generator_TablePropName="rptBalanceByInvoice" msprop:Generator_RowDeletingName="rptBalanceByInvoiceRowDeleting" msprop:Generator_RowChangingName="rptBalanceByInvoiceRowChanging" msprop:Generator_RowEvHandlerName="rptBalanceByInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="rptBalanceByInvoiceRowDeleted" msprop:Generator_UserTableName="rptBalanceByInvoice" msprop:Generator_RowChangedName="rptBalanceByInvoiceRowChanged" msprop:Generator_RowEvArgName="rptBalanceByInvoiceRowChangeEvent" msprop:Generator_RowClassName="rptBalanceByInvoiceRow">
+        <xs:element name="rptBalanceByInvoice" msprop:Generator_TableClassName="rptBalanceByInvoiceDataTable" msprop:Generator_TableVarName="tablerptBalanceByInvoice" msprop:Generator_RowChangedName="rptBalanceByInvoiceRowChanged" msprop:Generator_TablePropName="rptBalanceByInvoice" msprop:Generator_RowDeletingName="rptBalanceByInvoiceRowDeleting" msprop:Generator_RowChangingName="rptBalanceByInvoiceRowChanging" msprop:Generator_RowEvHandlerName="rptBalanceByInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="rptBalanceByInvoiceRowDeleted" msprop:Generator_RowClassName="rptBalanceByInvoiceRow" msprop:Generator_UserTableName="rptBalanceByInvoice" msprop:Generator_RowEvArgName="rptBalanceByInvoiceRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" minOccurs="0" />
@@ -1081,7 +1250,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GetCustomerBalance" msprop:Generator_TableClassName="GetCustomerBalanceDataTable" msprop:Generator_TableVarName="tableGetCustomerBalance" msprop:Generator_RowChangedName="GetCustomerBalanceRowChanged" msprop:Generator_TablePropName="GetCustomerBalance" msprop:Generator_RowDeletingName="GetCustomerBalanceRowDeleting" msprop:Generator_RowChangingName="GetCustomerBalanceRowChanging" msprop:Generator_RowEvHandlerName="GetCustomerBalanceRowChangeEventHandler" msprop:Generator_RowDeletedName="GetCustomerBalanceRowDeleted" msprop:Generator_RowClassName="GetCustomerBalanceRow" msprop:Generator_UserTableName="GetCustomerBalance" msprop:Generator_RowEvArgName="GetCustomerBalanceRowChangeEvent">
+        <xs:element name="GetCustomerBalance" msprop:Generator_TableClassName="GetCustomerBalanceDataTable" msprop:Generator_TableVarName="tableGetCustomerBalance" msprop:Generator_TablePropName="GetCustomerBalance" msprop:Generator_RowDeletingName="GetCustomerBalanceRowDeleting" msprop:Generator_RowChangingName="GetCustomerBalanceRowChanging" msprop:Generator_RowEvHandlerName="GetCustomerBalanceRowChangeEventHandler" msprop:Generator_RowDeletedName="GetCustomerBalanceRowDeleted" msprop:Generator_UserTableName="GetCustomerBalance" msprop:Generator_RowChangedName="GetCustomerBalanceRowChanged" msprop:Generator_RowEvArgName="GetCustomerBalanceRowChangeEvent" msprop:Generator_RowClassName="GetCustomerBalanceRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" />
@@ -1155,7 +1324,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="StockInInvoice" msprop:Generator_TableClassName="StockInInvoiceDataTable" msprop:Generator_TableVarName="tableStockInInvoice" msprop:Generator_RowChangedName="StockInInvoiceRowChanged" msprop:Generator_TablePropName="StockInInvoice" msprop:Generator_RowDeletingName="StockInInvoiceRowDeleting" msprop:Generator_RowChangingName="StockInInvoiceRowChanging" msprop:Generator_RowEvHandlerName="StockInInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="StockInInvoiceRowDeleted" msprop:Generator_RowClassName="StockInInvoiceRow" msprop:Generator_UserTableName="StockInInvoice" msprop:Generator_RowEvArgName="StockInInvoiceRowChangeEvent">
+        <xs:element name="StockInInvoice" msprop:Generator_TableClassName="StockInInvoiceDataTable" msprop:Generator_TableVarName="tableStockInInvoice" msprop:Generator_TablePropName="StockInInvoice" msprop:Generator_RowDeletingName="StockInInvoiceRowDeleting" msprop:Generator_RowChangingName="StockInInvoiceRowChanging" msprop:Generator_RowEvHandlerName="StockInInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="StockInInvoiceRowDeleted" msprop:Generator_UserTableName="StockInInvoice" msprop:Generator_RowChangedName="StockInInvoiceRowChanged" msprop:Generator_RowEvArgName="StockInInvoiceRowChangeEvent" msprop:Generator_RowClassName="StockInInvoiceRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ProductName" msprop:Generator_ColumnVarNameInTable="columnProductName" msprop:Generator_ColumnPropNameInRow="ProductName" msprop:Generator_ColumnPropNameInTable="ProductNameColumn" msprop:Generator_UserColumnName="ProductName">
@@ -1240,10 +1409,20 @@
               </xs:element>
               <xs:element name="UpdatedDate" msprop:Generator_ColumnVarNameInTable="columnUpdatedDate" msprop:Generator_ColumnPropNameInRow="UpdatedDate" msprop:Generator_ColumnPropNameInTable="UpdatedDateColumn" msprop:Generator_UserColumnName="UpdatedDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="IsActive" msprop:Generator_ColumnVarNameInTable="columnIsActive" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" msprop:Generator_UserColumnName="IsActive" type="xs:boolean" />
+              <xs:element name="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_UserColumnName="Rate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="APIId" msprop:Generator_ColumnVarNameInTable="columnAPIId" msprop:Generator_ColumnPropNameInRow="APIId" msprop:Generator_ColumnPropNameInTable="APIIdColumn" msprop:Generator_UserColumnName="APIId" type="xs:int" minOccurs="0" />
+              <xs:element name="APIName" msprop:Generator_ColumnVarNameInTable="columnAPIName" msprop:Generator_ColumnPropNameInRow="APIName" msprop:Generator_ColumnPropNameInTable="APINameColumn" msprop:Generator_UserColumnName="APIName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StockInPrice" msprop:Generator_ColumnVarNameInTable="columnStockInPrice" msprop:Generator_ColumnPropNameInRow="StockInPrice" msprop:Generator_ColumnPropNameInTable="StockInPriceColumn" msprop:Generator_UserColumnName="StockInPrice" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ReceiveReport" msprop:Generator_TableClassName="ReceiveReportDataTable" msprop:Generator_TableVarName="tableReceiveReport" msprop:Generator_RowChangedName="ReceiveReportRowChanged" msprop:Generator_TablePropName="ReceiveReport" msprop:Generator_RowDeletingName="ReceiveReportRowDeleting" msprop:Generator_RowChangingName="ReceiveReportRowChanging" msprop:Generator_RowEvHandlerName="ReceiveReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiveReportRowDeleted" msprop:Generator_RowClassName="ReceiveReportRow" msprop:Generator_UserTableName="ReceiveReport" msprop:Generator_RowEvArgName="ReceiveReportRowChangeEvent">
+        <xs:element name="ReceiveReport" msprop:Generator_TableClassName="ReceiveReportDataTable" msprop:Generator_TableVarName="tableReceiveReport" msprop:Generator_TablePropName="ReceiveReport" msprop:Generator_RowDeletingName="ReceiveReportRowDeleting" msprop:Generator_RowChangingName="ReceiveReportRowChanging" msprop:Generator_RowEvHandlerName="ReceiveReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiveReportRowDeleted" msprop:Generator_UserTableName="ReceiveReport" msprop:Generator_RowChangedName="ReceiveReportRowChanged" msprop:Generator_RowEvArgName="ReceiveReportRowChangeEvent" msprop:Generator_RowClassName="ReceiveReportRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -1332,7 +1511,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PaymentVoucher" msprop:Generator_TableClassName="PaymentVoucherDataTable" msprop:Generator_TableVarName="tablePaymentVoucher" msprop:Generator_RowChangedName="PaymentVoucherRowChanged" msprop:Generator_TablePropName="PaymentVoucher" msprop:Generator_RowDeletingName="PaymentVoucherRowDeleting" msprop:Generator_RowChangingName="PaymentVoucherRowChanging" msprop:Generator_RowEvHandlerName="PaymentVoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="PaymentVoucherRowDeleted" msprop:Generator_RowClassName="PaymentVoucherRow" msprop:Generator_UserTableName="PaymentVoucher" msprop:Generator_RowEvArgName="PaymentVoucherRowChangeEvent">
+        <xs:element name="PaymentVoucher" msprop:Generator_TableClassName="PaymentVoucherDataTable" msprop:Generator_TableVarName="tablePaymentVoucher" msprop:Generator_TablePropName="PaymentVoucher" msprop:Generator_RowDeletingName="PaymentVoucherRowDeleting" msprop:Generator_RowChangingName="PaymentVoucherRowChanging" msprop:Generator_RowEvHandlerName="PaymentVoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="PaymentVoucherRowDeleted" msprop:Generator_UserTableName="PaymentVoucher" msprop:Generator_RowChangedName="PaymentVoucherRowChanged" msprop:Generator_RowEvArgName="PaymentVoucherRowChangeEvent" msprop:Generator_RowClassName="PaymentVoucherRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
@@ -1408,7 +1587,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ReceiveVoucher" msprop:Generator_TableClassName="ReceiveVoucherDataTable" msprop:Generator_TableVarName="tableReceiveVoucher" msprop:Generator_TablePropName="ReceiveVoucher" msprop:Generator_RowDeletingName="ReceiveVoucherRowDeleting" msprop:Generator_RowChangingName="ReceiveVoucherRowChanging" msprop:Generator_RowEvHandlerName="ReceiveVoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiveVoucherRowDeleted" msprop:Generator_UserTableName="ReceiveVoucher" msprop:Generator_RowChangedName="ReceiveVoucherRowChanged" msprop:Generator_RowEvArgName="ReceiveVoucherRowChangeEvent" msprop:Generator_RowClassName="ReceiveVoucherRow">
+        <xs:element name="ReceiveVoucher" msprop:Generator_TableClassName="ReceiveVoucherDataTable" msprop:Generator_TableVarName="tableReceiveVoucher" msprop:Generator_RowChangedName="ReceiveVoucherRowChanged" msprop:Generator_TablePropName="ReceiveVoucher" msprop:Generator_RowDeletingName="ReceiveVoucherRowDeleting" msprop:Generator_RowChangingName="ReceiveVoucherRowChanging" msprop:Generator_RowEvHandlerName="ReceiveVoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="ReceiveVoucherRowDeleted" msprop:Generator_RowClassName="ReceiveVoucherRow" msprop:Generator_UserTableName="ReceiveVoucher" msprop:Generator_RowEvArgName="ReceiveVoucherRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
@@ -1484,7 +1663,97 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="rptSalesInvoice" msprop:Generator_TableClassName="rptSalesInvoiceDataTable" msprop:Generator_TableVarName="tablerptSalesInvoice" msprop:Generator_RowChangedName="rptSalesInvoiceRowChanged" msprop:Generator_TablePropName="rptSalesInvoice" msprop:Generator_RowDeletingName="rptSalesInvoiceRowDeleting" msprop:Generator_RowChangingName="rptSalesInvoiceRowChanging" msprop:Generator_RowEvHandlerName="rptSalesInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="rptSalesInvoiceRowDeleted" msprop:Generator_RowClassName="rptSalesInvoiceRow" msprop:Generator_UserTableName="rptSalesInvoice" msprop:Generator_RowEvArgName="rptSalesInvoiceRowChangeEvent">
+        <xs:element name="SP_JournalVoucher" msprop:Generator_TableClassName="SP_JournalVoucherDataTable" msprop:Generator_TableVarName="tableSP_JournalVoucher" msprop:Generator_RowChangedName="SP_JournalVoucherRowChanged" msprop:Generator_TablePropName="SP_JournalVoucher" msprop:Generator_RowDeletingName="SP_JournalVoucherRowDeleting" msprop:Generator_RowChangingName="SP_JournalVoucherRowChanging" msprop:Generator_RowEvHandlerName="SP_JournalVoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_JournalVoucherRowDeleted" msprop:Generator_RowClassName="SP_JournalVoucherRow" msprop:Generator_UserTableName="SP_JournalVoucher" msprop:Generator_RowEvArgName="SP_JournalVoucherRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="VoucherTypeId" msprop:Generator_ColumnVarNameInTable="columnVoucherTypeId" msprop:Generator_ColumnPropNameInRow="VoucherTypeId" msprop:Generator_ColumnPropNameInTable="VoucherTypeIdColumn" msprop:Generator_UserColumnName="VoucherTypeId" type="xs:int" minOccurs="0" />
+              <xs:element name="VoucherNo" msprop:Generator_ColumnVarNameInTable="columnVoucherNo" msprop:Generator_ColumnPropNameInRow="VoucherNo" msprop:Generator_ColumnPropNameInTable="VoucherNoColumn" msprop:Generator_UserColumnName="VoucherNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" minOccurs="0" />
+              <xs:element name="Debit" msprop:Generator_ColumnVarNameInTable="columnDebit" msprop:Generator_ColumnPropNameInRow="Debit" msprop:Generator_ColumnPropNameInTable="DebitColumn" msprop:Generator_UserColumnName="Debit" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Credit" msprop:Generator_ColumnVarNameInTable="columnCredit" msprop:Generator_ColumnPropNameInRow="Credit" msprop:Generator_ColumnPropNameInTable="CreditColumn" msprop:Generator_UserColumnName="Credit" type="xs:decimal" minOccurs="0" />
+              <xs:element name="YearId" msprop:Generator_ColumnVarNameInTable="columnYearId" msprop:Generator_ColumnPropNameInRow="YearId" msprop:Generator_ColumnPropNameInTable="YearIdColumn" msprop:Generator_UserColumnName="YearId" type="xs:int" minOccurs="0" />
+              <xs:element name="InvoiceNo" msprop:Generator_ColumnVarNameInTable="columnInvoiceNo" msprop:Generator_ColumnPropNameInRow="InvoiceNo" msprop:Generator_ColumnPropNameInTable="InvoiceNoColumn" msprop:Generator_UserColumnName="InvoiceNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChequeNo" msprop:Generator_ColumnVarNameInTable="columnChequeNo" msprop:Generator_ColumnPropNameInRow="ChequeNo" msprop:Generator_ColumnPropNameInTable="ChequeNoColumn" msprop:Generator_UserColumnName="ChequeNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChequeDate" msprop:Generator_ColumnVarNameInTable="columnChequeDate" msprop:Generator_ColumnPropNameInRow="ChequeDate" msprop:Generator_ColumnPropNameInTable="ChequeDateColumn" msprop:Generator_UserColumnName="ChequeDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ExtraDate" msprop:Generator_ColumnVarNameInTable="columnExtraDate" msprop:Generator_ColumnPropNameInRow="ExtraDate" msprop:Generator_ColumnPropNameInTable="ExtraDateColumn" msprop:Generator_UserColumnName="ExtraDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Extra1" msprop:Generator_ColumnVarNameInTable="columnExtra1" msprop:Generator_ColumnPropNameInRow="Extra1" msprop:Generator_ColumnPropNameInTable="Extra1Column" msprop:Generator_UserColumnName="Extra1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Extra2" msprop:Generator_ColumnVarNameInTable="columnExtra2" msprop:Generator_ColumnPropNameInRow="Extra2" msprop:Generator_ColumnPropNameInTable="Extra2Column" msprop:Generator_UserColumnName="Extra2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IsActive" msprop:Generator_ColumnVarNameInTable="columnIsActive" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" msprop:Generator_UserColumnName="IsActive" type="xs:boolean" />
+              <xs:element name="IsLastYear" msprop:Generator_ColumnVarNameInTable="columnIsLastYear" msprop:Generator_ColumnPropNameInRow="IsLastYear" msprop:Generator_ColumnPropNameInTable="IsLastYearColumn" msprop:Generator_UserColumnName="IsLastYear" type="xs:boolean" minOccurs="0" />
+              <xs:element name="MasterId" msprop:Generator_ColumnVarNameInTable="columnMasterId" msprop:Generator_ColumnPropNameInRow="MasterId" msprop:Generator_ColumnPropNameInTable="MasterIdColumn" msprop:Generator_UserColumnName="MasterId" type="xs:int" minOccurs="0" />
+              <xs:element name="CreatedDate" msprop:Generator_ColumnVarNameInTable="columnCreatedDate" msprop:Generator_ColumnPropNameInRow="CreatedDate" msprop:Generator_ColumnPropNameInTable="CreatedDateColumn" msprop:Generator_UserColumnName="CreatedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CreatedBy" msprop:Generator_ColumnVarNameInTable="columnCreatedBy" msprop:Generator_ColumnPropNameInRow="CreatedBy" msprop:Generator_ColumnPropNameInTable="CreatedByColumn" msprop:Generator_UserColumnName="CreatedBy" type="xs:int" minOccurs="0" />
+              <xs:element name="LedgerName" msprop:Generator_ColumnVarNameInTable="columnLedgerName" msprop:Generator_ColumnPropNameInRow="LedgerName" msprop:Generator_ColumnPropNameInTable="LedgerNameColumn" msprop:Generator_UserColumnName="LedgerName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_UserColumnName="Address" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_UserColumnName="Phone" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Mobile" msprop:Generator_ColumnVarNameInTable="columnMobile" msprop:Generator_ColumnPropNameInRow="Mobile" msprop:Generator_ColumnPropNameInTable="MobileColumn" msprop:Generator_UserColumnName="Mobile" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="rptSalesInvoice" msprop:Generator_TableClassName="rptSalesInvoiceDataTable" msprop:Generator_TableVarName="tablerptSalesInvoice" msprop:Generator_TablePropName="rptSalesInvoice" msprop:Generator_RowDeletingName="rptSalesInvoiceRowDeleting" msprop:Generator_RowChangingName="rptSalesInvoiceRowChanging" msprop:Generator_RowEvHandlerName="rptSalesInvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="rptSalesInvoiceRowDeleted" msprop:Generator_UserTableName="rptSalesInvoice" msprop:Generator_RowChangedName="rptSalesInvoiceRowChanged" msprop:Generator_RowEvArgName="rptSalesInvoiceRowChangeEvent" msprop:Generator_RowClassName="rptSalesInvoiceRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AdditionalCost" msprop:Generator_ColumnVarNameInTable="columnAdditionalCost" msprop:Generator_ColumnPropNameInRow="AdditionalCost" msprop:Generator_ColumnPropNameInTable="AdditionalCostColumn" msprop:Generator_UserColumnName="AdditionalCost" type="xs:decimal" />
@@ -1506,13 +1775,7 @@
               <xs:element name="GrandTotal" msprop:Generator_ColumnVarNameInTable="columnGrandTotal" msprop:Generator_ColumnPropNameInRow="GrandTotal" msprop:Generator_ColumnPropNameInTable="GrandTotalColumn" msprop:Generator_UserColumnName="GrandTotal" type="xs:decimal" />
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
               <xs:element name="PricingDate" msprop:Generator_ColumnVarNameInTable="columnPricingDate" msprop:Generator_ColumnPropNameInRow="PricingDate" msprop:Generator_ColumnPropNameInTable="PricingDateColumn" msprop:Generator_UserColumnName="PricingDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="SalesBy" msprop:Generator_ColumnVarNameInTable="columnSalesBy" msprop:Generator_ColumnPropNameInRow="SalesBy" msprop:Generator_ColumnPropNameInTable="SalesByColumn" msprop:Generator_UserColumnName="SalesBy" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
+              <xs:element name="SalesBy" msprop:Generator_ColumnVarNameInTable="columnSalesBy" msprop:Generator_ColumnPropNameInRow="SalesBy" msprop:Generator_ColumnPropNameInTable="SalesByColumn" msprop:Generator_UserColumnName="SalesBy" type="xs:int" minOccurs="0" />
               <xs:element name="SalesDate" msprop:Generator_ColumnVarNameInTable="columnSalesDate" msprop:Generator_ColumnPropNameInRow="SalesDate" msprop:Generator_ColumnPropNameInTable="SalesDateColumn" msprop:Generator_UserColumnName="SalesDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="SalesInvoice" msprop:Generator_ColumnVarNameInTable="columnSalesInvoice" msprop:Generator_ColumnPropNameInRow="SalesInvoice" msprop:Generator_ColumnPropNameInTable="SalesInvoiceColumn" msprop:Generator_UserColumnName="SalesInvoice">
                 <xs:simpleType>
@@ -1576,6 +1839,14 @@
               </xs:element>
               <xs:element name="ProductId" msprop:Generator_ColumnVarNameInTable="columnProductId" msprop:Generator_ColumnPropNameInRow="ProductId" msprop:Generator_ColumnPropNameInTable="ProductIdColumn" msprop:Generator_UserColumnName="ProductId" type="xs:int" />
               <xs:element name="SizeId" msprop:Generator_ColumnVarNameInTable="columnSizeId" msprop:Generator_ColumnPropNameInRow="SizeId" msprop:Generator_ColumnPropNameInTable="SizeIdColumn" msprop:Generator_UserColumnName="SizeId" type="xs:int" minOccurs="0" />
+              <xs:element name="APIId" msprop:Generator_ColumnVarNameInTable="columnAPIId" msprop:Generator_ColumnPropNameInRow="APIId" msprop:Generator_ColumnPropNameInTable="APIIdColumn" msprop:Generator_UserColumnName="APIId" type="xs:int" minOccurs="0" />
+              <xs:element name="APIName" msprop:Generator_ColumnVarNameInTable="columnAPIName" msprop:Generator_ColumnPropNameInRow="APIName" msprop:Generator_ColumnPropNameInTable="APINameColumn" msprop:Generator_UserColumnName="APIName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="SizeName" msprop:Generator_ColumnVarNameInTable="columnSizeName" msprop:Generator_ColumnPropNameInRow="SizeName" msprop:Generator_ColumnPropNameInTable="SizeNameColumn" msprop:Generator_UserColumnName="SizeName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -1778,13 +2049,260 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SP_JournalVoucher" msprop:Generator_TableClassName="SP_JournalVoucherDataTable" msprop:Generator_TableVarName="tableSP_JournalVoucher" msprop:Generator_TablePropName="SP_JournalVoucher" msprop:Generator_RowDeletingName="SP_JournalVoucherRowDeleting" msprop:Generator_RowChangingName="SP_JournalVoucherRowChanging" msprop:Generator_RowEvHandlerName="SP_JournalVoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_JournalVoucherRowDeleted" msprop:Generator_UserTableName="SP_JournalVoucher" msprop:Generator_RowChangedName="SP_JournalVoucherRowChanged" msprop:Generator_RowEvArgName="SP_JournalVoucherRowChangeEvent" msprop:Generator_RowClassName="SP_JournalVoucherRow">
+        <xs:element name="rptPurchaseChallan" msprop:Generator_TableClassName="rptPurchaseChallanDataTable" msprop:Generator_TableVarName="tablerptPurchaseChallan" msprop:Generator_TablePropName="rptPurchaseChallan" msprop:Generator_RowDeletingName="rptPurchaseChallanRowDeleting" msprop:Generator_RowChangingName="rptPurchaseChallanRowChanging" msprop:Generator_RowEvHandlerName="rptPurchaseChallanRowChangeEventHandler" msprop:Generator_RowDeletedName="rptPurchaseChallanRowDeleted" msprop:Generator_UserTableName="rptPurchaseChallan" msprop:Generator_RowChangedName="rptPurchaseChallanRowChanged" msprop:Generator_RowEvArgName="rptPurchaseChallanRowChangeEvent" msprop:Generator_RowClassName="rptPurchaseChallanRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
-              <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="VoucherTypeId" msprop:Generator_ColumnVarNameInTable="columnVoucherTypeId" msprop:Generator_ColumnPropNameInRow="VoucherTypeId" msprop:Generator_ColumnPropNameInTable="VoucherTypeIdColumn" msprop:Generator_UserColumnName="VoucherTypeId" type="xs:int" minOccurs="0" />
-              <xs:element name="VoucherNo" msprop:Generator_ColumnVarNameInTable="columnVoucherNo" msprop:Generator_ColumnPropNameInRow="VoucherNo" msprop:Generator_ColumnPropNameInTable="VoucherNoColumn" msprop:Generator_UserColumnName="VoucherNo" minOccurs="0">
+              <xs:element name="SizeName" msprop:Generator_ColumnVarNameInTable="columnSizeName" msprop:Generator_ColumnPropNameInRow="SizeName" msprop:Generator_ColumnPropNameInTable="SizeNameColumn" msprop:Generator_UserColumnName="SizeName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BrandName" msprop:Generator_ColumnVarNameInTable="columnBrandName" msprop:Generator_ColumnPropNameInRow="BrandName" msprop:Generator_ColumnPropNameInTable="BrandNameColumn" msprop:Generator_UserColumnName="BrandName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="APIName" msprop:Generator_ColumnVarNameInTable="columnAPIName" msprop:Generator_ColumnPropNameInRow="APIName" msprop:Generator_ColumnPropNameInTable="APINameColumn" msprop:Generator_UserColumnName="APIName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AdditionalCost" msprop:Generator_ColumnVarNameInTable="columnAdditionalCost" msprop:Generator_ColumnPropNameInRow="AdditionalCost" msprop:Generator_ColumnPropNameInTable="AdditionalCostColumn" msprop:Generator_UserColumnName="AdditionalCost" type="xs:decimal" />
+              <xs:element name="InvoiceNoPaper" msprop:Generator_ColumnVarNameInTable="columnInvoiceNoPaper" msprop:Generator_ColumnPropNameInRow="InvoiceNoPaper" msprop:Generator_ColumnPropNameInTable="InvoiceNoPaperColumn" msprop:Generator_UserColumnName="InvoiceNoPaper" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BillDiscount" msprop:Generator_ColumnVarNameInTable="columnBillDiscount" msprop:Generator_ColumnPropNameInRow="BillDiscount" msprop:Generator_ColumnPropNameInTable="BillDiscountColumn" msprop:Generator_UserColumnName="BillDiscount" type="xs:decimal" />
+              <xs:element name="Notes" msprop:Generator_ColumnVarNameInTable="columnNotes" msprop:Generator_ColumnPropNameInRow="Notes" msprop:Generator_ColumnPropNameInTable="NotesColumn" msprop:Generator_UserColumnName="Notes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GrandTotal" msprop:Generator_ColumnVarNameInTable="columnGrandTotal" msprop:Generator_ColumnPropNameInRow="GrandTotal" msprop:Generator_ColumnPropNameInTable="GrandTotalColumn" msprop:Generator_UserColumnName="GrandTotal" type="xs:decimal" />
+              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="InvoiceDate" msprop:Generator_ColumnVarNameInTable="columnInvoiceDate" msprop:Generator_ColumnPropNameInRow="InvoiceDate" msprop:Generator_ColumnPropNameInTable="InvoiceDateColumn" msprop:Generator_UserColumnName="InvoiceDate" type="xs:dateTime" />
+              <xs:element name="AdditionalCostPurpose" msprop:Generator_ColumnVarNameInTable="columnAdditionalCostPurpose" msprop:Generator_ColumnPropNameInRow="AdditionalCostPurpose" msprop:Generator_ColumnPropNameInTable="AdditionalCostPurposeColumn" msprop:Generator_UserColumnName="AdditionalCostPurpose" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="InvoiceNo" msprop:Generator_ColumnVarNameInTable="columnInvoiceNo" msprop:Generator_ColumnPropNameInRow="InvoiceNo" msprop:Generator_ColumnPropNameInTable="InvoiceNoColumn" msprop:Generator_UserColumnName="InvoiceNo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalAmount" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:decimal" />
+              <xs:element name="TransportNo" msprop:Generator_ColumnVarNameInTable="columnTransportNo" msprop:Generator_ColumnPropNameInRow="TransportNo" msprop:Generator_ColumnPropNameInTable="TransportNoColumn" msprop:Generator_UserColumnName="TransportNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TransportType" msprop:Generator_ColumnVarNameInTable="columnTransportType" msprop:Generator_ColumnPropNameInRow="TransportType" msprop:Generator_ColumnPropNameInTable="TransportTypeColumn" msprop:Generator_UserColumnName="TransportType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GrandTotalInWord" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnGrandTotalInWord" msprop:Generator_ColumnPropNameInRow="GrandTotalInWord" msprop:Generator_ColumnPropNameInTable="GrandTotalInWordColumn" msprop:Generator_UserColumnName="GrandTotalInWord" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1035" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Id1" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId1" msprop:Generator_ColumnPropNameInRow="Id1" msprop:Generator_ColumnPropNameInTable="Id1Column" msprop:Generator_UserColumnName="Id1" type="xs:int" />
+              <xs:element name="ReceiveMasterId" msprop:Generator_ColumnVarNameInTable="columnReceiveMasterId" msprop:Generator_ColumnPropNameInRow="ReceiveMasterId" msprop:Generator_ColumnPropNameInTable="ReceiveMasterIdColumn" msprop:Generator_UserColumnName="ReceiveMasterId" type="xs:int" />
+              <xs:element name="ProductId" msprop:Generator_ColumnVarNameInTable="columnProductId" msprop:Generator_ColumnPropNameInRow="ProductId" msprop:Generator_ColumnPropNameInTable="ProductIdColumn" msprop:Generator_UserColumnName="ProductId" type="xs:int" />
+              <xs:element name="WarehouseId" msprop:Generator_ColumnVarNameInTable="columnWarehouseId" msprop:Generator_ColumnPropNameInRow="WarehouseId" msprop:Generator_ColumnPropNameInTable="WarehouseIdColumn" msprop:Generator_UserColumnName="WarehouseId" type="xs:int" minOccurs="0" />
+              <xs:element name="SizeId" msprop:Generator_ColumnVarNameInTable="columnSizeId" msprop:Generator_ColumnPropNameInRow="SizeId" msprop:Generator_ColumnPropNameInTable="SizeIdColumn" msprop:Generator_UserColumnName="SizeId" type="xs:int" minOccurs="0" />
+              <xs:element name="BrandId" msprop:Generator_ColumnVarNameInTable="columnBrandId" msprop:Generator_ColumnPropNameInRow="BrandId" msprop:Generator_ColumnPropNameInTable="BrandIdColumn" msprop:Generator_UserColumnName="BrandId" type="xs:int" minOccurs="0" />
+              <xs:element name="APIId" msprop:Generator_ColumnVarNameInTable="columnAPIId" msprop:Generator_ColumnPropNameInRow="APIId" msprop:Generator_ColumnPropNameInTable="APIIdColumn" msprop:Generator_UserColumnName="APIId" type="xs:int" minOccurs="0" />
+              <xs:element name="Qty" msprop:Generator_ColumnVarNameInTable="columnQty" msprop:Generator_ColumnPropNameInRow="Qty" msprop:Generator_ColumnPropNameInTable="QtyColumn" msprop:Generator_UserColumnName="Qty" type="xs:decimal" />
+              <xs:element name="Rate" msprop:Generator_ColumnVarNameInTable="columnRate" msprop:Generator_ColumnPropNameInRow="Rate" msprop:Generator_ColumnPropNameInTable="RateColumn" msprop:Generator_UserColumnName="Rate" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Amount" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:decimal" />
+              <xs:element name="CreatedBy" msprop:Generator_ColumnVarNameInTable="columnCreatedBy" msprop:Generator_ColumnPropNameInRow="CreatedBy" msprop:Generator_ColumnPropNameInTable="CreatedByColumn" msprop:Generator_UserColumnName="CreatedBy" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="24" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreatedDate" msprop:Generator_ColumnVarNameInTable="columnCreatedDate" msprop:Generator_ColumnPropNameInRow="CreatedDate" msprop:Generator_ColumnPropNameInTable="CreatedDateColumn" msprop:Generator_UserColumnName="CreatedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UpdatedBy" msprop:Generator_ColumnVarNameInTable="columnUpdatedBy" msprop:Generator_ColumnPropNameInRow="UpdatedBy" msprop:Generator_ColumnPropNameInTable="UpdatedByColumn" msprop:Generator_UserColumnName="UpdatedBy" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="24" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UpdatedDate" msprop:Generator_ColumnVarNameInTable="columnUpdatedDate" msprop:Generator_ColumnPropNameInRow="UpdatedDate" msprop:Generator_ColumnPropNameInTable="UpdatedDateColumn" msprop:Generator_UserColumnName="UpdatedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="IsActive" msprop:Generator_ColumnVarNameInTable="columnIsActive" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" msprop:Generator_UserColumnName="IsActive" type="xs:boolean" />
+              <xs:element name="Id2" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId2" msprop:Generator_ColumnPropNameInRow="Id2" msprop:Generator_ColumnPropNameInTable="Id2Column" msprop:Generator_UserColumnName="Id2" type="xs:int" />
+              <xs:element name="Code" msprop:Generator_ColumnVarNameInTable="columnCode" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_UserColumnName="Code">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProductName" msprop:Generator_ColumnVarNameInTable="columnProductName" msprop:Generator_ColumnPropNameInRow="ProductName" msprop:Generator_ColumnPropNameInTable="ProductNameColumn" msprop:Generator_UserColumnName="ProductName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProductNameBangla" msprop:Generator_ColumnVarNameInTable="columnProductNameBangla" msprop:Generator_ColumnPropNameInRow="ProductNameBangla" msprop:Generator_ColumnPropNameInTable="ProductNameBanglaColumn" msprop:Generator_UserColumnName="ProductNameBangla" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CategoryId" msprop:Generator_ColumnVarNameInTable="columnCategoryId" msprop:Generator_ColumnPropNameInRow="CategoryId" msprop:Generator_ColumnPropNameInTable="CategoryIdColumn" msprop:Generator_UserColumnName="CategoryId" type="xs:int" minOccurs="0" />
+              <xs:element name="ProductType" msprop:Generator_ColumnVarNameInTable="columnProductType" msprop:Generator_ColumnPropNameInRow="ProductType" msprop:Generator_ColumnPropNameInTable="ProductTypeColumn" msprop:Generator_UserColumnName="ProductType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ProductTypeId" msprop:Generator_ColumnVarNameInTable="columnProductTypeId" msprop:Generator_ColumnPropNameInRow="ProductTypeId" msprop:Generator_ColumnPropNameInTable="ProductTypeIdColumn" msprop:Generator_UserColumnName="ProductTypeId" type="xs:int" minOccurs="0" />
+              <xs:element name="MinStock" msprop:Generator_ColumnVarNameInTable="columnMinStock" msprop:Generator_ColumnPropNameInRow="MinStock" msprop:Generator_ColumnPropNameInTable="MinStockColumn" msprop:Generator_UserColumnName="MinStock" type="xs:int" minOccurs="0" />
+              <xs:element name="TaxId" msprop:Generator_ColumnVarNameInTable="columnTaxId" msprop:Generator_ColumnPropNameInRow="TaxId" msprop:Generator_ColumnPropNameInTable="TaxIdColumn" msprop:Generator_UserColumnName="TaxId" type="xs:int" minOccurs="0" />
+              <xs:element name="MaxStock" msprop:Generator_ColumnVarNameInTable="columnMaxStock" msprop:Generator_ColumnPropNameInRow="MaxStock" msprop:Generator_ColumnPropNameInTable="MaxStockColumn" msprop:Generator_UserColumnName="MaxStock" type="xs:int" minOccurs="0" />
+              <xs:element name="Unit" msprop:Generator_ColumnVarNameInTable="columnUnit" msprop:Generator_ColumnPropNameInRow="Unit" msprop:Generator_ColumnPropNameInTable="UnitColumn" msprop:Generator_UserColumnName="Unit" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ReorderLevel" msprop:Generator_ColumnVarNameInTable="columnReorderLevel" msprop:Generator_ColumnPropNameInRow="ReorderLevel" msprop:Generator_ColumnPropNameInTable="ReorderLevelColumn" msprop:Generator_UserColumnName="ReorderLevel" type="xs:int" minOccurs="0" />
+              <xs:element name="CreatedBy1" msprop:Generator_ColumnVarNameInTable="columnCreatedBy1" msprop:Generator_ColumnPropNameInRow="CreatedBy1" msprop:Generator_ColumnPropNameInTable="CreatedBy1Column" msprop:Generator_UserColumnName="CreatedBy1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="24" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreatedDate1" msprop:Generator_ColumnVarNameInTable="columnCreatedDate1" msprop:Generator_ColumnPropNameInRow="CreatedDate1" msprop:Generator_ColumnPropNameInTable="CreatedDate1Column" msprop:Generator_UserColumnName="CreatedDate1" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UpdateBy" msprop:Generator_ColumnVarNameInTable="columnUpdateBy" msprop:Generator_ColumnPropNameInRow="UpdateBy" msprop:Generator_ColumnPropNameInTable="UpdateByColumn" msprop:Generator_UserColumnName="UpdateBy" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="24" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UpdateDate" msprop:Generator_ColumnVarNameInTable="columnUpdateDate" msprop:Generator_ColumnPropNameInRow="UpdateDate" msprop:Generator_ColumnPropNameInTable="UpdateDateColumn" msprop:Generator_UserColumnName="UpdateDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="IsActive1" msprop:Generator_ColumnVarNameInTable="columnIsActive1" msprop:Generator_ColumnPropNameInRow="IsActive1" msprop:Generator_ColumnPropNameInTable="IsActive1Column" msprop:Generator_UserColumnName="IsActive1" type="xs:boolean" />
+              <xs:element name="Id3" msprop:Generator_ColumnVarNameInTable="columnId3" msprop:Generator_ColumnPropNameInRow="Id3" msprop:Generator_ColumnPropNameInTable="Id3Column" msprop:Generator_UserColumnName="Id3" type="xs:int" />
+              <xs:element name="Code1" msprop:Generator_ColumnVarNameInTable="columnCode1" msprop:Generator_ColumnPropNameInRow="Code1" msprop:Generator_ColumnPropNameInTable="Code1Column" msprop:Generator_UserColumnName="Code1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Address" msprop:Generator_ColumnVarNameInTable="columnAddress" msprop:Generator_ColumnPropNameInRow="Address" msprop:Generator_ColumnPropNameInTable="AddressColumn" msprop:Generator_UserColumnName="Address" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ContactPersonName" msprop:Generator_ColumnVarNameInTable="columnContactPersonName" msprop:Generator_ColumnPropNameInRow="ContactPersonName" msprop:Generator_ColumnPropNameInTable="ContactPersonNameColumn" msprop:Generator_UserColumnName="ContactPersonName" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ContactPersonPhone" msprop:Generator_ColumnVarNameInTable="columnContactPersonPhone" msprop:Generator_ColumnPropNameInRow="ContactPersonPhone" msprop:Generator_ColumnPropNameInTable="ContactPersonPhoneColumn" msprop:Generator_UserColumnName="ContactPersonPhone" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="City" msprop:Generator_ColumnVarNameInTable="columnCity" msprop:Generator_ColumnPropNameInRow="City" msprop:Generator_ColumnPropNameInTable="CityColumn" msprop:Generator_UserColumnName="City" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Phone" msprop:Generator_ColumnVarNameInTable="columnPhone" msprop:Generator_ColumnPropNameInRow="Phone" msprop:Generator_ColumnPropNameInTable="PhoneColumn" msprop:Generator_UserColumnName="Phone" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Web" msprop:Generator_ColumnVarNameInTable="columnWeb" msprop:Generator_ColumnPropNameInRow="Web" msprop:Generator_ColumnPropNameInTable="WebColumn" msprop:Generator_UserColumnName="Web" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SupplierType" msprop:Generator_ColumnVarNameInTable="columnSupplierType" msprop:Generator_ColumnPropNameInRow="SupplierType" msprop:Generator_ColumnPropNameInTable="SupplierTypeColumn" msprop:Generator_UserColumnName="SupplierType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Creator" msprop:Generator_ColumnVarNameInTable="columnCreator" msprop:Generator_ColumnPropNameInRow="Creator" msprop:Generator_ColumnPropNameInTable="CreatorColumn" msprop:Generator_UserColumnName="Creator" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreationDate" msprop:Generator_ColumnVarNameInTable="columnCreationDate" msprop:Generator_ColumnPropNameInRow="CreationDate" msprop:Generator_ColumnPropNameInTable="CreationDateColumn" msprop:Generator_UserColumnName="CreationDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UpdateBy1" msprop:Generator_ColumnVarNameInTable="columnUpdateBy1" msprop:Generator_ColumnPropNameInRow="UpdateBy1" msprop:Generator_ColumnPropNameInTable="UpdateBy1Column" msprop:Generator_UserColumnName="UpdateBy1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UpdateDate1" msprop:Generator_ColumnVarNameInTable="columnUpdateDate1" msprop:Generator_ColumnPropNameInRow="UpdateDate1" msprop:Generator_ColumnPropNameInTable="UpdateDate1Column" msprop:Generator_UserColumnName="UpdateDate1" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="IsActive2" msprop:Generator_ColumnVarNameInTable="columnIsActive2" msprop:Generator_ColumnPropNameInRow="IsActive2" msprop:Generator_ColumnPropNameInTable="IsActive2Column" msprop:Generator_UserColumnName="IsActive2" type="xs:boolean" />
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
@@ -1792,9 +2310,24 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="rptPaymentInitateVoucher" msprop:Generator_TableClassName="rptPaymentInitateVoucherDataTable" msprop:Generator_TableVarName="tablerptPaymentInitateVoucher" msprop:Generator_RowChangedName="rptPaymentInitateVoucherRowChanged" msprop:Generator_TablePropName="rptPaymentInitateVoucher" msprop:Generator_RowDeletingName="rptPaymentInitateVoucherRowDeleting" msprop:Generator_RowChangingName="rptPaymentInitateVoucherRowChanging" msprop:Generator_RowEvHandlerName="rptPaymentInitateVoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="rptPaymentInitateVoucherRowDeleted" msprop:Generator_RowClassName="rptPaymentInitateVoucherRow" msprop:Generator_UserTableName="rptPaymentInitateVoucher" msprop:Generator_RowEvArgName="rptPaymentInitateVoucherRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PostingDate" msprop:Generator_ColumnVarNameInTable="columnPostingDate" msprop:Generator_ColumnPropNameInRow="PostingDate" msprop:Generator_ColumnPropNameInTable="PostingDateColumn" msprop:Generator_UserColumnName="PostingDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="Debit" msprop:Generator_ColumnVarNameInTable="columnDebit" msprop:Generator_ColumnPropNameInRow="Debit" msprop:Generator_ColumnPropNameInTable="DebitColumn" msprop:Generator_UserColumnName="Debit" type="xs:decimal" minOccurs="0" />
               <xs:element name="Credit" msprop:Generator_ColumnVarNameInTable="columnCredit" msprop:Generator_ColumnPropNameInRow="Credit" msprop:Generator_ColumnPropNameInTable="CreditColumn" msprop:Generator_UserColumnName="Credit" type="xs:decimal" minOccurs="0" />
-              <xs:element name="YearId" msprop:Generator_ColumnVarNameInTable="columnYearId" msprop:Generator_ColumnPropNameInRow="YearId" msprop:Generator_ColumnPropNameInTable="YearIdColumn" msprop:Generator_UserColumnName="YearId" type="xs:int" minOccurs="0" />
+              <xs:element name="ChequeDate" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnChequeDate" msprop:Generator_ColumnPropNameInRow="ChequeDate" msprop:Generator_ColumnPropNameInTable="ChequeDateColumn" msprop:Generator_UserColumnName="ChequeDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ChequeNo" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnChequeNo" msprop:Generator_ColumnPropNameInRow="ChequeNo" msprop:Generator_ColumnPropNameInTable="ChequeNoColumn" msprop:Generator_UserColumnName="ChequeNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CreatedBy" msprop:Generator_ColumnVarNameInTable="columnCreatedBy" msprop:Generator_ColumnPropNameInRow="CreatedBy" msprop:Generator_ColumnPropNameInTable="CreatedByColumn" msprop:Generator_UserColumnName="CreatedBy" type="xs:int" minOccurs="0" />
               <xs:element name="InvoiceNo" msprop:Generator_ColumnVarNameInTable="columnInvoiceNo" msprop:Generator_ColumnPropNameInRow="InvoiceNo" msprop:Generator_ColumnPropNameInTable="InvoiceNoColumn" msprop:Generator_UserColumnName="InvoiceNo" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -1802,35 +2335,8 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="ChequeNo" msprop:Generator_ColumnVarNameInTable="columnChequeNo" msprop:Generator_ColumnPropNameInRow="ChequeNo" msprop:Generator_ColumnPropNameInTable="ChequeNoColumn" msprop:Generator_UserColumnName="ChequeNo" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="ChequeDate" msprop:Generator_ColumnVarNameInTable="columnChequeDate" msprop:Generator_ColumnPropNameInRow="ChequeDate" msprop:Generator_ColumnPropNameInTable="ChequeDateColumn" msprop:Generator_UserColumnName="ChequeDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="ExtraDate" msprop:Generator_ColumnVarNameInTable="columnExtraDate" msprop:Generator_ColumnPropNameInRow="ExtraDate" msprop:Generator_ColumnPropNameInTable="ExtraDateColumn" msprop:Generator_UserColumnName="ExtraDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="Extra1" msprop:Generator_ColumnVarNameInTable="columnExtra1" msprop:Generator_ColumnPropNameInRow="Extra1" msprop:Generator_ColumnPropNameInTable="Extra1Column" msprop:Generator_UserColumnName="Extra1" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="Extra2" msprop:Generator_ColumnVarNameInTable="columnExtra2" msprop:Generator_ColumnPropNameInRow="Extra2" msprop:Generator_ColumnPropNameInTable="Extra2Column" msprop:Generator_UserColumnName="Extra2" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="IsActive" msprop:Generator_ColumnVarNameInTable="columnIsActive" msprop:Generator_ColumnPropNameInRow="IsActive" msprop:Generator_ColumnPropNameInTable="IsActiveColumn" msprop:Generator_UserColumnName="IsActive" type="xs:boolean" />
-              <xs:element name="IsLastYear" msprop:Generator_ColumnVarNameInTable="columnIsLastYear" msprop:Generator_ColumnPropNameInRow="IsLastYear" msprop:Generator_ColumnPropNameInTable="IsLastYearColumn" msprop:Generator_UserColumnName="IsLastYear" type="xs:boolean" minOccurs="0" />
-              <xs:element name="MasterId" msprop:Generator_ColumnVarNameInTable="columnMasterId" msprop:Generator_ColumnPropNameInRow="MasterId" msprop:Generator_ColumnPropNameInTable="MasterIdColumn" msprop:Generator_UserColumnName="MasterId" type="xs:int" minOccurs="0" />
-              <xs:element name="CreatedDate" msprop:Generator_ColumnVarNameInTable="columnCreatedDate" msprop:Generator_ColumnPropNameInRow="CreatedDate" msprop:Generator_ColumnPropNameInTable="CreatedDateColumn" msprop:Generator_UserColumnName="CreatedDate" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="CreatedBy" msprop:Generator_ColumnVarNameInTable="columnCreatedBy" msprop:Generator_ColumnPropNameInRow="CreatedBy" msprop:Generator_ColumnPropNameInTable="CreatedByColumn" msprop:Generator_UserColumnName="CreatedBy" type="xs:int" minOccurs="0" />
-              <xs:element name="LedgerName" msprop:Generator_ColumnVarNameInTable="columnLedgerName" msprop:Generator_ColumnPropNameInRow="LedgerName" msprop:Generator_ColumnPropNameInTable="LedgerNameColumn" msprop:Generator_UserColumnName="LedgerName" minOccurs="0">
+              <xs:element name="VoucherTypeId" msprop:Generator_ColumnVarNameInTable="columnVoucherTypeId" msprop:Generator_ColumnPropNameInRow="VoucherTypeId" msprop:Generator_ColumnPropNameInTable="VoucherTypeIdColumn" msprop:Generator_UserColumnName="VoucherTypeId" type="xs:int" />
+              <xs:element name="LedgerName" msprop:Generator_ColumnVarNameInTable="columnLedgerName" msprop:Generator_ColumnPropNameInRow="LedgerName" msprop:Generator_ColumnPropNameInTable="LedgerNameColumn" msprop:Generator_UserColumnName="LedgerName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
@@ -1865,6 +2371,77 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="Extra1" msprop:Generator_ColumnVarNameInTable="columnExtra1" msprop:Generator_ColumnPropNameInRow="Extra1" msprop:Generator_ColumnPropNameInTable="Extra1Column" msprop:Generator_UserColumnName="Extra1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Extra2" msprop:Generator_ColumnVarNameInTable="columnExtra2" msprop:Generator_ColumnPropNameInRow="Extra2" msprop:Generator_ColumnPropNameInTable="Extra2Column" msprop:Generator_UserColumnName="Extra2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ExtraDate" msprop:Generator_ColumnVarNameInTable="columnExtraDate" msprop:Generator_ColumnPropNameInRow="ExtraDate" msprop:Generator_ColumnPropNameInTable="ExtraDateColumn" msprop:Generator_UserColumnName="ExtraDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="LedgerDate" msprop:Generator_ColumnVarNameInTable="columnLedgerDate" msprop:Generator_ColumnPropNameInRow="LedgerDate" msprop:Generator_ColumnPropNameInTable="LedgerDateColumn" msprop:Generator_UserColumnName="LedgerDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Narration" msprop:Generator_ColumnVarNameInTable="columnNarration" msprop:Generator_ColumnPropNameInRow="Narration" msprop:Generator_ColumnPropNameInTable="NarrationColumn" msprop:Generator_UserColumnName="Narration" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VoucherNo" msprop:Generator_ColumnVarNameInTable="columnVoucherNo" msprop:Generator_ColumnPropNameInRow="VoucherNo" msprop:Generator_ColumnPropNameInTable="VoucherNoColumn" msprop:Generator_UserColumnName="VoucherNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalAmount" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="rptUnApprovedPaymentList" msprop:Generator_TableClassName="rptUnApprovedPaymentListDataTable" msprop:Generator_TableVarName="tablerptUnApprovedPaymentList" msprop:Generator_RowChangedName="rptUnApprovedPaymentListRowChanged" msprop:Generator_TablePropName="rptUnApprovedPaymentList" msprop:Generator_RowDeletingName="rptUnApprovedPaymentListRowDeleting" msprop:Generator_RowChangingName="rptUnApprovedPaymentListRowChanging" msprop:Generator_RowEvHandlerName="rptUnApprovedPaymentListRowChangeEventHandler" msprop:Generator_RowDeletedName="rptUnApprovedPaymentListRowDeleted" msprop:Generator_RowClassName="rptUnApprovedPaymentListRow" msprop:Generator_UserTableName="rptUnApprovedPaymentList" msprop:Generator_RowEvArgName="rptUnApprovedPaymentListRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="InvoiceNo" msprop:Generator_ColumnVarNameInTable="columnInvoiceNo" msprop:Generator_ColumnPropNameInRow="InvoiceNo" msprop:Generator_ColumnPropNameInTable="InvoiceNoColumn" msprop:Generator_UserColumnName="InvoiceNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LedgerDate" msprop:Generator_ColumnVarNameInTable="columnLedgerDate" msprop:Generator_ColumnPropNameInRow="LedgerDate" msprop:Generator_ColumnPropNameInTable="LedgerDateColumn" msprop:Generator_UserColumnName="LedgerDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Narration" msprop:Generator_ColumnVarNameInTable="columnNarration" msprop:Generator_ColumnPropNameInRow="Narration" msprop:Generator_ColumnPropNameInTable="NarrationColumn" msprop:Generator_UserColumnName="Narration" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VoucherNo" msprop:Generator_ColumnVarNameInTable="columnVoucherNo" msprop:Generator_ColumnPropNameInRow="VoucherNo" msprop:Generator_ColumnPropNameInTable="VoucherNoColumn" msprop:Generator_UserColumnName="VoucherNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalAmount" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LedgerId" msprop:Generator_ColumnVarNameInTable="columnLedgerId" msprop:Generator_ColumnPropNameInRow="LedgerId" msprop:Generator_ColumnPropNameInTable="LedgerIdColumn" msprop:Generator_UserColumnName="LedgerId" type="xs:int" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1890,6 +2467,10 @@
       <xs:selector xpath=".//mstns:ReceiveReport" />
       <xs:field xpath="mstns:Id" />
     </xs:unique>
+    <xs:unique name="SP_JournalVoucher_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SP_JournalVoucher" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
     <xs:unique name="rptSalesInvoice_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:rptSalesInvoice" />
       <xs:field xpath="mstns:Id" />
@@ -1897,8 +2478,12 @@
       <xs:field xpath="mstns:Id2" />
       <xs:field xpath="mstns:Id3" />
     </xs:unique>
-    <xs:unique name="SP_JournalVoucher_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:SP_JournalVoucher" />
+    <xs:unique name="rptPaymentInitateVoucher_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:rptPaymentInitateVoucher" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+    <xs:unique name="rptUnApprovedPaymentList_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:rptUnApprovedPaymentList" />
       <xs:field xpath="mstns:Id" />
     </xs:unique>
   </xs:element>

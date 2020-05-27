@@ -42,13 +42,13 @@ namespace RexERP_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(string totalAmount, string PONo,int supplierId,string descriptions,string LcNo,int WarehouseId,DateTime dates, List<GoodsReceiveResponse> response,List<AdditionalCost> ledgerPosting,decimal Discount)
+        public ActionResult Save(string totalAmount, string PONo,int supplierId,string descriptions,string LcNo,int WarehouseId,DateTime dates, List<GoodsReceiveResponse> response,List<AdditionalCost> additionalCosts,decimal Discount)
         {           
             string ID = "";
             ReceiveMaster master = new ReceiveMaster();
             master.InvoiceNoPaper= LcNo;
             master.InvoiceDate = dates;
-            master.TotalAmount = decimal.Parse(totalAmount);
+          //  master.TotalAmount = decimal.Parse(totalAmount);
             master.InvoiceNo = new GlobalClass().GetMaxIdWithPrfix("InvoiceNo", "8", "00000001", "ReceiveMaster", "GR");
             master.SupplierID = supplierId;
             ID = master.InvoiceNo;
@@ -73,15 +73,16 @@ namespace RexERP_MVC.Controllers
             }
             master.RecieveFrom = CurrentSession.GetCurrentSession().UserName;
             master.BillDiscount = Discount;
-            if (ledgerPosting!=null && ledgerPosting.Count>0)
+            if (additionalCosts!=null && additionalCosts.Count>0)
             {
-                master.AdditionalCost = ledgerPosting.Select(a => a.Debit).Sum(a => a.Value);
+                master.AdditionalCost = additionalCosts.Select(a => a.Debit).Sum(a => a.Value);
             }
             else
             {
                 master.AdditionalCost = 0;
             }
-            master.GrandTotal = master.TotalAmount + master.AdditionalCost - master.BillDiscount;
+            master.TotalAmount = master.ReceiveDetails.Sum(a => a.Amount);
+            master.GrandTotal = master.ReceiveDetails.Sum(a=>a.Amount) + master.AdditionalCost - master.BillDiscount;
             master.IsActive = true;
             master.SupplierID = supplierId;
             master.Notes = descriptions;
@@ -90,7 +91,7 @@ namespace RexERP_MVC.Controllers
             master.TransportNo = "1";
             master.CreatedBy = CurrentSession.GetCurrentSession().UserName;
             master.CreatedDate = DateTime.Now;
-            var result = service.Save(master, WarehouseId,1);
+            var result = service.Save(master,additionalCosts, WarehouseId,1);
             return Json(new { result = true, Error = "Saved", ID = ID }, JsonRequestBehavior.AllowGet);
         }
 

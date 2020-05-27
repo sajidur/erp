@@ -19,15 +19,10 @@ namespace RexERP_MVC.Controllers
         private readonly static log4net.ILog LOG = log4net.LogManager.GetLogger("EmployeeLeaveController");
         public IEmployeeLeaveService _employeeLeaveService;
         public EmployeeService _employeeService;
-        public ISalaryItemService _salaryItemService;
-        public ISalaryStandardDetailService _salaryStandardDetailService;
-
         public EmployeeLeaveController()
         {
             _employeeLeaveService = new EmployeeLeaveService(new EmployeeLeaveRepository(), new EmployeeLeaveValidator());
             _employeeService = new EmployeeService();
-            _salaryItemService = new SalaryItemService(new SalaryItemRepository(), new SalaryItemValidator());
-            _salaryStandardDetailService = new SalaryStandardDetailService(new SalaryStandardDetailRepository(), new SalaryStandardDetailValidator());
         }
 
         public ActionResult Index()

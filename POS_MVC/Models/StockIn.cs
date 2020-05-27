@@ -23,11 +23,13 @@ namespace RexERP_MVC.Models
         public Nullable<int> SupplierId { get; set; }
         public Nullable<System.DateTime> ProductionDate { get; set; }
         public Nullable<decimal> BaleQty { get; set; }
+        public Nullable<decimal> Rate { get; set; }
         public Nullable<int> BrandId { get; set; }
         public string BrandName { get; set; }
         public string SizeName { get; set; }
         public Nullable<int> APIId { get; set; }
         public string APIName { get; set; }
+        public Nullable<decimal> StockInPrice { get; set; }
         public string Notes { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

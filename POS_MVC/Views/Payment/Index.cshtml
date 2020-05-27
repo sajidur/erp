@@ -197,7 +197,7 @@
         var voucherDate = $("#txtDate").val();
         console.log(voucherDate);
         var notes = $("#txtDescriptions").val();
-        var url = '/Payment/ReceivePayment';
+        var url = '/Payment/PaymentSave';
         if (supplierId<=0) {
             ShowNotification("3", "Choose any Supplier!!");
             return;
@@ -230,7 +230,7 @@
                 details = [];
                 var templateWithData = Mustache.to_html($("#templateProductModal").html(), { ProductSearch: details });
                 $("#div-product").empty().html(templateWithData);
-                window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=PaymentVoucher&invoiceId=" + $("#txtPoNo").val();
+                window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=PaymentInitVoucher&invoiceId=" + $("#txtPoNo").val();
 
             },
             error: function () {

@@ -21,6 +21,18 @@ namespace RexERP_MVC.BAL
         {
             return service.GetById(id);
         }
+        public int LastId()
+        {
+            var customer= service.GetAll().OrderByDescending(a => a.Id).FirstOrDefault();
+            if (customer==null)
+            {
+                return 1;
+            }
+            else
+            {
+                return customer.Id + 1;
+            }
+        }
         public Customer GetByLedgerId(int? id = 0)
         {
             return service.GetAll(a=>a.LedgerId==id&&a.IsActive==true).FirstOrDefault();

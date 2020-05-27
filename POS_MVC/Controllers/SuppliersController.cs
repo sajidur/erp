@@ -114,6 +114,7 @@ namespace RexERP_MVC.Controllers
                 var result = supplier;
                 if (ModelState.IsValid)
                 {
+                    supplier.Code = db.LastId().ToString();
                     supplier.CreationDate = DateTime.Now;
                     supplier.UpdateDate = DateTime.Now;
                     supplier.Creator = CurrentSession.GetCurrentSession().UserName;

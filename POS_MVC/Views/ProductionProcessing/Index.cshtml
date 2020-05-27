@@ -20,7 +20,7 @@
                                         Stock out InvoiceNo:
                                     </label>
                                     <div class="col-md-3">
-                                        <select class="form-control" id="ddlStockOutInvoice" name="ddlStockOutInvoice" style="width:200px"></select>
+                                        <select class="form-control" id="ddlStockOutInvoice" name="ddlStockOutInvoice" onchange="LoadStockOutProductList()" style="width:200px"></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -55,13 +55,14 @@
                             <th>API</th>
                             <th>Size</th>
                             <th>Qty</th>
+                            <th>Rate</th>
                             <th>Godown</th>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>
                                         <select id="ddlItem" class="form-control">
-                                            <option value="0">পছন্দ করুন</option>
+                                            <option value="0">Select</option>
                                         </select>
                                     </td>
                                     <td>
@@ -83,6 +84,9 @@
                                         <input type="text" name="txtBaleQty" id="txtBaleQty" class="form-control" />
                                     </td>
                                     <td>
+                                        <input type="text" name="txtRate" id="txtRate" class="form-control" />
+                                    </td>
+                                    <td>
                                         <select class="form-control" id="ddlWareHouse" name="ddlWareHouse">
                                             @foreach (var item in Model)
                                             {
@@ -96,7 +100,28 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div>
+                                            <div class="ibox-content" id="divInfo2">
+                                                <br /><br />
+                                                <div class="form-group">
+                                                    <div class="col-md-12 table-responsive" id="div-StockOutModal">
+                                                    </div>
+                                                </div>
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ibox-content">
                             <div class="form-group">
                                 <h4>Added Product</h4>
@@ -106,7 +131,76 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <h4>Other Expense</h4>
+                            <table id="myTable" class="table order-list">
+                                <thead>
+                                    <tr>
+                                        <td>Expense Head</td>
+                                        <td>Qty</td>
+                                        <td>Rate</td>
+                                        <td>Total Expense </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-2">
+                                            <select id="ddlExpenseHead" class="form-control" style="height:35px">
+                                                <option value="Other">Others</option>
+                                            </select>
+                                        </td>
+                                        <td class="col-sm-1">
+                                            <input type="number" name="txtExpenseAmount" id="txtExpenseAmount" class="form-control" style="height:35px" />
+                                        </td>
+                                        <td class="col-sm-1">
+                                            <input type="number" name="txtExpenseRate" id="txtExpenseRate" class="form-control" style="height:35px" />
+                                        </td>
+                                        <td class="col-sm-1">
+                                            <input type="number" readonly name="txtExpenseTotalAmount" id="txtExpenseTotalAmount" class="form-control" style="height:35px" />
+                                        </td>
+                                        <td class="col-sm-1">
+                                            <input type="button" class="btn btn-primary" id="btnAddExpense" value="ADD" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="ibox-content" id="divExpenseInfo">
+                            <div class="form-group">
+                                <h4>Added Expense</h4>
+                                <div class="col-md-12 table-responsive" id="div-expense-add">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                            </div>
+                            <div class="col-md-4">
 
+                                <p>Total Expense Amount:<label id="lblTotalExpenseAmount">0</label></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                Discount:
+                            </label>
+                            <div class="col-md-4">
+                                <input type="number" id="txtDiscount" name="txtDiscount" value="0" class="form-control" style="width:200px; height:35px" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                            </div>
+                            <div class="col-md-4">
+
+                                <h5><b>Grand Total:</b><label id="lblGrandTotal">0</label></h5>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="form-actions">
                         <div class="col-md-12">
                             <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SaveStockIn()"><i class="fa fa-save"></i>&nbsp; Save</button>
@@ -127,6 +221,8 @@
         <th>API</th>
         <th>Size</th>
         <th>Qty</th>
+        <th>Rate</th>
+        <th>Amount</th>
         <th>Godown</th>
         </thead>
         <tbody>
@@ -138,12 +234,70 @@
                 <td>{{APIName}}</td>
                 <td>{{Size}}</td>
                 <td> {{BaleQty}}</td>
+                <td> {{Rate}}</td>
+                <td> {{Amount}}</td>
                 <td> {{WarehouseName}}</td>
                 <td>
                     <a class="btn btn-danger" onclick="OnDeleteProduct('{{datatableRowCount}}')"><i class="fa fa-trash-o"></i></a>
                 </td>
             </tr>
             {{/ProductSearchAdded}}
+        </tbody>
+    </table>
+</script>
+<script id="templateExpenseModalAdd" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="ExpenseTableModal">
+        <thead>
+        <th> </th>
+        <th>Expense</th>
+        <th>Rate</th>
+        <th>Qty</th>
+        <th>Total Expense</th>
+        <th>Action </th>
+        </thead>
+        <tbody>
+            {{#ExpenseSearchAdd}}
+            <tr>
+                <td>{{countAddedExpenseCount}}</td>
+                <td>{{Item}}</td>
+                <td> {{ExpenseRate}}</td>
+                <td> {{ExpenseAmount}}</td>
+                <td> {{TotalAmount}}</td>
+                <td>
+                    <a class="btn btn-danger" onclick="OnDeleteExpense('{{countAddedExpenseCount}}')"><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+            {{/ExpenseSearchAdd}}
+        </tbody>
+    </table>
+</script>
+<script id="templateStockOutProductShow" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="StockOutProductTableModal">
+        <thead>
+        <th>InvoiceNo </th>
+        <th>Product</th>
+        <th>Brand</th>
+        <th>API</th>
+        <th>Size</th>
+        <th>Qty</th>
+        <th>Rate</th>
+        <th>Amount</th>
+        <th>Godown</th>
+        </thead>
+        <tbody>
+            {{#StockOutSearchAdded}}
+            <tr>
+                <td>{{InvoiceNo}}</td>
+                <td>{{Product.ProductName}}</td>
+                <td>{{BrandName}}</td>
+                <td>{{API.APIName}}</td>
+                <td>{{SizeName}}</td>
+                <td>{{BaleQty}}</td>
+                <td>{{Rate}}</td>
+                <td>{{StockOutPrice}}</td>
+                <td>{{WareHouse.WarehouseName}}</td>
+            </tr>
+            {{/StockOutSearchAdded}}
         </tbody>
     </table>
 </script>
@@ -166,9 +320,14 @@
         LoadAllProduct('ddlItem');
         LoadAllSize("ddlSize");
         LoadAllBrand("ddlBrand");
-                LoadAllAPI("ddlAPI");
-
+        LoadAllAPI("ddlAPI");
+        
     });
+    function LoadStockOutProductList() {
+        $('#myModal').modal('toggle');
+        var invoiceNo = $("#ddlStockOutInvoice option:selected").text();
+        LoadStockOutByInvoice(invoiceNo);
+    }
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/StockIn.js"></script>

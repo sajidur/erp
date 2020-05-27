@@ -32,8 +32,6 @@ namespace RexERP_MVC.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
-        public virtual SalaryItem SalaryItem { get; set; }
-        public virtual SalaryItem SalaryItem1 { get; set; }
         public virtual SalarySlipDetail SalarySlipDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalarySlipDetail> SalarySlipDetails { get; set; }

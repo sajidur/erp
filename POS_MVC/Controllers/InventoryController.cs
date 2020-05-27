@@ -1,6 +1,8 @@
 ﻿using RexERP_MVC.BAL;
 using RexERP_MVC.Models;
+using RexERP_MVC.Util;
 using RexERP_MVC.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -33,6 +35,15 @@ namespace RexERP_MVC.Controllers
             return Json(inventoryList, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult OpeningInventory(string InvoiceNo, string Notes, List<StockIn> stockIns)
+        {
+            foreach (var item in stockIns)
+            {
+                item.InvoiceNo = InvoiceNo;
+                service.OpeningInventorySave(item);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult PaddyReport()
         {
@@ -91,27 +102,27 @@ namespace RexERP_MVC.Controllers
             return Json(inventoryList, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult RiceReport()
-        {
-            return View();
-        }
+        //public ActionResult RiceReport()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult GetAllRice()
-        {
-            List<Inventory> inventories = service.GetAllRice();
-            if (inventories == null)
-            {
-                return HttpNotFound();
-            }
-            List<InventoryResponse> inventoryList = new List<InventoryResponse>();
-            foreach (var item in inventories)
-            {
-                var result = AutoMapper.Mapper.Map<Inventory, InventoryResponse>(item);
-                result.BalanceQtyInKG = item.BalanceQty;
-                inventoryList.Add(result);
-            }
-            return Json(inventoryList, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult GetAllRice()
+        //{
+        //    List<Inventory> inventories = service.GetAllRice();
+        //    if (inventories == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    List<InventoryResponse> inventoryList = new List<InventoryResponse>();
+        //    foreach (var item in inventories)
+        //    {
+        //        var result = AutoMapper.Mapper.Map<Inventory, InventoryResponse>(item);
+        //        result.BalanceQtyInKG = item.BalanceQty;
+        //        inventoryList.Add(result);
+        //    }
+        //    return Json(inventoryList, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult GetAllRiceFilteredBySupplier(int id)
         {

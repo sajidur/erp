@@ -1,14 +1,5 @@
 ﻿
-@model RexERP_MVC.Models.DEPARTMENT
-@{
-    ViewBag.Title = "Size Setup";
-}
-
 <div class="page-title">
-    <div>
-        <h1><i class="fa fa-edit"></i> Design</h1>
-
-    </div>
     <div>
         <ul class="breadcrumb">
             <li><i class="fa fa-home fa-lg"></i></li>
@@ -25,7 +16,6 @@
                     <div class="well bs-component">
                         <form class="form-horizontal">
                             <fieldset>
-                                @Html.HiddenFor(m => m.Id)
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Department Name:
@@ -91,7 +81,7 @@
                                         {{#ProductGroupSearch}}
                                         <tr>
                                             <td> {{Id}}</td>
-                                            <td> {{DEPTNAME}}</td>
+                                            <td> {{Name}}</td>
                                             <td class="action-sm">
                                                 <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
                                             </td>

@@ -12,7 +12,7 @@ namespace RexERP_MVC.BAL
         DBService<ReceiveMaster> service = new DBService<ReceiveMaster>();
         DBService<ReceiveDetail> serviceDetails = new DBService<ReceiveDetail>();
         DBService<InventoryTransaction> _invTransactionService = new DBService<InventoryTransaction>();
-
+        DBService<AdditionalCost> _addCostService = new DBService<AdditionalCost>();
         DBService<Inventory> _inventoryService = new DBService<Inventory>();
         LedgerPostingService ledgerService = new LedgerPostingService();
         SupplierService supplierService = new SupplierService();
@@ -28,8 +28,10 @@ namespace RexERP_MVC.BAL
             return service.GetById(id);
         }
 
-        public ReceiveMaster Save(ReceiveMaster cus,int wareHouseId, int goodsType)
+        public ReceiveMaster Save(ReceiveMaster cus,List<AdditionalCost> additionalCosts,int wareHouseId, int goodsType)
         {
+            var avgAdditionalCost = cus.AdditionalCost / cus.ReceiveDetails.Select(a => a.Qty).Sum();
+            var avgCostPrice = 0.0m;
             var supplier = supplierService.GetById(cus.SupplierID);
             cus.YearId = financialYearId;
             var result= service.Save(cus);
@@ -43,6 +45,11 @@ namespace RexERP_MVC.BAL
                     {
                         foreach (var inv in existingItem)
                         {
+                            var existingCosting = inv.BalanceQty*inv.Costprice??0;
+                            var totalAmount=item.Amount + avgAdditionalCost*item.Qty+ existingCosting;
+                            avgCostPrice = totalAmount/(item.Qty+ inv.BalanceQty);
+                            inv.Costprice = avgCostPrice;
+                            inv.PurchasePrice = item.Rate;
                             inv.UpdatedDate = DateTime.Now;
                             inv.UpdatedBy = "";
                             inv.BalanceQty = inv.BalanceQty + item.Qty;
@@ -69,6 +76,8 @@ namespace RexERP_MVC.BAL
                         inv.OpeningQty = 0;
                         inv.BalanceQty = item.Qty;
                         inv.PurchasePrice = item.Rate;
+                        inv.Costprice = avgCostPrice;
+                        inv.SalesPrice = 0;
                         inv.GoodsType = goodsType.ToString();
                         _inventoryService.Save(inv);
                         balance = item.Qty;
@@ -87,6 +96,7 @@ namespace RexERP_MVC.BAL
                         IsActive = true,
                         ProductId = item.ProductId,
                         PurchasePrice = item.Rate,
+                        CostPrice = avgCostPrice,
                         Qty = item.Qty,
                         SalesPrice = 0,
                         SizeId = item.SizeId,
@@ -100,7 +110,7 @@ namespace RexERP_MVC.BAL
                 // Ledger posting debit to purchase account
 
                 var ledgerObj = new LedgerPosting();
-                ledgerObj.VoucherTypeId = (int)VoucherType.PurchaseInvoice;
+                ledgerObj.VoucherTypeId = (int)VoucherTypeEnum.PurchaseInvoice;
                 ledgerObj.VoucherNo = result.InvoiceNoPaper;
                 ledgerObj.PostingDate = cus.InvoiceDate;
                 ledgerObj.LedgerId =(int)DefaultLedger.PurchaseAccount;
@@ -112,26 +122,53 @@ namespace RexERP_MVC.BAL
 
                 //Ledger posting to customer ledger credit
                 var detailsLedger = new LedgerPosting();
-                detailsLedger.VoucherTypeId = (int)VoucherType.PurchaseInvoice;
+                detailsLedger.VoucherTypeId = (int)VoucherTypeEnum.PurchaseInvoice;
                 detailsLedger.VoucherNo = result.InvoiceNoPaper;
                 detailsLedger.PostingDate = cus.InvoiceDate;
                 detailsLedger.LedgerId =supplier.LedgerId;
                 detailsLedger.InvoiceNo = cus.InvoiceNo;
-                detailsLedger.Credit = cus.GrandTotal;
+                detailsLedger.Credit = cus.TotalAmount-cus.BillDiscount;
                 detailsLedger.Debit = 0;
                 detailsLedger.MasterId = result.Id;
                 var detailsLedgerResult = ledgerService.Save(detailsLedger);
 
+                //save addisitonalCost
+                if (additionalCosts != null && additionalCosts.Count>0)
+                {
+                    foreach (var item in additionalCosts)
+                    {
+                        item.CreatedBy = CurrentSession.GetCurrentSession().UserId;
+                        item.CreatedDate = DateTime.Now;
+                        item.LedgerId = supplier.LedgerId;
+                        item.VoucherNo = cus.InvoiceNo;
+                        item.Extra1 = cus.AdditionalCostPurpose;
+                        item.VoucherTypeId = (int)VoucherTypeEnum.PurchaseInvoice;
+                        var isSaved = _addCostService.Save(item);
+
+                    }
+                    //
+                    var additionalCost = new LedgerPosting();
+                    additionalCost.VoucherTypeId = (int)VoucherTypeEnum.AdditionalCost;
+                    additionalCost.VoucherNo = result.InvoiceNoPaper;
+                    additionalCost.PostingDate = cus.InvoiceDate;
+                    additionalCost.LedgerId = (int)DefaultLedger.AdditionalCost;
+                    additionalCost.InvoiceNo = cus.InvoiceNo;
+                    additionalCost.Credit = cus.AdditionalCost;
+                    additionalCost.Debit = 0;
+                    additionalCost.MasterId = result.Id;
+                    var _ = ledgerService.Save(additionalCost);
+                }
+
                 var party = new PartyBalance();
                 party.InvoiceNo = result.InvoiceNo;
                 party.LedgerId = supplier.LedgerId??0;
-                party.Credit = cus.GrandTotal;
+                party.Credit = cus.TotalAmount-cus.BillDiscount;
                 party.CreditPeriod = 60;
                 party.Debit = 0;
                 party.MasterId = result.Id;
                 party.FinancialYearId = CurrentSession.GetCurrentSession().FinancialYear;
                 party.PostingDate = cus.InvoiceDate;
-                party.VoucherTypeId = (int)VoucherType.PurchaseInvoice;
+                party.VoucherTypeId = (int)VoucherTypeEnum.PurchaseInvoice;
                 party.VoucherNo = result.InvoiceNo;
                 party.extra1 = "Purchase Invoice: "+cus.InvoiceNo+" Coutha:"+cus.InvoiceNoPaper;
                 party.extra2 = result.Id.ToString();

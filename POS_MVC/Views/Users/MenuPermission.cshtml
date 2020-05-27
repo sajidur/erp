@@ -72,19 +72,17 @@
                         <script id="templateProductGroupModal" type="text/html">
                             <table class="table table-bordered table-striped table-hover" id="productGroupTableModal">
                                 <thead>
-                                <th>ID</th>
-                                <th>Code</th>
-                                <td> CategoryName (পণ্যের ধরণ)</td>
+                                <th>Role</th>
+                                <td>Menu</td>
                                 <th>Action</th>
                                 </thead>
                                 <tbody>
                                     {{#ProductGroupSearch}}
                                     <tr>
-                                        <td> {{Id}}</td>
-                                        <td> {{Code}}</td>
-                                        <td> {{CategoryName}}</td>
+                                        <td> {{Role.RoleName}}</td>
+                                        <td> {{Screen.ScreenName}}</td>
                                         <td class="action-sm">
-                                            <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
+                                            <a class="btn btn-primary btn-xs" onclick="DeletePermission('{{RoleId}}','{{ScreenId}}')"><i class="fa fa-edit"></i> Delete</a>
                                         </td>
                                     </tr>
 
@@ -125,7 +123,8 @@
     }
     $(document).ready(function () {
     LoadRole();
-    LoadMenu();
+        LoadMenu();
+        LoadExistingData();
     });
     function LoadRole() {
         var r = true;
@@ -184,7 +183,7 @@
                 url: url,
                 method: 'GET',
                 success: function (data) {
-                      var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { SalesOrderGroupSearch: data });
+                      var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { ProductGroupSearch: data });
                      $("#div-productGroup").empty().html(templateWithData);
                        MakePagination('productGroupTableModal');
                 },
@@ -194,6 +193,21 @@
             });
         }
 
+    }
+    function DeletePermission(RoleId, ScreenId) {
+              console.log(RoleId+"|"+ScreenId);
+                var url = '/Users/DeleteMenuPermission';
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: { RoleId: RoleId, ScreenId: ScreenId },
+                success: function (data) {
+                    LoadExistingData();
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
     }
 </script>
 

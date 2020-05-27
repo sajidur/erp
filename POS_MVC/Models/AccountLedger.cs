@@ -22,6 +22,7 @@ namespace RexERP_MVC.Models
             this.JournalDetails = new HashSet<JournalDetail>();
             this.LedgerPostings = new HashSet<LedgerPosting>();
             this.PartyBalances = new HashSet<PartyBalance>();
+            this.PaymentDetails = new HashSet<PaymentDetail>();
         }
     
         public int Id { get; set; }
@@ -61,5 +62,7 @@ namespace RexERP_MVC.Models
         public virtual ICollection<LedgerPosting> LedgerPostings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PartyBalance> PartyBalances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PaymentDetail> PaymentDetails { get; set; }
     }
 }

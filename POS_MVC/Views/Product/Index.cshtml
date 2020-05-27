@@ -181,19 +181,18 @@ $(document).ready(function () {
     LoadProductList();   
 });
         $('#btnUnitAdd').click(function() {
-            var url = '/SizeSetup/Add';
+            var url = '/Setup/UnitSetup';
             var dialog = $('<div style="display:none"></div>').appendTo('body');
             dialog.load(url, {}, 
                 function (responseText, textStatus, XMLHttpRequest) {
                     dialog.dialog({
                     maxWidth:600,
                     maxHeight: 500,
-                    width: 600,
+                    width: 700,
                     height: 500,
                     modal: true,
                     title:"Add Unit",
                         close: function (event, ui) {
-                        LoadAllSize("ddlSize");
                         dialog.remove();
                     }
                 });

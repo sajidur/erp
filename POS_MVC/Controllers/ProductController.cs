@@ -14,7 +14,7 @@ namespace RexERP_MVC.Controllers
     {
         private ProductService db = new ProductService();
         private InventoryService _inventoryService = new InventoryService();
-
+        private WareHouseService serviceWareHouseService = new WareHouseService();
 
         // GET: /Category/
         public ActionResult Index()
@@ -26,6 +26,11 @@ namespace RexERP_MVC.Controllers
         public ActionResult PriceSetup()
         {
             return View();
+        }
+        public ActionResult OpeningInventory()
+        {
+            List<WareHouse> wareHouses = serviceWareHouseService.GetAll();
+            return View(wareHouses);
         }
         public ActionResult BestSelling()
         {

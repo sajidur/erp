@@ -36,7 +36,7 @@ namespace RexERP_MVC.Controllers
 
                 //ledger posting
                 LedgerPosting ledgersave = new LedgerPosting();
-                ledgersave.VoucherTypeId = (int)BAL.VoucherType.JournalVoucher;
+                ledgersave.VoucherTypeId = (int)BAL.VoucherTypeEnum.JournalVoucher;
                 ledgersave.VoucherNo = voucherNo;
                 ledgersave.LedgerId = item.LedgerId;
                 int a = ledgersave.LedgerId ?? 0;

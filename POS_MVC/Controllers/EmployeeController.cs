@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Web.Mvc;
 using RexERP_MVC.BAL;
+using RexERP_MVC.BLL;
 using RexERP_MVC.Models;
 using RexERP_MVC.RequestModel;
 using RexERP_MVC.Util;
@@ -17,18 +18,19 @@ namespace RexERP_MVC.Controllers
         private AccountLedgerService Accounts = new AccountLedgerService();
         private LedgerPostingService lps = new LedgerPostingService();
         private SalaryPaymentService salaryPaymentService = new SalaryPaymentService();
-
+        private DEPARTMENTService departmentService = new DEPARTMENTService();
+        private DBService<Designationtbl> designationService = new DBService<Designationtbl>();
 
         // GET: Employee
         public ActionResult AddEmployee()
         {
-
+            var departments = departmentService.GetAll();
+            ViewBag.DepartmentList = new SelectList(departments, "Id", "Name");
+            ViewBag.DesignationList = new SelectList(designationService.GetAll(), "Id", "DesignationName"); 
             ViewBag.Title = "Employee";
+            ViewBag.EmployeeCode = new GlobalClass().GetEmployeeCode("Id", "Employee");
             return View();
         }
-
-        
-
         [HttpPost]
         public ActionResult Create(EmployeeRequest request)
         {
@@ -42,6 +44,11 @@ namespace RexERP_MVC.Controllers
                 //    ImageByte = reader.ReadBytes(file.ContentLength);
                 //    employee.Photo = ImageByte;
                 //}
+                
+                if (!string.IsNullOrEmpty(request.Photo))
+                {
+                  request.Photo= UtilClass.SaveImage(request.Photo,request.MimeType);
+                }
                 AccountLedger ledger = new AccountLedger();
                 ledger.AccountGroupId = 1;
                 ledger.Address = request.Address;
@@ -75,7 +82,19 @@ namespace RexERP_MVC.Controllers
                     Remarks = request.Remarks,
                     Salary = request.Salary,
                     ZipCode = request.ZipCode,
-                    LedgerId = saved.Id
+                    LedgerId = saved.Id,
+                    DepartmentId=request.DepartmentId,
+                    DesignationId=request.DesignationId,
+                    BloodGroup=request.BloodGroup,
+                    DOB=request.DOB,
+                    EmployeeType=request.EmployeeType,
+                    Gender=request.Gender,
+                    JoiningDate=request.JoiningDate,
+                    Photo=request.Photo,
+                    Qualification=request.Qualification,
+                    SalaryPackage=request.SalaryPackage,
+                    TerminationDate=request.TerminationDate
+                    //,SalaryType=request.SalaryType
                 };
                 var res=db.Save(employee);
                 return Json(new {Id=res.Id }, JsonRequestBehavior.AllowGet);
@@ -93,12 +112,10 @@ namespace RexERP_MVC.Controllers
                 ImageByte = reader.ReadBytes(file.ContentLength);
                 ImageViewModel.bufferByte = ImageByte;
                 var employee = db.GetById(model.EmpId);
-                employee.Photo = ImageByte;
+              //  employee.Photo = ImageByte;
                 db.Update(employee, model.EmpId);
             }
         }
-
-
         public ActionResult GetAll()
         {
             List<Employee> employees = db.GetAll();
@@ -178,7 +195,6 @@ namespace RexERP_MVC.Controllers
             return Json(employee, JsonRequestBehavior.AllowGet);
         }
 
-
         [HttpPost]
         public ActionResult Edit(Employee model)
         {
@@ -194,7 +210,7 @@ namespace RexERP_MVC.Controllers
             model.IsActive = true;
             model.UpdateDate = DateTime.Now;
             model.UpdateBy = CurrentSession.GetCurrentSession().UserName;
-            model.Photo = ImageViewModel.bufferByte;
+          //  model.Photo = ImageViewModel.bufferByte;
             db.Update(model, model.Id);
             return Json("Updated", JsonRequestBehavior.AllowGet);
         }

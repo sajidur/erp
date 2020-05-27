@@ -22,6 +22,7 @@ namespace RexERP_MVC.Controllers
         private WareHouseService serviceWareHouseService = new WareHouseService();
         private BrandService _brandService = new BrandService();
         private SizeService _sizeService = new SizeService();
+        private DBService<API> _apiService = new DBService<API>();
 
         public ActionResult Index()
         {
@@ -75,25 +76,31 @@ namespace RexERP_MVC.Controllers
             StockIn result = new StockIn();
             var brands =_brandService.GetAll();
             var sizes =_sizeService.GetAll();
+            var apis = _apiService.GetAll();
+
             var stockOutInvoice = "";
 
-                foreach (var item in stockIns)
+            foreach (var item in stockIns)
+            {
+                var brand = brands.Where(a => a.Id == item.BrandId).FirstOrDefault();
+                var size = sizes.Where(a => a.Id == item.SizeId).FirstOrDefault();
+                var api = apis.Where(a => a.Id == item.APIId).FirstOrDefault();
+
+                item.Notes = Notes;
+                item.InvoiceNo = InvoiceNo;
+                item.BrandName = brand.BrandName;
+                item.APIName = item.APIName;
+                item.SizeName = size.Name;
+                item.CreatedDate = DateTime.Now;
+                item.CreatedBy = CurrentSession.GetCurrentSession().UserName;
+                if (!item.ProductionDate.HasValue)
                 {
-                    var brand = brands.Where(a => a.Id == item.BrandId).FirstOrDefault();
-                    var size = sizes.Where(a => a.Id == item.SizeId).FirstOrDefault();
-                    item.Notes = Notes;
-                    item.InvoiceNo = InvoiceNo;
-                    item.BrandName = brand.BrandName;
-                    item.SizeName = size.Name;
-                    item.CreatedDate = DateTime.Now;
-                    item.CreatedBy = CurrentSession.GetCurrentSession().UserName;
-                    if (!item.ProductionDate.HasValue)
-                    {
-                        item.ProductionDate = DateTime.Now;
-                    }
-                    serviceStockIn.Save(item);
-                stockOutInvoice = item.StockOutInvoiceNo;
+                    item.ProductionDate = DateTime.Now;
                 }
+                item.StockInPrice = item.Rate * item.BaleQty;
+                serviceStockIn.Save(item);
+                stockOutInvoice = item.StockOutInvoiceNo;
+            }
                 //stocOut Invoice Update
                 var stockOuts = stockOutService.GetStockChallan(stockOutInvoice);
                 foreach (var item in stockOuts)
@@ -153,6 +160,16 @@ namespace RexERP_MVC.Controllers
             }
            // var result = AutoMapper.Mapper.Map<List<StockOut>, List<StockOutResponse>>(products);
             return Json(products, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetByStockOutInvoice(string InvoiceId)
+        {
+            List<StockOut> products = stockOutService.GetStockChallan(InvoiceId);
+            if (products == null)
+            {
+                return HttpNotFound();
+            }
+            var result = AutoMapper.Mapper.Map<List<StockOut>, List<StockOutResponse>>(products);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

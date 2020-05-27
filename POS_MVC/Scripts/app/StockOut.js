@@ -1,14 +1,5 @@
 ﻿var detailsStockOut = [];
 var datatableRowCount = 0;
-
-$(document).ready(function () {
-    LoadInvoiceNo("txtPoNo");  
-    LoadInventoryList();
-    var templateWithData = Mustache.to_html($("#templateStockOutModal").html(), { StockTableAdd: detailsStockOut });
-    $("#div-stockOut-add").empty().html(templateWithData);
-});
-
-
 $("#btnAdd").click(function () {
     var msg = '';
     $(this).closest('tr').find('input').each(function () {
@@ -55,6 +46,9 @@ function GetStockOutReport() {
             },
             { "data": "InvoiceNo" },
             { "data": "Product.ProductName" },
+            { "data": "Brand.BrandName", "defaultContent": "" },
+            { "data": "API.APIName", "defaultContent": "" },
+            { "data": "Size.Name", "defaultContent": "" },
             { "data": "BaleQty" },
             { "data": "WareHouse.WareHouseName" },
             { "data": "Notes" }
@@ -78,7 +72,7 @@ function LoadInvoiceNo(controlId) {
         success: function (res) {
             var data = res;
             console.log(data);
-            $("#" + controlId).val(data);
+            $("#" + controlId).val("STO" +data);
         },
         error: function () {
         }
@@ -140,7 +134,8 @@ function LoadForAdd(parameters) {
     var SizeName = "";
     var BrandName = "";
     var WareHouse = "";
-    var Qty = '0';
+    var Qty = 0;
+    var Rate = 0;
     var ProductId = '0';
     var APIName = '';
     $('#inventoryGroupTableModal tr').each(function (i) {
@@ -153,6 +148,8 @@ function LoadForAdd(parameters) {
             WareHouse = $(this).find('td').eq(6).html();
             ProductId = Id;
             Qty = $(this).find('td').eq(8).find('input').val();
+            Rate = $(this).find('td').eq(9).find('input').val();
+
           }
         });         
             var object = {
@@ -160,6 +157,8 @@ function LoadForAdd(parameters) {
                 ProductName: ProductName,
                 InventoryId: Id,
                 Qty: Qty,
+                Rate: Rate,
+                Amount:Rate*Qty,
                 SizeName: SizeName,
                 APIName: APIName,
                 BrandName: BrandName,

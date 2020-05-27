@@ -87,6 +87,10 @@ namespace RexERP_MVC.ViewModel
             get;
             set;
         }
+        public Nullable<int> APIId { get; set; }
+        public string APIName { get; set; }
+        public virtual APIResponse API { get; set; }
+
         public decimal Qty { get; set; }
         public decimal Rate { get; set; }
         public Nullable<int> SizeId { get; set; }

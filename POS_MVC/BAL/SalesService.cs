@@ -41,7 +41,7 @@ namespace RexERP_MVC.BAL
             }
             if (WareHouseId!=0)
             {
-                return salesDetailsService.GetAll(a => a.IsActive == true && a.DeliveryStatus == deliveryStatus && a.WarehouseId == WareHouseId).ToList();
+                return salesDetailsService.GetAll(a => a.IsActive == true && a.DeliveryStatus == deliveryStatus).ToList();
             }
             else
             {
@@ -293,7 +293,7 @@ namespace RexERP_MVC.BAL
                 balance.Debit = new decimal?(salesMaster.GrandTotal);
                 num = new decimal();
                 balance.Credit = new decimal?(num);
-                balance.VoucherTypeId =(int) VoucherType.SalesInvoice;
+                balance.VoucherTypeId =(int) VoucherTypeEnum.SalesInvoice;
                 balance.extra1 = string.Concat("Sales Invoice: ", salesMaster.SalesInvoice, " Challan:", salesMaster.Coutha);
                 balance.extra2 = result.Id.ToString();
                 this.partyBalanceService.Save(balance);
@@ -340,7 +340,7 @@ namespace RexERP_MVC.BAL
         public SalesDetail Update(SalesDetail salesDetail, int id)
         {
             var balance = 0.0m;
-              List<Inventory> existingItem = this.inventory.GetAll((Inventory a) => a.ProductId == salesDetail.ProductId && a.IsActive && a.WarehouseId == salesDetail.WarehouseId && a.SizeId==salesDetail.SizeId&&a.BrandId==salesDetail.BrandId).ToList<Inventory>();
+              List<Inventory> existingItem = this.inventory.GetAll((Inventory a) => a.ProductId == salesDetail.ProductId && a.IsActive && a.WarehouseId == salesDetail.WarehouseId && a.SizeId==salesDetail.SizeId&&a.BrandId==salesDetail.BrandId && a.APIId==salesDetail.APIId).ToList<Inventory>();
                     if (existingItem.Count > 0)
                     {
                         foreach (Inventory inv in existingItem)

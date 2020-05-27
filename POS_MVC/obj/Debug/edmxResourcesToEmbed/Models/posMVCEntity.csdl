@@ -51,6 +51,7 @@
     <NavigationProperty Name="JournalDetails" Relationship="Self.FK_JournalDetails_Ladger" FromRole="AccountLedger" ToRole="JournalDetails" />
     <NavigationProperty Name="LedgerPostings" Relationship="Self.FK_LedgerPosting_AccountLedger" FromRole="AccountLedger" ToRole="LedgerPosting" />
     <NavigationProperty Name="PartyBalances" Relationship="Self.FK_PartyBalance_Ledger" FromRole="AccountLedger" ToRole="PartyBalance" />
+    <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_AccountLedger" FromRole="AccountLedger" ToRole="PaymentDetails" />
   </EntityType>
   <EntityType Name="ACGroup">
     <Key>
@@ -137,9 +138,9 @@
     <Property Name="CreatedDate" Type="DateTime" Precision="0" />
     <Property Name="CreatedBy" Type="Int32" />
     <NavigationProperty Name="AccountLedger" Relationship="Self.FK_AdvancePayment_Ledger" FromRole="AdvancePayment" ToRole="AccountLedger" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_AdvancePayment_Employee" FromRole="AdvancePayment" ToRole="Employee" />
     <NavigationProperty Name="VoucherType" Relationship="Self.FK_AdvancePayment_VoucherType" FromRole="AdvancePayment" ToRole="VoucherType" />
     <NavigationProperty Name="FinancialYear" Relationship="Self.FK_AdvancePayment_Year" FromRole="AdvancePayment" ToRole="FinancialYear" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_AdvancePayment_Employee" FromRole="AdvancePayment" ToRole="Employee" />
   </EntityType>
   <EntityType Name="AlarmLog">
     <Key>
@@ -167,6 +168,7 @@
     <NavigationProperty Name="InventoryTransactions" Relationship="Self.FK_InventoryTransaction_API" FromRole="API" ToRole="InventoryTransaction" />
     <NavigationProperty Name="ReceiveDetails" Relationship="Self.FK_ReceiveDetails_API" FromRole="API" ToRole="ReceiveDetails" />
     <NavigationProperty Name="SalesDetails" Relationship="Self.FK_SalesDetails_API" FromRole="API" ToRole="SalesDetails" />
+    <NavigationProperty Name="SalesReturns" Relationship="Self.FK_SalesReturn_API" FromRole="API" ToRole="SalesReturn" />
     <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_API" FromRole="API" ToRole="StockIn" />
     <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_API" FromRole="API" ToRole="StockOut" />
     <NavigationProperty Name="TempSalesDetails" Relationship="Self.FK_TempSalesDetails_API" FromRole="API" ToRole="TempSalesDetails" />
@@ -236,7 +238,6 @@
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CompanyInfo" Relationship="Self.FK_dbo_BranchOffice_dbo_CompanyInfo_CompanyInfoId" FromRole="BranchOffice" ToRole="CompanyInfo" />
-    <NavigationProperty Name="Departments" Relationship="Self.FK_dbo_Department_dbo_BranchOffice_BranchOfficeId" FromRole="BranchOffice" ToRole="Department" />
   </EntityType>
   <EntityType Name="Brand">
     <Key>
@@ -255,6 +256,7 @@
     <NavigationProperty Name="ReceiveDetails" Relationship="Self.FK_ReceiveDetails_Brand" FromRole="Brand" ToRole="ReceiveDetails" />
     <NavigationProperty Name="SalesDetails" Relationship="Self.FK_SalesDetails_Brand" FromRole="Brand" ToRole="SalesDetails" />
     <NavigationProperty Name="SalesOrders" Relationship="Self.FK_SalesOrder_Brand" FromRole="Brand" ToRole="SalesOrder" />
+    <NavigationProperty Name="SalesReturns" Relationship="Self.FK_SalesReturn_Brand" FromRole="Brand" ToRole="SalesReturn" />
     <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_Brand" FromRole="Brand" ToRole="StockIn" />
     <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_Brand" FromRole="Brand" ToRole="StockOut" />
     <NavigationProperty Name="TempSalesDetails" Relationship="Self.FK_TempSalesDetails_Brand" FromRole="Brand" ToRole="TempSalesDetails" />
@@ -429,6 +431,11 @@
     <Property Name="ContactPersonPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Dealer" Type="Int32" />
+    <Property Name="District" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TradeLicense" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="VATNo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Area" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Web" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Limit" Type="Decimal" Precision="18" Scale="2" />
@@ -452,13 +459,13 @@
     <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="BranchOfficeId" Type="Int32" Nullable="false" />
-    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-    <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="BranchOffice" Relationship="Self.FK_dbo_Department_dbo_BranchOffice_BranchOfficeId" FromRole="Department" ToRole="BranchOffice" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedBy" Type="Int32" />
     <NavigationProperty Name="Divisions" Relationship="Self.FK_dbo_Division_dbo_Department_DepartmentId" FromRole="Department" ToRole="Division" />
+    <NavigationProperty Name="Employees" Relationship="DB_9B34E1_erpModel.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
   </EntityType>
   <EntityType Name="DeptUsedSch">
     <Key>
@@ -477,7 +484,7 @@
     <Property Name="DepartmentID" Type="Int32" />
     <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Designationtbl" FromRole="Designationtbl" ToRole="Employee" />
+    <NavigationProperty Name="Employees" Relationship="DB_9B34E1_erpModel.FK_Employee_Designationtbl" FromRole="Designationtbl" ToRole="Employee" />
   </EntityType>
   <EntityType Name="Division">
     <Key>
@@ -493,49 +500,6 @@
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Department" Relationship="Self.FK_dbo_Division_dbo_Department_DepartmentId" FromRole="Division" ToRole="Department" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="DesignationId" Type="Int32" />
-    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Salary" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="Creator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CreationDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LedgerId" Type="Int32" />
-    <NavigationProperty Name="AdvancePayments" Relationship="Self.FK_AdvancePayment_Employee" FromRole="Employee" ToRole="AdvancePayment" />
-    <NavigationProperty Name="Designationtbl" Relationship="Self.FK_Employee_Designationtbl" FromRole="Employee" ToRole="Designationtbl" />
-    <NavigationProperty Name="EmployeeAttendances" Relationship="Self.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeAttendance" />
-    <NavigationProperty Name="EmployeeEducations" Relationship="Self.FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeEducation" />
-    <NavigationProperty Name="EmployeeLeaves" Relationship="Self.FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeLeave" />
-    <NavigationProperty Name="EmployeeLoans" Relationship="Self.FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeLoan" />
-    <NavigationProperty Name="EmployeeWorkingTimes" Relationship="Self.FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeWorkingTime" />
-    <NavigationProperty Name="FPUsers" Relationship="Self.FK_dbo_FPUser_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="FPUser" />
-    <NavigationProperty Name="LastEmployments" Relationship="Self.FK_dbo_LastEmployment_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="LastEmployment" />
-    <NavigationProperty Name="OtherExpenseDetails" Relationship="Self.FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="OtherExpenseDetail" />
-    <NavigationProperty Name="OtherIncomeDetails" Relationship="Self.FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="OtherIncomeDetail" />
-    <NavigationProperty Name="PensionCompensations" Relationship="Self.FK_dbo_PensionCompensation_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="PensionCompensation" />
-    <NavigationProperty Name="SalaryEmployees" Relationship="Self.FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="SalaryEmployee" />
-    <NavigationProperty Name="SlipGajiDetails" Relationship="Self.FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="SlipGajiDetail" />
-    <NavigationProperty Name="SPKLs" Relationship="Self.FK_dbo_SPKL_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="SPKL" />
-    <NavigationProperty Name="THRDetails" Relationship="Self.FK_dbo_THRDetail_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="THRDetail" />
-    <NavigationProperty Name="SalesMasters" Relationship="Self.FK_SalesMaster_Employee" FromRole="Employee" ToRole="SalesMaster" />
   </EntityType>
   <EntityType Name="EmployeeAttendance">
     <Key>
@@ -562,7 +526,7 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" FromRole="EmployeeAttendance" ToRole="Employee" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" FromRole="EmployeeAttendance" ToRole="Employee" />
   </EntityType>
   <EntityType Name="EmployeeEducation">
     <Key>
@@ -581,7 +545,7 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId" FromRole="EmployeeEducation" ToRole="Employee" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId" FromRole="EmployeeEducation" ToRole="Employee" />
   </EntityType>
   <EntityType Name="EmployeeLeave">
     <Key>
@@ -597,7 +561,7 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId" FromRole="EmployeeLeave" ToRole="Employee" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId" FromRole="EmployeeLeave" ToRole="Employee" />
   </EntityType>
   <EntityType Name="EmployeeLoan">
     <Key>
@@ -619,9 +583,9 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId" FromRole="EmployeeLoan" ToRole="Employee" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId" FromRole="EmployeeLoan" ToRole="SalaryItem" />
+    <NavigationProperty Name="PayHead" Relationship="Self.FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId" FromRole="EmployeeLoan" ToRole="PayHead" />
     <NavigationProperty Name="EmployeeLoanDetails" Relationship="Self.FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId" FromRole="EmployeeLoan" ToRole="EmployeeLoanDetail" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId" FromRole="EmployeeLoan" ToRole="Employee" />
   </EntityType>
   <EntityType Name="EmployeeLoanDetail">
     <Key>
@@ -652,8 +616,8 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId" FromRole="EmployeeWorkingTime" ToRole="Employee" />
     <NavigationProperty Name="WorkingTime" Relationship="Self.FK_dbo_EmployeeWorkingTime_dbo_WorkingTime_WorkingTimeId" FromRole="EmployeeWorkingTime" ToRole="WorkingTime" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId" FromRole="EmployeeWorkingTime" ToRole="Employee" />
   </EntityType>
   <EntityType Name="FaceTemp">
     <Key>
@@ -701,8 +665,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId" FromRole="Formula" ToRole="SalaryItem" />
-    <NavigationProperty Name="SalaryItem1" Relationship="Self.FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId" FromRole="Formula" ToRole="SalaryItem" />
     <NavigationProperty Name="SalarySlipDetail" Relationship="Self.FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId" FromRole="Formula" ToRole="SalarySlipDetail" />
     <NavigationProperty Name="SalarySlipDetails" Relationship="Self.FK_dbo_SalarySlipDetail_dbo_Formula_FormulaId" FromRole="Formula" ToRole="SalarySlipDetail" />
   </EntityType>
@@ -805,7 +767,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_FPUser_dbo_Employee_EmployeeId" FromRole="FPUser" ToRole="Employee" />
     <NavigationProperty Name="FPAttLogs" Relationship="Self.FK_dbo_FPAttLog_dbo_FPUser_FPUserId" FromRole="FPUser" ToRole="FPAttLog" />
     <NavigationProperty Name="FPTemplates" Relationship="Self.FK_dbo_FPTemplate_dbo_FPUser_FPUserId" FromRole="FPUser" ToRole="FPTemplate" />
   </EntityType>
@@ -861,6 +822,8 @@
     <Property Name="BalanceQty" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Costprice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionPrice" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -896,6 +859,8 @@
     <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CostPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProductionPrice" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -967,7 +932,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_LastEmployment_dbo_Employee_EmployeeId" FromRole="LastEmployment" ToRole="Employee" />
   </EntityType>
   <EntityType Name="LeaveClass">
     <Key>
@@ -1115,7 +1079,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId" FromRole="OtherExpense" ToRole="SalaryItem" />
     <NavigationProperty Name="OtherExpenseDetails" Relationship="Self.FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId" FromRole="OtherExpense" ToRole="OtherExpenseDetail" />
   </EntityType>
   <EntityType Name="OtherExpenseDetail">
@@ -1134,7 +1097,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId" FromRole="OtherExpenseDetail" ToRole="Employee" />
     <NavigationProperty Name="OtherExpense" Relationship="Self.FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId" FromRole="OtherExpenseDetail" ToRole="OtherExpense" />
   </EntityType>
   <EntityType Name="OtherIncome">
@@ -1153,7 +1115,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId" FromRole="OtherIncome" ToRole="SalaryItem" />
     <NavigationProperty Name="OtherIncomeDetails" Relationship="Self.FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId" FromRole="OtherIncome" ToRole="OtherIncomeDetail" />
   </EntityType>
   <EntityType Name="OtherIncomeDetail">
@@ -1172,7 +1133,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId" FromRole="OtherIncomeDetail" ToRole="Employee" />
     <NavigationProperty Name="OtherIncome" Relationship="Self.FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId" FromRole="OtherIncomeDetail" ToRole="OtherIncome" />
   </EntityType>
   <EntityType Name="PartyBalance">
@@ -1221,6 +1181,68 @@
     <Property Name="Bank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="PayHead">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsMainSalary" Type="Boolean" Nullable="false" />
+    <Property Name="IsDetailSalary" Type="Boolean" Nullable="false" />
+    <Property Name="SalaryItemType" Type="Int32" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="EmployeeLoans" Relationship="Self.FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId" FromRole="PayHead" ToRole="EmployeeLoan" />
+  </EntityType>
+  <EntityType Name="PaymentDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentMasterId" Type="Int32" />
+    <Property Name="LedgerId" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ExchangeRate" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ChequeNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ChequeDate" Type="DateTime" Precision="3" />
+    <Property Name="ExtraDate" Type="DateTime" Precision="3" />
+    <Property Name="Extra1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Extra2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="ApprovedNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovedBy" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AccountLedger" Relationship="Self.FK_PaymentDetails_AccountLedger" FromRole="PaymentDetails" ToRole="AccountLedger" />
+    <NavigationProperty Name="PaymentMaster" Relationship="Self.FK_PaymentDetails_PaymentMaster" FromRole="PaymentDetails" ToRole="PaymentMaster" />
+  </EntityType>
+  <EntityType Name="PaymentMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VoucherNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SuffixPrefixId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="LedgerDate" Type="DateTime" Precision="3" />
+    <Property Name="LedgerId" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="5" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="VoucherTypeId" Type="Int32" />
+    <Property Name="FinancialYearId" Type="Int32" />
+    <Property Name="ExtraDate" Type="DateTime" Precision="3" />
+    <Property Name="Extra1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Extra2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="ApprovedNotes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovedBy" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PaymentDetails" Relationship="Self.FK_PaymentDetails_PaymentMaster" FromRole="PaymentMaster" ToRole="PaymentDetails" />
+  </EntityType>
   <EntityType Name="PensionCompensation">
     <Key>
       <PropertyRef Name="Id" />
@@ -1237,7 +1259,7 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_PensionCompensation_dbo_Employee_EmployeeId" FromRole="PensionCompensation" ToRole="Employee" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_dbo_PensionCompensation_dbo_Employee_EmployeeId" FromRole="PensionCompensation" ToRole="Employee" />
   </EntityType>
   <EntityType Name="Picture">
     <Key>
@@ -1427,8 +1449,8 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId" FromRole="SalaryEmployee" ToRole="Employee" />
     <NavigationProperty Name="SalaryEmployeeDetails" Relationship="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryEmployee_SalaryEmployeeId" FromRole="SalaryEmployee" ToRole="SalaryEmployeeDetail" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId" FromRole="SalaryEmployee" ToRole="Employee" />
   </EntityType>
   <EntityType Name="SalaryEmployeeDetail">
     <Key>
@@ -1443,37 +1465,6 @@
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="SalaryEmployee" Relationship="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryEmployee_SalaryEmployeeId" FromRole="SalaryEmployeeDetail" ToRole="SalaryEmployee" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId" FromRole="SalaryEmployeeDetail" ToRole="SalaryItem" />
-  </EntityType>
-  <EntityType Name="SalaryItem">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsLegacy" Type="Boolean" Nullable="false" />
-    <Property Name="IsMainSalary" Type="Boolean" Nullable="false" />
-    <Property Name="IsDetailSalary" Type="Boolean" Nullable="false" />
-    <Property Name="DefaultValue" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="CurrentValue" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="SalaryItemType" Type="Int32" Nullable="false" />
-    <Property Name="SalarySign" Type="Int32" Nullable="false" />
-    <Property Name="SalaryItemStatus" Type="Int32" Nullable="false" />
-    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-    <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="EmployeeLoans" Relationship="Self.FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId" FromRole="SalaryItem" ToRole="EmployeeLoan" />
-    <NavigationProperty Name="Formulae" Relationship="Self.FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId" FromRole="SalaryItem" ToRole="Formula" />
-    <NavigationProperty Name="Formulae1" Relationship="Self.FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId" FromRole="SalaryItem" ToRole="Formula" />
-    <NavigationProperty Name="OtherExpenses" Relationship="Self.FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId" FromRole="SalaryItem" ToRole="OtherExpense" />
-    <NavigationProperty Name="OtherIncomes" Relationship="Self.FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId" FromRole="SalaryItem" ToRole="OtherIncome" />
-    <NavigationProperty Name="SalaryEmployeeDetails" Relationship="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId" FromRole="SalaryItem" ToRole="SalaryEmployeeDetail" />
-    <NavigationProperty Name="SalarySlips" Relationship="Self.FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId" FromRole="SalaryItem" ToRole="SalarySlip" />
-    <NavigationProperty Name="SalaryStandardDetails" Relationship="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId" FromRole="SalaryItem" ToRole="SalaryStandardDetail" />
-    <NavigationProperty Name="THRs" Relationship="Self.FK_dbo_THR_dbo_SalaryItem_SalaryItemId" FromRole="SalaryItem" ToRole="THR" />
   </EntityType>
   <EntityType Name="SalaryPayment">
     <Key>
@@ -1492,6 +1483,25 @@
     <Property Name="LoanDeduction" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Narration" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SalaryProcess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DesignationName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Attendance" Type="Int32" />
+    <Property Name="Leave" Type="Int32" />
+    <Property Name="Absent" Type="Int32" />
+    <Property Name="Addition" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Deduction" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="Boolean" />
+    <Property Name="SalaryYear" Type="DateTime" Precision="3" />
+    <Property Name="Month" Type="DateTime" Precision="3" />
+    <Property Name="ProcessDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="SalarySlip">
     <Key>
@@ -1513,7 +1523,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId" FromRole="SalarySlip" ToRole="SalaryItem" />
     <NavigationProperty Name="SalarySlipDetails" Relationship="Self.FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId" FromRole="SalarySlip" ToRole="SalarySlipDetail" />
   </EntityType>
   <EntityType Name="SalarySlipDetail">
@@ -1565,7 +1574,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId" FromRole="SalaryStandardDetail" ToRole="SalaryItem" />
     <NavigationProperty Name="SalaryStandard" Relationship="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryStandard_SalaryStandardId" FromRole="SalaryStandardDetail" ToRole="SalaryStandard" />
   </EntityType>
   <EntityType Name="SalesDelivery">
@@ -1623,6 +1631,7 @@
     <NavigationProperty Name="Product" Relationship="Self.FK_SalesDetails_Product" FromRole="SalesDetails" ToRole="Product" />
     <NavigationProperty Name="SalesMaster" Relationship="Self.FK_SalesDetails_SalesMaster" FromRole="SalesDetails" ToRole="SalesMaster" />
     <NavigationProperty Name="Size" Relationship="Self.FK_SalesDetails_Size" FromRole="SalesDetails" ToRole="Size" />
+    <NavigationProperty Name="SalesReturns" Relationship="Self.FK_SalesReturn_SalesDetails" FromRole="SalesDetails" ToRole="SalesReturn" />
   </EntityType>
   <EntityType Name="SalesMaster">
     <Key>
@@ -1655,10 +1664,10 @@
     <Property Name="IsLastYear" Type="Boolean" />
     <Property Name="MasterId" Type="Int32" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_SalesMaster_Customer" FromRole="SalesMaster" ToRole="Customer" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_SalesMaster_Employee" FromRole="SalesMaster" ToRole="Employee" />
     <NavigationProperty Name="SalesDeliveries" Relationship="Self.FK_SalesDelivery_SalesMaster" FromRole="SalesMaster" ToRole="SalesDelivery" />
     <NavigationProperty Name="SalesDetails" Relationship="Self.FK_SalesDetails_SalesMaster" FromRole="SalesMaster" ToRole="SalesDetails" />
     <NavigationProperty Name="SalesOrder" Relationship="Self.FK_SalesMaster_Salesorder" FromRole="SalesMaster" ToRole="SalesOrder" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_SalesMaster_Employee" FromRole="SalesMaster" ToRole="Employee" />
   </EntityType>
   <EntityType Name="SalesOrder">
     <Key>
@@ -1700,13 +1709,20 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SalesId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="SalesInvoice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SalesDetailsId" Type="Int32" Nullable="false" />
     <Property Name="ItemId" Type="Int32" Nullable="false" />
+    <Property Name="SizeId" Type="Int32" />
+    <Property Name="BrandId" Type="Int32" />
+    <Property Name="APIId" Type="Int32" />
     <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="API" Relationship="Self.FK_SalesReturn_API" FromRole="SalesReturn" ToRole="API" />
+    <NavigationProperty Name="Brand" Relationship="Self.FK_SalesReturn_Brand" FromRole="SalesReturn" ToRole="Brand" />
+    <NavigationProperty Name="SalesDetail" Relationship="Self.FK_SalesReturn_SalesDetails" FromRole="SalesReturn" ToRole="SalesDetails" />
+    <NavigationProperty Name="Size" Relationship="Self.FK_SalesReturn_Size" FromRole="SalesReturn" ToRole="Size" />
   </EntityType>
   <EntityType Name="SchClass">
     <Key>
@@ -1811,6 +1827,7 @@
     <NavigationProperty Name="ReceiveDetails" Relationship="Self.FK_ReceiveDetails_Size" FromRole="Size" ToRole="ReceiveDetails" />
     <NavigationProperty Name="SalesDetails" Relationship="Self.FK_SalesDetails_Size" FromRole="Size" ToRole="SalesDetails" />
     <NavigationProperty Name="SalesOrders" Relationship="Self.FK_SalesOrder_Size" FromRole="Size" ToRole="SalesOrder" />
+    <NavigationProperty Name="SalesReturns" Relationship="Self.FK_SalesReturn_Size" FromRole="Size" ToRole="SalesReturn" />
     <NavigationProperty Name="StockIns" Relationship="Self.FK_StockIn_Size" FromRole="Size" ToRole="StockIn" />
     <NavigationProperty Name="StockOuts" Relationship="Self.FK_StockOut_Size" FromRole="Size" ToRole="StockOut" />
     <NavigationProperty Name="TempSalesDetails" Relationship="Self.FK_TempSalesDetails_Size" FromRole="Size" ToRole="TempSalesDetails" />
@@ -1840,7 +1857,6 @@
     <Property Name="Disetujui_oleh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Dikoreksi_oleh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="company_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId" FromRole="SlipGajiDetail" ToRole="Employee" />
     <NavigationProperty Name="SlipGajiDetail1" Relationship="Self.FK_dbo_SlipGajiDetail1_dbo_SlipGajiDetail_SlipGajiDetailId" FromRole="SlipGajiDetail" ToRole="SlipGajiDetail1" />
     <NavigationProperty Name="SlipGajiDetail2A" Relationship="Self.FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetail_Id" FromRole="SlipGajiDetail" ToRole="SlipGajiDetail2A" />
     <NavigationProperty Name="SlipGajiDetail2A1" Relationship="Self.FK_dbo_SlipGajiDetail2A_dbo_SlipGajiDetail_SlipGajiDetailId" FromRole="SlipGajiDetail" ToRole="SlipGajiDetail2A" />
@@ -1970,7 +1986,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_SPKL_dbo_Employee_EmployeeId" FromRole="SPKL" ToRole="Employee" />
   </EntityType>
   <EntityType Name="StockIn">
     <Key>
@@ -1985,11 +2000,13 @@
     <Property Name="SupplierId" Type="Int32" />
     <Property Name="ProductionDate" Type="DateTime" Precision="0" />
     <Property Name="BaleQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="BrandId" Type="Int32" />
     <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="APIId" Type="Int32" />
     <Property Name="APIName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="StockInPrice" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="CreatedBy" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
@@ -2015,6 +2032,7 @@
     <Property Name="SupplierId" Type="Int32" />
     <Property Name="ProductionDate" Type="DateTime" Precision="0" />
     <Property Name="BaleQty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="WeightInMon" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="APIId" Type="Int32" />
     <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -2029,6 +2047,7 @@
     <Property Name="BrandId" Type="Int32" />
     <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StockOutPrice" Type="Decimal" Precision="18" Scale="2" />
     <NavigationProperty Name="API" Relationship="Self.FK_StockOut_API" FromRole="StockOut" ToRole="API" />
     <NavigationProperty Name="Brand" Relationship="Self.FK_StockOut_Brand" FromRole="StockOut" ToRole="Brand" />
     <NavigationProperty Name="Inventory" Relationship="Self.FK_StockOut_Inventory" FromRole="StockOut" ToRole="Inventory" />
@@ -2219,7 +2238,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SalaryItem" Relationship="Self.FK_dbo_THR_dbo_SalaryItem_SalaryItemId" FromRole="THR" ToRole="SalaryItem" />
     <NavigationProperty Name="THRDetails" Relationship="Self.FK_dbo_THRDetail_dbo_THR_THRId" FromRole="THR" ToRole="THRDetail" />
   </EntityType>
   <EntityType Name="THRDetail">
@@ -2233,7 +2251,6 @@
     <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_THRDetail_dbo_Employee_EmployeeId" FromRole="THRDetail" ToRole="Employee" />
     <NavigationProperty Name="THR" Relationship="Self.FK_dbo_THRDetail_dbo_THR_THRId" FromRole="THRDetail" ToRole="THR" />
   </EntityType>
   <EntityType Name="TitleInfo">
@@ -2673,15 +2690,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AdvancePayment_Employee">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="AdvancePayment" Type="Self.AdvancePayment" Multiplicity="*" />
+  <Association Name="FK_PaymentDetails_AccountLedger">
+    <End Role="AccountLedger" Type="Self.AccountLedger" Multiplicity="0..1" />
+    <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Employee">
+      <Principal Role="AccountLedger">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="AdvancePayment">
-        <PropertyRef Name="EmployeeId" />
+      <Dependent Role="PaymentDetails">
+        <PropertyRef Name="LedgerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2757,6 +2774,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SalesReturn_API">
+    <End Role="API" Type="Self.API" Multiplicity="0..1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="API">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
+        <PropertyRef Name="APIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StockIn_API">
     <End Role="API" Type="Self.API" Multiplicity="0..1" />
     <End Role="StockIn" Type="Self.StockIn" Multiplicity="*" />
@@ -2817,18 +2846,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_Department_dbo_BranchOffice_BranchOfficeId">
-    <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="1" />
-    <End Role="Department" Type="Self.Department" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BranchOffice">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Department">
-        <PropertyRef Name="BranchOfficeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Inventory_Brand">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
     <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
@@ -2885,6 +2902,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="SalesOrder">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesReturn_Brand">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
         <PropertyRef Name="BrandId" />
       </Dependent>
     </ReferentialConstraint>
@@ -3069,205 +3098,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Employee_Designationtbl">
-    <End Role="Designationtbl" Type="Self.Designationtbl" Multiplicity="0..1" />
-    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Designationtbl">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="DesignationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="EmployeeAttendance" Type="Self.EmployeeAttendance" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EmployeeAttendance">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="EmployeeEducation" Type="Self.EmployeeEducation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EmployeeEducation">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="EmployeeLeave" Type="Self.EmployeeLeave" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EmployeeLeave">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="EmployeeLoan" Type="Self.EmployeeLoan" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EmployeeLoan">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="EmployeeWorkingTime" Type="Self.EmployeeWorkingTime" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EmployeeWorkingTime">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_FPUser_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="FPUser" Type="Self.FPUser" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="FPUser">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_LastEmployment_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="LastEmployment" Type="Self.LastEmployment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="LastEmployment">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="OtherExpenseDetail" Type="Self.OtherExpenseDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherExpenseDetail">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="OtherIncomeDetail" Type="Self.OtherIncomeDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherIncomeDetail">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_PensionCompensation_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="PensionCompensation" Type="Self.PensionCompensation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PensionCompensation">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="SalaryEmployee" Type="Self.SalaryEmployee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryEmployee">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="SlipGajiDetail" Type="Self.SlipGajiDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SlipGajiDetail">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SPKL_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="SPKL" Type="Self.SPKL" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SPKL">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_THRDetail_dbo_Employee_EmployeeId">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-    <End Role="THRDetail" Type="Self.THRDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="THRDetail">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SalesMaster_Employee">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="SalesMaster" Type="Self.SalesMaster" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalesMaster">
-        <PropertyRef Name="SalesBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
+    <End Role="PayHead" Type="Self.PayHead" Multiplicity="1" />
     <End Role="EmployeeLoan" Type="Self.EmployeeLoan" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SalaryItem">
+      <Principal Role="PayHead">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="EmployeeLoan">
@@ -3320,30 +3155,6 @@
       </Principal>
       <Dependent Role="LedgerPosting">
         <PropertyRef Name="YearId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
-    <End Role="Formula" Type="Self.Formula" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Formula">
-        <PropertyRef Name="FirstSalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="Formula" Type="Self.Formula" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Formula">
-        <PropertyRef Name="SecondSalaryItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3577,18 +3388,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="OtherExpense" Type="Self.OtherExpense" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherExpense">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId">
     <End Role="OtherExpense" Type="Self.OtherExpense" Multiplicity="1" />
     <End Role="OtherExpenseDetail" Type="Self.OtherExpenseDetail" Multiplicity="*" />
@@ -3598,18 +3397,6 @@
       </Principal>
       <Dependent Role="OtherExpenseDetail">
         <PropertyRef Name="OtherExpenseId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="OtherIncome" Type="Self.OtherIncome" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OtherIncome">
-        <PropertyRef Name="SalaryItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3634,6 +3421,18 @@
       </Principal>
       <Dependent Role="PartyBalance">
         <PropertyRef Name="VoucherTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentDetails_PaymentMaster">
+    <End Role="PaymentMaster" Type="Self.PaymentMaster" Multiplicity="0..1" />
+    <End Role="PaymentDetails" Type="Self.PaymentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaymentDetails">
+        <PropertyRef Name="PaymentMasterId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3781,54 +3580,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
-    <End Role="SalaryEmployeeDetail" Type="Self.SalaryEmployeeDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryEmployeeDetail">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="SalarySlip" Type="Self.SalarySlip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalarySlip">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="1" />
-    <End Role="SalaryStandardDetail" Type="Self.SalaryStandardDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryStandardDetail">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_THR_dbo_SalaryItem_SalaryItemId">
-    <End Role="SalaryItem" Type="Self.SalaryItem" Multiplicity="0..1" />
-    <End Role="THR" Type="Self.THR" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryItem">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="THR">
-        <PropertyRef Name="SalaryItemId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
     <End Role="SalarySlip" Type="Self.SalarySlip" Multiplicity="1" />
     <End Role="SalarySlipDetail" Type="Self.SalarySlipDetail" Multiplicity="*" />
@@ -3901,6 +3652,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SalesReturn_SalesDetails">
+    <End Role="SalesDetails" Type="Self.SalesDetail" Multiplicity="1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
+        <PropertyRef Name="SalesDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SalesMaster_Salesorder">
     <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="0..1" />
     <End Role="SalesMaster" Type="Self.SalesMaster" Multiplicity="*" />
@@ -3934,6 +3697,18 @@
       </Principal>
       <Dependent Role="TempSalesMaster">
         <PropertyRef Name="SalesOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesReturn_Size">
+    <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+    <End Role="SalesReturn" Type="Self.SalesReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Size">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesReturn">
+        <PropertyRef Name="SizeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4150,7 +3925,6 @@
     <EntitySet Name="DeptUsedSchs" EntityType="Self.DeptUsedSch" />
     <EntitySet Name="Designationtbls" EntityType="Self.Designationtbl" />
     <EntitySet Name="Divisions" EntityType="Self.Division" />
-    <EntitySet Name="Employees" EntityType="Self.Employee" />
     <EntitySet Name="EmployeeAttendances" EntityType="Self.EmployeeAttendance" />
     <EntitySet Name="EmployeeEducations" EntityType="Self.EmployeeEducation" />
     <EntitySet Name="EmployeeLeaves" EntityType="Self.EmployeeLeave" />
@@ -4184,6 +3958,9 @@
     <EntitySet Name="OtherIncomeDetails" EntityType="Self.OtherIncomeDetail" />
     <EntitySet Name="PartyBalances" EntityType="Self.PartyBalance" />
     <EntitySet Name="PartyPaymentHistories" EntityType="Self.PartyPaymentHistory" />
+    <EntitySet Name="PayHeads" EntityType="Self.PayHead" />
+    <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetail" />
+    <EntitySet Name="PaymentMasters" EntityType="Self.PaymentMaster" />
     <EntitySet Name="PensionCompensations" EntityType="Self.PensionCompensation" />
     <EntitySet Name="Pictures" EntityType="Self.Picture" />
     <EntitySet Name="PPH21SPT" EntityType="Self.PPH21SPT" />
@@ -4196,8 +3973,8 @@
     <EntitySet Name="RoleWiseScreenPermissions" EntityType="Self.RoleWiseScreenPermission" />
     <EntitySet Name="SalaryEmployees" EntityType="Self.SalaryEmployee" />
     <EntitySet Name="SalaryEmployeeDetails" EntityType="Self.SalaryEmployeeDetail" />
-    <EntitySet Name="SalaryItems" EntityType="Self.SalaryItem" />
     <EntitySet Name="SalaryPayments" EntityType="Self.SalaryPayment" />
+    <EntitySet Name="SalaryProcesses" EntityType="Self.SalaryProcess" />
     <EntitySet Name="SalarySlips" EntityType="Self.SalarySlip" />
     <EntitySet Name="SalarySlipDetails" EntityType="Self.SalarySlipDetail" />
     <EntitySet Name="SalaryStandards" EntityType="Self.SalaryStandard" />
@@ -4276,9 +4053,9 @@
       <End Role="AccountLedger" EntitySet="AccountLedgers" />
       <End Role="PartyBalance" EntitySet="PartyBalances" />
     </AssociationSet>
-    <AssociationSet Name="FK_AdvancePayment_Employee" Association="Self.FK_AdvancePayment_Employee">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="AdvancePayment" EntitySet="AdvancePayments" />
+    <AssociationSet Name="FK_PaymentDetails_AccountLedger" Association="Self.FK_PaymentDetails_AccountLedger">
+      <End Role="AccountLedger" EntitySet="AccountLedgers" />
+      <End Role="PaymentDetails" EntitySet="PaymentDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_AdvancePayment_VoucherType" Association="Self.FK_AdvancePayment_VoucherType">
       <End Role="VoucherType" EntitySet="VoucherTypes" />
@@ -4304,6 +4081,10 @@
       <End Role="API" EntitySet="APIs" />
       <End Role="SalesDetails" EntitySet="SalesDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_API" Association="Self.FK_SalesReturn_API">
+      <End Role="API" EntitySet="APIs" />
+      <End Role="SalesReturn" EntitySet="SalesReturns" />
+    </AssociationSet>
     <AssociationSet Name="FK_StockIn_API" Association="Self.FK_StockIn_API">
       <End Role="API" EntitySet="APIs" />
       <End Role="StockIn" EntitySet="StockIns" />
@@ -4324,10 +4105,6 @@
       <End Role="CompanyInfo" EntitySet="CompanyInfoes" />
       <End Role="BranchOffice" EntitySet="BranchOffices" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_Department_dbo_BranchOffice_BranchOfficeId" Association="Self.FK_dbo_Department_dbo_BranchOffice_BranchOfficeId">
-      <End Role="BranchOffice" EntitySet="BranchOffices" />
-      <End Role="Department" EntitySet="Departments" />
-    </AssociationSet>
     <AssociationSet Name="FK_Inventory_Brand" Association="Self.FK_Inventory_Brand">
       <End Role="Brand" EntitySet="Brands" />
       <End Role="Inventory" EntitySet="Inventories" />
@@ -4347,6 +4124,10 @@
     <AssociationSet Name="FK_SalesOrder_Brand" Association="Self.FK_SalesOrder_Brand">
       <End Role="Brand" EntitySet="Brands" />
       <End Role="SalesOrder" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_Brand" Association="Self.FK_SalesReturn_Brand">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="SalesReturn" EntitySet="SalesReturns" />
     </AssociationSet>
     <AssociationSet Name="FK_StockIn_Brand" Association="Self.FK_StockIn_Brand">
       <End Role="Brand" EntitySet="Brands" />
@@ -4408,72 +4189,8 @@
       <End Role="Department" EntitySet="Departments" />
       <End Role="Division" EntitySet="Divisions" />
     </AssociationSet>
-    <AssociationSet Name="FK_Employee_Designationtbl" Association="Self.FK_Employee_Designationtbl">
-      <End Role="Designationtbl" EntitySet="Designationtbls" />
-      <End Role="Employee" EntitySet="Employees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="EmployeeAttendance" EntitySet="EmployeeAttendances" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="EmployeeEducation" EntitySet="EmployeeEducations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="EmployeeLeave" EntitySet="EmployeeLeaves" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="EmployeeLoan" EntitySet="EmployeeLoans" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId" Association="Self.FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="EmployeeWorkingTime" EntitySet="EmployeeWorkingTimes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_FPUser_dbo_Employee_EmployeeId" Association="Self.FK_dbo_FPUser_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="FPUser" EntitySet="FPUsers" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_LastEmployment_dbo_Employee_EmployeeId" Association="Self.FK_dbo_LastEmployment_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="LastEmployment" EntitySet="LastEmployments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_OtherExpenseDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="OtherExpenseDetail" EntitySet="OtherExpenseDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_OtherIncomeDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="OtherIncomeDetail" EntitySet="OtherIncomeDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_PensionCompensation_dbo_Employee_EmployeeId" Association="Self.FK_dbo_PensionCompensation_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="PensionCompensation" EntitySet="PensionCompensations" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="SalaryEmployee" EntitySet="SalaryEmployees" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SlipGajiDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="SlipGajiDetail" EntitySet="SlipGajiDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SPKL_dbo_Employee_EmployeeId" Association="Self.FK_dbo_SPKL_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="SPKL" EntitySet="SPKLs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_THRDetail_dbo_Employee_EmployeeId" Association="Self.FK_dbo_THRDetail_dbo_Employee_EmployeeId">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="THRDetail" EntitySet="THRDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SalesMaster_Employee" Association="Self.FK_SalesMaster_Employee">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="SalesMaster" EntitySet="SalesMasters" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_EmployeeLoan_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
+      <End Role="PayHead" EntitySet="PayHeads" />
       <End Role="EmployeeLoan" EntitySet="EmployeeLoans" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId" Association="Self.FK_dbo_EmployeeLoanDetail_dbo_EmployeeLoan_EmployeeLoanId">
@@ -4491,14 +4208,6 @@
     <AssociationSet Name="FK_LedgerPosting_Year" Association="Self.FK_LedgerPosting_Year">
       <End Role="FinancialYear" EntitySet="FinancialYears" />
       <End Role="LedgerPosting" EntitySet="LedgerPostings" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId" Association="Self.FK_dbo_Formula_dbo_SalaryItem_FirstSalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="Formula" EntitySet="Formulae" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId" Association="Self.FK_dbo_Formula_dbo_SalaryItem_SecondSalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="Formula" EntitySet="Formulae" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId" Association="Self.FK_dbo_Formula_dbo_SalarySlipDetail_SalarySlipDetailId">
       <End Role="SalarySlipDetail" EntitySet="SalarySlipDetails" />
@@ -4576,17 +4285,9 @@
       <End Role="VoucherType" EntitySet="VoucherTypes" />
       <End Role="LedgerPosting" EntitySet="LedgerPostings" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_OtherExpense_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="OtherExpense" EntitySet="OtherExpenses" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId" Association="Self.FK_dbo_OtherExpenseDetail_dbo_OtherExpense_OtherExpenseId">
       <End Role="OtherExpense" EntitySet="OtherExpenses" />
       <End Role="OtherExpenseDetail" EntitySet="OtherExpenseDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_OtherIncome_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="OtherIncome" EntitySet="OtherIncomes" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId" Association="Self.FK_dbo_OtherIncomeDetail_dbo_OtherIncome_OtherIncomeId">
       <End Role="OtherIncome" EntitySet="OtherIncomes" />
@@ -4595,6 +4296,10 @@
     <AssociationSet Name="FK_PartyBalance_Voucher" Association="Self.FK_PartyBalance_Voucher">
       <End Role="VoucherType" EntitySet="VoucherTypes" />
       <End Role="PartyBalance" EntitySet="PartyBalances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentDetails_PaymentMaster" Association="Self.FK_PaymentDetails_PaymentMaster">
+      <End Role="PaymentMaster" EntitySet="PaymentMasters" />
+      <End Role="PaymentDetails" EntitySet="PaymentDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_ReceiveDetails_product" Association="Self.FK_ReceiveDetails_product">
       <End Role="Product" EntitySet="Products" />
@@ -4644,22 +4349,6 @@
       <End Role="SalaryEmployee" EntitySet="SalaryEmployees" />
       <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalarySlip_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="SalarySlip" EntitySet="SalarySlips" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_SalaryStandardDetail_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="SalaryStandardDetail" EntitySet="SalaryStandardDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_THR_dbo_SalaryItem_SalaryItemId" Association="Self.FK_dbo_THR_dbo_SalaryItem_SalaryItemId">
-      <End Role="SalaryItem" EntitySet="SalaryItems" />
-      <End Role="THR" EntitySet="THRs" />
-    </AssociationSet>
     <AssociationSet Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId" Association="Self.FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
       <End Role="SalarySlip" EntitySet="SalarySlips" />
       <End Role="SalarySlipDetail" EntitySet="SalarySlipDetails" />
@@ -4684,6 +4373,10 @@
       <End Role="Size" EntitySet="Sizes" />
       <End Role="SalesDetails" EntitySet="SalesDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_SalesDetails" Association="Self.FK_SalesReturn_SalesDetails">
+      <End Role="SalesDetails" EntitySet="SalesDetails" />
+      <End Role="SalesReturn" EntitySet="SalesReturns" />
+    </AssociationSet>
     <AssociationSet Name="FK_SalesMaster_Salesorder" Association="Self.FK_SalesMaster_Salesorder">
       <End Role="SalesOrder" EntitySet="SalesOrders" />
       <End Role="SalesMaster" EntitySet="SalesMasters" />
@@ -4695,6 +4388,10 @@
     <AssociationSet Name="FK_TempSalesMaster_SalesOrder" Association="Self.FK_TempSalesMaster_SalesOrder">
       <End Role="SalesOrder" EntitySet="SalesOrders" />
       <End Role="TempSalesMaster" EntitySet="TempSalesMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesReturn_Size" Association="Self.FK_SalesReturn_Size">
+      <End Role="Size" EntitySet="Sizes" />
+      <End Role="SalesReturn" EntitySet="SalesReturns" />
     </AssociationSet>
     <AssociationSet Name="FK_StockIn_Size" Association="Self.FK_StockIn_Size">
       <End Role="Size" EntitySet="Sizes" />
@@ -4824,9 +4521,16 @@
       <Parameter Name="IsSupplier" Mode="In" Type="Int32" />
       <Parameter Name="invoiceId" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="rptPaymentInitateVoucher" ReturnType="Collection(DB_9B34E1_erpModel.rptPaymentInitateVoucher_Result)">
+      <Parameter Name="InvoiceNo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="rptPurchaseChallan" ReturnType="Collection(DB_9B34E1_erpModel.rptPurchaseChallan_Result)">
+      <Parameter Name="InvoiceNo" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="rptSalesInvoice" ReturnType="Collection(DB_9B34E1_erpModel.rptSalesInvoice_Result)">
       <Parameter Name="SalesInvoice" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="rptUnApprovedPaymentList" ReturnType="Collection(DB_9B34E1_erpModel.rptUnApprovedPaymentList_Result)" />
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -4854,6 +4558,11 @@
     <FunctionImport Name="SP_JournalVoucher" ReturnType="Collection(DB_9B34E1_erpModel.SP_JournalVoucher_Result)">
       <Parameter Name="InvoiceNo" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_ProcessAttendance" ReturnType="Collection(Int32)">
+      <Parameter Name="employeeId" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="month" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="sp_renamediagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -4873,6 +4582,61 @@
     <FunctionImport Name="YearClosed">
       <Parameter Name="CustomerId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="Employees" EntityType="DB_9B34E1_erpModel.Employee" />
+    <AssociationSet Name="FK_AdvancePayment_Employee" Association="DB_9B34E1_erpModel.FK_AdvancePayment_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="AdvancePayment" EntitySet="AdvancePayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Department" Association="DB_9B34E1_erpModel.FK_Employee_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Designationtbl" Association="DB_9B34E1_erpModel.FK_Employee_Designationtbl">
+      <End Role="Designationtbl" EntitySet="Designationtbls" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" Association="DB_9B34E1_erpModel.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeAttendance" EntitySet="EmployeeAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId" Association="DB_9B34E1_erpModel.FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeEducation" EntitySet="EmployeeEducations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId" Association="DB_9B34E1_erpModel.FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeLeave" EntitySet="EmployeeLeaves" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId" Association="DB_9B34E1_erpModel.FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeLoan" EntitySet="EmployeeLoans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId" Association="DB_9B34E1_erpModel.FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="EmployeeWorkingTime" EntitySet="EmployeeWorkingTimes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PensionCompensation_dbo_Employee_EmployeeId" Association="DB_9B34E1_erpModel.FK_dbo_PensionCompensation_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="PensionCompensation" EntitySet="PensionCompensations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId" Association="DB_9B34E1_erpModel.FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="SalaryEmployee" EntitySet="SalaryEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesMaster_Employee" Association="DB_9B34E1_erpModel.FK_SalesMaster_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="SalesMaster" EntitySet="SalesMasters" />
+    </AssociationSet>
+    <EntitySet Name="SalaryPackages" EntityType="DB_9B34E1_erpModel.SalaryPackage" />
+    <EntitySet Name="SalaryPackageDetails" EntityType="DB_9B34E1_erpModel.SalaryPackageDetail" />
+    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackage" Association="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage">
+      <End Role="SalaryPackage" EntitySet="SalaryPackages" />
+      <End Role="SalaryPackageDetail" EntitySet="SalaryPackageDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackageDetails" Association="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails">
+      <End Role="SalaryPackageDetail" EntitySet="SalaryPackageDetails" />
+      <End Role="SalaryPackageDetail1" EntitySet="SalaryPackageDetails" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5078,6 +4842,84 @@
     <Property Type="Decimal" Name="Balance" Nullable="true" Precision="18" Scale="2" />
     <Property Type="String" Name="ToWords" Nullable="true" MaxLength="1035" />
   </ComplexType>
+  <ComplexType Name="rptPaymentInitateVoucher_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="InvoiceNo" Nullable="true" />
+    <Property Type="DateTime" Name="LedgerDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Narration" Nullable="true" />
+    <Property Type="String" Name="VoucherNo" Nullable="true" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="18" Scale="5" />
+    <Property Type="Int32" Name="LedgerId" Nullable="true" />
+    <Property Type="String" Name="LedgerName" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="rptPurchaseChallan_Result">
+    <Property Type="String" Name="SizeName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="BrandName" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="APIName" Nullable="false" MaxLength="250" />
+    <Property Type="Decimal" Name="AdditionalCost" Nullable="false" Precision="18" Scale="5" />
+    <Property Type="String" Name="InvoiceNoPaper" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="BillDiscount" Nullable="false" Precision="18" Scale="5" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
+    <Property Type="Decimal" Name="GrandTotal" Nullable="false" Precision="18" Scale="5" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="InvoiceDate" Nullable="false" />
+    <Property Type="String" Name="AdditionalCostPurpose" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="InvoiceNo" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="TransportNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="TransportType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="GrandTotalInWord" Nullable="true" MaxLength="1035" />
+    <Property Type="Int32" Name="Id1" Nullable="false" />
+    <Property Type="Int32" Name="ReceiveMasterId" Nullable="false" />
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="Int32" Name="WarehouseId" Nullable="true" />
+    <Property Type="Int32" Name="SizeId" Nullable="true" />
+    <Property Type="Int32" Name="BrandId" Nullable="true" />
+    <Property Type="Int32" Name="APIId" Nullable="true" />
+    <Property Type="Decimal" Name="Qty" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="24" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="24" />
+    <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="Id2" Nullable="false" />
+    <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="ProductNameBangla" Nullable="true" MaxLength="250" />
+    <Property Type="Int32" Name="CategoryId" Nullable="true" />
+    <Property Type="String" Name="ProductType" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ProductTypeId" Nullable="true" />
+    <Property Type="Int32" Name="MinStock" Nullable="true" />
+    <Property Type="Int32" Name="TaxId" Nullable="true" />
+    <Property Type="Int32" Name="MaxStock" Nullable="true" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="ReorderLevel" Nullable="true" />
+    <Property Type="String" Name="CreatedBy1" Nullable="true" MaxLength="24" />
+    <Property Type="DateTime" Name="CreatedDate1" Nullable="true" Precision="23" />
+    <Property Type="String" Name="UpdateBy" Nullable="true" MaxLength="24" />
+    <Property Type="DateTime" Name="UpdateDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsActive1" Nullable="false" />
+    <Property Type="Int32" Name="Id3" Nullable="false" />
+    <Property Type="String" Name="Code1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="true" />
+    <Property Type="String" Name="ContactPersonName" Nullable="true" />
+    <Property Type="String" Name="ContactPersonPhone" Nullable="true" />
+    <Property Type="String" Name="City" Nullable="true" />
+    <Property Type="String" Name="Phone" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" />
+    <Property Type="String" Name="Web" Nullable="true" />
+    <Property Type="String" Name="SupplierType" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Creator" Nullable="true" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="UpdateBy1" Nullable="true" />
+    <Property Type="DateTime" Name="UpdateDate1" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="IsActive2" Nullable="false" />
+    <Property Type="String" Name="Remarks" Nullable="true" />
+    <Property Type="Int32" Name="LedgerId" Nullable="true" />
+  </ComplexType>
   <ComplexType Name="rptSalesInvoice_Result">
     <Property Type="Decimal" Name="AdditionalCost" Nullable="false" Precision="18" Scale="2" />
     <Property Type="String" Name="Coutha" Nullable="true" MaxLength="50" />
@@ -5143,6 +4985,11 @@
     <Property Type="String" Name="ContactPersonPhone" Nullable="true" />
     <Property Type="String" Name="City" Nullable="true" />
     <Property Type="String" Name="Phone" Nullable="true" />
+    <Property Type="Int32" Name="Dealer" Nullable="true" />
+    <Property Type="String" Name="District" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="TradeLicense" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="VATNo" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Area" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="Email" Nullable="true" />
     <Property Type="String" Name="Web" Nullable="true" />
     <Property Type="Decimal" Name="Limit" Nullable="true" Precision="18" Scale="2" />
@@ -5153,6 +5000,16 @@
     <Property Type="DateTime" Name="UpdatedDate1" Nullable="true" Precision="23" />
     <Property Type="Boolean" Name="IsActive2" Nullable="false" />
     <Property Type="Int32" Name="LedgerId" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="rptUnApprovedPaymentList_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="InvoiceNo" Nullable="true" />
+    <Property Type="DateTime" Name="LedgerDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Narration" Nullable="true" />
+    <Property Type="String" Name="VoucherNo" Nullable="true" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="18" Scale="5" />
+    <Property Type="Int32" Name="LedgerId" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" />
   </ComplexType>
   <ComplexType Name="SP_JournalVoucher_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -5194,11 +5051,13 @@
     <Property Type="Int32" Name="SupplierId" Nullable="true" />
     <Property Type="DateTime" Name="ProductionDate1" Nullable="true" />
     <Property Type="Decimal" Name="BaleQty" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="2" />
     <Property Type="Int32" Name="BrandId" Nullable="true" />
     <Property Type="String" Name="BrandName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="SizeName" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="APIId" Nullable="true" />
     <Property Type="String" Name="APIName" Nullable="true" MaxLength="500" />
+    <Property Type="Decimal" Name="StockInPrice" Nullable="true" Precision="18" Scale="2" />
     <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="24" />
     <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
@@ -5223,6 +5082,7 @@
     <Property Type="Int32" Name="SupplierId" Nullable="true" />
     <Property Type="DateTime" Name="ProductionDate1" Nullable="true" />
     <Property Type="Decimal" Name="BaleQty" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="2" />
     <Property Type="Decimal" Name="WeightInMon" Nullable="true" Precision="18" Scale="2" />
     <Property Type="Int32" Name="APIId" Nullable="true" />
     <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
@@ -5237,5 +5097,241 @@
     <Property Type="Int32" Name="BrandId" Nullable="true" />
     <Property Type="String" Name="SizeName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="BrandName" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="StockOutPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="APIName" Nullable="true" MaxLength="250" />
   </ComplexType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MotherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DesignationId" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Salary" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Photo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CV" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="JoiningDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TerminationDate" Type="DateTime" Precision="0" />
+    <Property Name="Qualification" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="BloodGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SalaryPackage" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Creator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LedgerId" Type="Int32" />
+    <NavigationProperty Name="AdvancePayments" Relationship="DB_9B34E1_erpModel.FK_AdvancePayment_Employee" FromRole="Employee" ToRole="AdvancePayment" />
+    <NavigationProperty Name="Department" Relationship="DB_9B34E1_erpModel.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Designationtbl" Relationship="DB_9B34E1_erpModel.FK_Employee_Designationtbl" FromRole="Employee" ToRole="Designationtbl" />
+    <NavigationProperty Name="EmployeeAttendances" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeAttendance" />
+    <NavigationProperty Name="EmployeeEducations" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeEducation" />
+    <NavigationProperty Name="EmployeeLeaves" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeLeave" />
+    <NavigationProperty Name="EmployeeLoans" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeLoan" />
+    <NavigationProperty Name="EmployeeWorkingTimes" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeWorkingTime" />
+    <NavigationProperty Name="PensionCompensations" Relationship="DB_9B34E1_erpModel.FK_dbo_PensionCompensation_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="PensionCompensation" />
+    <NavigationProperty Name="SalaryEmployees" Relationship="DB_9B34E1_erpModel.FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="SalaryEmployee" />
+    <NavigationProperty Name="SalesMasters" Relationship="DB_9B34E1_erpModel.FK_SalesMaster_Employee" FromRole="Employee" ToRole="SalesMaster" />
+  </EntityType>
+  <Association Name="FK_AdvancePayment_Employee">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.AdvancePayment" Role="AdvancePayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdvancePayment">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Department">
+    <End Type="DB_9B34E1_erpModel.Department" Role="Department" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Designationtbl">
+    <End Type="DB_9B34E1_erpModel.Designationtbl" Role="Designationtbl" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Designationtbl">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DesignationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.EmployeeAttendance" Role="EmployeeAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeAttendance">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeEducation_dbo_Employee_EmployeeId">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.EmployeeEducation" Role="EmployeeEducation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeEducation">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeLeave_dbo_Employee_EmployeeId">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.EmployeeLeave" Role="EmployeeLeave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeLeave">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeLoan_dbo_Employee_EmployeeId">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.EmployeeLoan" Role="EmployeeLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeLoan">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_EmployeeWorkingTime_dbo_Employee_EmployeeId">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DB_9B34E1_erpModel.EmployeeWorkingTime" Role="EmployeeWorkingTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmployeeWorkingTime">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PensionCompensation_dbo_Employee_EmployeeId">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.PensionCompensation" Role="PensionCompensation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PensionCompensation">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalaryEmployee_dbo_Employee_EmployeeId">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.SalaryEmployee" Role="SalaryEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryEmployee">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesMaster_Employee">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="DB_9B34E1_erpModel.SalesMaster" Role="SalesMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesMaster">
+        <PropertyRef Name="SalesBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SalaryPackage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalaryPackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SalaryPackageDetails" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackage" ToRole="SalaryPackageDetail" />
+  </EntityType>
+  <EntityType Name="SalaryPackageDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalaryPackageId" Type="Int32" Nullable="false" />
+    <Property Name="PayHeadId" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <NavigationProperty Name="SalaryPackage" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackageDetail" ToRole="SalaryPackage" />
+    <NavigationProperty Name="SalaryPackageDetails1" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetail" ToRole="SalaryPackageDetail1" />
+    <NavigationProperty Name="SalaryPackageDetail1" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetail1" ToRole="SalaryPackageDetail" />
+  </EntityType>
+  <Association Name="FK_SalaryPackageDetails_SalaryPackage">
+    <End Type="DB_9B34E1_erpModel.SalaryPackage" Role="SalaryPackage" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryPackageDetail">
+        <PropertyRef Name="SalaryPackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryPackageDetails_SalaryPackageDetails">
+    <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryPackageDetail">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryPackageDetail1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

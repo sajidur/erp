@@ -1,18 +1,4 @@
-﻿
-function GenerateProductGroupId() {
-    $.ajax({
-        url: '@Url.Action("GenerateProductGroupId", "ProductGroup")',
-        type: 'Get',
-        async: false,
-        success: function (responseData) {
-            $("#txtGroupCode").val(responseData);
-
-        },
-        error: function () { }
-    });
-}
-
-function LoadBrandGrid() {
+﻿function LoadBrandGrid() {
     var url = '/Brand/GetAll';
 
     $.ajax({
@@ -75,11 +61,13 @@ function BrandSave() {
         async: false,
         data: {
             BrandName: $('#txtBrandName').val(),
+            BrandNameInBangla: $('#txtDescriptions').val(),
             create: 1
         },
         success: function (data) {
-            ShowNotification("0", "Brand Saved!!")
+            ShowNotification("1", "Brand Saved!!");
             ResetForm();
+            LoadBrandGrid();
         },
         error: function () {
 

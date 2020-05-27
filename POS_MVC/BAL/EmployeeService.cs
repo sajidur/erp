@@ -32,6 +32,7 @@ namespace RexERP_MVC.BAL
 
         public Employee Save(Employee cus)
         {
+            cus.CreationDate = DateTime.Now;
             return service.Save(cus);
 
         }

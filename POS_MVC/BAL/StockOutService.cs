@@ -11,6 +11,7 @@ namespace RexERP_MVC.BAL
     {
         DBService<StockOut> service = new DBService<StockOut>();
         DBService<Inventory> inventory = new DBService<Inventory>();
+        DBService<InventoryTransaction> _invTransactionService = new DBService<InventoryTransaction>();
 
         public List<StockOut> GetAll()
         {
@@ -48,6 +49,7 @@ namespace RexERP_MVC.BAL
 
         public bool Save(List<StockOutRequest> stockOuts,string invoiceNo,string Notes)
         {
+            var balance = 0.0m;
             var inventoryLists = stockOuts.Select(a => a.InventoryId).ToList();
             var existingItem = inventory.GetAll(a => inventoryLists.Contains(a.Id) && a.IsActive == true).ToList();
             if (existingItem.Count > 0)
@@ -68,20 +70,45 @@ namespace RexERP_MVC.BAL
                         WarehouseId = inv.WarehouseId,
                         CreatedBy = CurrentSession.GetCurrentSession().UserName,
                         CreatedDate = DateTime.Now,
-                        SizeId=inv.SizeId,
-                        SizeName=inv.Size.Name,
-                        BrandId=inv.BrandId,
-                        BrandName=inv.Brand.BrandName,
-                        APIId=inv.APIId,
-                        InventoryId=inv.Id,
+                        SizeId = inv.SizeId,
+                        SizeName = inv.Size.Name,
+                        BrandId = inv.BrandId,
+                        BrandName = inv.Brand.BrandName,
+                        APIId = inv.APIId,
+                        InventoryId = inv.Id,
+                        Rate = inv.PurchasePrice,
+                        StockOutPrice = inv.PurchasePrice * qty,
                         ProductionDate=DateTime.Now
                     };
                     inv.UpdatedDate = DateTime.Now;
                     inv.UpdatedBy = CurrentSession.GetCurrentSession().UserName;
                     inv.ProductionOut+= qty;
                     inv.BalanceQty = inv.BalanceQty - qty;
+                    balance = inv.BalanceQty;
                     inventory.Update(inv, inv.Id);
                     stocks.Add(stock);
+                    var invTransaction = new InventoryTransaction()
+                    {
+                        APIId = stock.APIId,
+                        BalanceQty = balance,
+                        BrandId = stock.BrandId,
+                        CreatedBy = CurrentSession.GetCurrentSession().UserName,
+                        CreatedDate = DateTime.Now,
+                        GoodsType = "Finished Goods",
+                        InventoryGuid = Guid.NewGuid().ToString(),
+                        InvoiceNo = "",
+                        IsActive = true,
+                        ProductId = stock.ProductId ?? 0,
+                        PurchasePrice = 0,
+                        Qty = stock.BaleQty,
+                        SalesPrice = 0,
+                        SizeId = stock.SizeId,
+                        SupplierId = stock.SupplierId ?? 0,
+
+                        TransactionType = (int)Util.TransactionType.ProductionOut,
+                        WarehouseId = stock.WarehouseId ?? 0
+                    };
+                    _invTransactionService.Save(invTransaction);
                 }
                 service.Save(stocks);
                 return true;

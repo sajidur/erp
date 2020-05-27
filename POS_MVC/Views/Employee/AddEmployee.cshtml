@@ -13,24 +13,22 @@
                                         Employee Code :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="text" id="txtCode" name="txtCode" class="form-control" />
+                                        <input type="text" id="txtCode" readonly required value="@Html.ViewBag.EmployeeCode" name="txtCode" class="form-control" />
                                     </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-md-2 control-label">
-                                        Employee Photo :
+                                        Department :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="file" id="photoEmployeePhoto" name="photoEmployeePhoto" class="form-control" />
-                                        <a href="#" class="btn btn-sm btn-danger" onclick="UploadImage()">Upload</a>
+                                        @Html.DropDownList("txtDepartment", (IEnumerable<SelectListItem>)ViewBag.DepartmentList, new { @class = "form-control chosen" })
                                     </div>
-                                    <div class="col-md-4 thumbnail" id="UploadedImage"></div>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Designation :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="text" id="txtDesignation" name="txtDesignation" class="form-control" />
+                                        @Html.DropDownList("txtDesignation", (IEnumerable<SelectListItem>)ViewBag.DesignationList, new { @class = "form-control chosen" })
                                     </div>
                                 </div>
 
@@ -41,9 +39,6 @@
                                     <div class="col-md-4">
                                         <input type="text" id="txtFirstName" name="txtFirstName" class="form-control" />
                                     </div>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Last Name :
                                     </label>
@@ -51,7 +46,7 @@
                                         <input type="text" id="txtLastName" name="txtLastName" class="form-control" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Father Name :
@@ -59,9 +54,6 @@
                                     <div class="col-md-4">
                                         <input type="text" id="txtFatherName" name="txtFatherName" class="form-control" />
                                     </div>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Mother Name :
                                     </label>
@@ -69,7 +61,7 @@
                                         <input type="text" id="txtMotherName" name="txtMotherName" class="form-control" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Employee Address :
@@ -77,9 +69,6 @@
                                     <div class="col-md-4">
                                         <input type="text" id="txtAddress" name="txtAddress" class="form-control" />
                                     </div>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         City :
                                     </label>
@@ -87,40 +76,94 @@
                                         <input type="text" id="txtCity" name="txtCity" class="form-control" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
-                                        Phone :
+                                        DOB :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="text" id="txtPhone" name="txtPhone" class="form-control" />
+                                        <input type="date" id="txtDOB" name="txtDOB" />
+                                    </div>
+                                    <label class="col-md-2 control-label">
+                                        Qualification :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="txtQualification" name="txtQualification" class="form-control" />
                                     </div>
                                 </div>
-                                
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">
-                                        Email :
+                                        BloodGroup :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="text" id="txtEmail" name="txtEmail" class="form-control" />
+                                        <select id="ddlBloodGroup" name="ddlBloodGroup" class="form-control">
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="AB+">AB-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+
+                                        </select>
+                                    </div>
+                                    <label class="col-md-2 control-label">
+                                        Gender :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <select id="ddlGender" name="ddlGender" class="form-control">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Third Gender">Third Gender</option>                                         
+                                        </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        Salary Type :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <select id="ddlSalaryType" name="ddlSalaryType" class="form-control">
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="Daily">Daily</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-md-2 control-label">
+                                        Employee Type :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <select id="ddlEmployeeType" name="ddlEmployeeType" class="form-control">
+                                            <option value="Permanent">Permanent</option>
+                                            <option value="Part-time">Part-time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">
+                                        JoiningDate :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="date" id="txtJoiningDate" name="txtJoiningDate" />
+                                    </div>
+                                    <label class="col-md-2 control-label">
+                                        TerminationDate :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="date" id="txtTerminationDate" name="txtTerminationDate"/>
+                                    </div>
+                                </div><div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Zip Code :
                                     </label>
                                     <div class="col-md-4">
                                         <input type="text" id="txtZipCode" name="txtZipCode" class="form-control" />
                                     </div>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label class="col-md-2 control-label">
                                         Salary :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="text" id="txtSalary" name="txtSalary" class="form-control" />
+                                        <input type="number" id="txtSalary" name="txtSalary" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -130,19 +173,26 @@
                                     <div class="col-md-4">
                                         <input type="text" id="txtRemarks" name="txtRemarks" class="form-control" />
                                     </div>
+                                    <label class="col-md-2 control-label">
+                                        Employee Photo :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input id="inp" type='file'>
+                                        <img id="img" height="150">
+                                    </div>
                                 </div>
-                                
+
                                 <fieldset>
                                     <div class="form-actions">
                                         <div class="col-md-12">
                                             <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="Save()"><i class="fa fa-save"></i>&nbsp; Save</button>
-                                            <button class="btn btn-w-m btn-primary" data-style="expand-left" id="btnUpdate" type="button" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>                                            
+                                            <button class="btn btn-w-m btn-primary" data-style="expand-left" id="btnUpdate" type="button" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>
                                             <button class="btn btn-danger" data-style="expand-left" id="btnDelete" type="button" onclick="Delete()"><i class="fa fa-minus"></i>&nbsp; Delete</button>
                                             <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
 
                                         </div>
                                     </div>
-                                    
+
                                     <br />
                                     <br />
 
@@ -198,6 +248,21 @@
 <script>
     $(document).ready(function () {
     LoadEmployeeList();
-});
+    });
+    var photoContent = "";
+    var MimeType = "";
+    function readFile() {
 
+        if (this.files && this.files[0]) {
+            var FR = new FileReader();
+            MimeType = this.files[0].type;
+            FR.addEventListener("load", function (e) {
+                document.getElementById("img").src = e.target.result;
+                photoContent = e.target.result;
+            });
+
+            FR.readAsDataURL(this.files[0]);
+        }
+    }
+    document.getElementById("inp").addEventListener("change", readFile);
 </script>

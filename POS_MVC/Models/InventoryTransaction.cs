@@ -29,6 +29,8 @@ namespace RexERP_MVC.Models
         public string GoodsType { get; set; }
         public Nullable<decimal> PurchasePrice { get; set; }
         public Nullable<decimal> SalesPrice { get; set; }
+        public Nullable<decimal> CostPrice { get; set; }
+        public Nullable<decimal> ProductionPrice { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string UpdatedBy { get; set; }

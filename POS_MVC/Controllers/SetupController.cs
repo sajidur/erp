@@ -24,7 +24,13 @@ namespace RexERP_MVC.Controllers
         [HttpPost]
         public ActionResult UnitSetup(Unit unit)
         {
-            return View();
+            if (string.IsNullOrEmpty(unit.Name))
+            {
+                return PartialView();
+            }
+            service.Save(unit);
+            RedirectToAction("Index", "Product");
+            return View("~/Views/Product/Index.cshtml");
         }
     }
 }

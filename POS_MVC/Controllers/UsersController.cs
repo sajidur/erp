@@ -164,7 +164,17 @@ namespace RexERP_MVC.Controllers
         public ActionResult MenuUsers()
         {
             var permission = db.RoleWiseScreenPermissions.ToList();
-            return Json(permission,JsonRequestBehavior.AllowGet);
+            var res = AutoMapper.Mapper.Map<List<RoleWiseScreenPermissionResponse>>(permission);
+            var roles = db.UserRoles.ToList();
+            foreach (var item in res)
+            {
+                var role = roles.Where(a => a.Id == Convert.ToInt32(item.RoleId)).FirstOrDefault();
+                if (role!=null)
+                {
+                    item.Role = AutoMapper.Mapper.Map<UserRoleResponse>(role);
+                }
+            }
+            return Json(res,JsonRequestBehavior.AllowGet);
         }
 
 
@@ -184,6 +194,26 @@ namespace RexERP_MVC.Controllers
                 return Json("Already Exists", JsonRequestBehavior.AllowGet);
 
             }
+        }
+        // POST: Users/Delete/5
+        [HttpPost, ActionName("DeleteMenuPermission")]
+        public ActionResult DeleteMenuPermission([Bind(Include = "RoleId,ScreenId")] RoleWiseScreenPermission roleWiseScreen)
+        {
+          //  var permission = db.RoleWiseScreenPermissions.Where(a => a.RoleId == roleWiseScreen.RoleId && a.ScreenId == roleWiseScreen.ScreenId).FirstOrDefault();
+            //if (permission != null)
+            //{
+            //    db.RoleWiseScreenPermissions.Attach(permission);
+            //    db.RoleWiseScreenPermissions.Remove(roleWiseScreen);
+            //    db.SaveChanges();
+            //    return Json("Sucess", JsonRequestBehavior.AllowGet);
+            //}
+            //else
+            //{
+            //    return Json("Delete failed", JsonRequestBehavior.AllowGet);
+
+            //}
+            var res=db.RoleWiseScreenPermissions.SqlQuery("Delete from RoleWiseScreenPermission where RoleId='"+roleWiseScreen.RoleId.Trim()+"' And ScreenId='"+roleWiseScreen.ScreenId.Trim()+"'").AsNoTracking();
+            return Json("Sucess", JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {

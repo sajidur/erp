@@ -35,8 +35,8 @@ namespace RexERP_MVC.Models
         public Nullable<int> CreatedBy { get; set; }
     
         public virtual AccountLedger AccountLedger { get; set; }
-        public virtual Employee Employee { get; set; }
         public virtual VoucherType VoucherType { get; set; }
         public virtual FinancialYear FinancialYear { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

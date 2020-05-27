@@ -10,7 +10,7 @@ using Validation.Validation;
 using RexERP_MVC.Models;
 using RexERP_MVC.Util;
 
-namespace WebView.Controllers
+namespace RexERP_MVC.Controllers
 {
     public class CompanyInfoController : Controller
     {

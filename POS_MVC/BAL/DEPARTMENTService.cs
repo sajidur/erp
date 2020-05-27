@@ -1,4 +1,5 @@
 ﻿using RexERP_MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,8 @@ namespace RexERP_MVC.BAL
             {
                 return null;
             }
+            cus.CreatedDate = DateTime.Now;
+            cus.Active = true;
             service.Save(cus);
             return cus;
 

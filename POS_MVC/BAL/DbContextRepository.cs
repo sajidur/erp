@@ -163,6 +163,8 @@ namespace RexERP_MVC.BAL
         {
             if (entity == null)
                 throw new ArgumentException("Cannot Delete a null entity.");
+            var entry = Context.Entry(entity);
+            entry.State = EntityState.Deleted; // This should attach entity
             DbSet.Remove(entity);
         } 
         #endregion IDisposable implementation

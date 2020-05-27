@@ -14,6 +14,12 @@ namespace RexERP_MVC.Models
     
     public partial class SalesDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SalesDetail()
+        {
+            this.SalesReturns = new HashSet<SalesReturn>();
+        }
+    
         public int Id { get; set; }
         public int SalesMasterId { get; set; }
         public string SalesInvoice { get; set; }
@@ -41,5 +47,7 @@ namespace RexERP_MVC.Models
         public virtual Product Product { get; set; }
         public virtual SalesMaster SalesMaster { get; set; }
         public virtual Size Size { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SalesReturn> SalesReturns { get; set; }
     }
 }

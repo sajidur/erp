@@ -410,6 +410,11 @@
           <ScalarProperty Name="ContactPersonPhone" ColumnName="ContactPersonPhone" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Dealer" ColumnName="Dealer" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="TradeLicense" ColumnName="TradeLicense" />
+          <ScalarProperty Name="VATNo" ColumnName="VATNo" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Web" ColumnName="Web" />
           <ScalarProperty Name="Limit" ColumnName="Limit" />
@@ -430,11 +435,11 @@
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="BranchOfficeId" ColumnName="BranchOfficeId" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-          <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -469,33 +474,6 @@
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
           <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employees">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-          <ScalarProperty Name="Salary" ColumnName="Salary" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="Creator" ColumnName="Creator" />
-          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -814,6 +792,8 @@
           <ScalarProperty Name="BalanceQty" ColumnName="BalanceQty" />
           <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
           <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+          <ScalarProperty Name="Costprice" ColumnName="Costprice" />
+          <ScalarProperty Name="ProductionPrice" ColumnName="ProductionPrice" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -842,6 +822,8 @@
           <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
           <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
           <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+          <ScalarProperty Name="CostPrice" ColumnName="CostPrice" />
+          <ScalarProperty Name="ProductionPrice" ColumnName="ProductionPrice" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
@@ -1154,6 +1136,67 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PayHeads">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.PayHead">
+        <MappingFragment StoreEntitySet="PayHead">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsMainSalary" ColumnName="IsMainSalary" />
+          <ScalarProperty Name="IsDetailSalary" ColumnName="IsDetailSalary" />
+          <ScalarProperty Name="SalaryItemType" ColumnName="SalaryItemType" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentDetails">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.PaymentDetail">
+        <MappingFragment StoreEntitySet="PaymentDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PaymentMasterId" ColumnName="PaymentMasterId" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+          <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+          <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+          <ScalarProperty Name="ExtraDate" ColumnName="ExtraDate" />
+          <ScalarProperty Name="Extra1" ColumnName="Extra1" />
+          <ScalarProperty Name="Extra2" ColumnName="Extra2" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="ApprovedNotes" ColumnName="ApprovedNotes" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentMasters">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.PaymentMaster">
+        <MappingFragment StoreEntitySet="PaymentMaster">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="SuffixPrefixId" ColumnName="SuffixPrefixId" />
+          <ScalarProperty Name="LedgerDate" ColumnName="LedgerDate" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="VoucherTypeId" ColumnName="VoucherTypeId" />
+          <ScalarProperty Name="FinancialYearId" ColumnName="FinancialYearId" />
+          <ScalarProperty Name="ExtraDate" ColumnName="ExtraDate" />
+          <ScalarProperty Name="Extra1" ColumnName="Extra1" />
+          <ScalarProperty Name="Extra2" ColumnName="Extra2" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="ApprovedNotes" ColumnName="ApprovedNotes" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="PensionCompensations">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.PensionCompensation">
         <MappingFragment StoreEntitySet="PensionCompensation">
@@ -1365,28 +1408,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SalaryItems">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryItem">
-        <MappingFragment StoreEntitySet="SalaryItem">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="IsLegacy" ColumnName="IsLegacy" />
-          <ScalarProperty Name="IsMainSalary" ColumnName="IsMainSalary" />
-          <ScalarProperty Name="IsDetailSalary" ColumnName="IsDetailSalary" />
-          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
-          <ScalarProperty Name="CurrentValue" ColumnName="CurrentValue" />
-          <ScalarProperty Name="SalaryItemType" ColumnName="SalaryItemType" />
-          <ScalarProperty Name="SalarySign" ColumnName="SalarySign" />
-          <ScalarProperty Name="SalaryItemStatus" ColumnName="SalaryItemStatus" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-          <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="SalaryPayments">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPayment">
         <MappingFragment StoreEntitySet="SalaryPayment">
@@ -1403,6 +1424,26 @@
           <ScalarProperty Name="LoanDeduction" ColumnName="LoanDeduction" />
           <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
           <ScalarProperty Name="Narration" ColumnName="Narration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalaryProcesses">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryProcess">
+        <MappingFragment StoreEntitySet="SalaryProcess">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="Attendance" ColumnName="Attendance" />
+          <ScalarProperty Name="Leave" ColumnName="Leave" />
+          <ScalarProperty Name="Absent" ColumnName="Absent" />
+          <ScalarProperty Name="Addition" ColumnName="Addition" />
+          <ScalarProperty Name="Deduction" ColumnName="Deduction" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="SalaryYear" ColumnName="SalaryYear" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1592,9 +1633,12 @@
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalesReturn">
         <MappingFragment StoreEntitySet="SalesReturn">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SalesId" ColumnName="SalesId" />
-          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="SalesInvoice" ColumnName="SalesInvoice" />
+          <ScalarProperty Name="SalesDetailsId" ColumnName="SalesDetailsId" />
           <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="APIId" ColumnName="APIId" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Date" ColumnName="Date" />
@@ -1872,11 +1916,13 @@
           <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
           <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
           <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="BrandId" ColumnName="BrandId" />
           <ScalarProperty Name="BrandName" ColumnName="BrandName" />
           <ScalarProperty Name="SizeName" ColumnName="SizeName" />
           <ScalarProperty Name="APIId" ColumnName="APIId" />
           <ScalarProperty Name="APIName" ColumnName="APIName" />
+          <ScalarProperty Name="StockInPrice" ColumnName="StockInPrice" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1897,6 +1943,7 @@
           <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
           <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
           <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="WeightInMon" ColumnName="WeightInMon" />
           <ScalarProperty Name="APIId" ColumnName="APIId" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -1911,6 +1958,7 @@
           <ScalarProperty Name="BrandId" ColumnName="BrandId" />
           <ScalarProperty Name="SizeName" ColumnName="SizeName" />
           <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="StockOutPrice" ColumnName="StockOutPrice" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2719,6 +2767,92 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rptPaymentInitateVoucher" FunctionName="DB_9B34E1_erpModel.Store.rptPaymentInitateVoucher">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_9B34E1_erpModel.rptPaymentInitateVoucher_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="LedgerDate" ColumnName="LedgerDate" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+          <ScalarProperty Name="LedgerName" ColumnName="LedgerName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rptPurchaseChallan" FunctionName="DB_9B34E1_erpModel.Store.rptPurchaseChallan">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_9B34E1_erpModel.rptPurchaseChallan_Result">
+          <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="APIName" ColumnName="APIName" />
+          <ScalarProperty Name="AdditionalCost" ColumnName="AdditionalCost" />
+          <ScalarProperty Name="InvoiceNoPaper" ColumnName="InvoiceNoPaper" />
+          <ScalarProperty Name="BillDiscount" ColumnName="BillDiscount" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="AdditionalCostPurpose" ColumnName="AdditionalCostPurpose" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TransportNo" ColumnName="TransportNo" />
+          <ScalarProperty Name="TransportType" ColumnName="TransportType" />
+          <ScalarProperty Name="GrandTotalInWord" ColumnName="GrandTotalInWord" />
+          <ScalarProperty Name="Id1" ColumnName="Id1" />
+          <ScalarProperty Name="ReceiveMasterId" ColumnName="ReceiveMasterId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+          <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="APIId" ColumnName="APIId" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Id2" ColumnName="Id2" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductNameBangla" ColumnName="ProductNameBangla" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+          <ScalarProperty Name="MinStock" ColumnName="MinStock" />
+          <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+          <ScalarProperty Name="MaxStock" ColumnName="MaxStock" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+          <ScalarProperty Name="CreatedBy1" ColumnName="CreatedBy1" />
+          <ScalarProperty Name="CreatedDate1" ColumnName="CreatedDate1" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="IsActive1" ColumnName="IsActive1" />
+          <ScalarProperty Name="Id3" ColumnName="Id3" />
+          <ScalarProperty Name="Code1" ColumnName="Code1" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+          <ScalarProperty Name="ContactPersonPhone" ColumnName="ContactPersonPhone" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Web" ColumnName="Web" />
+          <ScalarProperty Name="SupplierType" ColumnName="SupplierType" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="UpdateBy1" ColumnName="UpdateBy1" />
+          <ScalarProperty Name="UpdateDate1" ColumnName="UpdateDate1" />
+          <ScalarProperty Name="IsActive2" ColumnName="IsActive2" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="rptSalesInvoice" FunctionName="DB_9B34E1_erpModel.Store.rptSalesInvoice">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB_9B34E1_erpModel.rptSalesInvoice_Result">
@@ -2786,6 +2920,11 @@
           <ScalarProperty Name="ContactPersonPhone" ColumnName="ContactPersonPhone" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Dealer" ColumnName="Dealer" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="TradeLicense" ColumnName="TradeLicense" />
+          <ScalarProperty Name="VATNo" ColumnName="VATNo" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Web" ColumnName="Web" />
           <ScalarProperty Name="Limit" ColumnName="Limit" />
@@ -2796,6 +2935,20 @@
           <ScalarProperty Name="UpdatedDate1" ColumnName="UpdatedDate1" />
           <ScalarProperty Name="IsActive2" ColumnName="IsActive2" />
           <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="rptUnApprovedPaymentList" FunctionName="DB_9B34E1_erpModel.Store.rptUnApprovedPaymentList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_9B34E1_erpModel.rptUnApprovedPaymentList_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="LedgerDate" ColumnName="LedgerDate" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -2834,6 +2987,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_ProcessAttendance" FunctionName="DB_9B34E1_erpModel.Store.SP_ProcessAttendance" />
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB_9B34E1_erpModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB_9B34E1_erpModel.Store.sp_upgraddiagrams" />
     <FunctionImportMapping FunctionImportName="StockInInvoice" FunctionName="DB_9B34E1_erpModel.Store.StockInInvoice">
@@ -2852,11 +3006,13 @@
           <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
           <ScalarProperty Name="ProductionDate1" ColumnName="ProductionDate1" />
           <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="BrandId" ColumnName="BrandId" />
           <ScalarProperty Name="BrandName" ColumnName="BrandName" />
           <ScalarProperty Name="SizeName" ColumnName="SizeName" />
           <ScalarProperty Name="APIId" ColumnName="APIId" />
           <ScalarProperty Name="APIName" ColumnName="APIName" />
+          <ScalarProperty Name="StockInPrice" ColumnName="StockInPrice" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -2889,6 +3045,7 @@
           <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
           <ScalarProperty Name="ProductionDate1" ColumnName="ProductionDate1" />
           <ScalarProperty Name="BaleQty" ColumnName="BaleQty" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="WeightInMon" ColumnName="WeightInMon" />
           <ScalarProperty Name="APIId" ColumnName="APIId" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -2903,9 +3060,75 @@
           <ScalarProperty Name="BrandId" ColumnName="BrandId" />
           <ScalarProperty Name="SizeName" ColumnName="SizeName" />
           <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="StockOutPrice" ColumnName="StockOutPrice" />
+          <ScalarProperty Name="APIName" ColumnName="APIName" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="YearClosed" FunctionName="DB_9B34E1_erpModel.Store.YearClosed" />
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+          <ScalarProperty Name="SalaryPackage" ColumnName="SalaryPackage" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+          <ScalarProperty Name="TerminationDate" ColumnName="TerminationDate" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="CV" ColumnName="CV" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalaryPackages">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackage">
+        <MappingFragment StoreEntitySet="SalaryPackage">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="SalaryPackageName" ColumnName="SalaryPackageName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalaryPackageDetails">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackageDetail">
+        <MappingFragment StoreEntitySet="SalaryPackageDetails">
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PayHeadId" ColumnName="PayHeadId" />
+          <ScalarProperty Name="SalaryPackageId" ColumnName="SalaryPackageId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

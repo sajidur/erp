@@ -13,10 +13,11 @@
         DiscountReceived=9,
         SalesAccount=10,
         PurchaseAccount=11,
-        ForexGainLoss=12
+        ForexGainLoss=12,
+        AdditionalCost = 13
     }
 
-    public enum VoucherType
+    public enum VoucherTypeEnum
     {
         OpeningBalance = 1,
         OpeningStock = 2,
@@ -47,6 +48,7 @@
         MonthlySalaryVoucher = 27,
         AdvancePayment = 28,
         PaymentVoucherDelete = 29,
-        ReceiptVoucherDelete = 30
+        ReceiptVoucherDelete = 30,
+        AdditionalCost = 31
     }
 }

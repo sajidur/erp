@@ -32,7 +32,7 @@
                                         Department Name:
                                     </label>
                                     <div class="col-md-4">
-                                        @Html.DropDownList("Id", (IEnumerable<SelectListItem>)ViewBag.DepartmentList, new { @class = "form-control chosen" })
+                                        @Html.DropDownList("txtDepartment", (IEnumerable<SelectListItem>)ViewBag.DepartmentList, new { @class = "form-control chosen" })
                                     </div>
                                 </div>
 
@@ -100,10 +100,10 @@
                                     <tbody>
                                         {{#ProductGroupSearch}}
                                         <tr>
-                                            <td> {{Id}}</td>
-                                            <td> {{DEPTNAME}}</td>
+                                            <td> {{DesignationID}}</td>
+                                            <td> {{DesignationName}}</td>
                                             <td class="action-sm">
-                                                <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
+                                                <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{DesignationID}}')"><i class="fa fa-edit"></i> Select</a>
                                             </td>
                                         </tr>
 
@@ -120,7 +120,12 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/app/Department.js"></script>
+<script src="~/Scripts/app/Designation.js"></script>
+<script>
+    $(document).ready(function () {
+    LoadDesignationList("",true);
+});
+</script>
 
 
 

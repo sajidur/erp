@@ -10,17 +10,15 @@ using System.Data.Entity;
 using RexERP_MVC.Models;
 using RexERP_MVC.Util;
 
-namespace WebView.Controllers
+namespace RexERP_MVC.Controllers
 {
 
     public class SalaryItemController : Controller
     {
         private readonly static log4net.ILog LOG = log4net.LogManager.GetLogger("SalaryItemController");
-        public ISalaryItemService _salaryItemService;
 
         public SalaryItemController()
         {
-            _salaryItemService = new SalaryItemService(new SalaryItemRepository(), new SalaryItemValidator());
         }
 
         public ActionResult Index()
@@ -99,10 +97,9 @@ namespace WebView.Controllers
 
         public dynamic GetInfo(int Id)
         {
-            SalaryItem model = new SalaryItem();
+            PayHead model = new PayHead();
             try
             {
-                model = _salaryItemService.GetObjectById(Id);
             }
             catch (Exception ex)
             {
@@ -118,23 +115,16 @@ namespace WebView.Controllers
 
             return Json(new
             {
-                model.Id,
-                model.Code,
-                model.Name,
-                model.Description,
-                model.IsLegacy,
-                model.SalaryItemType,
-                model.SalaryItemStatus//,
+              
              //   model.Errors
             }, JsonRequestBehavior.AllowGet);
         }
 
         public dynamic GetDefaultInfo()
         {
-            SalaryItem model = new SalaryItem();
+            PayHead model = new PayHead();
             try
             {
-                model = _salaryItemService.GetQueryable().FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -150,19 +140,13 @@ namespace WebView.Controllers
 
             return Json(new
             {
-                model.Id,
-                model.Code,
-                model.Name,
-                model.Description,
-                model.IsLegacy,
-                model.SalaryItemType,
-                model.SalaryItemStatus//,
+                model.Id
             //    model.Errors
             }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public dynamic Insert(SalaryItem model)
+        public dynamic Insert(PayHead model)
         {
             try
             {
@@ -177,7 +161,6 @@ namespace WebView.Controllers
                 //    }, JsonRequestBehavior.AllowGet);
                 //}
 
-                model = _salaryItemService.CreateObject(model);
             }
             catch (Exception ex)
             {
@@ -198,7 +181,7 @@ namespace WebView.Controllers
         }
 
         [HttpPost]
-        public dynamic Update(SalaryItem model)
+        public dynamic Update(PayHead model)
         {
             try
             {
@@ -213,13 +196,7 @@ namespace WebView.Controllers
                 //    }, JsonRequestBehavior.AllowGet);
                 //}
 
-                var data = _salaryItemService.GetObjectById(model.Id);
-                data.Code = model.Code;
-                data.Name = model.Name;
-                data.IsLegacy = model.IsLegacy;
-                data.SalaryItemType = model.SalaryItemType;
-                data.SalaryItemStatus = model.SalaryItemStatus;
-                model = _salaryItemService.UpdateObject(data);
+
             }
             catch (Exception ex)
             {
@@ -240,7 +217,7 @@ namespace WebView.Controllers
         }
 
         [HttpPost]
-        public dynamic Delete(SalaryItem model)
+        public dynamic Delete(PayHead model)
         {
             try
             {
@@ -255,8 +232,6 @@ namespace WebView.Controllers
                 //    }, JsonRequestBehavior.AllowGet);
                 //}
 
-                var data = _salaryItemService.GetObjectById(model.Id);
-                model = _salaryItemService.SoftDeleteObject(data);
             }
 
             catch (Exception ex)

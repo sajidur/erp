@@ -14,8 +14,11 @@ namespace RexERP_MVC.ViewModel
         public Nullable<decimal> OpeningQty { get; set; }
         public Nullable<decimal> SalesQty { get; set; }
         public Nullable<decimal> ReceiveQty { get; set; }
-        public Nullable<decimal> AddFromOtherSource { get; set; }
-        public Nullable<decimal> ProductionQty { get; set; }
+        public Nullable<decimal> Costprice { get; set; }
+        public Nullable<decimal> ProductionPrice { get; set; }
+
+        public Nullable<decimal> ProductionIn { get; set; }
+        public Nullable<decimal> ProductionOut { get; set; }
         public Nullable<decimal> ReturnQty { get; set; }
         public Nullable<decimal> Faulty { get; set; }
         public decimal BalanceQty { get; set; }

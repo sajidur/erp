@@ -19,5 +19,24 @@ namespace RexERP_MVC.Controllers
             var res = AutoMapper.Mapper.Map<List<APIResponse>>(all);
             return Json(res,JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Index(API model)
+        {
+            if (string.IsNullOrEmpty(model.APIName))
+            {
+                return View(new API());
+            }
+            model.Active = true;
+            model.CreatedDate = DateTime.Now;
+            model.CreatedBy = "sajid";
+            var saved=dBService.Save(model);
+            return View(saved);
+        }
+        public ActionResult List()
+        {
+            var all = dBService.GetAll();
+            var res = AutoMapper.Mapper.Map<List<APIResponse>>(all);
+            return View(res);
+        }
     }
 }

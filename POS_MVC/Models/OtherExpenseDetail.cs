@@ -27,7 +27,6 @@ namespace RexERP_MVC.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
-        public virtual Employee Employee { get; set; }
         public virtual OtherExpense OtherExpense { get; set; }
     }
 }

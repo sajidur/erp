@@ -54,7 +54,7 @@ $("#btnAdd").click(function () {
     var WarehouseId = $("#ddlWareHouse option:selected").val();
     //var WarehouseId = 1;
     var sizeId = $("#ddlSize option:selected").val();
-    var size = $("#ddlItem option:selected").text();
+    var size = $("#ddlSize option:selected").text();
 
     var brandId = $("#ddlBrand option:selected").val();
     var brand = $("#ddlBrand option:selected").text();
@@ -226,7 +226,7 @@ function GoodReceiveSave()
             dates: $("#txtDates").val(),
             Discount: $("#txtDiscount").val(),
             response: details,
-            ledgerPosting: detailsExpense
+            additionalCosts: detailsExpense
         },
         success: function (data) {
             //debugger;
@@ -235,15 +235,16 @@ function GoodReceiveSave()
             //window.open("../Report/Viewer/ReportViewer.aspx?" + param, "_blank");
             setTimeout(location.reload.bind(location), 10000);
             ShowNotification("1", "Item Recived Saved!!");
+            window.location.href = "/Report/Viewer/ReportViewer.aspx?ReportName=PurchaseInvoice&invoiceId=" + $("#txtPoNo").val();
 
-            details = [];
-            detailsExpense = [];
-            var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
-            $("#div-product-add").empty().html(templateWithData);
-            var templateWithExpense2 = Mustache.to_html($("#templateExpenseModalAdd").html(), { ExpenseSearchAdd: detailsExpense });
-            $("#div-expense-add").empty().html(templateWithExpense2);
-            LoadInvoiceNo("txtPoNo");
-            location.reload();
+            //details = [];
+            //detailsExpense = [];
+            //var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: details });
+            //$("#div-product-add").empty().html(templateWithData);
+            //var templateWithExpense2 = Mustache.to_html($("#templateExpenseModalAdd").html(), { ExpenseSearchAdd: detailsExpense });
+            //$("#div-expense-add").empty().html(templateWithExpense2);
+            //LoadInvoiceNo("txtPoNo");
+            //location.reload();
         },
         error: function () {
         }
@@ -265,7 +266,7 @@ function LoadInvoiceNo(controlId) {
 }
 
 function LoadSupplier(controlId) {
-    var url = '/Suppliers/GetAllPaddySupplier';
+    var url = '/Suppliers/GetAll';
     $.ajax({
         url: url,
         method: 'POST',

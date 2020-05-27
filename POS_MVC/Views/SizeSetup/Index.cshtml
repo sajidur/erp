@@ -46,7 +46,7 @@
                                 <fieldset>
                                     <div class="form-actions">
                                         <div class="col-md-12">
-                                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="Save()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SizeSave()"><i class="fa fa-save"></i>&nbsp; Save</button>
                                             <button class="btn btn-w-m btn-primary" data-style="expand-left" id="btnUpdate" type="button" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>
                                             <button class="btn btn-danger" data-style="expand-left" id="btnDelete" type="button" onclick="Delete()"><i class="fa fa-minus"></i>&nbsp; Delete</button>
                                             <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
@@ -113,6 +113,11 @@
     </div>
 </div>
 <script src="~/Scripts/app/Size.js"></script>
+<script>
+       $(document).ready(function () {
+            LoadSizeGrid();
+    });
+</script>
 
 
 

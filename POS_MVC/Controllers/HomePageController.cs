@@ -22,7 +22,7 @@ namespace RexERP_MVC.Controllers
                 var ListOfPermittedMenu= service.GetMenuPermission(currentUser.UserRoleId);
                 var maninMenu = ListOfPermittedMenu.Where(a => a.ParentScreenId.Trim() == "0000").OrderBy(a=>a.OrderBy).ToList();
 
-                foreach (var item in maninMenu)                 {
+                foreach (var item in maninMenu){
                     var menu = new MenuPermission();
                     menu.MainModule = item;
                     var submodule = ListOfPermittedMenu.Where(a => a.ParentScreenId == item.ScreenId).ToList();

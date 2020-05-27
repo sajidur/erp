@@ -49,11 +49,11 @@ namespace RexERP_MVC.Models
         public Nullable<int> MasterId { get; set; }
     
         public virtual Customer Customer { get; set; }
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesDelivery> SalesDeliveries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesDetail> SalesDetails { get; set; }
         public virtual SalesOrder SalesOrder { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Core.Interface.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using RexERP_MVC.BAL;
+using Data.Repository;
 
 namespace Core.Interface.Service
 {
@@ -11,6 +12,7 @@ namespace Core.Interface.Service
         IEmployeeAttendanceValidator GetValidator();
         IQueryable<EmployeeAttendance> GetQueryable();
         IList<EmployeeAttendance> GetAll();
+        List<EmployeeCountGroupResponse> GetAttendanceCount(int month);
         EmployeeAttendance GetObjectById(int Id);
         EmployeeAttendance CreateObject(EmployeeAttendance employeeAttendance, EmployeeService _employeeService);
         EmployeeAttendance UpdateObject(EmployeeAttendance employeeAttendance, EmployeeService _employeeService);

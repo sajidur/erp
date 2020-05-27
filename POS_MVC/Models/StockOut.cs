@@ -22,6 +22,7 @@ namespace RexERP_MVC.Models
         public Nullable<int> SupplierId { get; set; }
         public Nullable<System.DateTime> ProductionDate { get; set; }
         public Nullable<decimal> BaleQty { get; set; }
+        public Nullable<decimal> Rate { get; set; }
         public Nullable<decimal> WeightInMon { get; set; }
         public Nullable<int> APIId { get; set; }
         public string Notes { get; set; }
@@ -36,6 +37,7 @@ namespace RexERP_MVC.Models
         public Nullable<int> BrandId { get; set; }
         public string SizeName { get; set; }
         public string BrandName { get; set; }
+        public Nullable<decimal> StockOutPrice { get; set; }
     
         public virtual API API { get; set; }
         public virtual Brand Brand { get; set; }

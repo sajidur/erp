@@ -81,10 +81,17 @@ namespace RexERP_MVC.Controllers
             var result = category;
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(category.AccountGroupName))
+                {
+                    return Json("Please input a valid name", JsonRequestBehavior.AllowGet);
+                }
+                if (category.GroupUnder<0)
+                {
+                    return Json("Please select accounting Head", JsonRequestBehavior.AllowGet);
+                }
                 category.IsDefault = false;
                 result = service.Save(category);
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

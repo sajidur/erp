@@ -29,7 +29,7 @@ namespace RexERP_MVC.BAL
         public List<PartyBalance> GetAll(DateTime fromDate,DateTime todate)
         {
             var supplierLedgerIds = supplierService.GetAll(c => c.SupplierType == "Rice Supplier").Select(b => b.LedgerId).ToList();
-            var list= service.GetAll(a=>a.VoucherTypeId==(int)VoucherType.PurchaseInvoice && supplierLedgerIds.Contains(a.LedgerId) && a.FinancialYearId== yearId).ToList();
+            var list= service.GetAll(a=>a.VoucherTypeId==(int)VoucherTypeEnum.PurchaseInvoice && supplierLedgerIds.Contains(a.LedgerId) && a.FinancialYearId== yearId).ToList();
             //foreach (var item in list)
             //{
             //    var alreadyPaid = service.GetAll(a => a.AgainstInvoiceNo== item.InvoiceNo && a.LedgerId==item.LedgerId).Select(a=>a.Debit).Sum();

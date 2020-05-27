@@ -1,6 +1,7 @@
 ﻿using Core.Interface.Repository;
 using Core.Interface.Service;
 using Core.Interface.Validation;
+using Data.Repository;
 using RexERP_MVC.BAL;
 using RexERP_MVC.Models;
 using System;
@@ -34,6 +35,10 @@ namespace Service.Service
         public IList<EmployeeAttendance> GetAll()
         {
             return _repository.GetAll();
+        }
+        public List<EmployeeCountGroupResponse> GetAttendanceCount(int month)
+        {
+            return _repository.GetAttendanceCount(month);
         }
 
         public EmployeeAttendance GetObjectById(int Id)

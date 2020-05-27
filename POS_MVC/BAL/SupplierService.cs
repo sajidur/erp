@@ -25,7 +25,19 @@ namespace RexERP_MVC.BAL
         {
             return service.GetById(id);
         }
+        public int LastId()
+        {
+            var data= service.GetAll().OrderByDescending(a=>a.Id).FirstOrDefault();
+            if (data==null)
+            {
+                return 1;
+            }
+            else
+            {
+              return  data.Id + 1;
+            }
 
+        }
 
         public Supplier Save(Supplier cus)
         {

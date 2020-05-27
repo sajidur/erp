@@ -11,6 +11,8 @@ namespace Core.Interface.Service
         IEmployeeLeaveValidator GetValidator();
         IQueryable<EmployeeLeave> GetQueryable();
         IList<EmployeeLeave> GetAll();
+        IList<EmployeeLeave> GetAll(List<int> employeeIds);
+
         EmployeeLeave GetObjectById(int Id);
         EmployeeLeave CreateObject(EmployeeLeave employeeLeave, EmployeeService _employeeService);
         EmployeeLeave UpdateObject(EmployeeLeave employeeLeave, EmployeeService _employeeService);

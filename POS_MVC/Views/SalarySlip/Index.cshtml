@@ -1,234 +1,132 @@
-﻿@using RexERP_MVC.Util
-@{
-    ViewBag.Title = "Salary Slip";
-    //string Caption = ".: " + ViewBag.Title + " :.";
-    ViewBag.Caption = ".: " + ViewBag.Title + " :.";
-}
-<div id="ua_panel" class="easyui-panel" style="text-align: left;" data-options="modal:true" 
-    title="@ViewBag.Caption">
-    <div id="form_div" class="easyui-dialog" style="text-align: left; top:120px; padding:0px 0px 10px" data-options="modal:true" 
-        title="@ViewBag.Caption">
-
-        <div style="overflow: auto">
-            <form id="frm">
-                @*<fieldset class="ui-widget-content ui-corner-all input_form_div">*@
-                    <table width="100%" border="0" cellpadding="1" cellspacing="1" class="input_form_tbl" >
-                        <tr nowrap>
-                            <td width="80" nowrap style="width: 80px">
-                                <label>ID</label></td>
-                            <td width="100">
-                                <input id="id" type="text" size="15" disabled="disabled"/></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Index
-                            </td>
-                            <td>
-                                <input id="Index" name="Index" type="text" size="15" maxlength="20" class="textright easyui-numberbox" data-options="groupSeparator:','" value="0" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Code</label></td>
-                            <td>
-                                <input id="Code" name="Code" type="text" size="15" maxlength="60" align="left" /></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Name</label></td>
-                            <td colspan="3">
-                                <input id="Name" name="Name" type="text" size="60" maxlength="60" align="left" /></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Salary Sign </label></td>
-                            <td>
-                                <select id="SalarySign" name="SalarySign">
-                                    @foreach (int item in Enum.GetValues(typeof(Constant.SalarySign)))
-                                    {
-                                        <option value="@item">@Enum.GetName(typeof(Constant.SalarySign), item)</option>
-                                    }
-                                </select>
-                            </td>
-                        </tr>
-                        <tr hidden>
-                            <td>
-                                <label>Salary Item</label></td>
-                            <td colspan="3">
-                               <input id="SalaryIetmId" name="SalaryIetmId" hidden class="textright" type="text" size="10" maxlength="7" disabled="disabled" />
-                               <input id="btnSalaryIetm" name="btnSalaryIetm" type="button" style="cursor: pointer;" class="ui-corner-all ui-state-default" value=".." />
-                               <input id="SalaryIetmName" name="SalaryIetm" type="text" size="56" maxlength="50" class="editable upper" disabled="disabled" />
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <table>
-                                    <td>
-                                <label for="IsEnabled">Enabled </label></td>
-                            <td>
-                                <input type="checkbox" id="IsEnabled" name="IsEnabled" value="value"></td>
-                            <td align="right">
-                                <label for="IsMain">Main Salary </label></td>
-                            <td>
-                                <input type="checkbox" id="IsMain" name="IsMain" value="value"></td>
-                            <td>
-                                <label for="IsDetail">Detail Salary </label></td>
-                            <td>
-                                <input type="checkbox" id="IsDetail" name="IsDetail" value="value"></td>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                    <div id="tabledetail_div">
-                        <div id="toolbardetail" class="grid_toolbar">
-                            <a id="btn_add_new_detail" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">Add New</a>
-                            <a id="btn_edit_detail" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-edit'">Edit</a>
-                            <a id="btn_del_detail" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">Delete</a>
+﻿<title>
+    :Salary Slip
+</title>
+<label>Salary Slip</label>
+<div class="col-md-12">
+    <div class="card">
+        <div class="row">
+            <form class="form-horizontal" style="height:75px">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <label class="control-label">Select Year</label>
+                            <select class="form-control" id="ddlYear" name="ddlYear" style="height:35px;">
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                            </select>
                         </div>
-                            <table id="listdetail" class="scroll" cellpadding="0" cellspacing="0"></table>
-                        <div id="pagerdetail" class="scroll" style="text-align: center;"></div>
+                        <div class="col-md-2">
+                            <label class="control-label">Select Month</label>
+                            <select class="form-control" id="ddlMonth" name="ddlMonth" style="height:35px;">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">Agust</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Employee</label>
+                            <select class="form-control" id="ddlEmployee" name="ddlEmployee" style="height:35px;">
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">
+                            </label>
+                            <button class="btn btn-primary" id="btnFilter" onclick="Filter();" type="button">Filter</button>
+                        </div>
                     </div>
-                @*</fieldset>*@
+                </fieldset>
             </form>
+
+        </div>
+        <div class="row">
+            <div class="ibox-content" id="div-info" style="overflow:scroll;">
+
+            </div>
         </div>
     </div>
-<!-- Dialog Box Detail-->
-    <div id="detail_div" class="easyui-dialog" style="text-align: left;padding:0px 0px 10px"
-        data-options="modal:true" title=".: Input Detail :.">
+</div>
+<script id="templateInventoryGroupModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="inventoryGroupTableModal">
+        <thead>
+        <th>Id</th>
+        <th>Employee Id</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Designation</th>
+        <th>Attendance</th>
+        <th>Leave</th>
+        <th>Absent</th>
+        @*<th>Other Deduction</th>
+            <th>Other Additions</th>*@
+        <th>
+            Action
+        </th>
+        <tbody>
+            {{#InventoryGroupSearch}}
+            <tr>
+                <td>{{Id}}</td>
+                <td> {{Code}}</td>
+                <td>{{FirstName}} {{LastName}}</td>
+                <td>{{DepartmentName}}</td>
+                <td>{{AttendanceCount}}</td>
+                <td>{{LeaveCount}}</td>
+                <td> {{AbsenceCount}}</td>
+                <td width="10px">
+                </td>
+                <td>
+                    <input type="checkbox" class="checkbox-inline" value="Print"></>
+                </td>
+            </tr>
+            {{/InventoryGroupSearch}}
+        </tbody>
+    </table>
+</script>
+<script src="~/Scripts/app/CommonLoader.js"></script>
+<script src="~/Scripts/app/Salary.js"></script>
+<script src="~/Scripts/app/Employee.js"></script>
+<script>
+    $(document).ready(function () {
 
-        <div id="detail_toolbar" class="form_toolbar">
-            <a id="detail_btn_submit" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-save'">Submit</a>
-            <a id="detail_btn_cancel" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">Close</a>
-        </div>
-        <div id="detail_info">
-              <table  width="100%" border="0" cellpadding="5" cellspacing="5" class="input_form_tbl">
-                  <tr>
-                            <td width="139" nowrap style="width: 100px">
-                                Index
-                            </td>
-                            <td>
-                                <input id="detailIndex" name="Index" type="text" size="15" maxlength="20" class="textright easyui-numberbox" data-options="groupSeparator:','" value="0" />
-                            </td>
-                  </tr>
-                  <tr hidden>
-                      <td >
-                         Formula
-                      </td>
-                      <td>
-                         <input id="FormulaId" hidden class="textright" type="text" size="10" maxlength="7" disabled="disabled" />
-                         <input id="btnFormula" name="buttonactivated" type="button" style="cursor: pointer;" class="ui-corner-all ui-state-default" value=".." />
-                         <input id="FormulaName" name="Formula" type="text" size="56" maxlength="50" class="editable upper" disabled="disabled" />
-                         <input id="SalarySlipId" name="SalarySlipId" type="text" size ="10" hidden="hidden" />
-                      </td>
-                  </tr>
-                  <tr>
-                            <td>
-                                <label>Salary Sign </label></td>
-                            <td>
-                                <select id="SalaryItemSign" name="SalarySign">
-                                    @foreach (int item in Enum.GetValues(typeof(Constant.SalarySign)))
-                                    {
-                                        <option value="@item">@Enum.GetName(typeof(Constant.SalarySign), item)</option>
-                                    }
-                                </select>
-                            </td>
-                  </tr>
-                  <tr>
-                            <td>
-                                <label>First Operand </label></td>
-                            <td>
-                                <select id="FirstSalaryItem" name="FirstSalaryItem">
-                                    
-                                </select>
-                                @*<div id="datatable">
-                                <table id="FirstSalaryItem" name="FirstSalaryItem" cellspacing="0" width="100%">
-                                <tr><th>ID</th><th>Code</th><th>Name</th></tr>
-                                </table>
-                                </div>*@
-                            </td>
-                  </tr>
-                  <tr>
-                            <td>
-                                <label>Operator </label></td>
-                            <td>
-                                <select id="FormulaOp" name="FormulaOp">
-                                    <option value="+">+</option>
-                                    <option value="-">-</option>
-                                    <option value="*">x</option>
-                                    <option value="/">/</option>
-                                    <option value="%">MOD</option>
-                                    <option value="\">DIV</option>
-                                </select>
-                            </td>
-                  </tr>
-                  <tr>
-                            <td>
-                                <label for="IsSecondValue">Is Value </label></td>
-                            <td>
-                                <input type="checkbox" id="IsSecondValue" name="IsSecondValue" value="value"></td>
-                  </tr>
-                  <tr>
-                            <td>
-                                <label>Second Operand </label></td>
-                            <td>
-                                <select id="SecondSalaryItem" name="SecondSalaryItem">
-                                    
-                                </select>
-                            </td>
-                  </tr>
-                  <tr>
-                        <td>
-                            Value
-                        </td>
-                        <td>
-                            <input id="SecondValue" name="SecondValue" type="text" size="15" maxlength="20" class="textright easyui-numberbox" data-options="groupSeparator:',', precision:4" value="0" />
-                        </td>
-                  </tr>
-                  <tr>
-                            <td>
-                                <label for="HasMinValue">Has MinValue </label></td>
-                            <td>
-                                <input type="checkbox" id="HasMinValue" name="HasMinValue" value="value"></td>
-                  </tr>
-                  <tr>
-                        <td>
-                            Min Value
-                        </td>
-                        <td>
-                            <input id="MinValue" name="MinValue" type="text" size="15" maxlength="20" class="textright easyui-numberbox" data-options="groupSeparator:',', precision:4" value="0" />
-                        </td>
-                  </tr>
-                  <tr>
-                            <td>
-                                <label for="HasMaxValue">Has MaxValue </label></td>
-                            <td>
-                                <input type="checkbox" id="HasMaxValue" name="HasMaxValue" value="value"></td>
-                  </tr>
-                  <tr>
-                        <td>
-                            Max Value
-                        </td>
-                        <td>
-                            <input id="MaxValue" name="MaxValue" type="text" size="15" maxlength="20" class="textright easyui-numberbox" data-options="groupSeparator:',', precision:4" value="0" />
-                        </td>
-                  </tr>
-              </table>
-        </div>
-    </div>
-<!-- End Dialog Box Detail-->
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#txtDate').val(today);
+        LoadEmployeeCombo("ddlEmployee");
+        //  LoadEmployeeAttendence();
+    });
+    function SalaryProcess() {
+        var year = $("#ddlYear option:selected").val();
 
-<!-- Look Up SalaryItem -->
-    <div id="lookup_div_salaryitem" class="easyui-dialog" title="List Title Info" style="padding: 0px 5px; height: 490px; width: 480px;"
-        data-options="iconCls:'icon-tip',modal:true">
+        var month = $("#ddlMonth option:selected").val();
+        var employeeId = $("#ddlEmployee option:selected").val();
+        $.ajax({
+            url: '/Salary/GetAttendance',
+            method: 'GET',
+            dataType: 'json',
+            data: { "year": year, "month": month, "employeeId": employeeId },
+            async: false,
+            success: function (data) {
+               var templateWithData = Mustache.to_html($("#templateInventoryGroupModal").html(), { InventoryGroupSearch: data });
+                 $("#div-info").empty().html(templateWithData);
+                 MakePagination('inventoryGroupTableModal');
+            },
+            error: function () {
+                ShowNotification("3", "Something Wrong!!");
+            }
+        });
+    }
 
-        <div id="lookup_toolbar_salaryitem" class="grid_toolbar">
-            <a id="lookup_btn_add_salaryitem" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">Select Data</a>
-            <a id="lookup_btn_cancel_salaryitem" href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove'">Close Window</a>
-        </div>
-
-        <table id="lookup_table_salaryitem" class="scroll" cellpadding="0" cellspacing="0"></table>
-        <div id="lookup_pager_salaryitem" class="scroll" style="text-align: center;"></div>
-    </div>
-<!-- END Look Up SalaryItem -->
-
-  </div>
+</script>
 

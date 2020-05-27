@@ -77,6 +77,11 @@ namespace RexERP_MVC.Models
         public string ContactPersonPhone { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
+        public Nullable<int> Dealer { get; set; }
+        public string District { get; set; }
+        public string TradeLicense { get; set; }
+        public string VATNo { get; set; }
+        public string Area { get; set; }
         public string Email { get; set; }
         public string Web { get; set; }
         public Nullable<decimal> Limit { get; set; }

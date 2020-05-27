@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Web.Hosting;
 
 namespace RexERP_MVC.Util
 {
@@ -25,6 +29,41 @@ namespace RexERP_MVC.Util
         }
     }
 
+    public static class UtilClass
+    {
+        public static string  SaveImage(string base64,string mimType)
+        {
+            ImageFormat format;
+            switch (mimType)
+            {
+                case "image/png":
+                    format = ImageFormat.Png;
+                    break;
+                case "image/gif":
+                    format = ImageFormat.Gif;
+                    break;
+                default:
+                    format = ImageFormat.Jpeg;
+                    break;
+            }
+            var directory = HostingEnvironment.ApplicationPhysicalPath + "/Image Data";
+            var path = Path.Combine(directory, Guid.NewGuid().ToString() + "." + format.ToString());
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            string imageDataParsed = base64.Substring(base64.IndexOf(',') + 1);
+            var bytes = Convert.FromBase64String(imageDataParsed);
+
+
+            using (var imageFile = new FileStream(path, FileMode.Create))
+            {
+                imageFile.Write(bytes, 0, bytes.Length);
+                imageFile.Flush();
+            }
+            return path;
+        }
+    }
     public static class GeneralFunction
     {
         private readonly static log4net.ILog LOG = log4net.LogManager.GetLogger("GeneralFunction");

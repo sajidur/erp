@@ -1,0 +1,28 @@
+﻿@model IEnumerable<RexERP_MVC.ViewModel.APIResponse>
+
+<p>
+    @Html.ActionLink("Create New", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.APIName)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.APIName)
+        </td>     
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+    </tr>
+}
+
+</table>

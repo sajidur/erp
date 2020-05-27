@@ -27,6 +27,14 @@ namespace Data.Repository
         {
             return FindAll(x => !x.IsDeleted).ToList();
         }
+        public List<EmployeeCountGroupResponse> GetAttendanceCount(int month)
+        {
+            var results = from p in entities.EmployeeAttendances where p.AttendanceDate.Month==month
+                          group p.Employee by p.EmployeeId into g
+                          select new EmployeeCountGroupResponse{  EmployeeId= g.Key, Count = g.Count()};
+            return results.ToList();
+            
+        }
 
         public EmployeeAttendance GetObjectById(int Id)
         {
@@ -62,6 +70,10 @@ namespace Data.Repository
             return (Delete(employeeAttendance) == 1) ? true : false;
         }
 
-
+    }
+    public class EmployeeCountGroupResponse
+    {
+        public int EmployeeId { get; set; }
+        public int Count { get; set; }
     }
 }

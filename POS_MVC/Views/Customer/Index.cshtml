@@ -64,7 +64,7 @@
                                                     Customer Code:
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" id="txtCustomerCode" name="txtCustomerCode" class="form-control" />
+                                                    <input type="text" placeholder="Code will be auto generate" readonly id="txtCustomerCode" name="txtCustomerCode" class="form-control" />
                                                 </div>
                                                 <label class="col-md-2 control-label">
                                                    VAT:
@@ -110,10 +110,75 @@
                                                     <input type="text" id="txtAddress" name="txtAddress" class="form-control" />
                                                 </div>
                                                 <label class="col-md-2 control-label">
-                                                    Dealer:
+                                                    District:
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <select class="form-control" id="ddlDealer" name="ddlDealer">
+                                                    <select class="form-control" id="ddlDistrict" name="ddlDistrict">
+                                                        <option value="Barguna">Barguna</option>
+                                                        <option value="Bhola">Bhola</option>
+                                                        <option value="Jhalokati">Jhalokati</option>
+                                                        <option value="Dhaka">Dhaka</option>
+                                                        <option value="Chattogram">Chattogram</option>
+                                                        <option value="Khulna">Khulna</option>
+                                                        <option value="Barisal">Barisal</option>
+                                                        <option value="Mymensingh">Mymensingh</option>
+                                                        <option value="Rajshahi">Rajshahi</option>
+                                                        <option value="Rangpur">Rangpur</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+                                                        <option value="Sylhet">Sylhet</option>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -124,6 +189,12 @@
                                                 </label>
                                                 <div class="col-md-4">
                                                     <input type="text" id="txtPhone" name="txtPhone" class="form-control" />
+                                                </div>
+                                                <label class="col-md-2 control-label">
+                                                    Area:
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="text" id="txtArea" required name="txtArea" class="form-control" />
                                                 </div>
                                             </div>
 
@@ -149,6 +220,13 @@
                                                 </label>
                                                 <div class="col-md-4">
                                                     <textarea id="txtDescription" name="txtDescription" class="form-control"></textarea>
+                                                </div>
+                                                <label class="col-md-2 control-label">
+                                                    Dealer:
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" id="ddlDealer" name="ddlDealer">
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -227,12 +305,6 @@
 <script src="~/Scripts/app/Customer.js"></script>
 <script>
     $(document).ready(function () {
-        LoadListData();
+        LoadCustomerList("ddlDealer");
     });
-
-    function UpdateLink() {
-        var ValueId = $("#txtcustomeid").val();
-        console.log(ValueId);
-        document.getElementById("link").href = "/Report/Viewer/ReportViewer.aspx?ReportName=CustomerTransaction&invoiceId=" + ValueId;
-    }
 </script>

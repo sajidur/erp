@@ -14,7 +14,7 @@ $("#btnAdd").click(function () {
         var Brand = $("#ddlBrand option:selected").text();
         var apiId = $("#ddlAPI option:selected").val();
         var apiName = $("#ddlAPI option:selected").text();
-
+        var rate = $("#txtRate").val();
     var BaleQty = $("#txtBaleQty").val();
         var object = {
             StockOutInvoiceNo: $("#ddlStockOutInvoice option:selected").text(),
@@ -26,7 +26,9 @@ $("#btnAdd").click(function () {
         BrandId: BrandId,
             Brand: Brand,
             APIId: apiId,
-            APIName: apiName
+            APIName: apiName,
+            Rate: rate,
+            Amount: rate * BaleQty
     };
     detailsStockIn.push(object);
     var templateWithData = Mustache.to_html($("#templateProductModalAdded").html(), { ProductSearchAdded: detailsStockIn });
@@ -91,7 +93,21 @@ function LoadAllStockOutChallan() {
 
 }
 
+function LoadStockOutByInvoice(InvoiceNo) {
+    var url = "/ProductionProcessing/GetByStockOutInvoice";
+    $.ajax({
+        url: url,
+        method: "GET",
+        data: { InvoiceId: InvoiceNo},
+        success: function (res) {
+            var templateWithData = Mustache.to_html($("#templateStockOutProductShow").html(), { StockOutSearchAdded: res });
+            $("#div-StockOutModal").empty().html(templateWithData);
+        },
+        error: function () {
+        }
+    });
 
+}
 function LoadInvoiceNo(controlId) {
     var url = "/ProductionProcessing/GetInvoiceNumberForStockIn";
     $.ajax({
@@ -99,7 +115,7 @@ function LoadInvoiceNo(controlId) {
         method: "POST",
         success: function (res) {
             var data = res;
-            $("#" + controlId).val(data);
+            $("#" + controlId).val("STN"+data);
         },
         error: function () {
         }

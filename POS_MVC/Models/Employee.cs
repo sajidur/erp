@@ -23,15 +23,8 @@ namespace RexERP_MVC.Models
             this.EmployeeLeaves = new HashSet<EmployeeLeave>();
             this.EmployeeLoans = new HashSet<EmployeeLoan>();
             this.EmployeeWorkingTimes = new HashSet<EmployeeWorkingTime>();
-            this.FPUsers = new HashSet<FPUser>();
-            this.LastEmployments = new HashSet<LastEmployment>();
-            this.OtherExpenseDetails = new HashSet<OtherExpenseDetail>();
-            this.OtherIncomeDetails = new HashSet<OtherIncomeDetail>();
             this.PensionCompensations = new HashSet<PensionCompensation>();
             this.SalaryEmployees = new HashSet<SalaryEmployee>();
-            this.SlipGajiDetails = new HashSet<SlipGajiDetail>();
-            this.SPKLs = new HashSet<SPKL>();
-            this.THRDetails = new HashSet<THRDetail>();
             this.SalesMasters = new HashSet<SalesMaster>();
         }
     
@@ -41,14 +34,24 @@ namespace RexERP_MVC.Models
         public string LastName { get; set; }
         public string FatherName { get; set; }
         public string MotherName { get; set; }
-        public Nullable<int> DesignationId { get; set; }
+        public int DesignationId { get; set; }
+        public int DepartmentId { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string ZipCode { get; set; }
-        public Nullable<decimal> Salary { get; set; }
-        public byte[] Photo { get; set; }
+        public decimal Salary { get; set; }
+        public string Photo { get; set; }
+        public string CV { get; set; }
+        public System.DateTime DOB { get; set; }
+        public System.DateTime JoiningDate { get; set; }
+        public Nullable<System.DateTime> TerminationDate { get; set; }
+        public string Qualification { get; set; }
+        public string BloodGroup { get; set; }
+        public int SalaryPackage { get; set; }
+        public string EmployeeType { get; set; }
+        public string Gender { get; set; }
         public string Creator { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public string UpdateBy { get; set; }
@@ -59,6 +62,7 @@ namespace RexERP_MVC.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdvancePayment> AdvancePayments { get; set; }
+        public virtual Department Department { get; set; }
         public virtual Designationtbl Designationtbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeAttendance> EmployeeAttendances { get; set; }
@@ -71,23 +75,9 @@ namespace RexERP_MVC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeWorkingTime> EmployeeWorkingTimes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FPUser> FPUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LastEmployment> LastEmployments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OtherExpenseDetail> OtherExpenseDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OtherIncomeDetail> OtherIncomeDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PensionCompensation> PensionCompensations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalaryEmployee> SalaryEmployees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SlipGajiDetail> SlipGajiDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SPKL> SPKLs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THRDetail> THRDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesMaster> SalesMasters { get; set; }
     }

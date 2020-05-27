@@ -15,6 +15,31 @@ function LoadEmployeeList() {
     });
 }
 function LoadEmployeeCombo(controlId) {
+    var url = '/Employee/GetAll';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        success: function (res) {
+            var data = res;
+            //alert('Success');
+            $("#" + controlId).empty();
+            $("#" + controlId).get(0).options.length = 0;
+            if (true) {
+                $("#" + controlId).get(0).options[0] = new Option("-Select-", "0");
+            }
+            if (data != null) {
+                $.each(data, function (index, item) {
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Code + '-' + item.FirstName, item.Id);
+                });
+            }
+            $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!" });
+        },
+        error: function (error, r) {
+            ShowNotification("3", "Something Wrong!!");
+        }
+    });
+}
+function LoadSalesMan(controlId) {
     var url = '/Employee/GetAllByDesignation';
     $.ajax({
         url: url,
@@ -76,8 +101,6 @@ function LoadSingleData(parameters) {
     });
 }
 
-
-
 function Save() {
     if ($("#txtCode").val() == "") {
         alert('Emloyee Code can not be empty.');
@@ -95,8 +118,21 @@ function Save() {
     object.Phone = $('#txtPhone').val();
     object.Email = $('#txtEmail').val();
     object.ZipCode = $('#txtZipCode').val();
+    object.DepartmentID = $("#txtDepartment option:selected").val();
+    object.DesignationId = $("#txtDesignation option:selected").val();
+    object.DOB = $('#txtDOB').val();
+    object.JoiningDate = $('#txtJoiningDate').val();
+    object.TerminationDate = $('#txtTerminationDate').val();
+    object.Qualification = $('#txtQualification').val();
+    object.BloodGroup = $('#ddlBloodGroup option:selected').val();
+    object.SalaryPackage = $('#ddlSalaryPackage option:selected').val();
+    object.EmployeeType = $('#ddlEmployeeType option:selected').val();
+    object.SalaryType = $('#ddlSalaryType option:selected').val();    
+    object.Gender = $('#ddlGender option:selected').val();    
     object.Salary = $('#txtSalary').val();
     object.Remarks = $('#txtRemarks').val();
+    object.Photo = photoContent;
+    object.MimeType = MimeType;
     $.ajax({
         url: '/Employee/Create',
         method: 'post',
@@ -108,8 +144,7 @@ function Save() {
         success: function (data) {
             $("#hdId").val(data.Id);
             ShowNotification("1", "Employee Saved!!");
-            ResetForm();
-            LoadEmployeeList();
+            location.reload();            
         },
         error: function () {
             ShowNotification("3", "Something Wrong!!");
@@ -223,9 +258,9 @@ function FormDataAsObject() {
     object.Email = $('#txtEmail').val();
     object.ZipCode = $('#txtZipCode').val();
     object.Salary = $('#txtSalary').val();
+    object.Photo = photoContent;
     return object;
 }
-
 
 function UploadImage() {
     var file = $('#photoEmployeePhoto').get(0).files;

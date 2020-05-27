@@ -8,6 +8,8 @@ namespace Core.Interface.Repository
     {
         IQueryable<EmployeeLeave> GetQueryable();
         IList<EmployeeLeave> GetAll();
+        IList<EmployeeLeave> GetAll(List<int> employeeIds);
+
         EmployeeLeave GetObjectById(int Id);
         EmployeeLeave CreateObject(EmployeeLeave employeeLeave);
         EmployeeLeave UpdateObject(EmployeeLeave employeeLeave);

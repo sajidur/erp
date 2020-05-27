@@ -14,12 +14,6 @@ namespace RexERP_MVC.Models
     
     public partial class BranchOffice
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BranchOffice()
-        {
-            this.Departments = new HashSet<Department>();
-        }
-    
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -39,7 +33,5 @@ namespace RexERP_MVC.Models
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual CompanyInfo CompanyInfo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Department> Departments { get; set; }
     }
 }

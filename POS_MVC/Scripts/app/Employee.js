@@ -129,6 +129,7 @@ function Save() {
     object.EmployeeType = $('#ddlEmployeeType option:selected').val();
     object.SalaryType = $('#ddlSalaryType option:selected').val();    
     object.Gender = $('#ddlGender option:selected').val();    
+    object.ShiftId = $('#ddlShift option:selected').val();
     object.Salary = $('#txtSalary').val();
     object.Remarks = $('#txtRemarks').val();
     object.Photo = photoContent;

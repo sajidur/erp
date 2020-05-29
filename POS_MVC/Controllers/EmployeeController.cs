@@ -20,6 +20,7 @@ namespace RexERP_MVC.Controllers
         private SalaryPaymentService salaryPaymentService = new SalaryPaymentService();
         private DEPARTMENTService departmentService = new DEPARTMENTService();
         private DBService<Designationtbl> designationService = new DBService<Designationtbl>();
+        private DBService<SHIFT> _shiftService = new DBService<SHIFT>();
 
         // GET: Employee
         public ActionResult AddEmployee()

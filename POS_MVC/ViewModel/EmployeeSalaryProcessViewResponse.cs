@@ -13,6 +13,7 @@ namespace RexERP_MVC.ViewModel
         public string Code { get; set; }
         public string DesignationName { get; set; }
         public string DepartmentName { get; set; }
+        public int LateCount { get; set; }
         public int AttendanceCount { get; set; }
         public int LeaveCount { get; set; }
         public int AbsenceCount { get; set; }

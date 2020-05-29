@@ -11,8 +11,8 @@ namespace Core.Interface.Service
     {
         IEmployeeAttendanceValidator GetValidator();
         IQueryable<EmployeeAttendance> GetQueryable();
-        IList<EmployeeAttendance> GetAll();
-        List<EmployeeCountGroupResponse> GetAttendanceCount(int month);
+        IList<EmployeeAttendance> GetAll(int year, int month);
+        List<EmployeeAttendance> GetAttendanceCount(int year,int month);
         EmployeeAttendance GetObjectById(int Id);
         EmployeeAttendance CreateObject(EmployeeAttendance employeeAttendance, EmployeeService _employeeService);
         EmployeeAttendance UpdateObject(EmployeeAttendance employeeAttendance, EmployeeService _employeeService);

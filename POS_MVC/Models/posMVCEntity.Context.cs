@@ -40,6 +40,7 @@ namespace RexERP_MVC.Models
         public virtual DbSet<AuditedExc> AuditedExcs { get; set; }
         public virtual DbSet<AUTHDEVICE> AUTHDEVICEs { get; set; }
         public virtual DbSet<BankReconciliation> BankReconciliations { get; set; }
+        public virtual DbSet<BonusDeduction> BonusDeductions { get; set; }
         public virtual DbSet<BranchOffice> BranchOffices { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
@@ -103,6 +104,8 @@ namespace RexERP_MVC.Models
         public virtual DbSet<RoleWiseScreenPermission> RoleWiseScreenPermissions { get; set; }
         public virtual DbSet<SalaryEmployee> SalaryEmployees { get; set; }
         public virtual DbSet<SalaryEmployeeDetail> SalaryEmployeeDetails { get; set; }
+        public virtual DbSet<SalaryPackage> SalaryPackages { get; set; }
+        public virtual DbSet<SalaryPackageDetail> SalaryPackageDetails { get; set; }
         public virtual DbSet<SalaryPayment> SalaryPayments { get; set; }
         public virtual DbSet<SalaryProcess> SalaryProcesses { get; set; }
         public virtual DbSet<SalarySlip> SalarySlips { get; set; }
@@ -118,7 +121,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Screen> Screens { get; set; }
         public virtual DbSet<SECURITYDETAIL> SECURITYDETAILS { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
-        public virtual DbSet<SHIFT> SHIFTs { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<SlipGajiDetail> SlipGajiDetails { get; set; }
         public virtual DbSet<SlipGajiDetail1> SlipGajiDetail1 { get; set; }
@@ -159,9 +161,8 @@ namespace RexERP_MVC.Models
         public virtual DbSet<ServerLog> ServerLogs { get; set; }
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
+        public virtual DbSet<SHIFT> SHIFTs { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<SalaryPackage> SalaryPackages { get; set; }
-        public virtual DbSet<SalaryPackageDetail> SalaryPackageDetails { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

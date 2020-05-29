@@ -15,6 +15,13 @@
                                     <div class="col-md-4">
                                         <input type="text" id="txtCode" readonly required value="@Html.ViewBag.EmployeeCode" name="txtCode" class="form-control" />
                                     </div>
+                                    <label class="col-md-2 control-label">
+                                        Shift :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <select id="ddlShift" name="ddlShift" class="form-control">
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -243,11 +250,12 @@
         </tbody>
     </table>
 </script>
-
+<script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/Employee.js"></script>
 <script>
     $(document).ready(function () {
-    LoadEmployeeList();
+        LoadEmployeeList();
+        LoadShiftCombo("ddlShift");
     });
     var photoContent = "";
     var MimeType = "";

@@ -216,6 +216,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BAL\AccountGroupService.cs" />
     <Compile Include="BAL\AccountLedgerService.cs" />
+    <Compile Include="BAL\BonusDeductionService.cs" />
     <Compile Include="BAL\BranchOfficeService.cs" />
     <Compile Include="BAL\BrandService.cs" />
     <Compile Include="BAL\CategoryService.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="Controllers\SalaryPaymentController.cs" />
     <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="Controllers\SizeSetupController.cs" />
     <Compile Include="Controllers\SMSController.cs" />
     <Compile Include="Controllers\TitleInfoController.cs" />
@@ -439,6 +441,9 @@
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BankReconciliation.cs">
+      <DependentUpon>posMVCEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BonusDeduction.cs">
       <DependentUpon>posMVCEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BranchOffice.cs">
@@ -1619,6 +1624,11 @@
     <Content Include="Views\SalaryItemNew\Index.cshtml" />
     <Content Include="Views\Salary\Process.cshtml" />
     <Content Include="Views\SalaryPayment\BonusDeduction.cshtml" />
+    <Content Include="Views\Shift\Create.cshtml" />
+    <Content Include="Views\Shift\Delete.cshtml" />
+    <Content Include="Views\Shift\Details.cshtml" />
+    <Content Include="Views\Shift\Edit.cshtml" />
+    <Content Include="Views\Shift\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

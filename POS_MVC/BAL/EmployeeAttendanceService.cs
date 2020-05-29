@@ -32,13 +32,13 @@ namespace Service.Service
             return _repository.GetQueryable();
         }
 
-        public IList<EmployeeAttendance> GetAll()
+        public IList<EmployeeAttendance> GetAll(int year,int month)
         {
-            return _repository.GetAll();
+            return _repository.GetAll(year,month);
         }
-        public List<EmployeeCountGroupResponse> GetAttendanceCount(int month)
+        public List<EmployeeAttendance> GetAttendanceCount(int year,int month)
         {
-            return _repository.GetAttendanceCount(month);
+            return _repository.GetAttendanceCount(year,month);
         }
 
         public EmployeeAttendance GetObjectById(int Id)

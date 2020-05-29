@@ -195,6 +195,24 @@
     <Property Name="CreatedDate" Type="date" />
     <Property Name="CreatedBy" Type="int" />
   </EntityType>
+  <EntityType Name="BonusDeduction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Month" Type="int" />
+    <Property Name="BonusAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DeductionAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Narration" Type="varchar(max)" />
+    <Property Name="extraDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="Extra1" Type="varchar(max)" />
+    <Property Name="Extra2" Type="varchar(max)" />
+  </EntityType>
   <EntityType Name="BranchOffice">
     <Key>
       <PropertyRef Name="Id" />
@@ -497,6 +515,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
     <Property Name="SalaryPackage" Type="int" Nullable="false" />
     <Property Name="EmployeeType" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShiftId" Type="int" />
     <Property Name="Creator" Type="nvarchar(max)" />
     <Property Name="CreationDate" Type="datetime" />
     <Property Name="UpdateBy" Type="nvarchar(max)" />
@@ -1724,28 +1743,15 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a prima
   </EntityType>
   <EntityType Name="SHIFT">
     <Key>
-      <PropertyRef Name="SHIFTID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="SHIFTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NAME" Type="varchar" MaxLength="20" />
-    <Property Name="USHIFTID" Type="int" />
-    <Property Name="STARTDATE" Type="datetime" Nullable="false" />
-    <Property Name="ENDDATE" Type="datetime" />
-    <Property Name="RUNNUM" Type="smallint" />
-    <Property Name="SCH1" Type="int" />
-    <Property Name="SCH2" Type="int" />
-    <Property Name="SCH3" Type="int" />
-    <Property Name="SCH4" Type="int" />
-    <Property Name="SCH5" Type="int" />
-    <Property Name="SCH6" Type="int" />
-    <Property Name="SCH7" Type="int" />
-    <Property Name="SCH8" Type="int" />
-    <Property Name="SCH9" Type="int" />
-    <Property Name="SCH10" Type="int" />
-    <Property Name="SCH11" Type="int" />
-    <Property Name="SCH12" Type="int" />
-    <Property Name="CYCLE" Type="smallint" />
-    <Property Name="UNITS" Type="smallint" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" />
+    <Property Name="Startdate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="InTime" Type="time" Precision="7" />
+    <Property Name="OutTime" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="Size">
     <Key>
@@ -2533,6 +2539,18 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Principal>
       <Dependent Role="BankReconciliation">
         <PropertyRef Name="LedgerPostingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BonusDeduction_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="BonusDeduction" Type="Self.BonusDeduction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BonusDeduction">
+        <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4047,6 +4065,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <EntitySet Name="AuditedExc" EntityType="Self.AuditedExc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AUTHDEVICE" EntityType="Self.AUTHDEVICE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BankReconciliation" EntityType="Self.BankReconciliation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BonusDeduction" EntityType="Self.BonusDeduction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BranchOffice" EntityType="Self.BranchOffice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -4239,6 +4258,10 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <AssociationSet Name="FK_BankReconciliation_LadgerPosting" Association="Self.FK_BankReconciliation_LadgerPosting">
       <End Role="LedgerPosting" EntitySet="LedgerPosting" />
       <End Role="BankReconciliation" EntitySet="BankReconciliation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BonusDeduction_Employee" Association="Self.FK_BonusDeduction_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="BonusDeduction" EntitySet="BonusDeduction" />
     </AssociationSet>
     <AssociationSet Name="FK_ContraDetails_ContraMaster" Association="Self.FK_ContraDetails_ContraMaster">
       <End Role="ContraMaster" EntitySet="ContraMaster" />

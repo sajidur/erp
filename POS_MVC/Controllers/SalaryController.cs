@@ -23,6 +23,7 @@ namespace RexERP_MVC.Controllers
         private IEmployeeAttendanceService _attendanceService;
         private IEmployeeLeaveService _leaveService;
         private DBService<HOLIDAY> _holyDayService = new DBService<HOLIDAY>();
+        private BonusDeductionService _bonusDeductionService = new BonusDeductionService();
         public SalaryController()
         {
             _titleInfoService = new TitleInfoService(new TitleInfoRepository(), new TitleInfoValidator());
@@ -49,14 +50,22 @@ namespace RexERP_MVC.Controllers
             var employeeSalaryProcessResponse = new List<EmployeeSalaryProcessViewResponse>();
             var allemployee = _employeeService.GetAll();
             var employeeIds = allemployee.Select(a => a.Id).ToList();
-            var attendance = _attendanceService.GetAttendanceCount(month);
+            var attendance = _attendanceService.GetAttendanceCount(year,month);
             var leave = _leaveService.GetAll(employeeIds);
+            var bonusDeductionList = _bonusDeductionService.GetAll(month,year);
             foreach (var item in allemployee)
             {
-                var holyDay = _holyDayService.GetAll(a => a.HOLIDAYMONTH == month).Count();
+                var holyDays = _holyDayService.GetAll(a => a.HOLIDAYMONTH == month && a.HOLIDAYYEAR==year).ToList();
+                var holyDaysCount = 0;
+                if (holyDays!=null)
+                {
+                    holyDaysCount = holyDays.Sum(a => a.DURATION ?? 0);
+                }
                 var dayInMonth = DateTime.DaysInMonth(year, month);
-                var attendanceCount = attendance.Where(a => a.EmployeeId == item.Id).Count();
+                var attendanceCount = attendance.Where(a => a.EmployeeId == item.Id);
+               // var lateCount=attendanceCount.Select(a=>a.)
                 var leaveCount = leave.Where(a => a.EmployeeId == item.Id).Count();
+                var bonusOrDeduction = bonusDeductionList.Where(a => a.EmployeeId == item.Id).ToList();
                 var response = new EmployeeSalaryProcessViewResponse();
                 response.Id = item.Id;
                 response.FirstName = item.FirstName;
@@ -64,11 +73,12 @@ namespace RexERP_MVC.Controllers
                 response.Code = item.Code;
                 response.DesignationName = item.Designationtbl.DesignationName;
                 response.DepartmentName = item.Department.Name;
-                response.AttendanceCount = attendanceCount;
+                response.AttendanceCount = attendanceCount.Count();
                 response.LeaveCount = leaveCount;
-                response.AbsenceCount = dayInMonth-(holyDay+attendanceCount+leaveCount);
-                response.DeductionAmount = 0;
-                response.AdditionAmount = 0;
+                response.LateCount = attendanceCount.Where(a => a.CheckLateMinutes > 15).Count();
+                response.AbsenceCount = dayInMonth-(holyDaysCount + attendanceCount.Count()+leaveCount);
+                response.DeductionAmount = bonusOrDeduction.Select(a=>a.DeductionAmount??0).Sum();
+                response.AdditionAmount = bonusOrDeduction.Select(a => a.BonusAmount ?? 0).Sum();
                 employeeSalaryProcessResponse.Add(response);
             }
             return Json(employeeSalaryProcessResponse, JsonRequestBehavior.AllowGet);

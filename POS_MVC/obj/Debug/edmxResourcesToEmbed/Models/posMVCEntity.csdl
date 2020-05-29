@@ -216,6 +216,25 @@
     <Property Name="CreatedBy" Type="Int32" />
     <NavigationProperty Name="LedgerPosting" Relationship="Self.FK_BankReconciliation_LadgerPosting" FromRole="BankReconciliation" ToRole="LedgerPosting" />
   </EntityType>
+  <EntityType Name="BonusDeduction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Month" Type="Int32" />
+    <Property Name="BonusAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DeductionAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="extraDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="Extra1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Extra2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_BonusDeduction_Employee" FromRole="BonusDeduction" ToRole="Employee" />
+  </EntityType>
   <EntityType Name="BranchOffice">
     <Key>
       <PropertyRef Name="Id" />
@@ -1466,6 +1485,35 @@
     <Property Name="DeletedAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="SalaryEmployee" Relationship="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryEmployee_SalaryEmployeeId" FromRole="SalaryEmployeeDetail" ToRole="SalaryEmployee" />
   </EntityType>
+  <EntityType Name="SalaryPackage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalaryPackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SalaryPackageDetails" Relationship="Self.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackage" ToRole="SalaryPackageDetails" />
+  </EntityType>
+  <EntityType Name="SalaryPackageDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalaryPackageId" Type="Int32" Nullable="false" />
+    <Property Name="PayHeadId" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <NavigationProperty Name="SalaryPackage" Relationship="Self.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackageDetails" ToRole="SalaryPackage" />
+    <NavigationProperty Name="SalaryPackageDetails1" Relationship="Self.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetails" ToRole="SalaryPackageDetails1" />
+    <NavigationProperty Name="SalaryPackageDetail1" Relationship="Self.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetails1" ToRole="SalaryPackageDetails" />
+  </EntityType>
   <EntityType Name="SalaryPayment">
     <Key>
       <PropertyRef Name="Id" />
@@ -1784,31 +1832,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="KeyName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="SHIFT">
-    <Key>
-      <PropertyRef Name="SHIFTID" />
-    </Key>
-    <Property Name="SHIFTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="USHIFTID" Type="Int32" />
-    <Property Name="STARTDATE" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ENDDATE" Type="DateTime" Precision="3" />
-    <Property Name="RUNNUM" Type="Int16" />
-    <Property Name="SCH1" Type="Int32" />
-    <Property Name="SCH2" Type="Int32" />
-    <Property Name="SCH3" Type="Int32" />
-    <Property Name="SCH4" Type="Int32" />
-    <Property Name="SCH5" Type="Int32" />
-    <Property Name="SCH6" Type="Int32" />
-    <Property Name="SCH7" Type="Int32" />
-    <Property Name="SCH8" Type="Int32" />
-    <Property Name="SCH9" Type="Int32" />
-    <Property Name="SCH10" Type="Int32" />
-    <Property Name="SCH11" Type="Int32" />
-    <Property Name="SCH12" Type="Int32" />
-    <Property Name="CYCLE" Type="Int16" />
-    <Property Name="UNITS" Type="Int16" />
   </EntityType>
   <EntityType Name="Size">
     <Key>
@@ -3580,6 +3603,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SalaryPackageDetails_SalaryPackage">
+    <End Role="SalaryPackage" Type="Self.SalaryPackage" Multiplicity="1" />
+    <End Role="SalaryPackageDetails" Type="Self.SalaryPackageDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryPackageDetails">
+        <PropertyRef Name="SalaryPackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryPackageDetails_SalaryPackageDetails">
+    <End Role="SalaryPackageDetails" Type="Self.SalaryPackageDetail" Multiplicity="1" />
+    <End Role="SalaryPackageDetails1" Type="Self.SalaryPackageDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SalaryPackageDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalaryPackageDetails1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
     <End Role="SalarySlip" Type="Self.SalarySlip" Multiplicity="1" />
     <End Role="SalarySlipDetail" Type="Self.SalarySlipDetail" Multiplicity="*" />
@@ -3910,6 +3957,7 @@
     <EntitySet Name="AuditedExcs" EntityType="Self.AuditedExc" />
     <EntitySet Name="AUTHDEVICEs" EntityType="Self.AUTHDEVICE" />
     <EntitySet Name="BankReconciliations" EntityType="Self.BankReconciliation" />
+    <EntitySet Name="BonusDeductions" EntityType="Self.BonusDeduction" />
     <EntitySet Name="BranchOffices" EntityType="Self.BranchOffice" />
     <EntitySet Name="Brands" EntityType="Self.Brand" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -3973,6 +4021,8 @@
     <EntitySet Name="RoleWiseScreenPermissions" EntityType="Self.RoleWiseScreenPermission" />
     <EntitySet Name="SalaryEmployees" EntityType="Self.SalaryEmployee" />
     <EntitySet Name="SalaryEmployeeDetails" EntityType="Self.SalaryEmployeeDetail" />
+    <EntitySet Name="SalaryPackages" EntityType="Self.SalaryPackage" />
+    <EntitySet Name="SalaryPackageDetails" EntityType="Self.SalaryPackageDetail" />
     <EntitySet Name="SalaryPayments" EntityType="Self.SalaryPayment" />
     <EntitySet Name="SalaryProcesses" EntityType="Self.SalaryProcess" />
     <EntitySet Name="SalarySlips" EntityType="Self.SalarySlip" />
@@ -3988,7 +4038,6 @@
     <EntitySet Name="Screens" EntityType="Self.Screen" />
     <EntitySet Name="SECURITYDETAILS" EntityType="Self.SECURITYDETAIL" />
     <EntitySet Name="Settings" EntityType="Self.Setting" />
-    <EntitySet Name="SHIFTs" EntityType="Self.SHIFT" />
     <EntitySet Name="Sizes" EntityType="Self.Size" />
     <EntitySet Name="SlipGajiDetails" EntityType="Self.SlipGajiDetail" />
     <EntitySet Name="SlipGajiDetail1" EntityType="Self.SlipGajiDetail1" />
@@ -4349,6 +4398,14 @@
       <End Role="SalaryEmployee" EntitySet="SalaryEmployees" />
       <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackage" Association="Self.FK_SalaryPackageDetails_SalaryPackage">
+      <End Role="SalaryPackage" EntitySet="SalaryPackages" />
+      <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackageDetails" Association="Self.FK_SalaryPackageDetails_SalaryPackageDetails">
+      <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
+      <End Role="SalaryPackageDetails1" EntitySet="SalaryPackageDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId" Association="Self.FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
       <End Role="SalarySlip" EntitySet="SalarySlips" />
       <End Role="SalarySlipDetail" EntitySet="SalarySlipDetails" />
@@ -4582,10 +4639,15 @@
     <FunctionImport Name="YearClosed">
       <Parameter Name="CustomerId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="SHIFTs" EntityType="DB_9B34E1_erpModel.SHIFT" />
     <EntitySet Name="Employees" EntityType="DB_9B34E1_erpModel.Employee" />
     <AssociationSet Name="FK_AdvancePayment_Employee" Association="DB_9B34E1_erpModel.FK_AdvancePayment_Employee">
       <End Role="Employee" EntitySet="Employees" />
       <End Role="AdvancePayment" EntitySet="AdvancePayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BonusDeduction_Employee" Association="DB_9B34E1_erpModel.FK_BonusDeduction_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="BonusDeduction" EntitySet="BonusDeductions" />
     </AssociationSet>
     <AssociationSet Name="FK_Employee_Department" Association="DB_9B34E1_erpModel.FK_Employee_Department">
       <End Role="Department" EntitySet="Departments" />
@@ -4626,16 +4688,6 @@
     <AssociationSet Name="FK_SalesMaster_Employee" Association="DB_9B34E1_erpModel.FK_SalesMaster_Employee">
       <End Role="Employee" EntitySet="Employees" />
       <End Role="SalesMaster" EntitySet="SalesMasters" />
-    </AssociationSet>
-    <EntitySet Name="SalaryPackages" EntityType="DB_9B34E1_erpModel.SalaryPackage" />
-    <EntitySet Name="SalaryPackageDetails" EntityType="DB_9B34E1_erpModel.SalaryPackageDetail" />
-    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackage" Association="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage">
-      <End Role="SalaryPackage" EntitySet="SalaryPackages" />
-      <End Role="SalaryPackageDetail" EntitySet="SalaryPackageDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackageDetails" Association="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails">
-      <End Role="SalaryPackageDetail" EntitySet="SalaryPackageDetails" />
-      <End Role="SalaryPackageDetail1" EntitySet="SalaryPackageDetails" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="CashBook_Result">
@@ -5100,6 +5152,18 @@
     <Property Type="Decimal" Name="StockOutPrice" Nullable="true" Precision="18" Scale="2" />
     <Property Type="String" Name="APIName" Nullable="true" MaxLength="250" />
   </ComplexType>
+  <EntityType Name="SHIFT">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Startdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="InTime" Type="Time" Precision="7" />
+    <Property Name="OutTime" Type="Time" Precision="7" />
+  </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="Id" />
@@ -5128,6 +5192,7 @@
     <Property Name="SalaryPackage" Type="Int32" Nullable="false" />
     <Property Name="EmployeeType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Gender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShiftId" Type="Int32" />
     <Property Name="Creator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreationDate" Type="DateTime" Precision="3" />
     <Property Name="UpdateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -5136,6 +5201,7 @@
     <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="LedgerId" Type="Int32" />
     <NavigationProperty Name="AdvancePayments" Relationship="DB_9B34E1_erpModel.FK_AdvancePayment_Employee" FromRole="Employee" ToRole="AdvancePayment" />
+    <NavigationProperty Name="BonusDeductions" Relationship="DB_9B34E1_erpModel.FK_BonusDeduction_Employee" FromRole="Employee" ToRole="BonusDeduction" />
     <NavigationProperty Name="Department" Relationship="DB_9B34E1_erpModel.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
     <NavigationProperty Name="Designationtbl" Relationship="DB_9B34E1_erpModel.FK_Employee_Designationtbl" FromRole="Employee" ToRole="Designationtbl" />
     <NavigationProperty Name="EmployeeAttendances" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeAttendance" />
@@ -5155,6 +5221,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="AdvancePayment">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BonusDeduction_Employee">
+    <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DB_9B34E1_erpModel.BonusDeduction" Role="BonusDeduction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BonusDeduction">
         <PropertyRef Name="EmployeeId" />
       </Dependent>
     </ReferentialConstraint>
@@ -5278,59 +5356,6 @@
       </Principal>
       <Dependent Role="SalesMaster">
         <PropertyRef Name="SalesBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="SalaryPackage">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SalaryPackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="SalaryPackageDetails" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackage" ToRole="SalaryPackageDetail" />
-  </EntityType>
-  <EntityType Name="SalaryPackageDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SalaryPackageId" Type="Int32" Nullable="false" />
-    <Property Name="PayHeadId" Type="Int32" />
-    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="CreatedBy" Type="Int32" />
-    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-    <Property Name="UpdatedBy" Type="Int32" />
-    <NavigationProperty Name="SalaryPackage" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackageDetail" ToRole="SalaryPackage" />
-    <NavigationProperty Name="SalaryPackageDetails1" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetail" ToRole="SalaryPackageDetail1" />
-    <NavigationProperty Name="SalaryPackageDetail1" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetail1" ToRole="SalaryPackageDetail" />
-  </EntityType>
-  <Association Name="FK_SalaryPackageDetails_SalaryPackage">
-    <End Type="DB_9B34E1_erpModel.SalaryPackage" Role="SalaryPackage" Multiplicity="1" />
-    <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryPackage">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryPackageDetail">
-        <PropertyRef Name="SalaryPackageId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SalaryPackageDetails_SalaryPackageDetails">
-    <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail" Multiplicity="1" />
-    <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail1" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryPackageDetail">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryPackageDetail1">
-        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

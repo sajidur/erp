@@ -8,8 +8,8 @@ namespace Core.Interface.Repository
     public interface IEmployeeAttendanceRepository : IRepository<EmployeeAttendance>
     {
         IQueryable<EmployeeAttendance> GetQueryable();
-        IList<EmployeeAttendance> GetAll();
-        List<EmployeeCountGroupResponse> GetAttendanceCount(int month);
+        IList<EmployeeAttendance> GetAll(int year, int month);
+        List<EmployeeAttendance> GetAttendanceCount(int year,int month);
         EmployeeAttendance GetObjectById(int Id);
         EmployeeAttendance CreateObject(EmployeeAttendance employeeAttendance);
         EmployeeAttendance UpdateObject(EmployeeAttendance employeeAttendance);

@@ -22,16 +22,10 @@ namespace Data.Repository
         {
             return FindAll(x => !x.IsDeleted);
         }
-
-        public IList<EmployeeAttendance> GetAll()
+        public List<EmployeeAttendance> GetAttendanceCount(int year,int month)
         {
-            return FindAll(x => !x.IsDeleted).ToList();
-        }
-        public List<EmployeeCountGroupResponse> GetAttendanceCount(int month)
-        {
-            var results = from p in entities.EmployeeAttendances where p.AttendanceDate.Month==month
-                          group p.Employee by p.EmployeeId into g
-                          select new EmployeeCountGroupResponse{  EmployeeId= g.Key, Count = g.Count()};
+            var results = from p in entities.EmployeeAttendances where p.AttendanceDate.Month==month && p.AttendanceDate.Year==year
+                          select p;
             return results.ToList();
             
         }
@@ -70,6 +64,10 @@ namespace Data.Repository
             return (Delete(employeeAttendance) == 1) ? true : false;
         }
 
+        public IList<EmployeeAttendance> GetAll(int year, int month)
+        {
+            return FindAll(x => !x.IsDeleted && x.AttendanceDate.Year==year && x.AttendanceDate.Month==month).ToList();
+        }
     }
     public class EmployeeCountGroupResponse
     {

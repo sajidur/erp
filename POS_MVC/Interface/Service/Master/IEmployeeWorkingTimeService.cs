@@ -11,6 +11,8 @@ namespace Core.Interface.Service
         IEmployeeWorkingTimeValidator GetValidator();
         IQueryable<EmployeeWorkingTime> GetQueryable();
         IList<EmployeeWorkingTime> GetAll();
+        IList<SHIFT> GetAllShift();
+        SHIFT AddShift(SHIFT sHIFT);
         IList<EmployeeWorkingTime> GetObjectsByWorkingTimeId(int WorkingTimeId);
         EmployeeWorkingTime GetObjectById(int Id);
         EmployeeWorkingTime CreateObject(EmployeeWorkingTime employeeWorkingTime, IWorkingTimeService _workingTimeService, EmployeeService _employeeService);

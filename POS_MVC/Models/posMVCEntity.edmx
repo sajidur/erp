@@ -200,6 +200,24 @@
           <Property Name="CreatedDate" Type="date" />
           <Property Name="CreatedBy" Type="int" />
         </EntityType>
+        <EntityType Name="BonusDeduction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="BonusAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DeductionAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Narration" Type="varchar(max)" />
+          <Property Name="extraDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Extra1" Type="varchar(max)" />
+          <Property Name="Extra2" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="BranchOffice">
           <Key>
             <PropertyRef Name="Id" />
@@ -502,6 +520,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
           <Property Name="SalaryPackage" Type="int" Nullable="false" />
           <Property Name="EmployeeType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShiftId" Type="int" />
           <Property Name="Creator" Type="nvarchar(max)" />
           <Property Name="CreationDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar(max)" />
@@ -1729,28 +1748,15 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a prima
         </EntityType>
         <EntityType Name="SHIFT">
           <Key>
-            <PropertyRef Name="SHIFTID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="SHIFTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NAME" Type="varchar" MaxLength="20" />
-          <Property Name="USHIFTID" Type="int" />
-          <Property Name="STARTDATE" Type="datetime" Nullable="false" />
-          <Property Name="ENDDATE" Type="datetime" />
-          <Property Name="RUNNUM" Type="smallint" />
-          <Property Name="SCH1" Type="int" />
-          <Property Name="SCH2" Type="int" />
-          <Property Name="SCH3" Type="int" />
-          <Property Name="SCH4" Type="int" />
-          <Property Name="SCH5" Type="int" />
-          <Property Name="SCH6" Type="int" />
-          <Property Name="SCH7" Type="int" />
-          <Property Name="SCH8" Type="int" />
-          <Property Name="SCH9" Type="int" />
-          <Property Name="SCH10" Type="int" />
-          <Property Name="SCH11" Type="int" />
-          <Property Name="SCH12" Type="int" />
-          <Property Name="CYCLE" Type="smallint" />
-          <Property Name="UNITS" Type="smallint" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="200" />
+          <Property Name="Startdate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="InTime" Type="time" Precision="7" />
+          <Property Name="OutTime" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -2538,6 +2544,18 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             </Principal>
             <Dependent Role="BankReconciliation">
               <PropertyRef Name="LedgerPostingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BonusDeduction_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="BonusDeduction" Type="Self.BonusDeduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BonusDeduction">
+              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4052,6 +4070,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <EntitySet Name="AuditedExc" EntityType="Self.AuditedExc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AUTHDEVICE" EntityType="Self.AUTHDEVICE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankReconciliation" EntityType="Self.BankReconciliation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BonusDeduction" EntityType="Self.BonusDeduction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BranchOffice" EntityType="Self.BranchOffice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -4244,6 +4263,10 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <AssociationSet Name="FK_BankReconciliation_LadgerPosting" Association="Self.FK_BankReconciliation_LadgerPosting">
             <End Role="LedgerPosting" EntitySet="LedgerPosting" />
             <End Role="BankReconciliation" EntitySet="BankReconciliation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BonusDeduction_Employee" Association="Self.FK_BonusDeduction_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="BonusDeduction" EntitySet="BonusDeduction" />
           </AssociationSet>
           <AssociationSet Name="FK_ContraDetails_ContraMaster" Association="Self.FK_ContraDetails_ContraMaster">
             <End Role="ContraMaster" EntitySet="ContraMaster" />
@@ -4917,6 +4940,25 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="CreatedBy" Type="Int32" />
           <NavigationProperty Name="LedgerPosting" Relationship="Self.FK_BankReconciliation_LadgerPosting" FromRole="BankReconciliation" ToRole="LedgerPosting" />
+        </EntityType>
+        <EntityType Name="BonusDeduction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="BonusAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DeductionAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="extraDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="Extra1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Extra2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="DB_9B34E1_erpModel.FK_BonusDeduction_Employee" FromRole="BonusDeduction" ToRole="Employee" />
         </EntityType>
         <EntityType Name="BranchOffice">
           <Key>
@@ -6168,6 +6210,35 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <Property Name="DeletedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="SalaryEmployee" Relationship="Self.FK_dbo_SalaryEmployeeDetail_dbo_SalaryEmployee_SalaryEmployeeId" FromRole="SalaryEmployeeDetail" ToRole="SalaryEmployee" />
         </EntityType>
+        <EntityType Name="SalaryPackage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalaryPackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SalaryPackageDetails" Relationship="Self.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackage" ToRole="SalaryPackageDetails" />
+        </EntityType>
+        <EntityType Name="SalaryPackageDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalaryPackageId" Type="Int32" Nullable="false" />
+          <Property Name="PayHeadId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <NavigationProperty Name="SalaryPackage" Relationship="Self.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackageDetails" ToRole="SalaryPackage" />
+          <NavigationProperty Name="SalaryPackageDetails1" Relationship="Self.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetails" ToRole="SalaryPackageDetails1" />
+          <NavigationProperty Name="SalaryPackageDetail1" Relationship="Self.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetails1" ToRole="SalaryPackageDetails" />
+        </EntityType>
         <EntityType Name="SalaryPayment">
           <Key>
             <PropertyRef Name="Id" />
@@ -6486,31 +6557,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="KeyName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="SHIFT">
-          <Key>
-            <PropertyRef Name="SHIFTID" />
-          </Key>
-          <Property Name="SHIFTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="USHIFTID" Type="Int32" />
-          <Property Name="STARTDATE" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ENDDATE" Type="DateTime" Precision="3" />
-          <Property Name="RUNNUM" Type="Int16" />
-          <Property Name="SCH1" Type="Int32" />
-          <Property Name="SCH2" Type="Int32" />
-          <Property Name="SCH3" Type="Int32" />
-          <Property Name="SCH4" Type="Int32" />
-          <Property Name="SCH5" Type="Int32" />
-          <Property Name="SCH6" Type="Int32" />
-          <Property Name="SCH7" Type="Int32" />
-          <Property Name="SCH8" Type="Int32" />
-          <Property Name="SCH9" Type="Int32" />
-          <Property Name="SCH10" Type="Int32" />
-          <Property Name="SCH11" Type="Int32" />
-          <Property Name="SCH12" Type="Int32" />
-          <Property Name="CYCLE" Type="Int16" />
-          <Property Name="UNITS" Type="Int16" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -8282,6 +8328,30 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SalaryPackageDetails_SalaryPackage">
+          <End Role="SalaryPackage" Type="Self.SalaryPackage" Multiplicity="1" />
+          <End Role="SalaryPackageDetails" Type="Self.SalaryPackageDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalaryPackage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalaryPackageDetails">
+              <PropertyRef Name="SalaryPackageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalaryPackageDetails_SalaryPackageDetails">
+          <End Role="SalaryPackageDetails" Type="Self.SalaryPackageDetail" Multiplicity="1" />
+          <End Role="SalaryPackageDetails1" Type="Self.SalaryPackageDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SalaryPackageDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalaryPackageDetails1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
           <End Role="SalarySlip" Type="Self.SalarySlip" Multiplicity="1" />
           <End Role="SalarySlipDetail" Type="Self.SalarySlipDetail" Multiplicity="*" />
@@ -8612,6 +8682,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <EntitySet Name="AuditedExcs" EntityType="Self.AuditedExc" />
           <EntitySet Name="AUTHDEVICEs" EntityType="Self.AUTHDEVICE" />
           <EntitySet Name="BankReconciliations" EntityType="Self.BankReconciliation" />
+          <EntitySet Name="BonusDeductions" EntityType="Self.BonusDeduction" />
           <EntitySet Name="BranchOffices" EntityType="Self.BranchOffice" />
           <EntitySet Name="Brands" EntityType="Self.Brand" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -8675,6 +8746,8 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <EntitySet Name="RoleWiseScreenPermissions" EntityType="Self.RoleWiseScreenPermission" />
           <EntitySet Name="SalaryEmployees" EntityType="Self.SalaryEmployee" />
           <EntitySet Name="SalaryEmployeeDetails" EntityType="Self.SalaryEmployeeDetail" />
+          <EntitySet Name="SalaryPackages" EntityType="Self.SalaryPackage" />
+          <EntitySet Name="SalaryPackageDetails" EntityType="Self.SalaryPackageDetail" />
           <EntitySet Name="SalaryPayments" EntityType="Self.SalaryPayment" />
           <EntitySet Name="SalaryProcesses" EntityType="Self.SalaryProcess" />
           <EntitySet Name="SalarySlips" EntityType="Self.SalarySlip" />
@@ -8690,7 +8763,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <EntitySet Name="Screens" EntityType="Self.Screen" />
           <EntitySet Name="SECURITYDETAILS" EntityType="Self.SECURITYDETAIL" />
           <EntitySet Name="Settings" EntityType="Self.Setting" />
-          <EntitySet Name="SHIFTs" EntityType="Self.SHIFT" />
           <EntitySet Name="Sizes" EntityType="Self.Size" />
           <EntitySet Name="SlipGajiDetails" EntityType="Self.SlipGajiDetail" />
           <EntitySet Name="SlipGajiDetail1" EntityType="Self.SlipGajiDetail1" />
@@ -9051,6 +9123,14 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             <End Role="SalaryEmployee" EntitySet="SalaryEmployees" />
             <End Role="SalaryEmployeeDetail" EntitySet="SalaryEmployeeDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackage" Association="Self.FK_SalaryPackageDetails_SalaryPackage">
+            <End Role="SalaryPackage" EntitySet="SalaryPackages" />
+            <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackageDetails" Association="Self.FK_SalaryPackageDetails_SalaryPackageDetails">
+            <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
+            <End Role="SalaryPackageDetails1" EntitySet="SalaryPackageDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId" Association="Self.FK_dbo_SalarySlipDetail_dbo_SalarySlip_SalarySlipId">
             <End Role="SalarySlip" EntitySet="SalarySlips" />
             <End Role="SalarySlipDetail" EntitySet="SalarySlipDetails" />
@@ -9284,10 +9364,15 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <FunctionImport Name="YearClosed">
           <Parameter Name="CustomerId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="SHIFTs" EntityType="DB_9B34E1_erpModel.SHIFT" />
           <EntitySet Name="Employees" EntityType="DB_9B34E1_erpModel.Employee" />
           <AssociationSet Name="FK_AdvancePayment_Employee" Association="DB_9B34E1_erpModel.FK_AdvancePayment_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="AdvancePayment" EntitySet="AdvancePayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BonusDeduction_Employee" Association="DB_9B34E1_erpModel.FK_BonusDeduction_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="BonusDeduction" EntitySet="BonusDeductions" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_Department" Association="DB_9B34E1_erpModel.FK_Employee_Department">
             <End Role="Department" EntitySet="Departments" />
@@ -9328,16 +9413,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <AssociationSet Name="FK_SalesMaster_Employee" Association="DB_9B34E1_erpModel.FK_SalesMaster_Employee">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="SalesMaster" EntitySet="SalesMasters" />
-          </AssociationSet>
-          <EntitySet Name="SalaryPackages" EntityType="DB_9B34E1_erpModel.SalaryPackage" />
-          <EntitySet Name="SalaryPackageDetails" EntityType="DB_9B34E1_erpModel.SalaryPackageDetail" />
-          <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackage" Association="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage">
-            <End Role="SalaryPackage" EntitySet="SalaryPackages" />
-            <End Role="SalaryPackageDetail" EntitySet="SalaryPackageDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackageDetails" Association="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails">
-            <End Role="SalaryPackageDetail" EntitySet="SalaryPackageDetails" />
-            <End Role="SalaryPackageDetail1" EntitySet="SalaryPackageDetails" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="CashBook_Result">
@@ -9802,6 +9877,18 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <Property Type="Decimal" Name="StockOutPrice" Nullable="true" Precision="18" Scale="2" />
           <Property Type="String" Name="APIName" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <EntityType Name="SHIFT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Startdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="InTime" Type="Time" Precision="7" />
+          <Property Name="OutTime" Type="Time" Precision="7" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Id" />
@@ -9830,6 +9917,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <Property Name="SalaryPackage" Type="Int32" Nullable="false" />
           <Property Name="EmployeeType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShiftId" Type="Int32" />
           <Property Name="Creator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -9838,6 +9926,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LedgerId" Type="Int32" />
           <NavigationProperty Name="AdvancePayments" Relationship="DB_9B34E1_erpModel.FK_AdvancePayment_Employee" FromRole="Employee" ToRole="AdvancePayment" />
+          <NavigationProperty Name="BonusDeductions" Relationship="DB_9B34E1_erpModel.FK_BonusDeduction_Employee" FromRole="Employee" ToRole="BonusDeduction" />
           <NavigationProperty Name="Department" Relationship="DB_9B34E1_erpModel.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Designationtbl" Relationship="DB_9B34E1_erpModel.FK_Employee_Designationtbl" FromRole="Employee" ToRole="Designationtbl" />
           <NavigationProperty Name="EmployeeAttendances" Relationship="DB_9B34E1_erpModel.FK_dbo_EmployeeAttendance_dbo_Employee_EmployeeId" FromRole="Employee" ToRole="EmployeeAttendance" />
@@ -9857,6 +9946,18 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AdvancePayment">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BonusDeduction_Employee">
+          <End Type="DB_9B34E1_erpModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DB_9B34E1_erpModel.BonusDeduction" Role="BonusDeduction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BonusDeduction">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -9980,59 +10081,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             </Principal>
             <Dependent Role="SalesMaster">
               <PropertyRef Name="SalesBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="SalaryPackage">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SalaryPackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="SalaryPackageDetails" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackage" ToRole="SalaryPackageDetail" />
-        </EntityType>
-        <EntityType Name="SalaryPackageDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SalaryPackageId" Type="Int32" Nullable="false" />
-          <Property Name="PayHeadId" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Narration" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int32" />
-          <NavigationProperty Name="SalaryPackage" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackage" FromRole="SalaryPackageDetail" ToRole="SalaryPackage" />
-          <NavigationProperty Name="SalaryPackageDetails1" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetail" ToRole="SalaryPackageDetail1" />
-          <NavigationProperty Name="SalaryPackageDetail1" Relationship="DB_9B34E1_erpModel.FK_SalaryPackageDetails_SalaryPackageDetails" FromRole="SalaryPackageDetail1" ToRole="SalaryPackageDetail" />
-        </EntityType>
-        <Association Name="FK_SalaryPackageDetails_SalaryPackage">
-          <End Type="DB_9B34E1_erpModel.SalaryPackage" Role="SalaryPackage" Multiplicity="1" />
-          <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalaryPackage">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SalaryPackageDetail">
-              <PropertyRef Name="SalaryPackageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SalaryPackageDetails_SalaryPackageDetails">
-          <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail" Multiplicity="1" />
-          <End Type="DB_9B34E1_erpModel.SalaryPackageDetail" Role="SalaryPackageDetail1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="SalaryPackageDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SalaryPackageDetail1">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10246,6 +10294,25 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
                 <ScalarProperty Name="Extra2" ColumnName="Extra2" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BonusDeductions">
+            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.BonusDeduction">
+              <MappingFragment StoreEntitySet="BonusDeduction">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="BonusAmount" ColumnName="BonusAmount" />
+                <ScalarProperty Name="DeductionAmount" ColumnName="DeductionAmount" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="extraDate" ColumnName="extraDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Extra1" ColumnName="Extra1" />
+                <ScalarProperty Name="Extra2" ColumnName="Extra2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11449,6 +11516,33 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SalaryPackages">
+            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackage">
+              <MappingFragment StoreEntitySet="SalaryPackage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SalaryPackageName" ColumnName="SalaryPackageName" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalaryPackageDetails">
+            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackageDetail">
+              <MappingFragment StoreEntitySet="SalaryPackageDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SalaryPackageId" ColumnName="SalaryPackageId" />
+                <ScalarProperty Name="PayHeadId" ColumnName="PayHeadId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Narration" ColumnName="Narration" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SalaryPayments">
             <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPayment">
               <MappingFragment StoreEntitySet="SalaryPayment">
@@ -11748,32 +11842,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="KeyName" ColumnName="KeyName" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SHIFTs">
-            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SHIFT">
-              <MappingFragment StoreEntitySet="SHIFT">
-                <ScalarProperty Name="SHIFTID" ColumnName="SHIFTID" />
-                <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="USHIFTID" ColumnName="USHIFTID" />
-                <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
-                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
-                <ScalarProperty Name="RUNNUM" ColumnName="RUNNUM" />
-                <ScalarProperty Name="SCH1" ColumnName="SCH1" />
-                <ScalarProperty Name="SCH2" ColumnName="SCH2" />
-                <ScalarProperty Name="SCH3" ColumnName="SCH3" />
-                <ScalarProperty Name="SCH4" ColumnName="SCH4" />
-                <ScalarProperty Name="SCH5" ColumnName="SCH5" />
-                <ScalarProperty Name="SCH6" ColumnName="SCH6" />
-                <ScalarProperty Name="SCH7" ColumnName="SCH7" />
-                <ScalarProperty Name="SCH8" ColumnName="SCH8" />
-                <ScalarProperty Name="SCH9" ColumnName="SCH9" />
-                <ScalarProperty Name="SCH10" ColumnName="SCH10" />
-                <ScalarProperty Name="SCH11" ColumnName="SCH11" />
-                <ScalarProperty Name="SCH12" ColumnName="SCH12" />
-                <ScalarProperty Name="CYCLE" ColumnName="CYCLE" />
-                <ScalarProperty Name="UNITS" ColumnName="UNITS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -13107,6 +13175,19 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="YearClosed" FunctionName="DB_9B34E1_erpModel.Store.YearClosed" />
+          <EntitySetMapping Name="SHIFTs">
+            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SHIFT">
+              <MappingFragment StoreEntitySet="SHIFT">
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Startdate" ColumnName="Startdate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
@@ -13117,6 +13198,7 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="ShiftId" ColumnName="ShiftId" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
                 <ScalarProperty Name="SalaryPackage" ColumnName="SalaryPackage" />
@@ -13140,33 +13222,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SalaryPackages">
-            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackage">
-              <MappingFragment StoreEntitySet="SalaryPackage">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="SalaryPackageName" ColumnName="SalaryPackageName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SalaryPackageDetails">
-            <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackageDetail">
-              <MappingFragment StoreEntitySet="SalaryPackageDetails">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Narration" ColumnName="Narration" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="PayHeadId" ColumnName="PayHeadId" />
-                <ScalarProperty Name="SalaryPackageId" ColumnName="SalaryPackageId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

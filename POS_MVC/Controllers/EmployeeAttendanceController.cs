@@ -25,7 +25,6 @@ namespace RexERP_MVC.Controllers
         public IEmployeeAttendanceService _employeeAttendanceService;
         private EmployeeService _employeeService;
         public ITitleInfoService _titleInfoService;
-        public DEPARTMENTService _departmentService = new DEPARTMENTService();
         public IBranchOfficeService _branchOfficeService;
         public IEmployeeWorkingTimeService _employeeWorkingTimeService;
 
@@ -40,7 +39,7 @@ namespace RexERP_MVC.Controllers
 
         public ActionResult Index()
         {
-            return View(this);
+            return View();
         }
 
         public dynamic GetList(string _search, long nd, int rows, int? page, string sidx, string sord, string filters = "", int ParentId = 0, Nullable<DateTime> findDate = null)
@@ -123,6 +122,11 @@ namespace RexERP_MVC.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetAllShift()
+        {
+            var shifts= _employeeWorkingTimeService.GetAllShift().ToList();
+            return Json(shifts, JsonRequestBehavior.AllowGet);
+        }
         public dynamic GetInfo(int Id)
         {
             EmployeeAttendance model = new EmployeeAttendance();
@@ -206,13 +210,13 @@ namespace RexERP_MVC.Controllers
         }
 
         [HttpPost]
-        public dynamic Insert(EmployeeAttendance model, bool IsDateRange, Nullable<DateTime> AttendanceDateEnd)
+        public dynamic Insert(EmployeeAttendance model, Nullable<DateTime> AttendanceDateEnd)
         {
             try
             {
 
                 DateTime date = model.AttendanceDate;
-                if (IsDateRange && AttendanceDateEnd != null)
+                if (AttendanceDateEnd != null)
                 {
                     if (AttendanceDateEnd.GetValueOrDefault() < date)
                     {
@@ -240,7 +244,7 @@ namespace RexERP_MVC.Controllers
                     model.AttendanceDate = date;
                     model = _employeeAttendanceService.CreateObject(model, _employeeService);
                     date = date.AddDays(1);
-                } while (IsDateRange && AttendanceDateEnd != null && date <= AttendanceDateEnd.GetValueOrDefault());
+                } while (AttendanceDateEnd != null && date <= AttendanceDateEnd.GetValueOrDefault());
             }
             catch (Exception ex)
             {

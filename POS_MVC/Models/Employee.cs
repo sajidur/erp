@@ -18,6 +18,7 @@ namespace RexERP_MVC.Models
         public Employee()
         {
             this.AdvancePayments = new HashSet<AdvancePayment>();
+            this.BonusDeductions = new HashSet<BonusDeduction>();
             this.EmployeeAttendances = new HashSet<EmployeeAttendance>();
             this.EmployeeEducations = new HashSet<EmployeeEducation>();
             this.EmployeeLeaves = new HashSet<EmployeeLeave>();
@@ -52,6 +53,7 @@ namespace RexERP_MVC.Models
         public int SalaryPackage { get; set; }
         public string EmployeeType { get; set; }
         public string Gender { get; set; }
+        public Nullable<int> ShiftId { get; set; }
         public string Creator { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public string UpdateBy { get; set; }
@@ -62,6 +64,8 @@ namespace RexERP_MVC.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdvancePayment> AdvancePayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BonusDeduction> BonusDeductions { get; set; }
         public virtual Department Department { get; set; }
         public virtual Designationtbl Designationtbl { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

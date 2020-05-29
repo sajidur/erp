@@ -13,6 +13,7 @@ namespace Service.Service
     {
         private IEmployeeWorkingTimeRepository _repository;
         private IEmployeeWorkingTimeValidator _validator;
+        private DBService<SHIFT> _shiftService = new DBService<SHIFT>();
         public EmployeeWorkingTimeService(IEmployeeWorkingTimeRepository _employeeWorkingTimeRepository, IEmployeeWorkingTimeValidator _employeeWorkingTimeValidator)
         {
             _repository = _employeeWorkingTimeRepository;
@@ -66,6 +67,15 @@ namespace Service.Service
             return _repository.DeleteObject(Id);
         }
 
-        
+        public IList<SHIFT> GetAllShift()
+        {
+            return _shiftService.GetAll(a => a.Active == true).ToList();
+        }
+
+        public SHIFT AddShift(SHIFT sHIFT)
+        {
+            sHIFT.Active = true;
+            return _shiftService.Save(sHIFT);
+        }
     }
 }

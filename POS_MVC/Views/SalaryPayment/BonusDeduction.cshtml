@@ -50,6 +50,9 @@
                     <input type="date" placeholder="Date" id="txtDate" name="txtDate" />
                 </div>
                 <div class="col-md-2">
+                    <textarea placeholder="Notes" id="txtNotes" name="txtNotes" />
+                </div>
+                <div class="col-md-2">
                     <button class="btn btn-primary" id="btnProcess" onclick="BonusDeduction();" type="button">Process</button>
                 </div>
             </div>
@@ -80,10 +83,10 @@
             url: '/SalaryPayment/BonusDeduction',
             method: 'POST',
             dataType: 'json',
-            data: { "year": year, "month": month, "employeeId": employeeId, ÀdditionAmount: addition, DeductionAmount: deduction,Date:date },
+            data: { "year": year, "month": month, "employeeId": employeeId, ÀdditionAmount: addition, DeductionAmount: deduction,Date:date,Notes:$("#txtNotes").val() },
             async: false,
             success: function (data) {
-
+                ShowNotification("1", "Saved Sucess!!");
             },
             error: function () {
                 ShowNotification("3", "Something Wrong!!");

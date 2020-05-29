@@ -208,6 +208,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BonusDeductions">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.BonusDeduction">
+        <MappingFragment StoreEntitySet="BonusDeduction">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="BonusAmount" ColumnName="BonusAmount" />
+          <ScalarProperty Name="DeductionAmount" ColumnName="DeductionAmount" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="extraDate" ColumnName="extraDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Extra1" ColumnName="Extra1" />
+          <ScalarProperty Name="Extra2" ColumnName="Extra2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BranchOffices">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.BranchOffice">
         <MappingFragment StoreEntitySet="BranchOffice">
@@ -1408,6 +1427,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SalaryPackages">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackage">
+        <MappingFragment StoreEntitySet="SalaryPackage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SalaryPackageName" ColumnName="SalaryPackageName" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalaryPackageDetails">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackageDetail">
+        <MappingFragment StoreEntitySet="SalaryPackageDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SalaryPackageId" ColumnName="SalaryPackageId" />
+          <ScalarProperty Name="PayHeadId" ColumnName="PayHeadId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Narration" ColumnName="Narration" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SalaryPayments">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPayment">
         <MappingFragment StoreEntitySet="SalaryPayment">
@@ -1707,32 +1753,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="KeyName" ColumnName="KeyName" />
           <ScalarProperty Name="Value" ColumnName="Value" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SHIFTs">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SHIFT">
-        <MappingFragment StoreEntitySet="SHIFT">
-          <ScalarProperty Name="SHIFTID" ColumnName="SHIFTID" />
-          <ScalarProperty Name="NAME" ColumnName="NAME" />
-          <ScalarProperty Name="USHIFTID" ColumnName="USHIFTID" />
-          <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
-          <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
-          <ScalarProperty Name="RUNNUM" ColumnName="RUNNUM" />
-          <ScalarProperty Name="SCH1" ColumnName="SCH1" />
-          <ScalarProperty Name="SCH2" ColumnName="SCH2" />
-          <ScalarProperty Name="SCH3" ColumnName="SCH3" />
-          <ScalarProperty Name="SCH4" ColumnName="SCH4" />
-          <ScalarProperty Name="SCH5" ColumnName="SCH5" />
-          <ScalarProperty Name="SCH6" ColumnName="SCH6" />
-          <ScalarProperty Name="SCH7" ColumnName="SCH7" />
-          <ScalarProperty Name="SCH8" ColumnName="SCH8" />
-          <ScalarProperty Name="SCH9" ColumnName="SCH9" />
-          <ScalarProperty Name="SCH10" ColumnName="SCH10" />
-          <ScalarProperty Name="SCH11" ColumnName="SCH11" />
-          <ScalarProperty Name="SCH12" ColumnName="SCH12" />
-          <ScalarProperty Name="CYCLE" ColumnName="CYCLE" />
-          <ScalarProperty Name="UNITS" ColumnName="UNITS" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3066,6 +3086,19 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="YearClosed" FunctionName="DB_9B34E1_erpModel.Store.YearClosed" />
+    <EntitySetMapping Name="SHIFTs">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SHIFT">
+        <MappingFragment StoreEntitySet="SHIFT">
+          <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+          <ScalarProperty Name="InTime" ColumnName="InTime" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Startdate" ColumnName="Startdate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
@@ -3076,6 +3109,7 @@
           <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
           <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="ShiftId" ColumnName="ShiftId" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
           <ScalarProperty Name="SalaryPackage" ColumnName="SalaryPackage" />
@@ -3099,33 +3133,6 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SalaryPackages">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackage">
-        <MappingFragment StoreEntitySet="SalaryPackage">
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-          <ScalarProperty Name="SalaryPackageName" ColumnName="SalaryPackageName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SalaryPackageDetails">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SalaryPackageDetail">
-        <MappingFragment StoreEntitySet="SalaryPackageDetails">
-          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="Narration" ColumnName="Narration" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="PayHeadId" ColumnName="PayHeadId" />
-          <ScalarProperty Name="SalaryPackageId" ColumnName="SalaryPackageId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

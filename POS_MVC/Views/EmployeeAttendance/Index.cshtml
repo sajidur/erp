@@ -1,5 +1,6 @@
 ﻿@using RexERP_MVC.Util
-@model WebView.Controllers.EmployeeAttendanceController
+@using RexERP_MVC.Models
+@model List<SHIFT>
 @{
     ViewBag.Title = "Manual Attendance";
     ViewBag.Caption = ".: " + ViewBag.Title + " :.";
@@ -7,8 +8,6 @@
 
 @section Scripts {
     <script src="~/Scripts/app/Employee.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
 }
 <div class="card">
     <fieldset>
@@ -18,11 +17,7 @@
                     Attendance Date
                 </td>
                 <td>
-                    <input id="findAttendanceDate" type="date" value="" />
-                    <input name="findAttendanceDate" type="text" size="1" hidden="hidden" />
-                </td>
-                <td>
-                    <a id="btn_find" href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">Find</a>
+                    <input id="findAttendanceDate" type="date" value="@DateTime.Today.ToShortDateString()" />
                 </td>
             </tr>
         </table>
@@ -71,18 +66,10 @@
                             Attendance Date
                         </td>
                         <td>
-                            <input id="AttendanceDate" class="easyui-datebox" title="mm/dd/yyyy" type="text" size="10" value="@DateTime.Today.ToShortDateString()" />
-                            <input name="AttendanceDate" type="text" size="1" hidden="hidden" />
+                            <input id="AttendanceDate" type="date" size="10" value="@DateTime.Today.ToShortDateString()" />
                         </td>
                         <td>
-                            <select id="DateRange">
-                                <option value="false">Only</option>
-                                <option value="true">To</option>
-                            </select>
-                        </td>
-                        <td hidden id="ToDate">
-                            <input id="AttendanceDateEnd" class="easyui-datebox" title="mm/dd/yyyy" type="text" size="10" value="@DateTime.Today.ToShortDateString()" />
-                            <input name="AttendanceDateEnd" type="text" size="1" hidden="hidden" />
+                            <input id="AttendanceDateEnd" type="date" size="10" value="@DateTime.Today.ToShortDateString()" />
                         </td>
                     </tr>
                     <tr>
@@ -97,36 +84,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <label>Shift </label>
-                        </td>
-                        <td>
-                            <select id="Shift" name="Shift">
-                                @foreach (int item in Enum.GetValues(typeof(Constant.WorkingShift)))
-                                {
-                                    <option value="@item">@Enum.GetName(typeof(Constant.WorkingShift), item)</option>
-                                }
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Status </label>
-                        </td>
-                        <td>
-                            <select id="Status" name="Status">
-                                @foreach (int item in Enum.GetValues(typeof(Constant.AttendanceStatus)))
-                                {
-                                    <option value="@item">@Enum.GetName(typeof(Constant.AttendanceStatus), item)</option>
-                                }
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             CheckIn
                         </td>
                         <td width="160">
-                            <input id="CheckIn" name="CheckIn" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                            <input id="CheckIn" name="CheckIn" title="HH:mm" type="time" size="10" maxlength="12" value="00:00" />
                         </td>
                     </tr>
                     <tr hidden>
@@ -134,7 +95,7 @@
                             BreakOut
                         </td>
                         <td width="160">
-                            <input id="BreakOut" name="BreakOut" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                            <input id="BreakOut" name="BreakOut" title="HH:mm" type="time" size="10" maxlength="12" value="00:00" />
                         </td>
                     </tr>
                     <tr hidden>
@@ -142,7 +103,7 @@
                             BreakIn
                         </td>
                         <td width="160">
-                            <input id="BreakIn" name="BreakIn" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                            <input id="BreakIn" name="BreakIn" title="HH:mm" type="time" size="10" maxlength="12" value="00:00" />
                         </td>
                     </tr>
                     <tr>
@@ -150,7 +111,7 @@
                             CheckOut
                         </td>
                         <td width="160">
-                            <input id="CheckOut" name="CheckOut" title="HH:mm" type="text" size="10" maxlength="12" value="00:00" />
+                            <input id="CheckOut" name="CheckOut" title="HH:mm" type="time" size="10" maxlength="12" value="00:00" />
                         </td>
                     </tr>
                 </table>
@@ -217,109 +178,39 @@
 </script>
 <script>
     $(document).ready(function () {
-           var now = new Date();
-            var day = ("0" + now.getDate()).slice(-2);
-            var month = ("0" + (now.getMonth() + 1)).slice(-2);
-            var today = now.getFullYear() + "-" + (month) + "-" + (day);
-            $('#AttendanceDate').val(today);
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#AttendanceDate').val(today);
         LoadEmployeeList();
-        $("#list").jqGrid({
-            url: '/EmployeeAttendance/GetList',
-            postData: { 'ParentId':0,'findDate':$('#AttendanceDate').val() },
-            datatype: "json",
-            colNames: ['ID', 'Employee ID', 'Name', 'Attendance Date', 'Shift', 'Status', 'CheckIn', 'BreakOut', 'BreakIn', 'CheckOut', 'Remark', 'Created At', 'Updated At'],
-            colModel: [
-                { name: 'id', index: 'id', width: 20, align: "center" },
-                { name: 'employeeid', index: 'employeeid', width: 50, hidden: true },
-                { name: 'employeename', index: 'employeename', width: 150 },
-                { name: 'attendancedate', index: 'attendancedate', search: true, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
-                { name: 'shift', index: 'shift', width: 50, stype: 'select', editoptions: { value: getSelectOption("#Shift") } },
-                { name: 'status', index: 'status', width: 50, stype: 'select', editoptions: { value: getSelectOption("#Status") } },
-                { name: 'checkin', index: 'checkin', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
-                { name: 'breakout', index: 'breakout', hidden: true, search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
-                { name: 'breakin', index: 'breakin', hidden: true, search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
-                { name: 'checkout', index: 'checkout', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { newformat: 'H:i' } },
-                { name: 'remark', index: 'remark', width: 100 },
-                { name: 'createdat', index: 'createdat', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
-                { name: 'updatedat', index: 'updatedat', search: false, width: 100, align: "center", formatter: 'date', formatoptions: { srcformat: 'Y-m-d', newformat: 'm/d/Y' } },
-            ],
-            page: '1',
-            pager: $('#pager'),
-            rowNum: 20,
-            rowList: [20, 30, 60],
-            sortname: 'id',
-            del: true,
-            edit:true,
-            viewrecords: true,
-            scrollrows: true,
-            scrollerbar:true,
-            shrinkToFit: false,
-            sortorder: "DESC",
-            width: $("#toolbar").width(),
-            height: $(window).height() - 220,
-            ondblClickRow: function (rowid) {
-                $("#btn_edit").trigger("click");
-            },
-            gridComplete:
-                function () {
-                    var ids = $(this).jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var cl = ids[i];
-                        rowShift = document.getElementById("Shift").options[$(this).getRowData(cl).shift].text;
-                        $(this).jqGrid('setRowData', ids[i], { shift: rowShift });
-
-                        rowStatus = document.getElementById("Status").options[$(this).getRowData(cl).status].text;
-                        $(this).jqGrid('setRowData', ids[i], { status: rowStatus });
-                    }
-                    //var ids = $(this).jqGrid('getDataIDs');
-                    //for (var i = 0; i < ids.length; i++) {
-                    //    var cl = ids[i];
-                    //    rowDel = $(this).getRowData(cl).deletedimg;
-                    //    if (rowDel == 'true') {
-                    //        img = "<img src ='" + base_url + "content/assets/images/remove.png' title='Data has been deleted !' width='16px' height='16px'>";
-
-                    //    } else {
-                    //        img = "";
-                    //    }
-                    //    $(this).jqGrid('setRowData', ids[i], { deletedimg: img });
-                    //}
-                }
-
-        });//END GRID
-       // jQuery('#list').jqGrid('filterToolbar',{stringResult:true, searchOnEnter:true});
-        $('#list').jqGrid('filterToolbar', {
-    stringResult: true
-});
 
     });
     function ClearErrorMessage() {
         $('span[class=errormessage]').text('').remove();
     }
     function LoadToAdd(Id, Code, FirstName, LastName) {
-                $("#empId").val(Id);
-                 $("#txtFirstName").val(FirstName);
-                $("#txtLastName").val(LastName);
+        $("#empId").val(Id);
+        $("#txtFirstName").val(FirstName);
+        $("#txtLastName").val(LastName);
         $("#EmployeeId").val(Code);
-           $('#employeeModal').modal('toggle');
+        $('#employeeModal').modal('toggle');
 
     }
     function SaveAttendance() {
         ClearErrorMessage();
 
-        var submitURL ='/EmployeeAttendance/Insert';
+        var submitURL = '/EmployeeAttendance/Insert';
         $.ajax({
             contentType: "application/json",
             type: 'POST',
             url: submitURL,
             data: JSON.stringify({
-                EmployeeId: $("#empId").val(), AttendanceDate: $('#AttendanceDate').val(), AttendanceDateEnd: $('#AttendanceDateEnd').val(), IsDateRange: $("#DateRange").val(),
-                Shift: document.getElementById("Shift").selectedIndex, Status: document.getElementById("Status").selectedIndex,
+                EmployeeId: $("#empId").val(), AttendanceDate: $('#AttendanceDate').val(), AttendanceDateEnd: $('#AttendanceDateEnd').val(),
                 CheckIn: $("#CheckIn").val(), CheckOut: $("#CheckOut").val(),
                 BreakIn: $("#BreakIn").val(), BreakOut: $("#BreakOut").val(),
             }),
             async: false,
-            cache: false,
-            timeout: 30000,
             error: function () {
                 return false;
             },

@@ -29,7 +29,7 @@ function LoadEmployeeCombo(controlId) {
             }
             if (data != null) {
                 $.each(data, function (index, item) {
-                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Code + '-' + item.FirstName, item.Id);
+                    $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.Code + '-' + item.FirstName + '_' + item.LastName, item.Id);
                 });
             }
             $("#" + controlId).chosen({ no_results_text: "Oops, nothing found!" });
@@ -130,7 +130,7 @@ function Save() {
     object.SalaryType = $('#ddlSalaryType option:selected').val();    
     object.Gender = $('#ddlGender option:selected').val();    
     object.ShiftId = $('#ddlShift option:selected').val();
-    object.Salary = $('#txtSalary').val();
+    object.SalaryPackage = $('#ddlPackage option:selected').val();
     object.Remarks = $('#txtRemarks').val();
     object.Photo = photoContent;
     object.MimeType = MimeType;

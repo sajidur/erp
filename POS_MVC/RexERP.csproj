@@ -295,7 +295,6 @@
     <Compile Include="Controllers\ProductionProcessingController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\SalaryItemController.cs" />
-    <Compile Include="Controllers\SalaryItemNewController.cs" />
     <Compile Include="Controllers\SalaryPaymentController.cs" />
     <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
@@ -996,6 +995,7 @@
     <Compile Include="ViewModel\ReceiveMasterResponse.cs" />
     <Compile Include="ViewModel\RoleWiseScreenPermissionResponse.cs" />
     <Compile Include="ViewModel\SalaryItemNewViewModel.cs" />
+    <Compile Include="ViewModel\SalaryPackageResponse.cs" />
     <Compile Include="ViewModel\SalesDeliveryResponse.cs" />
     <Compile Include="ViewModel\SalesDetailResponse.cs" />
     <Compile Include="ViewModel\SalesMasterResponse.cs" />
@@ -1311,7 +1311,7 @@
     <Content Include="Scripts\app\RiceReceiveReport.js" />
     <Content Include="Scripts\app\RiceReport.js" />
     <Content Include="Scripts\app\Salary.js" />
-    <Content Include="Scripts\app\SalaryItemNew.js" />
+    <Content Include="Scripts\app\SalaryItem.js" />
     <Content Include="Scripts\app\Sales.js" />
     <Content Include="Scripts\app\SalesOrder.js" />
     <Content Include="Scripts\app\SalesReport.js" />
@@ -1621,7 +1621,6 @@
     <Content Include="Views\Payment\PendingPayment.cshtml" />
     <Content Include="Views\APISetup\Index.cshtml" />
     <Content Include="Views\APISetup\List.cshtml" />
-    <Content Include="Views\SalaryItemNew\Index.cshtml" />
     <Content Include="Views\Salary\Process.cshtml" />
     <Content Include="Views\SalaryPayment\BonusDeduction.cshtml" />
     <Content Include="Views\Shift\Create.cshtml" />
@@ -1629,6 +1628,7 @@
     <Content Include="Views\Shift\Details.cshtml" />
     <Content Include="Views\Shift\Edit.cshtml" />
     <Content Include="Views\Shift\Index.cshtml" />
+    <Content Include="Views\SalaryItem\Package.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

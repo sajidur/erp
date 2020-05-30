@@ -22,7 +22,7 @@ namespace Data.Repository
 
         public IList<Employee> GetAll()
         {
-            return FindAll(x => !x.IsActive).ToList();
+            return FindAll(x =>x.IsActive==true).ToList();
         }
 
         public Employee GetObjectById(int Id)

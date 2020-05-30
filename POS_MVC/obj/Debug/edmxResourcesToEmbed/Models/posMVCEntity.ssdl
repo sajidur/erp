@@ -633,6 +633,13 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
     <Property Name="UpdatedAt" Type="datetime" />
     <Property Name="DeletedAt" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.EXCNOTES' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EXCNOTES">
+          <Property Name="USERID" Type="int" />
+          <Property Name="ATTDATE" Type="datetime" />
+          <Property Name="NOTES" Type="varchar" MaxLength="200" />
+        </EntityType>-->
   <EntityType Name="FaceTemp">
     <Key>
       <PropertyRef Name="TEMPLATEID" />
@@ -1040,6 +1047,12 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.EmOpLog' does not have a primary
     <Property Name="SCHCLASSID" Type="int" />
     <Property Name="OverTime" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.Ones' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Ones">
+          <Property Name="Id" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
   <EntityType Name="OtherExpense">
     <Key>
       <PropertyRef Name="Id" />
@@ -1900,6 +1913,15 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a prima
     <Property Name="Disetujui_oleh" Type="nvarchar(max)" />
     <Property Name="Dikoreksi_oleh" Type="nvarchar(max)" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.SMSHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SMSHistory">
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMSText" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="CustomerType" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
   <EntityType Name="SPKL">
     <Key>
       <PropertyRef Name="Id" />
@@ -2029,6 +2051,12 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ServerLog' does not have a prima
     <Property Name="UpdateDate" Type="nchar" MaxLength="24" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DB_9B34E1_erp.dbo.TBKEY' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TBKEY">
+          <Property Name="PreName" Type="varchar" MaxLength="12" />
+          <Property Name="ONEKEY" Type="int" />
+        </EntityType>-->
   <EntityType Name="TBSMSALLOT">
     <Key>
       <PropertyRef Name="REFERENCE" />
@@ -3414,18 +3442,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SalaryPackageDetails_SalaryPackageDetails">
-    <End Role="SalaryPackageDetails" Type="Self.SalaryPackageDetails" Multiplicity="1" />
-    <End Role="SalaryPackageDetails1" Type="Self.SalaryPackageDetails" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="SalaryPackageDetails">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SalaryPackageDetails1">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SalesDelivery_Customer">
     <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
     <End Role="SalesDelivery" Type="Self.SalesDelivery" Multiplicity="*" />
@@ -4546,10 +4562,6 @@ warning 6002: The table/view 'DB_9B34E1_erp.dbo.ProductInfo' does not have a pri
     <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackage" Association="Self.FK_SalaryPackageDetails_SalaryPackage">
       <End Role="SalaryPackage" EntitySet="SalaryPackage" />
       <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SalaryPackageDetails_SalaryPackageDetails" Association="Self.FK_SalaryPackageDetails_SalaryPackageDetails">
-      <End Role="SalaryPackageDetails" EntitySet="SalaryPackageDetails" />
-      <End Role="SalaryPackageDetails1" EntitySet="SalaryPackageDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_SalesDelivery_Customer" Association="Self.FK_SalesDelivery_Customer">
       <End Role="Customer" EntitySet="Customer" />

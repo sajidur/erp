@@ -25,7 +25,5 @@ namespace RexERP_MVC.Models
         public Nullable<int> UpdatedBy { get; set; }
     
         public virtual SalaryPackage SalaryPackage { get; set; }
-        public virtual SalaryPackageDetail SalaryPackageDetails1 { get; set; }
-        public virtual SalaryPackageDetail SalaryPackageDetail1 { get; set; }
     }
 }

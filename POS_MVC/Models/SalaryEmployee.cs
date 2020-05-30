@@ -30,8 +30,8 @@ namespace RexERP_MVC.Models
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
     
+        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalaryEmployeeDetail> SalaryEmployeeDetails { get; set; }
-        public virtual Employee Employee { get; set; }
     }
 }

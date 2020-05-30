@@ -127,11 +127,18 @@ namespace RexERP_MVC.BLL
 
             SQLDALService dal = new SQLDALService();
             DataTable dt = dal.Select(_selectQuery).Data;
-
-            if (dt != null && dt.Rows.Count > 0)
+            try
             {
-                maxId = Convert.ToInt32(dt.Rows[0][coloumName]);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    maxId = Convert.ToInt32(dt.Rows[0][coloumName]);
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+
 
             return DateTime.Now.Year+""+DateTime.Now.Month.ToString("D2")+maxId.ToString("D4");
         }

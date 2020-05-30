@@ -1,0 +1,128 @@
+﻿<div class="row">
+    <label>Package Create</label>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="well bs-component">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="hidden" id="hdId" />
+                                    <label class="col-md-2 control-label">
+                                        Package Name :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="txtPackagename" name="txtPackagename" class="form-control" />
+                                    </div>
+                                    <label class="col-md-2 control-label">
+                                        Descriptions :
+                                    </label>
+                                    <div class="col-md-4">
+                                        <input type="text" id="txtDescriptions" name="txtDescriptions" class="form-control" />
+                                    </div>
+                                </div>
+                                <fieldset>
+                                    <div class="ibox-content" id="divInfo">
+                                        <div class="form-group">
+                                            <div class="col-md-12 table-responsive" id="div-employeeGroup">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SavePackage()"><i class="fa fa-save"></i>&nbsp; Save</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="ibox-content" id="div-packageInfo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="templateGroupModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="groupTableModal">
+        <thead>
+        <th>ID</th>
+        <th>PayHead Name</th>
+        <th>IsMainSalary</th>
+        <th>IsSubItem</th>
+        <th>Amount</th>
+        <th>Select</th>
+        </thead>
+        <tbody>
+            {{#GroupSearch}}
+            <tr>
+                <td> {{Id}}</td>
+                <td>{{Name}}</td>
+                <td> {{IsMainSalary}}</td>
+                <td> {{IsDetailSalary}}</td>
+                <td> <input type="number" value="0" /></td>
+                <td><input type="checkbox" checked /> </td>              
+            </tr>
+
+            {{/GroupSearch}}
+        </tbody>
+    </table>
+</script>
+<script id="templatePackageGroupModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="groupPackageTableModal">
+        <thead>
+        <th>ID</th>
+        <th>Package name</th>
+        <th>Descriptions</th>
+        <th>Amount</th>
+        </thead>
+        <tbody>
+            {{#GroupPackageSearch}}
+            <tr>
+                <td> {{Id}}</td>
+                <td>{{SalaryPackageName}}</td>
+                <td> {{TotalAmount}}</td>
+                <td> {{Description}}</td>
+            </tr>
+
+            {{/GroupPackageSearch}}
+        </tbody>
+    </table>
+</script>
+<script src="~/Scripts/app/SalaryItem.js"></script>
+<script>
+    $(document).ready(function () {
+        PayHead("", false, true);
+        LoadPackage("",false,true);
+    });
+    var details = [];
+    var salaryPackage = {};
+    function SavePackage() {
+        var totalAmount = 0;
+        $('#groupTableModal tr').each(function (i) {
+                Id = $(this).find('td').eq(0).text();
+                if ($(this).find('td').eq(5).find('input').is(":checked")) {
+                    Amount = $(this).find('td').eq(4).find('input').val();
+                    var detail = { PayHeadId: Id, Amount: Amount };
+                    details.push(detail);
+                }
+        });
+        
+            var salaryPackage = { SalaryPackageDetails: details, SalaryPackageName: $("#txtPackagename").val(), TotalAmount: totalAmount, Description: $("#txtDescriptions").val() };
+            var url = '/SalaryItem/SalaryPackage';
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: salaryPackage,
+            success: function (data) {
+                ShowNotification("1", data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+</script>

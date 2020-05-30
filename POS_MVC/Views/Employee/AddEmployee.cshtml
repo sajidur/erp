@@ -121,7 +121,7 @@
                                         <select id="ddlGender" name="ddlGender" class="form-control">
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
-                                            <option value="Third Gender">Third Gender</option>                                         
+                                            <option value="Third Gender">Third Gender</option>
                                         </select>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                                         TerminationDate :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="date" id="txtTerminationDate" name="txtTerminationDate"/>
+                                        <input type="date" id="txtTerminationDate" name="txtTerminationDate" />
                                     </div>
                                 </div><div class="form-group">
                                     <label class="col-md-2 control-label">
@@ -167,10 +167,11 @@
                                         <input type="text" id="txtZipCode" name="txtZipCode" class="form-control" />
                                     </div>
                                     <label class="col-md-2 control-label">
-                                        Salary :
+                                        Salary Package :
                                     </label>
                                     <div class="col-md-4">
-                                        <input type="number" id="txtSalary" name="txtSalary" class="form-control" />
+                                        <select id="ddlPackage" name="ddlPackage" class="form-control">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -232,30 +233,33 @@
         <th>Action</th>
         </thead>
         <tbody>
-        {{#EmployeeGroupSearch}}
-        <tr>
-            <td> {{Id}}</td>
-            <td>{{Code}}</td>
-            <td> {{FirstName}}</td>
-            <td> {{LastName}}</td>
-            <td> {{Email}}</td>
-            <td> {{Phone}}</td>
-            <td> <img src="{{PhotoBase64}}"/></td>
-            <td class="action-sm">
-                <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
-            </td>
-        </tr>
+            {{#EmployeeGroupSearch}}
+            <tr>
+                <td> {{Id}}</td>
+                <td>{{Code}}</td>
+                <td> {{FirstName}}</td>
+                <td> {{LastName}}</td>
+                <td> {{Email}}</td>
+                <td> {{Phone}}</td>
+                <td> <img src="{{PhotoBase64}}" /></td>
+                <td class="action-sm">
+                    <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
+                </td>
+            </tr>
 
-        {{/EmployeeGroupSearch}}
+            {{/EmployeeGroupSearch}}
         </tbody>
     </table>
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/Employee.js"></script>
+<script src="~/Scripts/app/SalaryItem.js"></script>
+
 <script>
     $(document).ready(function () {
         LoadEmployeeList();
         LoadShiftCombo("ddlShift");
+        LoadPackage("ddlPackage",true,false);
     });
     var photoContent = "";
     var MimeType = "";

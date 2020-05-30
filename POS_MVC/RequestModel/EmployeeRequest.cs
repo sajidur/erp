@@ -31,6 +31,7 @@ namespace RexERP_MVC.RequestModel
         public string ZipCode { get; set; }
         public int DesignationId { get; set; }
         public int DepartmentId { get; set; }
+        public int ShiftId { get; set; }
         public decimal Salary { get; set; }
         public string Photo { get; set; }
         public string MimeType { get; set; }

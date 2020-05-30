@@ -56,6 +56,7 @@ namespace RexERP_MVC.Models
         public virtual DbSet<DeptUsedSch> DeptUsedSchs { get; set; }
         public virtual DbSet<Designationtbl> Designationtbls { get; set; }
         public virtual DbSet<Division> Divisions { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeAttendance> EmployeeAttendances { get; set; }
         public virtual DbSet<EmployeeEducation> EmployeeEducations { get; set; }
         public virtual DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
@@ -121,6 +122,7 @@ namespace RexERP_MVC.Models
         public virtual DbSet<Screen> Screens { get; set; }
         public virtual DbSet<SECURITYDETAIL> SECURITYDETAILS { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<SHIFT> SHIFTs { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<SlipGajiDetail> SlipGajiDetails { get; set; }
         public virtual DbSet<SlipGajiDetail1> SlipGajiDetail1 { get; set; }
@@ -161,8 +163,6 @@ namespace RexERP_MVC.Models
         public virtual DbSet<ServerLog> ServerLogs { get; set; }
         public virtual DbSet<UsersMachine> UsersMachines { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
-        public virtual DbSet<SHIFT> SHIFTs { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
     
         public virtual int BalanceReconcilation(Nullable<int> ledgerId, Nullable<int> yearId)
         {

@@ -5,13 +5,12 @@ using System.Web;
 
 namespace RexERP_MVC.ViewModel
 {
-    public class SalaryItemNewViewModel
+    public class PayHeadViewModel
     {
-        public int id { get; set; }
-        public string SalaryItemName { get; set; }
-        public Nullable<decimal> Percentage { get; set; }
-        public string Description { get; set; }
-        public string CreateBy { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsMainSalary { get; set; }
+        public bool IsDetailSalary { get; set; }
+        public int SalaryItemType { get; set; }
     }
 }

@@ -496,6 +496,44 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="CV" ColumnName="CV" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="TerminationDate" ColumnName="TerminationDate" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="SalaryPackage" ColumnName="SalaryPackage" />
+          <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ShiftId" ColumnName="ShiftId" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EmployeeAttendances">
       <EntityTypeMapping TypeName="DB_9B34E1_erpModel.EmployeeAttendance">
         <MappingFragment StoreEntitySet="EmployeeAttendance">
@@ -1753,6 +1791,19 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="KeyName" ColumnName="KeyName" />
           <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SHIFTs">
+      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SHIFT">
+        <MappingFragment StoreEntitySet="SHIFT">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Startdate" ColumnName="Startdate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="InTime" ColumnName="InTime" />
+          <ScalarProperty Name="OutTime" ColumnName="OutTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3086,56 +3137,5 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="YearClosed" FunctionName="DB_9B34E1_erpModel.Store.YearClosed" />
-    <EntitySetMapping Name="SHIFTs">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.SHIFT">
-        <MappingFragment StoreEntitySet="SHIFT">
-          <ScalarProperty Name="OutTime" ColumnName="OutTime" />
-          <ScalarProperty Name="InTime" ColumnName="InTime" />
-          <ScalarProperty Name="Active" ColumnName="Active" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="Startdate" ColumnName="Startdate" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employees">
-      <EntityTypeMapping TypeName="DB_9B34E1_erpModel.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
-          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-          <ScalarProperty Name="Creator" ColumnName="Creator" />
-          <ScalarProperty Name="ShiftId" ColumnName="ShiftId" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
-          <ScalarProperty Name="SalaryPackage" ColumnName="SalaryPackage" />
-          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
-          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
-          <ScalarProperty Name="TerminationDate" ColumnName="TerminationDate" />
-          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="CV" ColumnName="CV" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="Salary" ColumnName="Salary" />
-          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-          <ScalarProperty Name="DesignationId" ColumnName="DesignationId" />
-          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
-          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

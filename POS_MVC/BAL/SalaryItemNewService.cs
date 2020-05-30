@@ -1,5 +1,6 @@
 ﻿using RexERP_MVC.Models;
 using RexERP_MVC.Util;
+using RexERP_MVC.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,20 @@ using System.Web;
 
 namespace RexERP_MVC.BAL
 {
-    public class SalaryItemNewService
+    public class SalaryItemService
     {
         DBService<PayHead> service = new DBService<PayHead>();
-        public List<PayHead> GetAll()
+        DBService<SalaryPackage> _salaryPackageservice = new DBService<SalaryPackage>();
+
+        public List<PayHeadViewModel> GetAll()
         {
-            return service.GetAll();
+            var payHeads = service.GetAll();
+            return AutoMapper.Mapper.Map<List<PayHeadViewModel>>(payHeads);
+        }
+        public List<SalaryPackageResponse> GetAllPackage()
+        {
+            var payHeads = _salaryPackageservice.GetAll();
+            return AutoMapper.Mapper.Map<List<SalaryPackageResponse>>(payHeads);
         }
         public PayHead GetById(int? id = 0)
         {
@@ -29,12 +38,16 @@ namespace RexERP_MVC.BAL
 
         }
 
-        public SalaryPackage SaveFinally(SalaryPackage cus)
+        public SalaryPackage PackageSave(SalaryPackage cus)
         {
             //cus.Active = true;
             cus.CreateDate = DateTime.Now;
             cus.CreateBy = CurrentSession.GetCurrentSession().UserName;
-          //  service.Save(cus);
+            foreach (var item in cus.SalaryPackageDetails)
+            {
+                item.SalaryPackageId = cus.Id;
+            }
+            _salaryPackageservice.Save(cus);
             return cus;
 
         }

@@ -21,6 +21,7 @@ namespace RexERP_MVC.Controllers
         private DEPARTMENTService departmentService = new DEPARTMENTService();
         private DBService<Designationtbl> designationService = new DBService<Designationtbl>();
         private DBService<SHIFT> _shiftService = new DBService<SHIFT>();
+        private DBService<SalaryPackage> _packageService = new DBService<SalaryPackage>();
 
         // GET: Employee
         public ActionResult AddEmployee()
@@ -45,7 +46,7 @@ namespace RexERP_MVC.Controllers
                 //    ImageByte = reader.ReadBytes(file.ContentLength);
                 //    employee.Photo = ImageByte;
                 //}
-                
+                var package = _packageService.GetById(request.SalaryPackage);
                 if (!string.IsNullOrEmpty(request.Photo))
                 {
                   request.Photo= UtilClass.SaveImage(request.Photo,request.MimeType);
@@ -81,7 +82,7 @@ namespace RexERP_MVC.Controllers
                     MotherName = request.MotherName,
                     Phone = request.Phone,
                     Remarks = request.Remarks,
-                    Salary = request.Salary,
+                    Salary = package.TotalAmount??0,
                     ZipCode = request.ZipCode,
                     LedgerId = saved.Id,
                     DepartmentId=request.DepartmentId,
@@ -94,7 +95,8 @@ namespace RexERP_MVC.Controllers
                     Photo=request.Photo,
                     Qualification=request.Qualification,
                     SalaryPackage=request.SalaryPackage,
-                    TerminationDate=request.TerminationDate
+                    TerminationDate=request.TerminationDate,
+                    ShiftId=request.ShiftId
                     //,SalaryType=request.SalaryType
                 };
                 var res=db.Save(employee);

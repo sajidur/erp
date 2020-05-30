@@ -47,8 +47,9 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<PaymentMaster, PaymentMasterResponse>().ReverseMap();
                 cfg.CreateMap<PaymentDetail, PaymentDetailResponse>().ReverseMap();
                 cfg.CreateMap<RoleWiseScreenPermission, RoleWiseScreenPermissionResponse>().ForMember(a=>a.Role,opt=>opt.Ignore()).ReverseMap();
-                cfg.CreateMap<PayHead, SalaryItemNewViewModel>().ReverseMap();
-
+                cfg.CreateMap<PayHead, PayHeadViewModel>().ReverseMap();
+                cfg.CreateMap<SalaryPackage, SalaryPackageResponse>().ReverseMap();
+                cfg.CreateMap<SalaryPackageDetail, SalaryPackageDetailResponse>().ReverseMap();
 
             });
         }

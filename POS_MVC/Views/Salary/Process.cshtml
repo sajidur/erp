@@ -68,11 +68,13 @@
         <th>Attendance</th>
         <th>Leave</th>
         <th>Absent</th>
-        @*<th>Other Deduction</th>
-        <th>Other Additions</th>*@
-        <th>
-            Action
-        </th>
+        <th>Late</th>
+        <th>Deduction</th>
+        <th>Additions</th>
+        <th>Salary</th>
+        @*<th>
+            Pay Slip
+        </th>*@
         <tbody>
             {{#InventoryGroupSearch}}
             <tr>
@@ -80,20 +82,17 @@
                 <td> {{Code}}</td>
                 <td>{{FirstName}} {{LastName}}</td>
                 <td>{{DepartmentName}}</td>
+                <td>{{DesignationName}}</td>
                 <td>{{AttendanceCount}}</td>
                 <td>{{LeaveCount}}</td>
                 <td> {{AbsenceCount}}</td>
-                <td width="10px">
-                </td>
-                @*<td width="10px">
-                    <input type="text" id="txtAddition" name="txtAddition" class="form-control"/>
-                </td>
-                <td class="action-sm">
-                    <input type="text" placeholder="" id="txtDiduction" name="txtDiduction" class="form-control" />
+                <td> {{LateCount}}</td>
+                <td> {{DeductionAmount}}</td>
+                <td> {{AdditionAmount}}</td>
+                <td> {{Salary}}</td>
+                @*<td>
+                    <button type="button" class="btn-primary" onclick="Print('{{Id}}')" value="Process">Print</button>
                 </td>*@
-                <td>
-                    <input type="checkbox" class="checkbox-inline" value="Process"></>
-                </td>
             </tr>
             {{/InventoryGroupSearch}}
         </tbody>
@@ -119,7 +118,7 @@
         var month = $("#ddlMonth option:selected").val();
         var employeeId = $("#ddlEmployee option:selected").val();
         $.ajax({
-            url: '/Salary/GetAttendance',
+            url: '/Salary/ProcessAttendance',
             method: 'GET',
             dataType: 'json',
             data: { "year": year, "month": month, "employeeId": employeeId },
@@ -133,6 +132,10 @@
                 ShowNotification("3", "Something Wrong!!");
             }
         });
+    }
+
+    function Print(id) {
+        console.log(id);
     }
 
 </script>

@@ -19,5 +19,6 @@ namespace RexERP_MVC.ViewModel
         public int AbsenceCount { get; set; }
         public decimal DeductionAmount { get; set; }
         public decimal AdditionAmount { get; set; }
+        public decimal Salary { get; internal set; }
     }
 }

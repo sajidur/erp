@@ -42,16 +42,9 @@ namespace RexERP_MVC.Controllers
             return View();
         }
 
-        public dynamic GetList(string _search, long nd, int rows, int? page, string sidx, string sord, string filters = "", int ParentId = 0, Nullable<DateTime> findDate = null)
+        public ActionResult GetList(DateTime attendanceDate,int? EmployeeId)
         {
-            // Construct where statement
-            string strWhere = GeneralFunction.ConstructWhere(filters);
-            string filter = null;
-            GeneralFunction.ConstructWhereInLinq(strWhere, out filter);
-            if (filter == "") filter = "true";
-
-            // Get Data
-            var q = _employeeAttendanceService.GetQueryable().Include("Employee").Include("EmployeeWorkingTimes").Include("Department").Include("BranchOffice").Where(x => (ParentId == 0) && (findDate == null || EntityFunctions.TruncateTime(x.CheckIn) == findDate.Value));
+            var q = _employeeAttendanceService.GetQueryable().Where(a=>a.AttendanceDate.Month== attendanceDate.Month && a.AttendanceDate.Year== attendanceDate.Year);
 
             var query = (from model in q
                          select new
@@ -69,57 +62,10 @@ namespace RexERP_MVC.Controllers
                              model.Remark,
                              model.CreatedAt,
                              model.UpdatedAt,
-                         }).Where(a=>a.AttendanceDate==findDate).OrderBy(a=>a.Id); //.ToList();
+                         }).OrderBy(a=>a.Id); //.ToList();
 
-            var list = query.AsEnumerable();
-
-            var pageIndex = Convert.ToInt32(page) - 1;
-            var pageSize = rows;
-            var totalRecords = query.Count();
-            var totalPages = (int)Math.Ceiling((float)totalRecords / (float)pageSize);
-            // default last page
-            if (totalPages > 0)
-            {
-                if (!page.HasValue)
-                {
-                    pageIndex = totalPages - 1;
-                    page = totalPages;
-                }
-            }
-
-            list = list.Skip(pageIndex * pageSize).Take(pageSize);
-
-            return Json(new
-            {
-                total = totalPages,
-                page = page,
-                records = totalRecords,
-                rows = (
-                    from model in list
-                    select new
-                    {
-                        id = model.Id,
-                        cell = new object[] {
-                             model.Id,
-                             model.EmployeeId,
-                           //  model.EmployeeNIK,
-                             model.EmployeeName,
-                           //  model.Title,
-                           //  model.Division,
-                          //   model.BranchOffice,
-                             model.AttendanceDate,
-                             model.Shift,
-                             model.Status,
-                             model.CheckIn,
-                             model.BreakOut,
-                             model.BreakIn,
-                             model.CheckOut,
-                             model.Remark,
-                             model.CreatedAt,
-                             model.UpdatedAt,
-                      }
-                    }).ToArray()
-            }, JsonRequestBehavior.AllowGet);
+            var list = query.ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetAllShift()

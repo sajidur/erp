@@ -50,6 +50,7 @@ namespace RexERP_MVC.Util
                 cfg.CreateMap<PayHead, PayHeadViewModel>().ReverseMap();
                 cfg.CreateMap<SalaryPackage, SalaryPackageResponse>().ReverseMap();
                 cfg.CreateMap<SalaryPackageDetail, SalaryPackageDetailResponse>().ReverseMap();
+                cfg.CreateMap<VoucherType, VoucherTypeResponse>().ReverseMap();
 
             });
         }

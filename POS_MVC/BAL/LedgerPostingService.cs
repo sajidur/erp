@@ -57,10 +57,6 @@ namespace RexERP_MVC.BAL
             return totaldebit-totalcredit;
 
         }
-        public LedgerPosting GetAll(string VoucherNo)
-        {
-            return service.GetAll(a => a.VoucherNo == VoucherNo).OrderBy(a=>a.Id).FirstOrDefault();
-        }
         public List<LedgerPosting> GetAll(string VoucherNo, bool returnAll)
         {
             List<LedgerPosting> list = this.service.GetAll((LedgerPosting a) => a.VoucherNo == VoucherNo && a.IsActive).ToList<LedgerPosting>();

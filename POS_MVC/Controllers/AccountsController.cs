@@ -22,5 +22,12 @@ namespace RexERP_MVC.Controllers
             ledgerPosting.GetIncomeStatement(fromDate,toDate);
             return Json("");
         }
+        [HttpGet]
+        public ActionResult BalanceSheet(DateTime toDate)
+        {
+            LedgerPostingService ledgerPosting = new LedgerPostingService();
+         //   ledgerPosting.GetIncomeStatement(fromDate, toDate);
+            return Json("");
+        }
     }
 }

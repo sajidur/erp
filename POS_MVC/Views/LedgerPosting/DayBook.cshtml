@@ -1,0 +1,170 @@
+﻿<title>Day Book</title>
+<div class="row">
+    <label>Day Book</label>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="well bs-component">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-1 control-label">
+                                    From Date:
+                                </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="txtFromDate" name="txtDate" />
+                                </div>
+                                <label class="col-md-1 control-label">
+                                    To Date:
+                                </label>
+
+                                <div class="col-md-3">
+                                    <input type="date" id="txtToDate" name="txtDate" />
+                                </div>
+                                <div class="col-md-1">
+                                    <button id="btnFilter" class="btn-primary">Filter</button>
+                                </div>
+                                <label class="col-md-1 control-label">
+                                    Ledger:
+                                </label>
+                                <div class="col-md-2">
+                                    <select class="form-control" id="ddlCustomer" name="ddlCustomer" onchange="GetLedger()"></select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div>
+                        <div class="ibox-content" id="divInfo">
+                            <table name="PaymentReportTableModal"     id="PaymentReportTableModal">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Voucher Type</th>
+                                        <th>Invoice No</th>
+                                        <th>Ledger</th>
+                                        <th>Notes</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                    </tr>
+                                </thead>
+                                <tfoot style="color:red;">
+                                    <tr>
+                                        <td>In Total:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#txtFromDate').val(today);
+        $('#txtToDate').val(today);
+
+          GetDayBook(today, today);
+    });
+    $("#btnFilter").click(function () {
+        GetDayBook( $('#txtFromDate').val(), $('#txtToDate').val());
+    });
+    function GetDayBook(fromDate, toDate) {
+        $('#PaymentReportTableModal').DataTable({
+            "pageLength": 100,
+            "ajax": {
+                "dataType": 'json',
+                "contentType": "application/json; charset=utf-8",
+                "type": "GET",
+                "url": "/LedgerPosting/DayBookReport",
+                "data": { 'fromDate': fromDate, 'toDate': toDate },
+                "dataSrc": function (json) {
+                    return json;
+                }
+            },
+            "columns": [
+                { "data": "Value" },
+                { "data": "VoucherType.VoucherTypeName" },
+                { "data": "InvoiceNo" },
+                { "data": "AccountLedger.LedgerName" },
+                { "data": "Extra1" },
+                { "data": "Debit" },
+                { "data": "Credit" }
+            ],
+            "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            // Total over all pages
+            debit = api
+                .column(5)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            credit = api
+                .column(6)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+                balance = debit - credit;
+
+            // Total over this page
+            pageTotalDebit = api
+                .column(5, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            pageTotalCredit = api
+                .column(6, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+                pageTotalBalance = pageTotalDebit - pageTotalCredit;
+            // Update footer
+                $(api.column(5).footer()).html(
+                    'Page Total Debit:' + pageTotalDebit + ' Credit:' + debit + ',</br> Total Debit:' + debit + ' Credit:' + credit + '</br>'
+                    + 'Page Total Balance:' + pageTotalBalance + ' Total Balance:' + balance
+            );
+        },
+            "columnDefs": [{
+                "targets": 0,
+                "data": "Value",
+                "render": function (data, type, row) {
+                    return moment(data).format("DD-MMM-YYYY");
+                }
+            }
+            ],
+            "bDestroy": true,
+            "colReorder": true,
+            "dom": 'Bfrtip',
+            "buttons": [
+                'excel', 'pdf'
+            ]
+        });
+    }
+</script>

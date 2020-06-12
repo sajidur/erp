@@ -19,7 +19,8 @@ namespace RexERP_MVC.ViewModel
         public string Extra1 { get; set; }
         public string Extra2 { get; set; }
         public string PostDate { get { return PostingDate.ToString("dd-MM-yyyy"); } set { PostingDate.ToString("dd-MM-yyyy"); } }
-      //  public string LedgerName { get { return AccountLedger.LedgerName; } set { AccountLedger.LedgerName.ToString(); } }
         public virtual AccountLedgerResponse AccountLedger { get; set; }
+        public virtual VoucherTypeResponse VoucherType { get; set; }
+
     }
 }

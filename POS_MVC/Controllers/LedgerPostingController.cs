@@ -7,6 +7,7 @@ using RexERP_MVC.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace RexERP_MVC.Controllers
 {
@@ -49,6 +50,11 @@ namespace RexERP_MVC.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult DayBook()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Withdraw()
@@ -59,10 +65,36 @@ namespace RexERP_MVC.Controllers
         [HttpGet]
         public ActionResult CashBook(string fromDate, string toDate)
         {
-            DateTime from = Convert.ToDateTime(fromDate).Date;
-            DateTime to = Convert.ToDateTime(toDate).Date;
+            DateTime from = DateTime.Now.Date;
+            DateTime to = DateTime.Now.Date;
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                from = Convert.ToDateTime(fromDate).Date;
+            }
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                to = Convert.ToDateTime(toDate).Date;
+            }
             List<CashBookResponse> result = this.postingService.GetCashBook(from, to);
             return base.Json(result, 0);
+        }
+
+        [HttpGet]
+        public ActionResult DayBookReport(string fromDate, string toDate)
+        {
+            DateTime from = DateTime.Now.Date;
+            DateTime to = DateTime.Now.Date;
+            if (!string.IsNullOrEmpty(fromDate))
+            {
+                from = Convert.ToDateTime(fromDate).Date;
+            }
+            if (!string.IsNullOrEmpty(toDate))
+            {
+                to = Convert.ToDateTime(toDate).Date;
+            }
+            var result = this.postingService.GetAll(from, to).OrderBy(a=>a.Id).ThenBy(a=>a.VoucherNo);
+            var res = Mapper.Map<List<LedgerPostingResponse>>(result);
+            return base.Json(res, 0);
         }
 
         public ActionResult GetIncomes(string fromDate, string toDate)

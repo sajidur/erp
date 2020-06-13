@@ -52,52 +52,26 @@
         </div>
         <div class="row">
             <div class="ibox-content" id="div-info" style="overflow:scroll;">
-
+                <table id="PaymentReportTableModal">
+                    <thead>
+                    <th>Id</th>
+                    <th>Employee Id</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Attendance</th>
+                    <th>Leave</th>
+                    <th>Absent</th>
+                    <th>Late</th>
+                    <th>Deduction</th>
+                    <th>Additions</th>
+                    <th>Salary</th>
+                </table>
             </div>
         </div>
     </div>
 </div>
-<script id="templateInventoryGroupModal" type="text/html">
-    <table class="table table-bordered table-striped table-hover" id="inventoryGroupTableModal">
-        <thead>
-        <th>Id</th>
-        <th>Employee Id</th>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Designation</th>
-        <th>Attendance</th>
-        <th>Leave</th>
-        <th>Absent</th>
-        <th>Late</th>
-        <th>Deduction</th>
-        <th>Additions</th>
-        <th>Salary</th>
-        @*<th>
-            Pay Slip
-        </th>*@
-        <tbody>
-            {{#InventoryGroupSearch}}
-            <tr>
-                <td>{{Id}}</td>
-                <td> {{Code}}</td>
-                <td>{{FirstName}} {{LastName}}</td>
-                <td>{{DepartmentName}}</td>
-                <td>{{DesignationName}}</td>
-                <td>{{AttendanceCount}}</td>
-                <td>{{LeaveCount}}</td>
-                <td> {{AbsenceCount}}</td>
-                <td> {{LateCount}}</td>
-                <td> {{DeductionAmount}}</td>
-                <td> {{AdditionAmount}}</td>
-                <td> {{Salary}}</td>
-                @*<td>
-                    <button type="button" class="btn-primary" onclick="Print('{{Id}}')" value="Process">Print</button>
-                </td>*@
-            </tr>
-            {{/InventoryGroupSearch}}
-        </tbody>
-    </table>
-</script>
+
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/Salary.js"></script>
 <script src="~/Scripts/app/Employee.js"></script>
@@ -110,30 +84,78 @@
         var today = now.getFullYear() + "-" + (month) + "-" + (day);
         $('#txtDate').val(today);
         LoadEmployeeCombo("ddlEmployee");
-        //  LoadEmployeeAttendence();
+        $('#PaymentReportTableModal').DataTable();
     });
     function SalaryProcess() {
         var year = $("#ddlYear option:selected").val();
-
         var month = $("#ddlMonth option:selected").val();
         var employeeId = $("#ddlEmployee option:selected").val();
-        $.ajax({
-            url: '/Salary/ProcessAttendance',
-            method: 'GET',
-            dataType: 'json',
-            data: { "year": year, "month": month, "employeeId": employeeId },
-            async: false,
-            success: function (data) {
-               var templateWithData = Mustache.to_html($("#templateInventoryGroupModal").html(), { InventoryGroupSearch: data });
-                 $("#div-info").empty().html(templateWithData);
-                 MakePagination('inventoryGroupTableModal');
+        $('#PaymentReportTableModal').DataTable({
+            "pageLength": 100,
+            "ajax": {
+                "dataType": 'json',
+                "contentType": "application/json; charset=utf-8",
+                "type": "GET",
+                "url": "/Salary/ProcessAttendance",
+                "data":{ "year": year, "month": month, "employeeId": employeeId },
+                "dataSrc": function (json) {
+                    return json;
+                }
             },
-            error: function () {
-                ShowNotification("3", "Something Wrong!!");
-            }
+            "columns": [
+                { "data": "Id" },
+                { "data": "Code" },
+                { "data": "FirstName" },
+                { "data": "DepartmentName" },
+                { "data": "DesignationName" },
+                { "data": "AttendanceCount" },
+                { "data": "LeaveCount" },
+                { "data": "AbsenceCount" },
+                { "data": "LateCount" },
+                { "data": "DeductionAmount" },
+                { "data": "AdditionAmount" },
+                { "data": "Salary" }
+            ],
+        //    "footerCallback": function (row, data, start, end, display) {
+        //    var api = this.api(), data;
+
+        //    // Remove the formatting to get integer data for summation
+        //    var intVal = function (i) {
+        //        return typeof i === 'string' ?
+        //            i.replace(/[\$,]/g, '') * 1 :
+        //            typeof i === 'number' ?
+        //                i : 0;
+        //    };
+
+        //    // Total over all pages
+        //    debit = api
+        //        .column(3)
+        //        .data()
+        //        .reduce(function (a, b) {
+        //            return intVal(a) + intVal(b);
+        //        }, 0);
+        //    credit = api
+        //        .column(4)
+        //        .data()
+        //        .reduce(function (a, b) {
+        //            return intVal(a) + intVal(b);
+        //        }, 0);
+        //    // Update footer
+        //        $(api.column(3).footer()).html(
+        //            'Total Debit:' + debit + ' Credit:' + credit
+        //    );
+        //},
+            "columnDefs": [
+
+            ],
+            "bDestroy": true,
+            "colReorder": true,
+            "dom": 'Bfrtip',
+            "buttons": [
+                'excel', 'pdf'
+            ]
         });
     }
-
     function Print(id) {
         console.log(id);
     }

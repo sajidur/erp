@@ -1,0 +1,139 @@
+﻿<title>Trail Balance</title>
+<div class="row">
+    <label>Trail Balance</label>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="well bs-component">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-1 control-label">
+                                    From Date:
+                                </label>
+                                <div class="col-md-3">
+                                    <input type="date" id="txtFromDate" name="txtDate" />
+                                </div>
+                                <label class="col-md-1 control-label">
+                                    To Date:
+                                </label>
+
+                                <div class="col-md-3">
+                                    <input type="date" id="txtToDate" name="txtDate" />
+                                </div>
+                                <div class="col-md-1">
+                                    <button id="btnFilter" class="btn-primary">Filter</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div>
+                        <div class="ibox-content" id="divInfo">
+                            <table name="PaymentReportTableModal" id="PaymentReportTableModal">
+                                <thead>
+                                    <tr>
+                                        <th>SI</th>
+                                        <th>Particular</th>
+                                        <th>Opening</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tfoot style="color:red;">
+                                    <tr>
+                                        <td>In Total:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $(document).ready(function () {
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#txtFromDate').val(today);
+        $('#txtToDate').val(today);
+
+          TrailBalance(today, today);
+    });
+    $("#btnFilter").click(function () {
+        TrailBalance( $('#txtFromDate').val(), $('#txtToDate').val());
+    });
+    function TrailBalance(fromDate, toDate) {
+        $('#PaymentReportTableModal').DataTable({
+            "pageLength": 100,
+            "ajax": {
+                "dataType": 'json',
+                "contentType": "application/json; charset=utf-8",
+                "type": "GET",
+                "url": "/Accounts/TrailBalanceSheet",
+                "data": { 'fromDate': fromDate, 'toDate': toDate },
+                "dataSrc": function (json) {
+                    return json;
+                }
+            },
+            "columns": [
+                { "data": "SI" },
+                { "data": "Particular" },
+                { "data": "OpeningType" },
+                { "data": "Debit" },
+                { "data": "Credit" },
+                { "data": "BalanceType" }
+            ],
+            "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            // Total over all pages
+            debit = api
+                .column(3)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            credit = api
+                .column(4)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            // Update footer
+                $(api.column(3).footer()).html(
+                    'Total Debit:' + debit + ' Credit:' + credit
+            );
+        },
+            "columnDefs": [
+
+            ],
+            "bDestroy": true,
+            "colReorder": true,
+            "dom": 'Bfrtip',
+            "buttons": [
+                'excel', 'pdf'
+            ]
+        });
+    }
+</script>

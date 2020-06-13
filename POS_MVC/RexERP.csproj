@@ -987,6 +987,7 @@
     <Compile Include="ViewModel\LedgerPostingResponse.cs" />
     <Compile Include="ViewModel\LocalMarketPayment.cs" />
     <Compile Include="ViewModel\MenuPermission.cs" />
+    <Compile Include="ViewModel\PartyAgeingReportResponse.cs" />
     <Compile Include="ViewModel\PartyPaymentResponse.cs" />
     <Compile Include="ViewModel\PaymentDetailResponse.cs" />
     <Compile Include="ViewModel\PaymentMasterResponse.cs" />
@@ -1010,6 +1011,7 @@
     <Compile Include="ViewModel\TempSalesDetailsResponse.cs" />
     <Compile Include="ViewModel\TempSalesMasterResponse.cs" />
     <Compile Include="ViewModel\TopSellResponse.cs" />
+    <Compile Include="ViewModel\TrailBalanceResponse.cs" />
     <Compile Include="ViewModel\UserInfoResponse.cs" />
     <Compile Include="ViewModel\UserRoleResponse.cs" />
     <Compile Include="ViewModel\VoucherTypeResponse.cs" />
@@ -1631,6 +1633,8 @@
     <Content Include="Views\Shift\Index.cshtml" />
     <Content Include="Views\SalaryItem\Package.cshtml" />
     <Content Include="Views\LedgerPosting\DayBook.cshtml" />
+    <Content Include="Views\Accounts\TrailBalance.cshtml" />
+    <Content Include="Views\Report\AgeingReportReceivable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

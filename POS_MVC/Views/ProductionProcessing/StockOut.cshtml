@@ -167,7 +167,13 @@
         $("#grandtotal").text(grandTotal.toFixed(2));
     }
     
-$(document).ready(function () {
+    $(document).ready(function () {
+       var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#txtDate').val(today);
+
     LoadInvoiceNo("txtPoNo");  
     LoadInventoryList();
     var templateWithData = Mustache.to_html($("#templateStockOutModal").html(), { StockTableAdd: detailsStockOut });

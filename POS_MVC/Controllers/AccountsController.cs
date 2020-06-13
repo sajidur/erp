@@ -15,6 +15,10 @@ namespace RexERP_MVC.Controllers
         {
             return View();
         }
+        public ActionResult TrailBalance()
+        {
+            return View();
+        }
         [HttpGet]
         public ActionResult GetIncomeStatement(DateTime fromDate,DateTime toDate)
         {
@@ -28,6 +32,13 @@ namespace RexERP_MVC.Controllers
             LedgerPostingService ledgerPosting = new LedgerPostingService();
          //   ledgerPosting.GetIncomeStatement(fromDate, toDate);
             return Json("");
+        }
+        [HttpGet]
+        public ActionResult TrailBalanceSheet(DateTime fromDate, DateTime toDate)
+        {
+            LedgerPostingService ledgerPosting = new LedgerPostingService();
+            var res=ledgerPosting.TrailBalance(fromDate, toDate);
+            return Json(res,JsonRequestBehavior.AllowGet);
         }
     }
 }

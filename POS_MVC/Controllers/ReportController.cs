@@ -31,8 +31,20 @@ namespace RexERP_MVC.Controllers
         {
             return View();
         }
+        public ActionResult AgeingReportReceivable()
+        {
+            return View();
+        }
 
-
+        public ActionResult AgeingReportReceivableStatement(DateTime fromDate, DateTime toDate)
+        {
+            var data = partyBalanceService.AgeingReportSummary(fromDate,toDate);
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetAllInvoice(string fromDate, string toDate)
         {
             DateTime cFromDate = Convert.ToDateTime(fromDate).Date;

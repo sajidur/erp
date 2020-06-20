@@ -33,6 +33,11 @@ namespace RexERP_MVC.BAL
         {
             return serviceSalesMaster.GetAll(a => a.IsActive == true && a.SalesOrderId==orderId && a.YearId== yearId).ToList();
         }
+        public List<SalesDetail> GetAll(int productId,string apiName,string brandName,string sizeName)
+        {
+            return salesDetailsService.GetAll(a => a.IsActive == true && a.ProductId == productId &&a.SizeName==sizeName&&a.APIName==apiName&&a.BrandName==brandName).ToList();
+        }
+
         public List<SalesDetail> GetAll(int? orderId,int deliveryStatus,int WareHouseId)
         {
             if (orderId!=0)
@@ -101,16 +106,20 @@ namespace RexERP_MVC.BAL
 
         public List<TopSellResponse> GetTopSell()
         {
-            //var result = (from i in entity.SalesDetails
-            //              group i by i.ProductId into g
-            //              select new TopSellResponse()
-            //              {
-            //                  ItemId = g.Key,
-            //                  ProductName = g.Where(a => a.ProductId == g.Key).FirstOrDefault().Product.ProductName,
-            //              }).ToList().OrderByDescending(a => a.SalesQty);
-            DataTable dt = null;
-            dt = oResult.Data as DataTable;
-            return topSellResponse.ExecuteProcedure("ProductWiseBestSales");
+            var result = (from i in salesDetailsService.GetAll()
+                          group i by new { i.ProductId,i.APIName,i.SizeName,i.BrandName } into g
+                          select new TopSellResponse()
+                          {
+                              Id = g.Key.ProductId,                              
+                              ProductName = g.Where(a => a.ProductId == g.Key.ProductId).FirstOrDefault().Product.ProductName,
+                              APIName= g.Key.APIName,
+                              BrandName = g.Key.BrandName,
+                              SizeName = g.Key.SizeName,
+                              Qty = g.Where(a => a.ProductId == g.Key.ProductId && a.APIName == g.Key.APIName && a.SizeName == g.Key.SizeName && a.BrandName == g.Key.BrandName).Sum(a=>a.Qty),
+                              TotalAmount = g.Where(a => a.ProductId == g.Key.ProductId && a.APIName == g.Key.APIName && a.SizeName == g.Key.SizeName && a.BrandName == g.Key.BrandName).Sum(a => a.Amount)
+
+                          }).ToList().OrderByDescending(a => a.Qty).ToList();
+            return result;
 
         }
         public SalesMaster GetById(int? id = 0)
@@ -259,7 +268,7 @@ namespace RexERP_MVC.BAL
                     VoucherTypeId = new int?(19),
                     VoucherNo = result.SalesInvoice,
                     PostingDate = salesMaster.SalesDate,
-                    LedgerId = new int?(10),
+                    LedgerId =(int) DefaultLedger.SalesAccount,
                     InvoiceNo = result.SalesInvoice,
                     Credit = new decimal?(result.GrandTotal)
                 };
@@ -268,7 +277,7 @@ namespace RexERP_MVC.BAL
                 this.ledgerService.Save(ledgerObj);
                 LedgerPosting detailsLedger = new LedgerPosting()
                 {
-                    VoucherTypeId = new int?(19),
+                    VoucherTypeId =(int) VoucherTypeEnum.SalesInvoice,
                     VoucherNo = result.SalesInvoice,
                     PostingDate = salesMaster.SalesDate,
                     LedgerId = customer.LedgerId,
@@ -276,8 +285,23 @@ namespace RexERP_MVC.BAL
                 };
                 num = new decimal();
                 detailsLedger.Credit = new decimal?(num);
-                detailsLedger.Debit = new decimal?(salesMaster.GrandTotal);
+                detailsLedger.Debit = new decimal?(salesMaster.GrandTotal-salesMaster.Discount);
                 this.ledgerService.Save(detailsLedger);
+                if (salesMaster.Discount>0)
+                {
+                    LedgerPosting detailsLedgerDiscount = new LedgerPosting()
+                    {
+                        VoucherTypeId = (int)VoucherTypeEnum.SalesInvoice,
+                        VoucherNo = result.SalesInvoice,
+                        PostingDate = salesMaster.SalesDate,
+                        LedgerId = customer.LedgerId,
+                        InvoiceNo = result.SalesInvoice
+                    };
+                    num = new decimal();
+                    detailsLedger.Credit = new decimal?(num);
+                    detailsLedger.Debit = new decimal?(salesMaster.Discount);
+                    this.ledgerService.Save(detailsLedgerDiscount);
+                }
                 PartyBalance balance = new PartyBalance()
                 {
                     AgainstInvoiceNo = result.SalesInvoice,
@@ -290,7 +314,7 @@ namespace RexERP_MVC.BAL
                 int? ledgerId = customer.LedgerId;
                 partyBalance.LedgerId = (ledgerId.HasValue ? ledgerId.GetValueOrDefault() : 0);
                 balance.InvoiceNo = result.SalesInvoice;
-                balance.Debit = new decimal?(salesMaster.GrandTotal);
+                balance.Debit = new decimal?(salesMaster.GrandTotal - salesMaster.Discount);
                 num = new decimal();
                 balance.Credit = new decimal?(num);
                 balance.VoucherTypeId =(int) VoucherTypeEnum.SalesInvoice;

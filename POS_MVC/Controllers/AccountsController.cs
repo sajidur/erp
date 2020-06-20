@@ -40,5 +40,18 @@ namespace RexERP_MVC.Controllers
             var res=ledgerPosting.TrailBalance(fromDate, toDate);
             return Json(res,JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public ActionResult ChatOfAccounts()
+        {
+            AccountLedgerService accountLedgerService = new AccountLedgerService();
+            var accounts=accountLedgerService.ChartOfAccounts();
+            return Json(accounts, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult AccountLedgerReport()
+        {
+            return View();
+        }
     }
 }

@@ -1659,8 +1659,10 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Signature</Value>
-                  <Style />
+                  <Value>It's computer generated invoice &amp; signature of issuing authority not mandatory</Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -1668,9 +1670,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>0.50084in</Top>
-          <Left>1.49875in</Left>
+          <Left>0.30381in</Left>
           <Height>0.25in</Height>
-          <Width>1in</Width>
+          <Width>5.31994in</Width>
           <Style>
             <Border>
               <Style>None</Style>

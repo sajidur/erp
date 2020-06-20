@@ -1,7 +1,8 @@
-﻿
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+<script src="~/Scripts/app/Accounts.js"></script>
+
 <style>
-
-
     /* Style the tab */
     .tab {
         overflow: hidden;
@@ -41,305 +42,77 @@
 </style>
 <div class="card">
     <div class="row">
-        <h2>Accounting Report</h2>
         <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'daily')">Daily Expense</button>
-            <button class="tablinks" onclick="openCity(event, 'cashbook')">Cash Book</button>
-            <button class="tablinks" onclick="openCity(event, 'montly')">Monthly Summary</button>
-            <button class="tablinks" onclick="openCity(event, 'byLedger')">By Account Ledger</button>
+            <button class="tablinks" onclick="openCity(event, 'chartofaccounts')">Chart Of Accounts</button>
         </div>
-        <div>
-            <div class="row">
-                <div class="col-md-10">
-                    <label class="col-md-2">
-                        From Date:
-                    </label>
-                    <div class="col-md-3">
-                        <input type="date" id="txtFromDate" />
-                    </div>
-                    <label class="col-md-2">
-                        To Date:
-                    </label>
-                    <div class="col-md-3">
-                        <input type="date" id="txtToDate" />
-                    </div>
-                    <div class="col-md-2">
-                        <button id="btnFilter" class="btn-primary" onclick="Filter();">Filter</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="daily" class="tabcontent">
-            <div class="ibox-content" id="divInfo">
-                <div class="form-group">
-                    <div class="col-md-12 table-responsive" id="div-expenseGroup">
-                    </div>
-                </div>
-                <script id="templateProductGroupModal" type="text/html">
-                    <table class="table table-bordered table-striped table-hover" id="expenseGroupTableModal">
-                        <thead>
-                        <th>Invoice No</th>
-                        <th>Ledger</th>
-                        <th>Ladger Date</th>
-                        <th>Narration</th>
-                        <th>Amount</th>
-                        </thead>
-                        <tbody>
-                            {{#expensesGroupSearch}}
-                            <tr>
-                                <td> {{InvoiceNo}}</td>
-                                <td> {{InvoiceNo}}</td>
-                                <td> {{PostingDate}}</td>
-                                <td>{{Narration}}</td>
-                                <td>{{TotalAmount}}</td>
-                            </tr>
-                            {{/expensesGroupSearch}}
-                        </tbody>
-                    </table>
-                </script>
-            </div>
-        </div>
-        <div id="dailyIncome" class="tabcontent">
-            <div class="ibox-content" id="divInfo">
-                <div class="form-group">
-                    <div class="col-md-12 table-responsive" id="div-expenseGroup">
-                    </div>
-                </div>
-                <script id="templateIcomeModal" type="text/html">
-                    <table class="table table-bordered table-striped table-hover" id="incomeGroupTableModal">
-                        <thead>
-                        <th>Invoice No</th>
-                        <th>Ledger</th>
-                        <th>Ladger Date</th>
-                        <th>Narration</th>
-                        <th>Amount</th>
-                        </thead>
-                        <tbody>
-                            {{#expensesGroupSearch}}
-                            <tr>
-                                <td> {{InvoiceNo}}</td>
-                                <td> {{InvoiceNo}}</td>
-                                <td> {{PostingDate}}</td>
-                                <td>{{Narration}}</td>
-                                <td>{{TotalAmount}}</td>
-                            </tr>
-                            {{/expensesGroupSearch}}
-                        </tbody>
-                    </table>
-                </script>
-            </div>
-        </div>
-        <div id="cashbook" class="tabcontent">
-            <div class="ibox-content" id="cashbook">
-
-                <div class="form-group">
-                    <div class="col-md-12 table-responsive" id="div-cashbookGroup">
-                    </div>
-                </div>
-                <script id="templatecashbbokModal" type="text/html">
-                    <table class="table table-bordered table-striped table-hover" id="cashbookTableModal">
-                        <thead>
-                        <th>Invoice No</th>
-                        <th>Ladger Date</th>
-                        <th>Voucher Type</th>
-                        <th>Ledger Name</th>
-                        <th>Narration</th>
-                        <th>Credit</th>
-                        <th>Debit</th>
-                        </thead>
-                        <tbody>
-                            {{#expensesGroupSearch}}
-                            <tr>
-                                <td> {{VoucherNo}}</td>
-                                <td> {{PostDate}}</td>
-                                <td>{{VoucherTypeName}}</td>
-                                <td>{{LedgerName}}</td>
-                                <td>{{Extra1}}</td>
-                                <td>{{Credit}}</td>
-                                <td>{{Debit}}</td>
-                            </tr>
-                            {{/expensesGroupSearch}}
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    Total:
-                                </td>
-                                <td>
-                                    {{totalCredit}}
-                                </td>
-                                <td>
-                                    {{totalDebit}}
-                                </td>
-                            </tr>
-
-                        </tfoot>
-                    </table>
-                </script>
-            </div>
-        </div>
-        <div id="montly" class="tabcontent">
-            <h3>Comming soon...</h3>
-
-        </div>
-
-        <div id="byLedger" class="tabcontent">
-            <h3>Comming soon...</h3>
-
+        <div id="chartofaccounts" class="tabcontent">
+            <table id="chartOfAccountsGrid"><tr><td /></tr></table>
         </div>
     </div>
-    </div>
-    <script>
-        function openCity(evt, name) {
-            if (name == "cashbook")
-            {
-                GetCashBook();
-            }
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(name).style.display = "block";
-            evt.currentTarget.className += " active";
+</div>
+<script>
+    function openCity(evt, name) {
+        if (name == "chartofaccounts") {
+            ChartOfAccounts();
         }
-
-        $(document).ready(function () {
-            var now = new Date();
-
-            var day = ("0" + now.getDate()).slice(-2);
-            var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
-            var today = now.getFullYear() + "-" + (month) + "-" + (day);
-
-            $('#txtFromDate').val(today);
-            $('#txtToDate').val(today);
-
-
-            document.getElementById("daily").style.display = "block";
-            GetAllExpense();
-        });
-
-        function Filter() {
-            var daily = document.getElementById("daily").style.display
-            var income = document.getElementById("dailyIncome").style.display
-            var cashbook = document.getElementById("cashbook").style.display
-
-            if(daily=="block")
-            {
-                GetAllExpense();
-            }
-            if(income=="block")
-            {
-                GetAllIncome();
-            }
-            if(cashbook=="block")
-            {
-                GetCashBook();
-            }
-
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
         }
-            function GetAllIncome() {
-            var url = '/LedgerPosting/GetIncomes';
-            var fromDate = $("#txtFromDate").val();
-            var toDate = $("#txtToDate").val();
-            $.ajax({
-                url: url,
-                data: { fromDate: fromDate, toDate: toDate },
-                method: 'GET',
-                success: function (res) {
-                    var data = res;
-                    var TotalAmount = 0;
-                    var totalCredit = 0;
-                    var totalDebit = 0;
-                    $.each(data, function (index, value) {
-                        var credit = parseInt(value.Credit, 10);
-                        var debit = parseInt(value.Debit, 10);
-                        totalCredit += credit;
-                        totalDebit += debit;
-                        data[index].totalCredit = totalCredit;
-                        data[index].totalDebit = totalDebit;
-
-                    });
-                    var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { expensesGroupSearch: res });
-                    $("#div-expenseGroup").empty().html(templateWithData);
-                    MakePagination('expenseGroupTableModal');
-                },
-                error: function () {
-                }
-            });
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-        function GetAllExpense() {
-            var url = '/LedgerPosting/GetExpenses';
-            var fromDate = $("#txtFromDate").val();
-            var toDate = $("#txtToDate").val();
-            $.ajax({
-                url: url,
-                data: { fromDate: fromDate, toDate: toDate },
-                method: 'GET',
-                success: function (res) {
-                    var data = res;
-                    var TotalAmount = 0;
-                    var totalCredit = 0;
-                    var totalDebit = 0;
-                    $.each(data, function (index, value) {
-                        var credit = parseInt(value.Credit, 10);
-                        var debit = parseInt(value.Debit, 10);
-                        totalCredit += credit;
-                        totalDebit += debit;
-                        data[index].totalCredit = totalCredit;
-                        data[index].totalDebit = totalDebit;
+        document.getElementById(name).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
 
-                    });
-                    var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { expensesGroupSearch: res });
-                    $("#div-expenseGroup").empty().html(templateWithData);
-                    MakePagination('expenseGroupTableModal');
-                },
-                error: function () {
-                }
-            });
-        }
+    $(document).ready(function () {
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        //$('#txtFromDate').val(today);
+        //$('#txtToDate').val(today);
 
 
-        function GetCashBook() {
-            var url = '/LedgerPosting/CashBook';
-            var fromDate = $("#txtFromDate").val();
-            var toDate = $("#txtToDate").val();
-            $.ajax({
-                url: url,
-                data: { fromDate: fromDate, toDate: toDate },
-                method: 'GET',
-                success: function (res) {
-                    var data = res;
-                    var totalCredit = 0;
-                    var totalDebit = 0;
-                    $.each(data, function (index, value) {
-                        var credit = parseInt(value.Credit, 10);
-                        var debit = parseInt(value.Debit, 10);
-                        totalCredit += credit;
-                        totalDebit += debit;
-                        data[index].totalCredit = totalCredit;
-                        data[index].totalDebit = totalDebit;
+        document.getElementById("chartofaccounts").style.display = "block";
+        ChartOfAccounts();
+    });
+    function ChartOfAccounts() {
+        $("#chartOfAccountsGrid").jqGrid({
+            url: '/Accounts/ChatOfAccounts',
+            datatype: "json",
+            jsonReader: { repeatitems: false },
+            colNames: ['Id', 'Head', 'ParentName', 'Nature'],
+            colModel: [
+                { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
+                { name: 'Particular', index: 'Particular', width: 100 },
+                { name: 'ParentName', index: 'ParentName', width: 200 },
+                { name: 'DrOrCr', index: 'DrOrCr', width: 200 }
 
-                    });
-                    var templateWithData = Mustache.to_html($("#templatecashbbokModal").html(), { expensesGroupSearch: data, totalCredit: totalCredit, totalDebit: totalDebit });
-                    $("#div-cashbookGroup").empty().html(templateWithData);
-                    MakePagination('cashbookTableModal');
-                },
-                error: function () {
-                }
-            });
-        }
+            ],
+            page: '1',
+            pager: $('#pager'),
+            rowNum: 20,
+            rowList: [20, 30, 60],
+            sortname: 'id',
+            height: 'auto',
+            gridview: true,
+            rowNum: 10000,
+            sortname: 'id',
+            treeGrid: true,
+            treeGridModel: 'adjacency',
+            treedatatype: "local",
+            ExpandColClick: true,
+            ExpandColumn: 'Particular',
+            caption: "Chart Of Accounts",
+            footerrow: true
 
+        });//END GRID
 
-    </script>
+    }
+</script>
 

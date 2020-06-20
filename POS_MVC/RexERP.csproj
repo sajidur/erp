@@ -932,8 +932,10 @@
     <Compile Include="Validator\WorkingTimeValidator.cs" />
     <Compile Include="ViewModel\AccountGroupResponse.cs" />
     <Compile Include="ViewModel\AccountLedgerResponse.cs" />
+    <Compile Include="ViewModel\AccountsBaseResponse.cs" />
     <Compile Include="ViewModel\APIResponse.cs" />
     <Compile Include="ViewModel\CashBookResponse.cs" />
+    <Compile Include="ViewModel\ChartOfAccount.cs" />
     <Compile Include="ViewModel\CustomerLedgerResultResponse.cs" />
     <Compile Include="ViewModel\DEPARTMENTResponse.cs" />
     <Compile Include="ViewModel\DesignationtblResponse.cs" />
@@ -1635,6 +1637,9 @@
     <Content Include="Views\LedgerPosting\DayBook.cshtml" />
     <Content Include="Views\Accounts\TrailBalance.cshtml" />
     <Content Include="Views\Report\AgeingReportReceivable.cshtml" />
+    <Content Include="Views\Accounts\AccountLedgerReport.cshtml" />
+    <Content Include="Views\LedgerPosting\CashBook.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

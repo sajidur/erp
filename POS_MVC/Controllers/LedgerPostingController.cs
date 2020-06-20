@@ -55,6 +55,10 @@ namespace RexERP_MVC.Controllers
         {
             return View();
         }
+        public ActionResult CashBook()
+        {
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Withdraw()
@@ -63,7 +67,7 @@ namespace RexERP_MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult CashBook(string fromDate, string toDate)
+        public ActionResult CashBookReport(string fromDate, string toDate)
         {
             DateTime from = DateTime.Now.Date;
             DateTime to = DateTime.Now.Date;
@@ -244,74 +248,36 @@ namespace RexERP_MVC.Controllers
             }
             return actionResult;
         }
-
+        [HttpGet]
+        public ActionResult LedgerReport(DateTime fromDate, DateTime toDate)
+        {
+            var trailBalance = this.postingService.GetAllLedger(fromDate, toDate);
+            return base.Json(trailBalance, 0);
+        }
+        [HttpGet]
         public ActionResult GetAllLedgerPosting(DateTime fromDate, DateTime toDate, int id, int VoucherTypeId)
         {
             List<LedgerPosting> ledgerPosting = this.postingService.GetAll(fromDate, toDate, id, VoucherTypeId) ?? new List<LedgerPosting>();
             return base.Json(Mapper.Map<List<LedgerPosting>, List<LedgerPostingResponse>>(ledgerPosting), 0);
         }
+        [HttpGet]
+        public ActionResult LedgerPostingByLedger(DateTime fromDate, DateTime toDate, int ledgerId)
+        {
+            List<LedgerPostingResponse> ledgerPosting = this.postingService.GetAllByLedger(fromDate,toDate,ledgerId);
+            return base.Json(ledgerPosting,JsonRequestBehavior.AllowGet);
+        }
 
+        [HttpGet]
+        public ActionResult GroupWiseLedgerReport(DateTime fromDate, DateTime toDate, int groupId)
+        {
+            List<LedgerPostingResponse> ledgerPosting = this.postingService.GetAllByGroup(fromDate, toDate,groupId);
+            return base.Json(ledgerPosting,JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetContraInvoiceNo()
         {
             string invoice = new GlobalClass().GetMaxId("Id", "LedgerPosting");
             string xx = "JO" + invoice.PadLeft(6, '0');
             return Json(xx, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult AddContraSave(string voucherNo, int CostHeadId, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPostion, string CostChkNo, decimal TotalAmount, string Radio)
-        {
-            if (Radio == "Debit")
-            {
-                LedgerPosting lp = new LedgerPosting();
-                lp.VoucherNo = voucherNo;
-                lp.VoucherTypeId = 6;
-                lp.LedgerId = CostHeadId;
-                lp.Debit = TotalAmount;
-                lp.Credit = 0;
-                lp.InvoiceNo = voucherNo;
-                lp.ChequeNo = CostChkNo;
-                lp.ChequeDate = voucherDate;
-                postingService.Save(lp);
-                foreach (var item in ledgerPostion)
-                {
-                    LedgerPosting ledgersave = new LedgerPosting();
-                    ledgersave.VoucherTypeId = 6;
-                    ledgersave.VoucherNo = voucherNo;
-                    ledgersave.LedgerId = item.LedgerId;
-                    ledgersave.Debit = 0;
-                    ledgersave.Credit = item.Credit;
-                    ledgersave.InvoiceNo = voucherNo;
-                    ledgersave.ChequeNo = "";
-                    ledgersave.ChequeDate = item.ChequeDate;
-                    postingService.Save(ledgersave);
-                }
-            }
-            else {
-                LedgerPosting lp = new LedgerPosting();
-                lp.VoucherNo = voucherNo;
-                lp.VoucherTypeId = 6;
-                lp.LedgerId = CostHeadId;
-                lp.Debit = TotalAmount;
-                lp.Credit = 0;
-                lp.InvoiceNo = voucherNo;
-                lp.ChequeNo = "";
-                lp.ChequeDate = voucherDate;
-                postingService.Save(lp);
-                foreach (var item in ledgerPostion)
-                {
-                    LedgerPosting ledgersave = new LedgerPosting();
-                    ledgersave.VoucherTypeId = 6;
-                    ledgersave.VoucherNo = voucherNo;
-                    ledgersave.LedgerId = item.LedgerId;
-                    ledgersave.Debit = 0;
-                    ledgersave.Credit = item.Credit;
-                    ledgersave.InvoiceNo = voucherNo;
-                    ledgersave.ChequeNo = item.ChequeNo;
-                    ledgersave.ChequeDate = item.ChequeDate;
-                    postingService.Save(ledgersave);
-                }
-            }
-            
-            return Json("", JsonRequestBehavior.AllowGet);
         }
 
     }

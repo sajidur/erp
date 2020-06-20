@@ -1,0 +1,194 @@
+﻿<script src="~/Scripts/app/Accounts.js"></script>
+
+<div class="" style="background-color:white;">
+    <div class="row">
+        <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        From Date:
+                        <input type="date" id="txtFromDate" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    To Date:
+                    <input type="date" id="txtToDate" />
+                </div>
+                <div class="col-md-2">
+                    Group/Head:
+                    <select class="form-control" id="ddlUnder" name="ddlUnder" onchange="LoadLedger()"></select>
+                </div>
+                <div class="col-md-2">
+                    Ledger:
+                    <select class="form-control" id="ddlLedger" name="ddlLedger" onchange="LoadLedger()"></select>
+                </div>
+                <div class="col-md-1">
+                    <br/>
+                    <button id="btnFilter" class="btn btn-lg" onclick="Filter()">Filter</button>
+                </div>
+        </div>                 
+        <div class="row">
+            <div class="ibox-content">
+                <div class="form-group">
+                    <div class="col-md-12 table-responsive" id="div-byPostingByGroup">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="templatebyPostingByGroup" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="byPostingByGroupTableModal">
+        <thead>
+        <th>Ledger Name</th>
+        <th>Opening</th>
+        <th>Credit</th>
+        <th>Debit</th>
+        @*<th>Closing</th>*@
+        </thead>
+        <tbody>
+            {{#byPostingByGroupSearch}}
+            <tr>
+                <td><button class="btn-primary" onclick="GetLedgerByLedger('{{AccountLedger.Id}}')">{{AccountLedger.LedgerName}}</button></td>
+                <td> {{Opening}}</td>
+                <td>{{Debit}}</td>
+                <td>{{Credit}}</td>
+                @*<td>{{Balance}}</td>*@
+            </tr>
+            {{/byPostingByGroupSearch}}
+        </tbody>
+    </table>
+</script>
+<script id="templatebyPostingByLedger" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="byPostingByLedgerTableModal">
+        <thead>
+        <th>Ledger Name</th>
+        <th>Posting Date</th>
+        <th>Voucher/Invoice</th>
+        <th>Narrations</th>
+        <th>Credit</th>
+        <th>Debit</th>
+        @*<th>Closing</th>*@
+        </thead>
+        <tbody>
+            {{#byPostingByLedgerSearch}}
+            <tr>
+                <td>{{AccountLedger.LedgerName}}</td>
+                <td> {{PostDate}}</td>
+                <td> {{VoucherNo}}</td>
+                <td> {{Extra1}}</td>
+                <td>{{Debit}}</td>
+                <td>{{Credit}}</td>
+                @*<td>{{Balance}}</td>*@
+            </tr>
+            {{/byPostingByLedgerSearch}}
+        </tbody>
+    </table>
+</script>
+<script>
+    function LoadLedger() {
+        var id = $("#ddlUnder").val();
+        var url = '/AccountLedger/GetAllLedger?groupId=' + id + '';
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function (res) {
+                var data = res;
+                //alert('Success');
+                var controlId = "ddlLedger";
+                $("#" + controlId).empty();
+                $("#" + controlId).get(0).options.length = 0;
+                if (data != null) {
+                    $.each(data, function (index, item) {
+                        $("#" + controlId).get(0).options[$("#" + controlId).get(0).options.length] = new Option(item.LedgerName, item.Id);
+                    });
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+    $(document).ready(function () {
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+        $('#txtFromDate').val(today);
+        $('#txtToDate').val(today);
+        LoadAccountGroup();
+        GetLedgerByGroup();
+    });
+
+    function Filter() {
+        GetLedgerByGroup();
+    }
+    function GetLedgerByLedger(LedgerId) {
+        var url = '/LedgerPosting/LedgerPostingByLedger';
+        var fromDate = $("#txtFromDate").val();
+        var toDate = $("#txtToDate").val();
+        $.ajax({
+            url: url,
+            data: { fromDate: fromDate, toDate: toDate, ledgerId: LedgerId },
+            method: 'GET',
+            success: function (res) {
+                var templateWithData = Mustache.to_html($("#templatebyPostingByLedger").html(), { byPostingByLedgerSearch: res});
+                $("#div-byPostingByGroup").empty().html(templateWithData);
+                MakePagination('byPostingByLedgerTableModal');
+            },
+            error: function () {
+            }
+        });
+    }
+    function GetLedgerByGroup() {
+        var url = '/LedgerPosting/GroupWiseLedgerReport';
+        var fromDate = $("#txtFromDate").val();
+        var toDate = $("#txtToDate").val();
+        var groupId = $('#ddlUnder').val();
+        if (groupId==null) {
+            groupId = 1;
+        }
+        $.ajax({
+            url: url,
+            data: { fromDate: fromDate, toDate: toDate, groupId: groupId },
+            method: 'GET',
+            success: function (res) {
+                var templateWithData = Mustache.to_html($("#templatebyPostingByGroup").html(), { byPostingByGroupSearch: res});
+                $("#div-byPostingByGroup").empty().html(templateWithData);
+                MakePagination('byPostingByGroupTableModal');
+            },
+            error: function () {
+            }
+        });
+    }
+    function GetCashBook() {
+        var url = '/LedgerPosting/CashBook';
+        var fromDate = $("#txtFromDate").val();
+        var toDate = $("#txtToDate").val();
+        $.ajax({
+            url: url,
+            data: { fromDate: fromDate, toDate: toDate },
+            method: 'GET',
+            success: function (res) {
+                $("#txtToDate").val(res);
+                var data = res;
+                var totalCredit = 0;
+                var totalDebit = 0;
+                $.each(data, function (index, value) {
+                    var credit = parseInt(value.Credit, 10);
+                    var debit = parseInt(value.Debit, 10);
+                    totalCredit += credit;
+                    totalDebit += debit;
+                    data[index].totalCredit = totalCredit;
+                    data[index].totalDebit = totalDebit;
+
+                });
+                var templateWithData = Mustache.to_html($("#templatecashbbokModal").html(), { expensesGroupSearch: data, totalCredit: totalCredit, totalDebit: totalDebit });
+                $("#div-cashbookGroup").empty().html(templateWithData);
+                MakePagination('cashbookTableModal');
+            },
+            error: function () {
+            }
+        });
+    }
+</script>
+
+

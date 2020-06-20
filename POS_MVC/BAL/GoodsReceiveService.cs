@@ -170,7 +170,7 @@ namespace RexERP_MVC.BAL
                 party.PostingDate = cus.InvoiceDate;
                 party.VoucherTypeId = (int)VoucherTypeEnum.PurchaseInvoice;
                 party.VoucherNo = result.InvoiceNo;
-                party.extra1 = "Purchase Invoice: "+cus.InvoiceNo+" Coutha:"+cus.InvoiceNoPaper;
+                party.extra1 = "Purchase Invoice: "+cus.InvoiceNo+" Paper Invoice No:"+cus.InvoiceNoPaper;
                 party.extra2 = result.Id.ToString();
                 partyBalanceService.Save(party);
             }

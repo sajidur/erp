@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using RexERP_MVC.BLL;
 
 namespace RexERP_MVC.Controllers
 {
@@ -20,8 +21,13 @@ namespace RexERP_MVC.Controllers
         }
         public ActionResult JournalSave(string voucherNo, DateTime voucherDate, string notes, List<JournalRequest> ledgerPosting)
         {
+            string invoiceNumber = DateTime.Now.Year +
+                new GlobalClass().GetMaxId("Id", "LedgerPosting");
+            voucherNo= "JV" + invoiceNumber;
             JournalMaster jmaster = new JournalMaster();
-            jmaster.InvoiceNo = voucherNo;
+
+            jmaster.InvoiceNo =voucherNo;
+            jmaster.VoucherNo = voucherNo;
             jmaster.LadgerDate = voucherDate;
             jmaster.Narration = notes;
             jmaster.TotalAmount = ledgerPosting.Where(a=>a.DrOrCr=="Dr").Sum(a=>a.Amount);
@@ -38,6 +44,8 @@ namespace RexERP_MVC.Controllers
                 LedgerPosting ledgersave = new LedgerPosting();
                 ledgersave.VoucherTypeId = (int)BAL.VoucherTypeEnum.JournalVoucher;
                 ledgersave.VoucherNo = voucherNo;
+                ledgersave.InvoiceNo = voucherNo;
+                ledgersave.Extra1 = notes;
                 ledgersave.LedgerId = item.LedgerId;
                 int a = ledgersave.LedgerId ?? 0;
                 if (item.DrOrCr == "Dr")
@@ -71,6 +79,9 @@ namespace RexERP_MVC.Controllers
         }
         public ActionResult AddIncomeJournalSave(string voucherNo, int CostHeadId, DateTime voucherDate, string notes, List<JournalDetail> journalDetails, decimal TotalAmount, string ChkNo)
         {
+            string invoiceNumber = DateTime.Now.Year +
+    new GlobalClass().GetMaxId("Id", "LedgerPosting");
+            voucherNo = "RV" + invoiceNumber;
             JournalMaster jmaster = new JournalMaster();
 
             jmaster.InvoiceNo = voucherNo;
@@ -122,6 +133,13 @@ namespace RexERP_MVC.Controllers
         }
         public ActionResult AddExpenseJournalSave(string voucherNo, int CostHeadId, DateTime voucherDate, string notes, List<JournalDetail> journalDetails, decimal TotalAmount, string ChkNo)
         {
+            string invoiceNumber = DateTime.Now.Year +
+new GlobalClass().GetMaxId("Id", "LedgerPosting");
+            voucherNo = "PV" + invoiceNumber;
+            if (voucherDate==null)
+            {
+                voucherDate = DateTime.Now;
+            }
             JournalMaster jmaster = new JournalMaster();
             JournalDetail jd = new JournalDetail();
 
@@ -177,6 +195,70 @@ namespace RexERP_MVC.Controllers
             posting.Debit = 0;
             posting.Extra1 = "Voucher:" + voucherNo + " " + notes;
             postingService.Save(posting);
+
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AddContraSave(string voucherNo, int CostHeadId, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPostion, string CostChkNo, decimal TotalAmount, string Radio)
+        {
+            if (Radio == "Debit")
+            {
+                LedgerPosting lp = new LedgerPosting();
+                lp.VoucherNo = voucherNo;
+                lp.VoucherTypeId = 6;
+                lp.LedgerId = CostHeadId;
+                lp.Debit = TotalAmount;
+                lp.Credit = 0;
+                lp.InvoiceNo = voucherNo;
+                lp.ChequeNo = CostChkNo;
+                lp.ChequeDate = voucherDate;
+                lp.PostingDate = voucherDate;
+                postingService.Save(lp);
+                foreach (var item in ledgerPostion)
+                {
+                    LedgerPosting ledgersave = new LedgerPosting();
+                    ledgersave.VoucherTypeId = 6;
+                    ledgersave.VoucherNo = voucherNo;
+                    ledgersave.LedgerId = item.LedgerId;
+                    ledgersave.Debit = 0;
+                    ledgersave.Credit = item.Credit;
+                    ledgersave.InvoiceNo = voucherNo;
+                    ledgersave.ChequeNo = "";
+                    ledgersave.ChequeDate = item.ChequeDate;
+                    ledgersave.PostingDate = voucherDate;
+                    ledgersave.Extra1 = notes;
+                    postingService.Save(ledgersave);
+                }
+            }
+            else
+            {
+                LedgerPosting lp = new LedgerPosting();
+                lp.VoucherNo = voucherNo;
+                lp.VoucherTypeId = 6;
+                lp.LedgerId = CostHeadId;
+                lp.Debit = TotalAmount;
+                lp.Credit = 0;
+                lp.InvoiceNo = voucherNo;
+                lp.ChequeNo = "";
+                lp.ChequeDate = voucherDate;
+                lp.PostingDate = voucherDate;
+                lp.Extra1 = notes;
+                postingService.Save(lp);
+                foreach (var item in ledgerPostion)
+                {
+                    LedgerPosting ledgersave = new LedgerPosting();
+                    ledgersave.VoucherTypeId = 6;
+                    ledgersave.VoucherNo = voucherNo;
+                    ledgersave.PostingDate = voucherDate;
+                    ledgersave.LedgerId = item.LedgerId;
+                    ledgersave.Debit = 0;
+                    ledgersave.Credit = item.Credit;
+                    ledgersave.InvoiceNo = voucherNo;
+                    ledgersave.ChequeNo = item.ChequeNo;
+                    ledgersave.ChequeDate = item.ChequeDate;
+                    ledgersave.Extra1 = notes;
+                    postingService.Save(ledgersave);
+                }
+            }
 
             return Json("", JsonRequestBehavior.AllowGet);
         }

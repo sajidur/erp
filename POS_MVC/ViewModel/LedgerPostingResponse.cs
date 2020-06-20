@@ -9,8 +9,10 @@ namespace RexERP_MVC.ViewModel
         public int VoucherTypeId { get; set; }
         public string VoucherNo { get; set; }
         public int LedgerId { get; set; }
+        public decimal Opening { get; set; }
         public decimal Debit { get; set; }
         public decimal Credit { get; set; }
+        public decimal Balance { get; set; }
         public int YearId { get; set; }
         public string InvoiceNo { get; set; }
         public string ChequeNo { get; set; }

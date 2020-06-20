@@ -1,0 +1,118 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+<script src="~/Scripts/app/Accounts.js"></script>
+
+<style>
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+<div class="card">
+    <div class="row">
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'chartofaccounts')">Chart Of Accounts</button>
+        </div>
+        <div id="chartofaccounts" class="tabcontent">
+            <table id="chartOfAccountsGrid"><tr><td /></tr></table>
+        </div>
+    </div>
+</div>
+<script>
+    function openCity(evt, name) {
+        if (name == "chartofaccounts") {
+            ChartOfAccounts();
+        }
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(name).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    $(document).ready(function () {
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        //$('#txtFromDate').val(today);
+        //$('#txtToDate').val(today);
+
+
+        document.getElementById("chartofaccounts").style.display = "block";
+        ChartOfAccounts();
+    });
+    function ChartOfAccounts() {
+        $("#chartOfAccountsGrid").jqGrid({
+            url: '/Accounts/ChatOfAccounts',
+            datatype: "json",
+            jsonReader: { repeatitems: false },
+            colNames: ['Id', 'Head', 'ParentName', 'Nature'],
+            colModel: [
+                { name: 'Id', index: 'Id', width: 1, hidden: true, key: true },
+                { name: 'Particular', index: 'Particular', width: 100 },
+                { name: 'ParentName', index: 'ParentName', width: 200 },
+                { name: 'DrOrCr', index: 'DrOrCr', width: 200 }
+
+            ],
+            page: '1',
+            pager: $('#pager'),
+            rowNum: 20,
+            rowList: [20, 30, 60],
+            sortname: 'id',
+            height: 'auto',
+            gridview: true,
+            rowNum: 10000,
+            sortname: 'id',
+            treeGrid: true,
+            treeGridModel: 'adjacency',
+            treedatatype: "local",
+            ExpandColClick: true,
+            ExpandColumn: 'Particular',
+            caption: "Chart Of Accounts",
+            footerrow: true
+
+        });//END GRID
+
+    }
+</script>
+

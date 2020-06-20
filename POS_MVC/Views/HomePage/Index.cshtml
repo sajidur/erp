@@ -95,16 +95,44 @@
     <table class="table table-bordered table-hover table-responsive" id="productGroupTableModal">
         <thead>
         <th>Product Name</th>
-        <th>Customer</th>
+        <th>SizePack</th>
+        <th>API</th>
+        <th>Brand</th>
         <th>Sales Qty</th>
         <th>Amount</th>
         </thead>
         <tbody>
             {{#ProductGroupSearch}}
             <tr>
-                <td> {{ProductName}}</td>
-                <td> {{CustomerName}}</td>
-                <td> {{SalesQty}}</td>
+                <td><a onclick="LoadSellsDetails('{{Id}}')">{{ProductName}}</a> </td>
+                <td> {{SizeName}}</td>
+                <td> {{APIName}}</td>
+                <td> {{BrandName}}</td>
+                <td> {{Qty}}</td>
+                <td> {{TotalAmount}}</td>
+            </tr>
+            {{/ProductGroupSearch}}
+        </tbody>
+    </table>
+</script>
+<script id="templateGroupModal" type="text/html">
+    <table class="table table-bordered table-hover table-responsive" id="productGroupTableModal">
+        <thead>
+        <th>Product Name</th>
+        <th>SizePack</th>
+        <th>API</th>
+        <th>Brand</th>
+        <th>Sales Qty</th>
+        <th>Amount</th>
+        </thead>
+        <tbody>
+            {{#ProductGroupSearch}}
+            <tr>
+                <td><a onclick="LoadSellsDetails('{{ProductId}},{{SizeName}},{{BrandName}},{{APIName}}')">{{ProductName}}</a> </td>
+                <td> {{SizeName}}</td>
+                <td> {{APIName}}</td>
+                <td> {{BrandName}}</td>
+                <td> {{Qty}}</td>
                 <td> {{TotalAmount}}</td>
             </tr>
             {{/ProductGroupSearch}}
@@ -116,4 +144,22 @@
     $(document).ready(function () {
         LoadStatistices();
     });
+    function LoadSellsDetails(productId, sizeName, brandName, apiName) {
+        console.log(productId);
+    var url = '/Sales/SalesListByProduct';
+    $.ajax({
+        url: url,
+        method: 'GET',
+        data: {productId:productId,sizeName:sizeName,brandName:brandName,apiName:apiName},
+        success: function (res) {
+            console.log(res);
+            var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { ProductGroupSearch: res});
+            $("#div-product-add").empty().html(templateWithData);
+            MakePagination('productGroupTableModal');
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+    }
 </script>

@@ -93,10 +93,30 @@ namespace RexERP_MVC.Controllers
             {
                 category = this.salesService.GetAll(0, (int)DeliveryStatus.Pending, wareHouse.Id);
             }
+            else
+            {
+                category = this.salesService.GetAll(0, (int)DeliveryStatus.Pending, wareHouse.Id);
+            }
             if (category != null)
             {
               var  result = Mapper.Map<List<SalesDetailResponse>>(category);
               return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(category, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult SalesListByProduct(int productId,string sizeName,string brandName,string apiName )
+        {
+            List<SalesDetail> category = new List<SalesDetail>();
+            category = this.salesService.GetAll(productId,apiName,brandName,sizeName);
+
+            if (category != null)
+            {
+                var result = Mapper.Map<List<SalesDetailResponse>>(category);
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             else
             {

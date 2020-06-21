@@ -24,7 +24,7 @@ function LoadAccountGroupList() {
             }
             var templateWithData = Mustache.to_html($("#templateProductGroupModal").html(), { ProductGroupSearch: res });
             $("#div-productGroup").empty().html(templateWithData);
-          //  MakePagination('productGroupTableModal');
+            MakePagination('productGroupTableModal');
         },
         error: function () {
         }

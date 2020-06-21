@@ -155,7 +155,8 @@
             var month = ("0" + (now.getMonth() + 1)).slice(-2);
             var today = now.getFullYear() + "-" + (month) + "-" + (day);
             $('#txtDates').val(today);
-         LoadAccountLedger("ddlLedger");
+        LoadAccountLedger("ddlLedger");
+        LoadInvoiceNo("txtPoNo");
      });
     function JournalPosting() {
     var isOK = CheckValidate();
@@ -235,6 +236,21 @@ function AddJournalToGrid() {
     var templateWithData = Mustache.to_html($("#templateProductModalAdd").html(), { ProductSearchAdd: ledgerPostingList });
     $("#div-product-add").empty().html(templateWithData);
 }
+    function LoadInvoiceNo(controlId) {
+        var url = "/LedgerPosting/GetContraInvoiceNo";
+        $.ajax({
+            url: url,
+            method: "POST",
+            success: function (res) {
+                var data = res;
+                console.log(data);
+                $("#" + controlId).val(data);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 </script>
 <script src="~/Scripts/app/CommonLoader.js"></script>
 <script src="~/Scripts/app/Accounts.js"></script>

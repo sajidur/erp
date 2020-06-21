@@ -25,96 +25,10 @@ namespace RexERP_MVC.Controllers
         {
             return View();
         }
-        //[HttpGet]
-        //public ActionResult LocalPayment()
-        //{
-        //    return View();
-        //}
         public ActionResult Transfer()
         {
             return View();
         }
-        //[HttpGet]
-        //public ActionResult LoadAllLocalPayment(DateTime fromDate,DateTime toDate)
-        //{
-        //    List<LocalMarketPayment> paymentList = new List<LocalMarketPayment>();
-        //    var partyPayment=  partyBalanceService.GetAll(fromDate, toDate).OrderBy(a=>a.InvoiceNo);
-        //    foreach (var item in partyPayment)
-        //    {
-        //        LocalMarketPayment payment = new LocalMarketPayment();              
-        //        var invoice= paymentList.Where(a => a.InvoiceNo == item.AgainstInvoiceNo).FirstOrDefault();
-        //        if (invoice==null)
-        //        {
-        //            payment.LedgerId = item.LedgerId;
-        //            if (string.IsNullOrEmpty(item.InvoiceNo))
-        //            {
-        //                payment.InvoiceNo = "";
-        //            }
-        //            else
-        //            {
-        //                payment.InvoiceNo = item.InvoiceNo;
-        //            }
-        //            payment.PaidAmount = item.Debit??0;
-        //            payment.Party = item.AccountLedger.LedgerName;
-        //            payment.PostingDate = item.PostingDate.Value.ToString("dd-MM-yyyy")??DateTime.Now.ToString("dd-MM-yyyy");
-        //            payment.TotalAmount = item.Credit??0;
-        //            payment.RestAmount = payment.TotalAmount - payment.PaidAmount;
-        //            paymentList.Add(payment);
-        //        }
-        //        else
-        //        {
-        //            invoice.PaidAmount =invoice.PaidAmount+ item.Credit??0;
-        //            invoice.RestAmount = payment.TotalAmount - invoice.PaidAmount;
-        //        }
-
-        //    }
-        //    return Json(paymentList, JsonRequestBehavior.AllowGet);
-        //}
-        //public ActionResult LocalPayment(List<LocalMarketPayment> payments,LedgerPosting ledger)
-        //{
-        //    foreach (var item in payments)
-        //    {
-
-        //    }
-        //    return Json("", JsonRequestBehavior.AllowGet);
-        //}
-        //public ActionResult LoadPayment()
-        //{
-        //    var getAllLedger= ledgerService.GetAll();
-        //    var result = AutoMapper.Mapper.Map<List<AccountLedger>, List<AccountLedgerResponse>>(getAllLedger);
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-
-        //}
-
-        //public ActionResult LoadPayment(int ledgerId)
-        //{
-        //    List<LocalMarketPayment> paymentList = new List<LocalMarketPayment>();
-        //    var partyPayment = partyBalanceService.GetAllInvoice(ledgerId,2).OrderBy(a => a.VoucherNo);
-        //    foreach (var item in partyPayment)
-        //    {
-        //        LocalMarketPayment payment = new LocalMarketPayment();
-        //        var invoice = paymentList.Where(a => a.InvoiceNo == item.InvoiceNo).FirstOrDefault();
-        //        if (invoice == null)
-        //        {
-        //            payment.InvoiceNo = item.InvoiceNo;
-        //            payment.PaidAmount = item.Credit;
-        //            payment.Party = item.LedgerName;
-        //            payment.PostingDate = item.PostingDate.ToString();//ToString("dd-MM-yyyy");
-        //            payment.TotalAmount = item.Debit;
-        //            payment.RestAmount = payment.TotalAmount - payment.PaidAmount;
-        //            paymentList.Add(payment);
-        //        }
-        //        else
-        //        {
-        //            invoice.PaidAmount = invoice.PaidAmount + item.Credit;
-        //            invoice.RestAmount = payment.TotalAmount - invoice.PaidAmount;
-        //        }
-
-        //    }
-        //    return Json(paymentList, JsonRequestBehavior.AllowGet);
-
-        //}
-        //payment
 
         public ActionResult PendingPayment()
         {
@@ -126,14 +40,14 @@ namespace RexERP_MVC.Controllers
             var res = AutoMapper.Mapper.Map<List<PaymentMasterResponse>>(pendingPayment);
             return Json(res,JsonRequestBehavior.AllowGet);
         }
-        public ActionResult PaymentSave(string voucherNo, int supplierId, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPosting, bool isSendSMS)
+        public ActionResult PaymentSave(string voucherNo, int ledgerId, DateTime voucherDate, string notes, List<LedgerPosting> ledgerPosting, bool isSendSMS)
         {
             decimal? credit;
-            var supplierInfo = supplierService.GetById(supplierId);
-            if (supplierInfo == null)
-            {
-                return Json("error", JsonRequestBehavior.AllowGet);
-            }
+            //var supplierInfo = supplierService.GetById(supplierId);
+            //if (supplierInfo == null)
+            //{
+            //    return Json("error", JsonRequestBehavior.AllowGet);
+            //}
             var paymentReciveMaster = new PaymentMaster() {
                 CreatedDate = DateTime.Now,
                 Extra1 = ledgerPosting.Select(a => a.Credit).Sum().ToString(),
@@ -144,7 +58,7 @@ namespace RexERP_MVC.Controllers
                 IsApproved=false,
                 CreatedBy=CurrentSession.GetCurrentSession().UserName,
                 LedgerDate=voucherDate,
-                LedgerId= supplierInfo.LedgerId,
+                LedgerId= ledgerId,
                 Narration=notes
             };
             foreach (var item in ledgerPosting)
@@ -366,44 +280,5 @@ namespace RexERP_MVC.Controllers
             var partybalance = partyBalanceService.DailyReceiveAndPayment(2,fromDate,toDate);
             return Json(partybalance, JsonRequestBehavior.AllowGet);
         }
-
-        //public ActionResult LoadTodayPayment(DateTime clientDate)
-        //{
-        //    var totalPayment = postingService.GetTodayPayment(clientDate);
-        //    return Json(totalPayment, JsonRequestBehavior.AllowGet);
-
-        //}
-        //public ActionResult LocalPaymentSave(decimal TotalAmount,List<PartyBalance> partyBalanceList, List<LedgerPosting>ledgerPostingList)
-        //{
-        //    decimal a,b;
-        //    foreach (var item in partyBalanceList)
-        //    {
-        //        PartyBalance pb = new PartyBalance();
-        //        pb.PostingDate = item.PostingDate;
-        //        pb.LedgerId = item.LedgerId;
-        //        pb.VoucherTypeId = 13;
-        //        pb.InvoiceNo = item.InvoiceNo;
-        //        a = item.Debit ?? 0;
-        //        b = item.Credit ?? 0;
-        //        pb.Debit = a + b;
-        //        pb.Credit = item.Balance;
-        //        partyBalanceService.Save(pb);
-        //    }
-            
-        //    foreach (var li in ledgerPostingList)
-        //    {
-        //        LedgerPosting lp = new LedgerPosting();
-        //        lp.VoucherNo = li.VoucherNo;
-        //        lp.PostingDate = li.ChequeDate;
-        //        lp.VoucherTypeId = 13;
-        //        lp.LedgerId = li.LedgerId;
-        //        lp.Debit = li.Credit;
-        //        lp.InvoiceNo = "";
-        //        lp.ChequeNo = li.ChequeNo;
-        //        lp.ChequeDate = li.ChequeDate;
-        //        postingService.Save(lp);
-        //    }
-        //    return Json("", JsonRequestBehavior.AllowGet);
-        //}
     }
 }

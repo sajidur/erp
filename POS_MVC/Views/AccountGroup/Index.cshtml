@@ -97,7 +97,7 @@
                                     <div class="form-actions">
                                         <div class="col-md-12">
                                             <button class="btn btn-w-m btn-info" data-style="expand-left" id="btnSave" type="button" onclick="SaveAccounts()"><i class="fa fa-save"></i>&nbsp; Save</button>
-                                            <button class="btn btn-w-m btn-primary" data-style="expand-left" id="btnUpdate" type="button" onclick="Update()"><i class="fa fa-save"></i>&nbsp; Update</button>
+                                            <button class="btn btn-w-m btn-primary" data-style="expand-left" id="btnUpdate" type="button" onclick="UpdateGroup()"><i class="fa fa-save"></i>&nbsp; Update</button>
                                             <button class="btn btn-danger" data-style="expand-left" id="btnDelete" type="button" onclick="Delete()"><i class="fa fa-minus"></i>&nbsp; Delete</button>
                                             <button class="btn btn-w-m btn-success" type="button" id="btnReset" onclick="ResetForm()"><i class="fa fa-refresh"></i>&nbsp;Reset</button>
 
@@ -120,42 +120,84 @@
                 </div>
                 <div class="col-lg-4 col-lg-offset-1">
                     <form class="bs-component">
-                        <script id="templateProductGroupModal" type="text/html">
-                            <table class="table table-bordered table-striped table-hover" id="productGroupTableModal">
-                                <thead>
-                                <th>ID</th>
-                                <th>Group Name</th>
-                                <th>Under</th>
-                                <th>Nature</th>
-                                <th>Is Default</th>
-                                <th>Action</th>
-                                </thead>
-                                <tbody>
-                                    {{#ProductGroupSearch}}
-                                    <tr>
-                                        <td> {{Id}}</td>
-                                        <td> {{AccountGroupName}}</td>
-                                        <td>{{Under}}</td>
-                                        <td>{{Nature}}</td>
-                                        <td class="action-sm">
-                                            <a class="btn btn-primary btn-xs" onclick="LoadForEdit('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
-                                        </td>
-                                    </tr>
-                                    {{/ProductGroupSearch}}
-                                </tbody>
-                            </table>
-                        </script>
+                        
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script id="templateProductGroupModal" type="text/html">
+    <table class="table table-bordered table-striped table-hover" id="productGroupTableModal">
+        <thead>
+        <th>ID</th>
+        <th>Group Name</th>
+        <th>Under</th>
+        <th>Nature</th>
+        <th>Is Default</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+            {{#ProductGroupSearch}}
+            <tr>
+                <td> {{Id}}</td>
+                <td> {{AccountGroupName}}</td>
+                <td>{{Under}}</td>
+                <td>{{Nature}}</td>
+                <td class="action-sm">
+                    <a class="btn btn-primary btn-xs" onclick="Load('{{Id}}')"><i class="fa fa-edit"></i> Select</a>
+                </td>
+            </tr>
+            {{/ProductGroupSearch}}
+        </tbody>
+    </table>
+</script>
 <script src="~/Scripts/app/Accounts.js"></script>
 <script>
     $(function () {
         LoadAccountGroupList();
     });
+    function Load(parameters) {
+        $.ajax({
+            url: '/AccountGroup/GetById',
+            data: { 'groupId': parameters },
+            success: function (data) {
+                $("#hdId").val(data.Id);
+                $("#txtGroupName").val(data.AccountGroupName);
+                $("#ddlUnder").val(data.GroupUnder);
+                $("#ddlNature").val(data.Nature);
+                $("#chkAffectGrossProfit").val(data.AffectGrossProfit);
 
+            },
+            error: function () {
+                alert('An error occured try again later');
+            }
+        });
+    }
+    function UpdateGroup() {
+    $.ajax({
+        url: '/AccountGroup/Edit',
+        method: 'post',
+        dataType: 'json',
+        async: false,
+        data: {
+            Id: $('#hdId').val(),
+            AccountGroupName: $('#txtGroupName').val(),
+            GroupUnder: $('#ddlUnder').val(),
+            Narration: $('#txtDescription').val(),
+            Nature: $('#ddlNature').val(),
+            create: 1
+        },
+        success: function (data) {
+            setTimeout(location.reload.bind(location), 10000);
+            ShowNotification("1", "Account Saved Saved!!");
+            ResetForm();
+            LoadCustomerList();
+        },
+        error: function () {
+
+        }
+    });
+
+}
 </script>

@@ -47,7 +47,16 @@ namespace RexERP_MVC.BAL
         }
         public AccountGroup Update(AccountGroup t, int id)
         {
-            return service.Update(t, id);
+            var existing = service.GetById(id);
+            if (existing!=null)
+            {
+                existing.AccountGroupName = t.AccountGroupName;
+                return service.Update(existing, id);
+            }
+            else
+            {
+                return null;
+            }
         }
         public int Delete(int id)
         {

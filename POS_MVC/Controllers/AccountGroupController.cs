@@ -107,7 +107,6 @@ namespace RexERP_MVC.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
         public ActionResult Delete(int accountGroupId)
         {

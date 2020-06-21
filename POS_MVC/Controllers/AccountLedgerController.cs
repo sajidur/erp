@@ -58,6 +58,14 @@ namespace RexERP_MVC.Controllers
             var expenses = Mapper.Map<List<AccountLedger>, List<AccountLedgerResponse>>(group).OrderByDescending(a => a.OrderNo);
             return Json(expenses, 0);
         }
+
+        [HttpGet]
+        public ActionResult GetById(int Id)
+        {
+            AccountLedger group = this.service.GetById(Id);
+            var expenses = Mapper.Map<AccountLedger, AccountLedgerResponse>(group);
+            return Json(expenses, 0);
+        }
         [HttpPost]
         public ActionResult GetBankCashLedgerList(int groupId)
         {

@@ -23,16 +23,16 @@ namespace RexERP_MVC.Controllers
             return View(new ReceiveMaster());
         }
         // GET: /Category/Details/5
-        public ActionResult GetAll()
-        {
-            List<ReceiveMaster> category = service.GetAll();
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(category);
-            return Json(category, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult GetAll()
+        //{
+        //    List<ReceiveMaster> category = service.GetAll();
+        //    if (category == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(category);
+        //    return Json(category, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult GetInvoiceNumber()
         {
@@ -119,16 +119,16 @@ namespace RexERP_MVC.Controllers
         }
 
 
-        public ActionResult GetAllPaddyReceives()
-        {
-            List<ReceiveMaster> receive = service.GetAllPaddyRecieveForReport();
-            if (receive == null)
-            {
-                return HttpNotFound();
-            }
-            var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(receive);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult GetAllPaddyReceives()
+        //{
+        //    List<ReceiveMaster> receive = service.GetAllPaddyRecieveForReport();
+        //    if (receive == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(receive);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult GetAllPaddyReceivesDetails(string voucherNo)
         {
@@ -154,29 +154,29 @@ namespace RexERP_MVC.Controllers
         }
 
 
-        public ActionResult GetAllPaddyReceivesFilteredBySupplier(int supplierId)
-        {
-            List<ReceiveMaster> receive = service.GetAllPaddyRecieveFilteredBySupplierForReport(supplierId);
-            if (receive == null)
-            {
-                return HttpNotFound();
-            }
-            var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(receive);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult GetAllPaddyReceivesFilteredBySupplier(int supplierId)
+        //{
+        //    List<ReceiveMaster> receive = service.GetAllPaddyRecieveFilteredBySupplierForReport(supplierId);
+        //    if (receive == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(receive);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
-        public ActionResult GetAllPaddyReceivesFilteredByDate(DateTime fromDate, DateTime toDate)
-        {
-            List<ReceiveMaster> receive = service.GetAllPaddyRecieveFilteredByDateForReport(fromDate, toDate);
-            if (receive == null)
-            {
-                return HttpNotFound();
-            }
-            var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(receive);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //public ActionResult GetAllPaddyReceivesFilteredByDate(DateTime fromDate, DateTime toDate)
+        //{
+        //    List<ReceiveMaster> receive = service.GetAllPaddyRecieveFilteredByDateForReport(fromDate, toDate);
+        //    if (receive == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    var result = AutoMapper.Mapper.Map<List<ReceiveMaster>, List<ReceiveMasterResponse>>(receive);
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
-        public ActionResult GetAllPaddyReceivesFilteredBySupplierAndDate(DateTime fromDate, DateTime toDate, int supplierId)
+        public ActionResult GetAllBySupplierAndDate(DateTime fromDate, DateTime toDate, int supplierId)
         {
             List<ReceiveMaster> receive =
                 service.GetAllPaddyRecieveFilteredByDateAndSupplierForReport(fromDate, toDate, supplierId);

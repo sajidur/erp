@@ -274,11 +274,9 @@ namespace RexERP_MVC.Controllers
 
         public ActionResult GetAllInvoice(string fromDate, string toDate)
         {
-          //  DateTime from = Convert.ToDateTime(fromDate);
-           // DateTime to = Convert.ToDateTime(toDate);
-
             var partybalance = partyBalanceService.DailyReceiveAndPayment(2,fromDate,toDate);
             return Json(partybalance, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

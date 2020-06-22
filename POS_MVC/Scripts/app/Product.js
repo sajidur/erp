@@ -16,11 +16,10 @@
     });
 }
 
-
 function InsertFail(response) {
     var content = "Please try again later";
     $("#lblMessage").html(content);
-};
+}
 
 function ClearAddBox() {
     //$("#CategoryID").val('0');
@@ -28,7 +27,6 @@ function ClearAddBox() {
 }
 
 function InsertSuccess(response) {
-
     // debugger;
     if (response.result == false) {
         $("#lblMessage").html(response.Error);
@@ -131,9 +129,7 @@ function LoadSingleData(parameters) {
             var ddlProductType = document.getElementById('ddlProductCategory');
             setSelectedValue(ddlProductType, data.ProductType);
 
-            var ddlCategoryName = document.getElementById('ddlCategory');
-            //ddlCategoryName.selectedIndex = data.Category.CategoryName;
-            setSelectedValue(ddlCategoryName, data.Category.CategoryName);
+            $("#ddlCategory").val(data.CategoryId);
         },
         error: function () {
             alert('An error occured try again later');
@@ -143,14 +139,12 @@ function LoadSingleData(parameters) {
 
 function setSelectedValue(selectObj, valueToSet) {
     for (var i = 0; i < selectObj.options.length; i++) {
-        if (selectObj.options[i].text == valueToSet) {
+        if (selectObj.options[i].text.trim() == valueToSet.trim()) {
             selectObj.options[i].selected = true;
             return;
         }
     }
 }
-
-
 
 function FormDataAsObject() {
     var object = new Object();

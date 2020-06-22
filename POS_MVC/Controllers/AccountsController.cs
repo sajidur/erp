@@ -41,6 +41,13 @@ namespace RexERP_MVC.Controllers
             return Json(res,JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
+        public ActionResult TrailBalanceDetails(DateTime fromDate, DateTime toDate,int groupId)
+        {
+            LedgerPostingService ledgerPosting = new LedgerPostingService();
+            var res = ledgerPosting.TrailBalanceDetails(fromDate, toDate, groupId);
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
         public ActionResult ChatOfAccounts()
         {
             AccountLedgerService accountLedgerService = new AccountLedgerService();

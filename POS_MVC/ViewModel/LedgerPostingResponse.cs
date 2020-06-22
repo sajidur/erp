@@ -13,6 +13,7 @@ namespace RexERP_MVC.ViewModel
         public decimal Debit { get; set; }
         public decimal Credit { get; set; }
         public decimal Balance { get; set; }
+        public string BalanceText { get; set; }
         public int YearId { get; set; }
         public string InvoiceNo { get; set; }
         public string ChequeNo { get; set; }

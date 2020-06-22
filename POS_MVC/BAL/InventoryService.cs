@@ -99,11 +99,12 @@ namespace RexERP_MVC.BAL
             {
                 Inventory result = new Inventory();
                 Inventory FinalResult = new Inventory();
-
                 result.ProductId = (int)stockIn.ProductId;
                 result.SupplierId = stockIn.SupplierId ?? 0;
                 result.WarehouseId = (int)stockIn.WarehouseId;
                 result.OpeningQty = stockIn.BaleQty;
+                result.Costprice = stockIn.Rate;
+                result.PurchasePrice = stockIn.Rate;
                 result.BrandId = stockIn.BrandId;
                 result.SizeId = stockIn.SizeId;
                 result.APIId = stockIn.APIId;

@@ -164,20 +164,32 @@ namespace RexERP_MVC.BAL
         {
             var lists = new List<LedgerPostingResponse>();
             var data = service.GetAll(a => a.PostingDate >= fromDate && a.PostingDate <= toDate && a.LedgerId == ledgerId);
+            var balance = 0.0m;
+            var balanceText = balance.ToString();
             foreach (var item in data.OrderBy(a=>a.Id))
             {
-                var balance = 0.0m;
+                balance = balance + item.Debit ?? 0 - item.Credit ?? 0;
+
+                if (balance<0)
+                {
+                    balanceText =Math.Abs(balance) + "Cr";
+                }
+                else
+                {
+                    balanceText = Math.Abs(balance) + "Dr";
+                }
                 lists.Add(new LedgerPostingResponse()
                 {
                     LedgerId = item.LedgerId ?? 0,
-                    VoucherNo=item.VoucherNo,
-                    InvoiceNo=item.InvoiceNo,
-                    PostDate=item.PostingDate.Value.ToShortDateString(),
-                    PostingDate=item.PostingDate.Value,
+                    VoucherNo = item.VoucherNo,
+                    InvoiceNo = item.InvoiceNo,
+                    PostDate = item.PostingDate.Value.ToShortDateString(),
+                    PostingDate = item.PostingDate.Value,
                     Credit = item.Credit ?? 0,
                     Debit = item.Debit ?? 0,
                     AccountLedger = Mapper.Map<AccountLedgerResponse>(item.AccountLedger),
-                    Balance = balance + item.Debit ?? 0 - item.Credit ?? 0
+                    Balance = balance,
+                    BalanceText=balanceText
                 });
             }
             return lists;
@@ -197,15 +209,25 @@ namespace RexERP_MVC.BAL
                 Credit=g.Sum(a=>a.Credit),
                 Total = g.Sum(x => x.Debit - x.Credit)
             });
+            var balance = 0.0m;
+            var balanceText = balance.ToString();
+            if (balance<0)
+            {
+                balanceText = balance + "Cr";
+            }
+            else
+            {
+                balanceText = balance + "Dr";
+            }
             foreach (var item in data)
             {
-                var balance = 0.0m;
                 lists.Add(new LedgerPostingResponse()
                 {
                     Credit = item.Credit ?? 0,
                     Debit = item.Debit ?? 0,
                     AccountLedger = Mapper.Map<AccountLedgerResponse>(item.AccountLedger),
-                    Balance = balance + item.Debit ?? 0 - item.Credit ?? 0
+                    Balance = balance + item.Debit ?? 0 - item.Credit ?? 0,
+                    BalanceText=balanceText
                 });
             }
             return lists;
@@ -254,6 +276,41 @@ namespace RexERP_MVC.BAL
             }
             return ress;
         }
+
+        public List<TrailBalanceResponse> TrailBalanceDetails(DateTime fromDate, DateTime toDate,int groupId)
+        {
+            List<TrailBalanceResponse> ress = new List<TrailBalanceResponse>();
+            var ledgers = ledgerService.GetAll();
+            if (groupId!=0)
+            {
+                ledgers = ledgerService.GetAll(groupId);
+            }
+            var ledgerPosting = GetAll(fromDate, toDate).ToList();
+            var si = 1;
+            foreach (AccountLedger item in ledgers)
+            {
+                var trailBalance = new TrailBalanceResponse();
+                trailBalance.SI = si;
+                trailBalance.Particular = item.LedgerName;
+                trailBalance.ParticularParent = item.AccountGroup.AccountGroupName;
+                trailBalance.Id = item.Id;
+                var postingWithLedgers = ledgerPosting.Where(a =>a.LedgerId==item.Id);
+                //openning
+                var openningCredit = postingWithLedgers.Where(a => a.VoucherTypeId == (int)VoucherTypeEnum.OpeningBalance).Sum(a => (a.Credit));
+                var openningDebit = postingWithLedgers.Where(a => a.VoucherTypeId == (int)VoucherTypeEnum.OpeningBalance).Sum(a => (a.Debit));
+                trailBalance.Opening = Math.Abs(openningDebit ?? 0 - openningCredit ?? 0);
+                trailBalance.OpeningType = trailBalance.Opening.ToString("#.##") + (openningCredit > openningDebit ? "Cr" : "Dr");
+                //debit credit
+                trailBalance.Credit = postingWithLedgers.Where(a => a.VoucherTypeId != (int)VoucherTypeEnum.OpeningBalance).Sum(a => a.Credit ?? 0);
+                trailBalance.Debit = postingWithLedgers.Where(a => a.VoucherTypeId != (int)VoucherTypeEnum.OpeningBalance).Sum(a => a.Debit ?? 0);
+                trailBalance.BalanceType = trailBalance.Balance.ToString("#.##") + (trailBalance.Credit > trailBalance.Debit ? "Cr" : "Dr");
+                trailBalance.Balance = Math.Abs(trailBalance.Credit - trailBalance.Debit);
+                ress.Add(trailBalance);
+                si++;
+            }
+            return ress;
+        }
+
         private List<AccountLedger> Ledgers(AccountGroup head,List<AccountGroup> groups)
         {
             var ledgerList = new List<AccountLedger>();

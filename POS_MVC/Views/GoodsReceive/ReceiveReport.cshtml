@@ -53,7 +53,6 @@
                                             <th>Addi. Cost</th>
                                             <th>Grand Total</th>
                                             <th>Notes</th>
-                                            <th>Print</th>
                                             <th>Delete</th>
                                         </thead>
                                         <tbody>
@@ -69,9 +68,6 @@
                                                 <td> {{AdditionalCost}}</td>
                                                 <td> {{GrandTotal}}</td>
                                                 <th>{{Notes}}</th>
-                                                <td>
-                                                    <a class="btn btn-info" href="/GoodsReceive/Print?id={{Id}}">Print</a>
-                                                </td>
                                                 <td>
                                                     <a class="btn btn-danger" href="/GoodsReceive/Delete?id={{Id}}">X</a>
                                                 </td>
@@ -115,7 +111,7 @@
         else {
             supplierId = customerDropdown.options[customerDropdown.selectedIndex].value;
         }
-        var url = '/GoodsReceive/GetAllPaddyReceivesFilteredBySupplierAndDate';
+        var url = '/GoodsReceive/GetAllBySupplierAndDate';
         $.ajax({
             url: url,
             method: 'POST',

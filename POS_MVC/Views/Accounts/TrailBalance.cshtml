@@ -17,9 +17,11 @@
                                 <label class="col-md-1 control-label">
                                     To Date:
                                 </label>
-
                                 <div class="col-md-3">
                                     <input type="date" id="txtToDate" name="txtDate" />
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" id="chkIsDetails" value="IsDetails" name="chkIsDetails" /> Show details?
                                 </div>
                                 <div class="col-md-1">
                                     <button id="btnFilter" class="btn-primary">Filter</button>
@@ -35,6 +37,7 @@
                                     <tr>
                                         <th>SI</th>
                                         <th>Particular</th>
+                                        <th>Parent</th>
                                         <th>Opening</th>
                                         <th>Debit</th>
                                         <th>Credit</th>
@@ -43,6 +46,7 @@
                                 </thead>
                                 <tfoot style="color:red;">
                                     <tr>
+                                        <td></td>
                                         <td>In Total:</td>
                                         <td></td>
                                         <td></td>
@@ -53,7 +57,6 @@
                                     </tr>
                                 </tfoot>
                             </table>
-
                         </div>
                     </div>
                 </div>
@@ -69,28 +72,48 @@
         var today = now.getFullYear() + "-" + (month) + "-" + (day);
         $('#txtFromDate').val(today);
         $('#txtToDate').val(today);
-
           TrailBalance(today, today);
     });
     $("#btnFilter").click(function () {
-        TrailBalance( $('#txtFromDate').val(), $('#txtToDate').val());
+        TrailBalance( $('#txtFromDate').val(), $('#txtToDate').val(),0);
     });
-    function TrailBalance(fromDate, toDate) {
+    function showDetails(groupId) {
+        document.getElementById("chkIsDetails").checked = true;
+        TrailBalance($('#txtFromDate').val(), $('#txtToDate').val(), groupId);
+    }
+    function TrailBalance(fromDate, toDate,groupId) {
+        var checkBox = document.getElementById("chkIsDetails");
+        var obj = { 'fromDate': fromDate, 'toDate': toDate };
+        var url = "/Accounts/TrailBalanceSheet";
+        if (checkBox.checked == true) {
+            url = "/Accounts/TrailBalanceDetails";
+            obj = { 'fromDate': fromDate, 'toDate': toDate,'groupId':groupId };
+        }
         $('#PaymentReportTableModal').DataTable({
             "pageLength": 100,
             "ajax": {
                 "dataType": 'json',
                 "contentType": "application/json; charset=utf-8",
                 "type": "GET",
-                "url": "/Accounts/TrailBalanceSheet",
-                "data": { 'fromDate': fromDate, 'toDate': toDate },
+                "url":url,
+                "data": obj,
                 "dataSrc": function (json) {
                     return json;
                 }
             },
             "columns": [
                 { "data": "SI" },
-                { "data": "Particular" },
+                {
+                    "data": "Particular",
+                    "render": function (data, type, row, meta) {
+                        if (type === 'display' && checkBox.checked == false) {
+                            data = '<a onclick="showDetails(' + row.Id + ')">' + data + '</a>';
+                        }
+
+                        return data;
+                    }
+                },
+                { "data": "ParticularParent" },
                 { "data": "OpeningType" },
                 { "data": "Debit" },
                 { "data": "Credit" },
@@ -109,13 +132,13 @@
 
             // Total over all pages
             debit = api
-                .column(3)
+                .column(4)
                 .data()
                 .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
             credit = api
-                .column(4)
+                .column(5)
                 .data()
                 .reduce(function (a, b) {
                     return intVal(a) + intVal(b);

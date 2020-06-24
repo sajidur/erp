@@ -31,11 +31,6 @@ namespace RexERP_MVC.BAL
         public List<AccountLedger> GetAll(int groupId)
         {
             var group = groupService.GetAll(groupId);
-            var groupDetails = groupService.GetById(groupId);
-            foreach (var item in groupDetails.AccountLedgers)
-            {
-                ledgerList.Add(item);
-            }
             foreach (var item in group)
             {
                 foreach (var l in item.AccountLedgers)

@@ -18,7 +18,7 @@ namespace RexERP_MVC.BAL
         AccountLedgerService ledgerService = new AccountLedgerService();
         private DBService<CashBookResponse> cashBookService = new DBService<CashBookResponse>();
         FinancialYearService financialYearService = new FinancialYearService();
-        private DBService<AccountGroup> _AccountsService = new DBService<AccountGroup>();
+        private DBService<AccountGroup> _accountsService = new DBService<AccountGroup>();
         public List<LedgerPosting> GetAll()
         {
             return service.GetAll().ToList();
@@ -77,7 +77,7 @@ namespace RexERP_MVC.BAL
         public List<TrailBalanceResponse> GetAllLedger(DateTime fromDate, DateTime toDate)
         {
             List<TrailBalanceResponse> ress = new List<TrailBalanceResponse>();
-            var Accounts = _AccountsService.GetAll().ToList();
+            var Accounts = _accountsService.GetAll().ToList();
             // var ledgers = ledgerService.GetAll().ToList();
             var ledgerPosting = GetAll(fromDate, toDate).ToList();
             var primaryAccounts = Accounts.Where(a => a.GroupUnder == 0);
@@ -199,7 +199,7 @@ namespace RexERP_MVC.BAL
             var lists = new List<LedgerPostingResponse>();
             //if (ledgerId == 0)
             //{
-            var group = _AccountsService.GetAll();
+            var group = _accountsService.GetAll();
             var accountGroup = group.Where(a => a.Id == groupId).FirstOrDefault();
             var getAllLedger = Ledgers(accountGroup, group);
             var ids = getAllLedger.Select(a => a.Id).ToList();
@@ -245,7 +245,7 @@ namespace RexERP_MVC.BAL
         public List<TrailBalanceResponse> TrailBalance(DateTime fromDate, DateTime toDate)
         {
             List<TrailBalanceResponse> ress = new List<TrailBalanceResponse>();
-            var Accounts = _AccountsService.GetAll().ToList();
+            var Accounts = _accountsService.GetAll().ToList();
            // var ledgers = ledgerService.GetAll().ToList();
             var ledgerPosting = GetAll(fromDate, toDate).ToList();
             var primaryAccounts = Accounts.Where(a => a.GroupUnder == 0);
@@ -265,12 +265,12 @@ namespace RexERP_MVC.BAL
                 var openningCredit = postingWithLedgers.Where(a => a.VoucherTypeId == (int)VoucherTypeEnum.OpeningBalance).Sum(a => (a.Credit));
                 var openningDebit = postingWithLedgers.Where(a => a.VoucherTypeId == (int)VoucherTypeEnum.OpeningBalance).Sum(a => (a.Debit));
                 trailBalance.Opening = Math.Abs(openningDebit??0 - openningCredit??0);
-                trailBalance.OpeningType = trailBalance.Opening.ToString()+ (openningCredit > openningDebit ? "Cr" : "Dr");
+                trailBalance.OpeningType = trailBalance.Opening.ToString("#.##") + (openningCredit > openningDebit ? "Cr" : "Dr");
                 //debit credit
                 trailBalance.Credit = postingWithLedgers.Where(a => a.VoucherTypeId != (int)VoucherTypeEnum.OpeningBalance).Sum(a => a.Credit??0);
                 trailBalance.Debit = postingWithLedgers.Where(a => a.VoucherTypeId != (int)VoucherTypeEnum.OpeningBalance).Sum(a => a.Debit??0);
-                trailBalance.BalanceType = trailBalance.Balance.ToString()+(trailBalance.Credit> trailBalance.Debit ? "Cr" : "Dr");
                 trailBalance.Balance = Math.Abs(trailBalance.Credit - trailBalance.Debit);
+                trailBalance.BalanceType = trailBalance.Balance.ToString("#.##") +(trailBalance.Credit> trailBalance.Debit ? "Cr" : "Dr");
                 ress.Add(trailBalance);
                 si++;
             }
@@ -284,6 +284,11 @@ namespace RexERP_MVC.BAL
             if (groupId!=0)
             {
                 ledgers = ledgerService.GetAll(groupId);
+                var groupDetails = _accountsService.GetById(groupId);
+                foreach (var item in groupDetails.AccountLedgers)
+                {
+                    ledgers.Add(item);
+                }
             }
             var ledgerPosting = GetAll(fromDate, toDate).ToList();
             var si = 1;
@@ -303,8 +308,8 @@ namespace RexERP_MVC.BAL
                 //debit credit
                 trailBalance.Credit = postingWithLedgers.Where(a => a.VoucherTypeId != (int)VoucherTypeEnum.OpeningBalance).Sum(a => a.Credit ?? 0);
                 trailBalance.Debit = postingWithLedgers.Where(a => a.VoucherTypeId != (int)VoucherTypeEnum.OpeningBalance).Sum(a => a.Debit ?? 0);
-                trailBalance.BalanceType = trailBalance.Balance.ToString("#.##") + (trailBalance.Credit > trailBalance.Debit ? "Cr" : "Dr");
                 trailBalance.Balance = Math.Abs(trailBalance.Credit - trailBalance.Debit);
+                trailBalance.BalanceType = trailBalance.Balance.ToString("#.##") + (trailBalance.Credit > trailBalance.Debit ? "Cr" : "Dr");
                 ress.Add(trailBalance);
                 si++;
             }

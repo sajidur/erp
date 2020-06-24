@@ -39,8 +39,13 @@ namespace RexERP_MVC.Controllers
         [HttpGet]
         public ActionResult GetAllLedger(int groupId)
         {
-            var group = service.GetAll(groupId);
-            var result = AutoMapper.Mapper.Map<List<AccountLedger>, List<AccountLedgerResponse>>(group);
+            var ledgers = service.GetAll(groupId);
+            var group = groupService.GetById(groupId);
+            foreach (var item in group.AccountLedgers)
+            {
+                ledgers.Add(item);
+            }
+            var result = AutoMapper.Mapper.Map<List<AccountLedger>, List<AccountLedgerResponse>>(ledgers);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -69,8 +74,13 @@ namespace RexERP_MVC.Controllers
         [HttpPost]
         public ActionResult GetBankCashLedgerList(int groupId)
         {
-            var group = service.GetAll(groupId);
-            var result = AutoMapper.Mapper.Map<List<AccountLedger>, List<AccountLedgerResponse>>(group);
+            var ledgers = service.GetAll(groupId);
+            var group = groupService.GetById(groupId);
+            foreach (var item in group.AccountLedgers)
+            {
+                ledgers.Add(item);
+            }
+            var result = AutoMapper.Mapper.Map<List<AccountLedger>, List<AccountLedgerResponse>>(ledgers);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DrCrLedgerList(string DrCr)
@@ -90,7 +100,7 @@ namespace RexERP_MVC.Controllers
                 if (result!=null && result.Id>0)
                 {
                     LedgerPosting post = new LedgerPosting();
-                    post.InvoiceNo = "";
+                    post.InvoiceNo = "OP_"+result.Id;
                     post.LedgerId = result.Id;
                     post.PostingDate = DateTime.Now;
                     if (category.CrOrDr=="Cr")

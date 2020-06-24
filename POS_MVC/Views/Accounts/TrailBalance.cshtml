@@ -75,17 +75,17 @@
           TrailBalance(today, today);
     });
     $("#btnFilter").click(function () {
-        TrailBalance( $('#txtFromDate').val(), $('#txtToDate').val(),0);
+        var checkBox = document.getElementById("chkIsDetails");
+        TrailBalance( $('#txtFromDate').val(), $('#txtToDate').val(),0,checkBox.checked);
     });
     function showDetails(groupId) {
-        document.getElementById("chkIsDetails").checked = true;
-        TrailBalance($('#txtFromDate').val(), $('#txtToDate').val(), groupId);
+       // document.getElementById("chkIsDetails").checked = true;
+        TrailBalance($('#txtFromDate').val(), $('#txtToDate').val(), groupId,true);
     }
-    function TrailBalance(fromDate, toDate,groupId) {
-        var checkBox = document.getElementById("chkIsDetails");
+    function TrailBalance(fromDate, toDate,groupId,isDetails) {
         var obj = { 'fromDate': fromDate, 'toDate': toDate };
         var url = "/Accounts/TrailBalanceSheet";
-        if (checkBox.checked == true) {
+        if (isDetails == true) {
             url = "/Accounts/TrailBalanceDetails";
             obj = { 'fromDate': fromDate, 'toDate': toDate,'groupId':groupId };
         }
@@ -106,10 +106,9 @@
                 {
                     "data": "Particular",
                     "render": function (data, type, row, meta) {
-                        if (type === 'display' && checkBox.checked == false) {
+                        if (type === 'display') {
                             data = '<a onclick="showDetails(' + row.Id + ')">' + data + '</a>';
                         }
-
                         return data;
                     }
                 },
@@ -144,7 +143,7 @@
                     return intVal(a) + intVal(b);
                 }, 0);
             // Update footer
-                $(api.column(3).footer()).html(
+                $(api.column(4).footer()).html(
                     'Total Debit:' + debit + ' Credit:' + credit
             );
         },
